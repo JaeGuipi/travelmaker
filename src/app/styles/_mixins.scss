@@ -1,0 +1,27 @@
+// Breakpoints
+$breakpoint-mobile: 375px;
+$breakpoint-tablet: 768px;
+$breakpoint-pc: 1280px;
+
+@mixin mobile {
+  @media (max-width: #{$breakpoint-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$breakpoint-pc - 1px}) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media (min-width: #{$breakpoint-pc}) {
+    @content;
+  }
+}
+
+@mixin text($size) {
+font-size: map-get(map-get($font-styles,$size), font-size);
+line-height: map-get(map-get($font-styles,$size), line-height);
+}
