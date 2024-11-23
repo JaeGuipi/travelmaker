@@ -12,6 +12,7 @@ const nextConfig = {
     @import "_variables";
     @import "_mixins";`,
   },
+  reactStrictMode: false,
 };
 
 export default nextConfig;
