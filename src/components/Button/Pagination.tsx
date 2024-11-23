@@ -1,8 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import s from "./Pagination.module.scss";
-import { FaCaretLeft } from "react-icons/fa6";
-import { FaCaretRight } from "react-icons/fa6";
+import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
 
 interface PaginationProps {
   currentPage: number; // 현재 페이지 상태
