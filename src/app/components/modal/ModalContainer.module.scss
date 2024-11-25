@@ -1,0 +1,28 @@
+.overlay {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 28px;
+  text-align: center;
+  @include mobile {
+    max-width: 327px;
+    width: 100%;
+  }
+}
+
+.content-box {
+  p {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}
