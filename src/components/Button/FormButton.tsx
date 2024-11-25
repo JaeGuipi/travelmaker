@@ -13,6 +13,7 @@ interface FormButtonProps {
 
 const FormButton = ({
   children,
+  onClick,
   type = "button",
   size = "medium",
   variant = "fillButton",
@@ -21,7 +22,7 @@ const FormButton = ({
   const buttonClass = classNames(s.formButton, s[size], s[variant], { [s.disabled]: disabled });
 
   return (
-    <button className={buttonClass} type={type} disabled={disabled}>
+    <button className={buttonClass} type={type} onClick={onClick} disabled={disabled}>
       {children}
     </button>
   );
