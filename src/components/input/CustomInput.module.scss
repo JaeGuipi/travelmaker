@@ -1,0 +1,45 @@
+.label {
+  @include text(lg);
+}
+
+.label + .input-container {
+  margin-top: 8px;
+}
+
+.input-container {
+position: relative;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid $gray04;
+  border-radius: 0.6rem;
+  padding: 1.6rem 2rem;
+  
+  &.border-yellow {
+    border-color: $yellow02;
+  }
+
+  &::placeholder {
+    @include text(lg);
+    color: $gray04;
+  }
+
+  &:focus {
+    border-color: $yellow02;
+    outline: none;
+  }
+}
+
+.input-error {
+  border-color: $red01;
+}
+
+.input-img {
+  position: absolute;
+  right: 0;
+  top:0;
+  width: 4.9rem;
+  height: 100%;
+  background-color: transparent;
+}
