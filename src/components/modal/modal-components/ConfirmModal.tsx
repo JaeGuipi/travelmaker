@@ -1,13 +1,21 @@
 import useModalStore from "@/app/store/useModalStore";
-import React from "react";
+import FormButton from "@/components/Button/FormButton";
+import s from "./ModalStyle.module.scss";
 
-export default function ConfirmModal({ text }) {
-  const toggleModal = useModalStore((state) => state.toggleModal);
+interface PopupModalProps {
+  text: string;
+}
+
+export default function ConfirmModal({ text }: PopupModalProps) {
+  const { toggleModal } = useModalStore();
   return (
     <>
-      <p>{text}</p>
-      {/* 공통 버튼 컴포넌트 사용 예정*/}
-      <button onClick={() => toggleModal("ConfirmModal")}>확인</button>
+      <p className={s.text}>{text}</p>
+      <div className={s["button-wrap"]}>
+        <FormButton size="medium" onClick={() => toggleModal(text)}>
+          확인
+        </FormButton>
+      </div>
     </>
   );
 }

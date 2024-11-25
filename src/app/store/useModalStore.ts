@@ -1,25 +1,15 @@
 import { create } from "zustand";
 
-export const ModalType = {
-  PopupModal: "PopupModal",
-  ConfirmModal: "ConfirmModal",
-} as const;
-
-export type ModalKey = keyof typeof ModalType;
-
 interface ModalStore {
-  modals: Record<ModalKey, boolean>;
-  toggleModal: (modalType: ModalKey) => void;
+  modals: { [key: string]: boolean }; // 고유한 텍스트(또는 타이틀)로 관리
+  toggleModal: (modalKey: string) => void; // 텍스트 또는 타이틀로 모달을 토글
 }
 
 const useModalStore = create<ModalStore>((set) => ({
-  modals: {
-    PopupModal: false,
-    ConfirmModal: false,
-  },
-  toggleModal: (modalType) =>
+  modals: {},
+  toggleModal: (modalKey) =>
     set((state) => ({
-      modals: { ...state.modals, [modalType]: !state.modals[modalType] },
+      modals: { ...state.modals, [modalKey]: !state.modals[modalKey] }, // 텍스트로 상태 관리
     })),
 }));
 
