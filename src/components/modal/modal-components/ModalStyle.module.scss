@@ -1,0 +1,17 @@
+.text {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.button-wrap {
+  padding-top: 40px;
+}
+
+.popup-modal {
+  .button-wrap {
+    text-align: right;
+  }
+  @include mobile {
+    text-align: center;
+  }
+}

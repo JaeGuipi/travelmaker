@@ -1,21 +1,26 @@
-import useModalStore, { ModalType } from "@/app/store/useModalStore";
+import useModalStore from "@/app/store/useModalStore";
 import React from "react";
 import Modal from "react-modal";
 import s from "./ModalContainer.module.scss";
 
 Modal.setAppElement("#modal-root");
 
-const ModalContainer = ({ modalType, children }: { modalType: keyof typeof ModalType; children: React.ReactNode }) => {
+interface ModalContainerProps {
+  modalKey: string;
+  children: React.ReactNode;
+}
+
+const ModalContainer = ({ modalKey, children }: ModalContainerProps) => {
   const { modals, toggleModal } = useModalStore();
 
   return (
     <Modal
-      isOpen={modals[modalType]}
-      onRequestClose={() => toggleModal(modalType)}
+      isOpen={modals[modalKey]}
+      onRequestClose={() => toggleModal(modalKey)}
       overlayClassName={s.overlay}
       className={s.content}
     >
-      <div className={`${s["content-box"]}`}>{children}</div>
+      {children}
     </Modal>
   );
 };
