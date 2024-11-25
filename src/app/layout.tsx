@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./styles/globals.scss";
+import { Toaster } from "react-hot-toast";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -8,6 +9,9 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
+const ToastProvider = () => {
+  return <Toaster />
+}
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable}`}>
+        <ToastProvider />
         {children}
       </body>
     </html>
