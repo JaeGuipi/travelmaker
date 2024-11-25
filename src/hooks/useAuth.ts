@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { getMyInfo } from "@/lib/api/user";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
@@ -14,7 +15,7 @@ export const useAuth = () => {
     isError,
   } = useQuery({
     queryKey: ["user"],
-    //queryFn: 유저 정보 api,
+    queryFn: getMyInfo,
   });
 
   // 로그인 처리
