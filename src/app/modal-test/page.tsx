@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import useModalStore from "../store/useModalStore";
-import ModalContainer from "../components/modal/ModalContainer";
-import PopupModal from "../components/modal/modal-components/PopupModal";
-import ConfirmModal from "../components/modal/modal-components/ConfirmModal";
+import ModalContainer from "@/components/modal/ModalContainer";
+import PopupModal from "@/components/modal/modal-components/PopupModal";
+import ConfirmModal from "@/components/modal/modal-components/ConfirmModal";
 
 const Page = () => {
   const { modals, toggleModal } = useModalStore();
+
   return (
     <div>
       <button onClick={() => toggleModal("PopupModal")}>버튼</button>

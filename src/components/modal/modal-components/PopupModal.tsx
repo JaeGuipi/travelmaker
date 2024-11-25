@@ -1,4 +1,5 @@
 import useModalStore from "@/app/store/useModalStore";
+import FormButton from "@/components/Button/FormButton";
 import React from "react";
 
 export default function PopupModal({ text }) {
