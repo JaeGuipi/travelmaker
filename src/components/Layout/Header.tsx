@@ -6,6 +6,7 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 import s from "./Header.module.scss";
 import { useAuth } from "@/hooks/useAuth";
+import CustomInput from "@/components/input/CustomInput";
 
 export const cx = classNames.bind(s);
 
@@ -21,6 +22,16 @@ const Header = () => {
     <header className={cx("headerContainer", "container")}>
       <Link href={"/"} className={s.logo}>
         <Image src={"/images/logo.png"} fill alt="TRAVEL MAKER" />
+      </Link>
+
+      <Link href={"/search-page"} className={s.search}>
+        <CustomInput
+          id="search"
+          type="text"
+          iconType="search"
+          borderColor="yellow"
+          placeholder="무엇을 체험하고 싶으신가요?"
+        />
       </Link>
 
       <div className={s.userWrap}>
