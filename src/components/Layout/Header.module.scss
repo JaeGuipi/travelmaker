@@ -5,12 +5,25 @@
   .logo {
     position: relative;
     display: block;
-    width: 232px;
-    height: 37px;
+    width: 350px;
+    height: 54px;
     object-fit: cover;
     @include mobile {
       width: 202px;
       height: 32px;
+    }
+  }
+
+  .search {
+    flex: 1;
+    padding: 0 5rem;
+    cursor: pointer;
+    @include mobile {
+      display: none;
+    }
+
+    input {
+      border-radius: 12px;
     }
   }
 
