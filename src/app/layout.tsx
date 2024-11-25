@@ -16,6 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable}`}>
+        <div id="modal-root"></div>
         {children}
       </body>
     </html>
