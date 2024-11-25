@@ -6,7 +6,7 @@ export default function ConfirmModal({ text }) {
   return (
     <div>
       {text}
-      <button onClick={() => toggleModal("PopupModal")}>확인</button>
+      <button onClick={() => toggleModal("ConfirmModal")}>확인</button>
     </div>
   );
 }
