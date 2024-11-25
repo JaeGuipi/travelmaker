@@ -1,21 +1,32 @@
 import useModalStore from "@/app/store/useModalStore";
 import FormButton from "@/components/Button/FormButton";
 import s from "./ModalStyle.module.scss";
+import ModalContainer from "../ModalContainer";
+import Image from "next/image";
 
-interface PopupModalProps {
+interface ModalProps {
   text: string;
 }
 
-export default function ConfirmModal({ text }: PopupModalProps) {
+const ConfirmModal = ({ text }: ModalProps) => {
   const { toggleModal } = useModalStore();
+
   return (
     <>
-      <p className={s.text}>{text}</p>
-      <div className={s["button-wrap"]}>
-        <FormButton size="medium" onClick={() => toggleModal(text)}>
-          확인
-        </FormButton>
-      </div>
+      <ModalContainer modalKey={text} className={s["confirm-modal"]}>
+        <span className={s.icon}>
+          <Image src="/icons/btn_check.svg" fill alt={text} />
+        </span>
+        <p className={s.text}>{text}</p>
+        <div className={`${s["button-wrap"]} ${s.flex}`}>
+          <FormButton size="small" variant="emptyButton" onClick={() => toggleModal(text)}>
+            아니오
+          </FormButton>
+          <FormButton size="small">취소하기</FormButton>
+        </div>
+      </ModalContainer>
     </>
   );
-}
+};
+
+export default ConfirmModal;

@@ -1,17 +1,110 @@
+.btn-close {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+}
+
 .text {
   font-size: 1.8rem;
   font-weight: 500;
 }
 
-.button-wrap {
-  padding-top: 40px;
+.button-wrap.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-top: 32px;
 }
 
+/* 팝업형 모달 */
 .popup-modal {
-  .button-wrap {
-    text-align: right;
-  }
+  width: 540px;
+  height: 250px;
   @include mobile {
+    max-width: 327px;
+    height: 220px;
     text-align: center;
+  }
+
+  > div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .text {
+    padding-bottom: 8px;
+    @include mobile {
+      padding-bottom: 32px;
+    }
+  }
+
+  .button-wrap {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    @include mobile {
+      right: 50%;
+      transform: translateX(50%);
+    }
+  }
+}
+
+/* 확인 모달 */
+.confirm-modal {
+  width: 298px;
+
+  .icon {
+    display: block;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+  }
+
+  .text {
+    padding-top: 16px;
+  }
+}
+
+/* 폼 모달 */
+.form-modal {
+  width: 480px;
+  @include mobile {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0 !important;
+  }
+
+  > div {
+    @include mobile {
+      position: relative;
+      height: 100%;
+    }
+  }
+
+  .title-wrap {
+    h2 {
+      @include text(2xl);
+    }
+
+    @include flex-between;
+  }
+
+  .contents {
+    padding: 20px 0;
+  }
+
+  @include mobile {
+    .button-wrap {
+      position: absolute;
+      left: 0;
+      bottom: 12px;
+      width: 100%;
+    }
   }
 }

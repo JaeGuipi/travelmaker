@@ -8,9 +8,10 @@ Modal.setAppElement("#modal-root");
 interface ModalContainerProps {
   modalKey: string;
   children: React.ReactNode;
+  className?: string;
 }
 
-const ModalContainer = ({ modalKey, children }: ModalContainerProps) => {
+const ModalContainer = ({ modalKey, children, className }: ModalContainerProps) => {
   const { modals, toggleModal } = useModalStore();
 
   return (
@@ -18,9 +19,9 @@ const ModalContainer = ({ modalKey, children }: ModalContainerProps) => {
       isOpen={modals[modalKey]}
       onRequestClose={() => toggleModal(modalKey)}
       overlayClassName={s.overlay}
-      className={s.content}
+      className={`${s.content} ${className}`}
     >
-      {children}
+      <div>{children}</div>
     </Modal>
   );
 };
