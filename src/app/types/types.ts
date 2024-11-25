@@ -1,7 +1,7 @@
 //체험 등록
 export type Schedule = {
-  id: number;
-  date: string;
+  id?: number;
+  date?: string;
   startTime: string;
   endTime: string;
 };
@@ -17,11 +17,6 @@ export interface PostActivites {
 
 //MyActivities
 //내체험리스트 조회
-export type SubImage = {
-  id: number;
-  imageUrl: string;
-};
-
 export type Activity = {
   id: number;
   userId: number;
@@ -42,11 +37,6 @@ export interface GetMyActivities {
   totalCount: number;
   activities: Activity[];
 }
-
-export type ActivityDetail = Activity & {
-  subImages: SubImage[];
-  schedules: Schedule[];
-};
 
 //내 체험 월별 예약 현황 조회
 export type Reservation = {
@@ -225,9 +215,9 @@ export interface PatchMe {
   newPassword: string;
 }
 
-//프로필 이미지 url 생성
+//체험 이미지 url 생성 & 프로필 이미지 url 생성
 export interface PostImage {
-  file: File;
+  file: File | null;
 }
 
 export interface PostImageResponse {
