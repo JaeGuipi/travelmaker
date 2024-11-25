@@ -9,7 +9,6 @@ export type ModalKey = keyof typeof ModalType;
 
 interface ModalStore {
   modals: Record<ModalKey, boolean>;
-  isModalOpen: boolean;
   toggleModal: (modalType: ModalKey) => void;
 }
 
@@ -18,7 +17,6 @@ const useModalStore = create<ModalStore>((set) => ({
     PopupModal: false,
     ConfirmModal: false,
   },
-  isModalOpen: false,
   toggleModal: (modalType) =>
     set((state) => ({
       modals: { ...state.modals, [modalType]: !state.modals[modalType] },
