@@ -9,16 +9,17 @@ interface ModalContainerProps {
   modalKey: string;
   children: React.ReactNode;
   className?: string;
+  overlayClassName?: string;
 }
 
-const ModalContainer = ({ modalKey, children, className }: ModalContainerProps) => {
+const ModalContainer = ({ modalKey, children, className, overlayClassName }: ModalContainerProps) => {
   const { modals, toggleModal } = useModalStore();
 
   return (
     <Modal
       isOpen={modals[modalKey]}
       onRequestClose={() => toggleModal(modalKey)}
-      overlayClassName={s.overlay}
+      overlayClassName={`${s.overlay} ${overlayClassName}`}
       className={`${s.content} ${className}`}
     >
       <div>{children}</div>

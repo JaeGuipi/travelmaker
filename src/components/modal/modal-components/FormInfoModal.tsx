@@ -7,27 +7,31 @@ import Image from "next/image";
 
 interface ModalProps {
   title: string;
+  showSubmit?: boolean;
 }
 
-const SubmitModal = ({ title }: ModalProps) => {
+const FormInfoModal = ({ title, showSubmit }: ModalProps) => {
   const { toggleModal } = useModalStore();
 
   return (
-    <ModalContainer modalKey={title} className={s["form-modal"]}>
+    <ModalContainer modalKey={title} className={s["forminfo-modal"]} overlayClassName={s["forminfo-overlay"]}>
       <div className={s["title-wrap"]}>
         <h2 className={s.text}>{title}</h2>
         <button onClick={() => toggleModal(title)} className={s["btn-close"]}>
           <Image src="/icons/btn_cancel_black.svg" fill alt="close" />
         </button>
       </div>
+      {/* 컨텐츠 작업 */}
       <div className={s.contents}>contents</div>
-      <div className={s["button-wrap"]}>
-        <FormButton size="large" disabled={true}>
-          작성하기
-        </FormButton>
-      </div>
+      {showSubmit && (
+        <div className={s["button-wrap"]}>
+          <FormButton size="large" disabled={true}>
+            작성하기
+          </FormButton>
+        </div>
+      )}
     </ModalContainer>
   );
 };
 
-export default SubmitModal;
+export default FormInfoModal;
