@@ -15,7 +15,7 @@ interface CustomInputProps {
   error?: FieldError;
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
-  register: UseFormRegisterReturn;
+  register?: UseFormRegisterReturn;
 }
 
 const CustomInput = ({
