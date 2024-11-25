@@ -1,23 +1,27 @@
 import useModalStore from "@/app/store/useModalStore";
 import FormButton from "@/components/Button/FormButton";
 import s from "./ModalStyle.module.scss";
+import ModalContainer from "../ModalContainer";
 
-interface PopupModalProps {
+interface ModalProps {
   text: string;
 }
 
-export default function PopupModal({ text }: PopupModalProps) {
+const PopupModal = ({ text }: ModalProps) => {
   const { toggleModal } = useModalStore();
+
   return (
     <>
-      <div className={s["popup-modal"]}>
+      <ModalContainer modalKey={text} className={s["popup-modal"]}>
         <p className={s.text}>{text}</p>
         <div className={s["button-wrap"]}>
           <FormButton size="medium" onClick={() => toggleModal(text)}>
             확인
           </FormButton>
         </div>
-      </div>
+      </ModalContainer>
     </>
   );
-}
+};
+
+export default PopupModal;
