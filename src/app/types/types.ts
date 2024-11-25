@@ -1,6 +1,7 @@
 //체험 등록
 export type Schedule = {
-  data: string;
+  id: number;
+  date: string;
   startTime: string;
   endTime: string;
 };
@@ -16,6 +17,11 @@ export interface PostActivites {
 
 //MyActivities
 //내체험리스트 조회
+export type SubImage = {
+  id: number;
+  imageUrl: string;
+};
+
 export type Activity = {
   id: number;
   userId: number;
@@ -36,6 +42,11 @@ export interface GetMyActivities {
   totalCount: number;
   activities: Activity[];
 }
+
+export type ActivityDetail = Activity & {
+  subImages: SubImage[];
+  schedules: Schedule[];
+};
 
 //내 체험 월별 예약 현황 조회
 export type Reservation = {
