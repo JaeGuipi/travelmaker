@@ -1,4 +1,3 @@
-import React from "react";
 import ModalContainer from "../ModalContainer";
 import FormButton from "@/components/Button/FormButton";
 import useModalStore from "@/app/store/useModalStore";
