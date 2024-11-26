@@ -3,6 +3,7 @@ import {API_URL} from "@/constants/config";
 import {
   PatchMyActivities,
   PatchMyActivitiesByReservations,
+  getMyActivitiesQuery,
   getMyActivitiesByDashboardQuery,
   getMyActivitiesByScheduleQuery,
   getMyActivitiesByReservationsQuery,
@@ -27,7 +28,11 @@ const fetchData = async (endpoint: string, options: RequestInit = {}) => {
 };
 
 //내 체험리스트 조회
-export const getMyActivities = async () => fetchData(`${BASE_PATH}`);
+export const getMyActivities = async (query: getMyActivitiesQuery) => {
+  const queryString = `?cusorId=${query.cursorId}&size=${query.size}`;
+
+  return fetchData(`${BASE_PATH}${queryString}`);
+};
 
 //내 체험 월별 예약 현황 조회
 export const getMyActivitiesByDashboard = async (query: getMyActivitiesByDashboardQuery) => {
