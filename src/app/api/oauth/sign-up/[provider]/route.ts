@@ -34,17 +34,17 @@ export async function POST(request: NextResponse, { params }: { params: { provid
   const config = OAUTH_CONFIG[provider];
 
   if (!config) {
-    return NextResponse.json({ error: "Invalid provider" }, { status: 400 });
+    return NextResponse.json({ error: "지원하지 않는 로그인 제공자입니다." }, { status: 400 });
   }
 
   const { searchParams } = new URL(request.url);
   const code = searchParams.get("code");
 
   if (!code) {
-    return NextResponse.json({ error: "Authorization code is missing" }, { status: 400 });
+    return NextResponse.json({ error: "인증 코드가 누락되었습니다." }, { status: 400 });
   }
 
-  // Step 1: Token 요청
+  // 토큰 요청
   const tokenResponse = await fetch(config.tokenUrl, {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -58,24 +58,21 @@ export async function POST(request: NextResponse, { params }: { params: { provid
   });
 
   if (!tokenResponse.ok) {
-    return NextResponse.json({ error: "Failed to fetch access token" }, { status: 500 });
+    return NextResponse.json({ error: "액세스 토큰을 가져오는 데 실패했습니다." }, { status: 500 });
   }
 
   const { access_token } = await tokenResponse.json();
 
-  // Step 2: 유저 정보 요청
   const userInfoResponse = await fetch(config.userInfoUrl, {
     headers: { Authorization: `Bearer ${access_token}` },
   });
 
   if (!userInfoResponse.ok) {
-    return NextResponse.json({ error: "Failed to fetch user info" }, { status: 500 });
+    return NextResponse.json({ error: "유저 정보를 가져오는 데 실패했습니다." }, { status: 500 });
   }
 
   const userInfo = await userInfoResponse.json();
 
-  // TODO: Step 3: 회원가입 로직 추가 (DB 저장 등)
-  // 예: DB에 저장하거나 이미 있는 사용자면 로그인 처리
   const user = {
     id: userInfo.id,
     email: userInfo.kakao_account?.email || userInfo.email,
