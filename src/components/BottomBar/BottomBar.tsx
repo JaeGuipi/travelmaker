@@ -13,35 +13,29 @@ const cx = classNames.bind(styles);
 const BottomBar = () => {
   return (
     <div className={cx("bottom-bar")}>
-      <div>
-        <Link href="/" className={cx("bottom-bar-item")}>
-          <IoSearch size={100} />
-          <span>검색</span>
-        </Link>
-      </div>
-      <div>
-        <Link href="/" className={cx("bottom-bar-item")}>
-          <TbReservedLine size={100} />
-          예약내역
-        </Link>
-      </div>
-      <div>
-        <Link href="/" className={cx("bottom-bar-item")}>
-          <FaHome size={100} />홈
-        </Link>
-      </div>
-      <div>
-        <Link href="/" className={cx("bottom-bar-item")}>
-          <IoPersonSharp size={100} />
-          마이페이지
-        </Link>
-      </div>
-      <div>
-        <Link href="/" className={cx("bottom-bar-item")}>
-          <HiOutlineBellAlert size={100} />
-          알림
-        </Link>
-      </div>
+      <Link href="/" className={cx("bottom-bar-item")}>
+        <IoSearch size={20} />
+        <span>검색</span>
+      </Link>
+
+      <Link href="/" className={cx("bottom-bar-item")}>
+        <TbReservedLine size={20} />
+        예약내역
+      </Link>
+
+      <Link href="/" className={cx("bottom-bar-item")}>
+        <FaHome size={20} />홈
+      </Link>
+
+      <Link href="/" className={cx("bottom-bar-item")}>
+        <IoPersonSharp size={20} />
+        마이페이지
+      </Link>
+
+      <Link href="/" className={cx("bottom-bar-item")}>
+        <HiOutlineBellAlert size={20} />
+        알림
+      </Link>
     </div>
   );
 };
