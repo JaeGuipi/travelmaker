@@ -1,0 +1,22 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form {
+  width: 640px;
+
+  & > div {
+    margin-bottom: 2.6rem;
+  }
+
+  @include tablet {
+    margin: 0 5.2rem;
+  }
+  @include mobile {
+    margin: 0 1.2rem;
+  }
+
+}

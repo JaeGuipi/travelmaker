@@ -1,5 +1,5 @@
 "use Client";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
+import {  UseFormRegisterReturn } from "react-hook-form";
 import styles from "./CustomInput.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
@@ -12,7 +12,7 @@ interface CustomInputProps {
   label?: string;
   type: string;
   placeholder?: string;
-  error?: FieldError;
+  error?: string;
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
@@ -52,6 +52,9 @@ const CustomInput = ({
           {...register}
           {...rest}
         />
+        {error && (
+          <span>{error}</span>
+        )}
         {iconType === "search" && (
           <button type="button" className={cx("input-img")}>
             <Image src={"/icons/btn_search.svg"} width={20} height={20} alt="Search Icon" />
