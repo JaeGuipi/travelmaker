@@ -93,24 +93,24 @@ export interface GetMyActivitiesByReservations {
   reservations: ActivityReservation[];
 }
 
-//내 체험 예약 상태(승인,거절)업데이트
-export type PatchMyActivitiesByReservations = {
-  status: "pending" | "confirm" | "decline";
-};
+// //내 체험 예약 상태(승인,거절)업데이트
+// export type PatchMyActivitiesByReservations = {
+//   status: "pending" | "confirm" | "decline";
+// };
 
-//내 체험 수정
-export interface PatchMyActivities {
-  title: string;
-  category: string;
-  description: string;
-  price: number;
-  address: string;
-  bannerImageUrl: string;
-  subImageIdsToRemove: [];
-  subImageUrlsToAdd: [];
-  scheduleIdsToRemove: [];
-  schedulesToAdd: [];
-}
+// //내 체험 수정
+// export interface PatchMyActivities {
+//   title: string;
+//   category: string;
+//   description: string;
+//   price: number;
+//   address: string;
+//   bannerImageUrl: string;
+//   subImageIdsToRemove: [];
+//   subImageUrlsToAdd: [];
+//   scheduleIdsToRemove: [];
+//   schedulesToAdd: [];
+// }
 
 //MyReservations
 //내 예약 리스트 조회
