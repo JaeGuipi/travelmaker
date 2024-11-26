@@ -1,6 +1,7 @@
 //체험 등록
 export type Schedule = {
-  data: string;
+  id?: number;
+  date?: string;
   startTime: string;
   endTime: string;
 };
@@ -214,9 +215,9 @@ export interface PatchMe {
   newPassword: string;
 }
 
-//프로필 이미지 url 생성
+//체험 이미지 url 생성 & 프로필 이미지 url 생성
 export interface PostImage {
-  file: File;
+  file: File | null;
 }
 
 export interface PostImageResponse {
