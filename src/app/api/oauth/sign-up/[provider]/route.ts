@@ -1,16 +1,5 @@
+import { OAuthConfig } from "@/app/types/auth/oauthTypes";
 import { NextResponse } from "next/server";
-
-interface OAuthProviderConfig {
-  tokenUrl: string;
-  userInfoUrl: string;
-  clientId: string;
-  clientSecret: string;
-  redirectUri: string;
-}
-
-interface OAuthConfig {
-  [provider: string]: OAuthProviderConfig;
-}
 
 const OAUTH_CONFIG: OAuthConfig = {
   kakao: {
