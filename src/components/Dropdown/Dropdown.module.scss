@@ -1,0 +1,62 @@
+/* Dropdown.module.css */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  color: black;
+  border: none;
+  cursor: pointer;
+
+  &.kebab {
+    width: 40px;
+    img {
+      width: 100%;
+    }
+  }
+
+  &.default {
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    width: 160px;
+
+    /* green/green_0B3B2D */
+    border: 1px solid #0b3b2d;
+    border-radius: 15px;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid #dddddd;
+  width: 160px;
+}
+
+.item {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 46px;
+  gap: 10px;
+  height: 62px;
+  border-bottom: 1px solid #dddddd;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
