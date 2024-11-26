@@ -24,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${pretendard.variable}`}>
         <QueryClientProvider>
+          <div id="modal-root"></div>
           <ToastProvider />
           <Header />
           {children}
