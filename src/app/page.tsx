@@ -1,5 +1,5 @@
-import PopularList from "@/components/Home/PopularList";
-import MainSwiper from "@/components/Swiper/MainSwiper";
+import PopularItemList from "@/components/Home/Popular-section/PopularItemList";
+import MainSwiper from "@/components/Home/Visual-section/MainSwiper";
 import { getActivity } from "@/lib/api/activities";
 
 export default async function Home() {
@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <>
       <MainSwiper />
-      <PopularList activities={activities} />
+      <PopularItemList activities={activities} />
       <div>
         <h3>🛼 마음에 드는 장소를 선택해보세요</h3>
       </div>

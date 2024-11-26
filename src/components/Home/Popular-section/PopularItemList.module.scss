@@ -1,5 +1,6 @@
 .popular-section {
-  padding-top: 60px;
+  position: relative;
+  margin-top: 60px;
   @include mobile {
     padding: 0 40px;
   }
@@ -8,8 +9,4 @@
   color: $black01;
   font-weight: bold;
   @include text(4xl);
-}
-.popular-list {
-  padding-top: 32px;
-  @include flex-between;
 }
