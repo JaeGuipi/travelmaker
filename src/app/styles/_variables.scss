@@ -5,6 +5,7 @@ $background: #fafafa;
 
 $black01: #1b1b1b;
 $black02: #221b11;
+$black03: #333236;
 $gray01: #4b4b4b;
 $gray02: #79747e;
 $gray03: #a1a1a1;
@@ -31,14 +32,38 @@ $blue02: #2eb4ff;
 $blue03: #e5f3ff;
 
 $font-styles: (
-  3xl:(font-size:3.2rem, line-height:4.2rem),
-  2xl:(font-size:2.4rem, line-height:3.2rem),
-  xl:(font-size:2rem, line-height:3.2rem),
-  2lg:(font-size:1.8rem, line-height:2.6rem),
-  lg:(font-size:1.6rem, line-height:2.6rem),
-  md:(font-size:1.4rem, line-height:2.4rem),
-  sm:(font-size:1.3rem, line-height:2.2rem),
-  xs:(font-size:1.2rem, line-height:1.8rem),
+  3xl: (
+    font-size: 3.2rem,
+    line-height: 4.2rem,
+  ),
+  2xl: (
+    font-size: 2.4rem,
+    line-height: 3.2rem,
+  ),
+  xl: (
+    font-size: 2rem,
+    line-height: 3.2rem,
+  ),
+  2lg: (
+    font-size: 1.8rem,
+    line-height: 2.6rem,
+  ),
+  lg: (
+    font-size: 1.6rem,
+    line-height: 2.6rem,
+  ),
+  md: (
+    font-size: 1.4rem,
+    line-height: 2.4rem,
+  ),
+  sm: (
+    font-size: 1.3rem,
+    line-height: 2.2rem,
+  ),
+  xs: (
+    font-size: 1.2rem,
+    line-height: 1.8rem,
+  ),
 );
 
 .container {
