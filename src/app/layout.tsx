@@ -10,8 +10,8 @@ const pretendard = localFont({
 });
 
 const ToastProvider = () => {
-  return <Toaster />
-}
+  return <Toaster />;
+};
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable}`}>
+        <div id="modal-root"></div>
         <ToastProvider />
         {children}
       </body>
