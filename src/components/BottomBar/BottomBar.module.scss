@@ -1,0 +1,15 @@
+/* BottomBar.module.scss */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+
+  .bottom-bar-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0 auto;
+    text-align: center;
+    text-decoration: none;
+  }
+}
