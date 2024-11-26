@@ -14,7 +14,8 @@ import { API_URL } from "@/constants/config";
 // 체험 리스트 조회
 export const getActivity = async (): Promise<GetActivities> => {
   try {
-    const response = await fetch(`${API_URL}/activities?method=offset`, {
+    const query = new URLSearchParams({ method: "offset" });
+    const response = await fetch(`${API_URL}/activities?${query}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

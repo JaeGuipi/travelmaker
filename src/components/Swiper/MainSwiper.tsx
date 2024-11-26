@@ -13,7 +13,7 @@ export default function MainSwiper() {
   SwiperCore.use([Navigation, Autoplay]);
   return (
     <>
-      <div className={s.visual}>
+      <section className={s.visual}>
         <SwiperText />
         <Swiper
           className={s.swiper}
@@ -41,7 +41,7 @@ export default function MainSwiper() {
             <Image src="/icons/arrow_next.svg" fill alt="prev" />
           </div>
         </Swiper>
-      </div>
+      </section>
     </>
   );
 }
