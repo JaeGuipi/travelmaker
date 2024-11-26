@@ -1,7 +1,5 @@
 import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/app/types/types";
-import config from "@/constants/config";
-
-const API_URL = config.API_URL;
+import { API_URL } from "@/constants/config";
 
 // 회원가입
 export const signUpUser = async (userData: SignUp) => {
