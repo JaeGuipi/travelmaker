@@ -17,6 +17,11 @@ export type PatchMyActivitiesByReservations = {
   status: "pending" | "confirm" | "decline";
 };
 
+export interface getMyActivitiesQuery {
+  cursorId: string;
+  size: number;
+}
+
 export interface getMyActivitiesByDashboardQuery {
   activityId: string;
   year: string;
