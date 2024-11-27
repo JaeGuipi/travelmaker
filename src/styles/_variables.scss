@@ -102,4 +102,9 @@ $font-styles: (
   justify-content: flex-start;
   align-items: center;
 }
+@mixin flex-align-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
 /* ----------------------- end: flex custom ----------------------- */
