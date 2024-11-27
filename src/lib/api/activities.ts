@@ -7,8 +7,8 @@ import {
   PostReservation,
   ScheduleList,
   PostReservationResponse,
-} from "@/app/types/activites/activitesTypes";
-import { PostImage, PostImageResponse } from "@/app/types/types";
+} from "@/types/activites/activitesTypes";
+import { PostImage, PostImageResponse } from "@/types/types";
 import { API_URL } from "@/constants/config";
 
 // 체험 리스트 조회
