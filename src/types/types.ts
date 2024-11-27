@@ -93,42 +93,24 @@ export interface GetMyActivitiesByReservations {
   reservations: ActivityReservation[];
 }
 
-//내 체험 예약 상태(승인,거절)업데이트
-export type PatchMyActivitiesByReservations = {
-  status: "pending" | "confirm" | "decline";
-};
+// //내 체험 예약 상태(승인,거절)업데이트
+// export type PatchMyActivitiesByReservations = {
+//   status: "pending" | "confirm" | "decline";
+// };
 
-//내 체험 수정
-export interface PatchMyActivities {
-  title: string;
-  category: string;
-  description: string;
-  price: number;
-  address: string;
-  bannerImageUrl: string;
-  subImageIdsToRemove: [];
-  subImageUrlsToAdd: [];
-  scheduleIdsToRemove: [];
-  schedulesToAdd: [];
-}
-
-//MyNotifications
-//내 알림 리스트 조회
-export type Notification = {
-  id: number;
-  teamId: string;
-  userId: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-};
-
-export interface GetMyNotifications {
-  cursorId: number;
-  notifications: Notification[];
-  totalCount: number;
-}
+// //내 체험 수정
+// export interface PatchMyActivities {
+//   title: string;
+//   category: string;
+//   description: string;
+//   price: number;
+//   address: string;
+//   bannerImageUrl: string;
+//   subImageIdsToRemove: [];
+//   subImageUrlsToAdd: [];
+//   scheduleIdsToRemove: [];
+//   schedulesToAdd: [];
+// }
 
 //MyReservations
 //내 예약 리스트 조회
@@ -172,52 +154,9 @@ export interface PostMyReservations {
   content: string;
 }
 
-//Oauth
-//post
-export interface PostOauthApps {
-  appKey: string;
-  provider: "google" | "kakao";
-}
-//간편 회원가입
-export interface PostOauthSignUp {
-  nickname: string;
-  redirectUrl: string;
-  token: string;
-}
-//간편 로그인
-export interface PostOauthSignIn {
-  redirectUrl: string;
-  token: string;
-}
-
-// Users
-//회원가입
-export interface SignUp {
-  email: string;
-  nickname: string;
-  password: string;
-}
-
-//내 정보 조회
-export interface GetMe {
-  id: number;
-  email: string;
-  nickname: string;
-  profileImageUrl: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-//내 정보 수정
-export interface PatchMe {
-  nickname: string;
-  profileImageUrl: string;
-  newPassword: string;
-}
-
-//체험 이미지 url 생성 & 프로필 이미지 url 생성
+//체험 이미지 url 생성
 export interface PostImage {
-  file: File | null;
+  file: File;
 }
 
 export interface PostImageResponse {
