@@ -1,4 +1,4 @@
-import { OAuthConfig } from "@/app/types/auth/oauthTypes";
+import { OAuthConfig } from "@/types/auth/oauthTypes";
 import { NextResponse } from "next/server";
 
 const OAUTH_CONFIG: OAuthConfig = {
