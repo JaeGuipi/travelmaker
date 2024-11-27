@@ -7,7 +7,7 @@ import PopularItemSwiper from "./PopularItemSwiper";
 export const cx = classNames.bind(s);
 
 const PopularItemList: React.FC<GetActivities> = ({ activities }) => {
-  // activities가 undefined나 null인 경우 기본값으로 빈 배열 사용
+  // rating 기준으로 정렬
   const sortedActivities = (activities || []).sort((a, b) => b.rating - a.rating);
 
   return (

@@ -1,15 +1,15 @@
 import { getActivity } from "@/lib/api/activities";
-import AllItemList from "@/components/Home/AllItemList-section/AllItemList";
+import ActivityList from "@/components/Home/ActivityList-section/ActivityList";
 import PopularItemList from "@/components/Home/Popular-section/PopularItemList";
 import MainSwiper from "@/components/Home/Visual-section/MainSwiper";
 
 export default async function Home() {
-  const { activities } = await getActivity();
+  const { activities, totalCount } = await getActivity();
   return (
     <>
       <MainSwiper />
       <PopularItemList activities={activities} />
-      <AllItemList activities={activities} />
+      <ActivityList activities={activities} totalCount={totalCount} />
     </>
   );
 }

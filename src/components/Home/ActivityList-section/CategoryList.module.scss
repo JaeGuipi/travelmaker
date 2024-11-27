@@ -1,0 +1,23 @@
+.category {
+  padding-top: 35px;
+  @include flex-start;
+  gap: 20px;
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 14%;
+    min-width: 154px;
+    height: 154px;
+    cursor: pointer;
+    > span {
+      @include text(md);
+    }
+  }
+  li.selected {
+    > span {
+      font-weight: bold;
+    }
+  }
+}

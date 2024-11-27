@@ -1,0 +1,13 @@
+.allitem-section {
+  position: relative;
+  margin-top: 60px;
+  @include tablet {
+    margin-top: 40px;
+  }
+}
+
+.title {
+  color: $black01;
+  font-weight: bold;
+  @include text(4xl);
+}
