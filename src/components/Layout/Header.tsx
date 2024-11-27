@@ -11,11 +11,16 @@ import CustomInput from "@/components/Input/CustomInput";
 export const cx = classNames.bind(s);
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, refetchUser } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    logout();
+    refetchUser();
   };
 
   return (
@@ -52,7 +57,7 @@ const Header = () => {
 
               {isDropdownOpen && (
                 <div className={s.logout}>
-                  <button onClick={() => logout()}>로그아웃</button>
+                  <button onClick={handleLogout}>로그아웃</button>
                 </div>
               )}
             </div>

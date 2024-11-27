@@ -14,12 +14,13 @@ export const useAuth = () => {
     data: user,
     isPending,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["user"],
-    //queryFn: getMyInfo,
     queryFn: async () => {
       return await getMyInfo();
     },
+    enabled: false,
   });
 
   // 로그인 처리
@@ -28,6 +29,7 @@ export const useAuth = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       router.push("/");
+      refetch();
     },
     onError: (error) => {
       console.error("로그인 실패", error);
@@ -54,5 +56,6 @@ export const useAuth = () => {
     isError,
     login: loginMutation.mutate,
     logout: logoutMutation.mutate,
+    refetchUser: refetch,
   };
 };
