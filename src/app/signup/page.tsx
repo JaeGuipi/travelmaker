@@ -1,13 +1,14 @@
-'use client'
-import SignUpForm from "@/components/SignUpForm"
+"use client";
+import SignUpForm from "@/components/signUpForm/SignUpForm";
+
 
 const SignUp = () => {
-  
   return (
     <>
-    <SignUpForm />
+   
+      <SignUpForm />
     </>
-  )
-}
+  );
+};
 
 export default SignUp;

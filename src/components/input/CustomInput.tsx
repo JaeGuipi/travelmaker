@@ -1,5 +1,5 @@
 "use Client";
-import {  UseFormRegisterReturn } from "react-hook-form";
+import { UseFormRegisterReturn } from "react-hook-form";
 import styles from "./CustomInput.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
@@ -12,7 +12,7 @@ interface CustomInputProps {
   label?: string;
   type: string;
   placeholder?: string;
-  error?: string;
+  errors?: string;
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
@@ -23,7 +23,7 @@ const CustomInput = ({
   label,
   type,
   register,
-  error,
+  errors,
   iconType,
   borderColor = "default",
   ...rest
@@ -44,7 +44,7 @@ const CustomInput = ({
       <div className={cx("input-container")}>
         <input
           className={cx("input", {
-            "input-error": error,
+            "input-error": errors,
             "border-yellow": borderColor === "yellow",
           })}
           type={iconType === "password" && isVisible ? "text" : type}
@@ -52,8 +52,8 @@ const CustomInput = ({
           {...register}
           {...rest}
         />
-        {error && (
-          <span>{error}</span>
+        {errors && (
+          <span>{errors}</span>
         )}
         {iconType === "search" && (
           <button type="button" className={cx("input-img")}>

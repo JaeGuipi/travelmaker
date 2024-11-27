@@ -1,0 +1,21 @@
+.logo {
+  margin-bottom: 5.2rem;
+  text-align: center;
+}
+
+.form-container {
+  max-width: 640px;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: 1.2rem;
+  }
+}
+
+.form > div {
+  margin-bottom: 2.6rem;
+}
