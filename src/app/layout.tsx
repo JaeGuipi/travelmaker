@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import "@/app/styles/globals.scss";
+import "@/styles/globals.scss";
 import Header from "@/components/Layout/Header";
 import { Providers as QueryClientProvider } from "./providers";
 import { Toaster } from "react-hot-toast";

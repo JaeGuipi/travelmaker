@@ -1,4 +1,4 @@
-import { GetMyNotifications } from "@/app/types/notifications/notificationsTypes";
+import { GetMyNotifications } from "@/types/notifications/notificationsTypes";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 
