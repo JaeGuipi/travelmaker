@@ -1,4 +1,4 @@
-import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/app/types/users/usersTypes";
+import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
 
 // 회원가입
