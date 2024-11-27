@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { PostAuth } from "@/types/auth/authTypes";
 import API_URL from "@/constants/config";
 
+// 쿠키 저장 함수
 const setCookie = (name: string, value: string) => {
   const cookieStore = cookies();
   cookieStore.set({
@@ -17,6 +18,18 @@ const setCookie = (name: string, value: string) => {
   });
 };
 
+// 쿠키 삭제 함수
+const deleteCookie = (cookieName: string) => {
+  const cookieStore = cookies();
+  cookieStore.set(cookieName, "", {
+    maxAge: 0, // 즉시 만료
+    path: "/", // 모든 경로에서 만료
+    httpOnly: true, // 클라이언트에서 접근 불가
+    secure: process.env.NODE_ENV === "production", // HTTPS 환경에서만 동작
+  });
+};
+
+// 로그인
 export const loginUser = async ({ email, password }: PostAuth) => {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
@@ -40,6 +53,19 @@ export const loginUser = async ({ email, password }: PostAuth) => {
   } catch (error) {
     console.error("로그인 오류 발생:", error);
     throw new Error("로그인 요청 실패");
+  }
+};
+
+// 로그아웃
+export const logoutUser = async () => {
+  try {
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+
+    console.log("로그아웃 성공");
+  } catch (error) {
+    console.error("로그아웃 중 오류 발생:", error);
+    throw new Error("로그아웃 실패");
   }
 };
 
