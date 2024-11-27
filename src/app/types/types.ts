@@ -156,7 +156,7 @@ export interface PostMyReservations {
 
 //체험 이미지 url 생성
 export interface PostImage {
-  file: File | null;
+  file: File;
 }
 
 export interface PostImageResponse {
