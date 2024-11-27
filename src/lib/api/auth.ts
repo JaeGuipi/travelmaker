@@ -10,11 +10,11 @@ const setCookie = (name: string, value: string) => {
   cookieStore.set({
     name,
     value,
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    sameSite: "strict",
     maxAge: 60 * 60 * 24 * 7, // 일주일 동안 유지
+    path: "/",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
   });
 };
 
@@ -22,10 +22,11 @@ const setCookie = (name: string, value: string) => {
 const deleteCookie = (cookieName: string) => {
   const cookieStore = cookies();
   cookieStore.set(cookieName, "", {
-    maxAge: 0, // 즉시 만료
-    path: "/", // 모든 경로에서 만료
-    httpOnly: true, // 클라이언트에서 접근 불가
-    secure: process.env.NODE_ENV === "production", // HTTPS 환경에서만 동작
+    maxAge: 0,
+    path: "/",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
   });
 };
 
