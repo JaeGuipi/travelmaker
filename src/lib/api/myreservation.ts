@@ -1,8 +1,7 @@
 import { customFetch } from "@/utils/customFetch";
 import { GetMyReservations, PatchMyReservations, PostMyReservations } from "../../app/types/types";
-import config from "@/constants/config";
+import API_URL from "@/constants/config";
 
-const API_URL = config.API_URL;
 
 // 내 예약 리스트 조회
 export const getMyReservations = async (): Promise<GetMyReservations> => {
