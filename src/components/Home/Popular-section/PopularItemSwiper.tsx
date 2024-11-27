@@ -10,11 +10,11 @@ import SwiperCore from "swiper";
 import s from "./PopularItemSwiper.module.scss";
 import PopularItem from "./PopularItem";
 
-export interface GetActivities {
+export interface PopularItems {
   sortedActivities: Activity[];
 }
 
-const PopularItemSwiper: React.FC<GetActivities> = ({ sortedActivities }) => {
+const PopularItemSwiper: React.FC<PopularItems> = ({ sortedActivities }) => {
   SwiperCore.use([Navigation]);
 
   return (

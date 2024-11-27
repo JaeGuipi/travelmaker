@@ -1,15 +1,14 @@
 "use client";
-
+import { GetActivities } from "@/types/activites/activitesTypes";
 import s from "./PopularItemList.module.scss";
 import classNames from "classnames/bind";
 import PopularItemSwiper from "./PopularItemSwiper";
-import { GetActivities } from "@/types/activites/activitesTypes";
 
 export const cx = classNames.bind(s);
 
 const PopularItemList: React.FC<GetActivities> = ({ activities }) => {
-  // rating 기준 리스트 나열
-  const sortedActivities = activities.sort((a, b) => b.rating - a.rating);
+  // activities가 undefined나 null인 경우 기본값으로 빈 배열 사용
+  const sortedActivities = (activities || []).sort((a, b) => b.rating - a.rating);
 
   return (
     <section className={cx("popular-section", "container")}>
