@@ -9,7 +9,7 @@ import {
   PostReservationResponse,
 } from "@/types/activites/activitesTypes";
 import { PostImage, PostImageResponse } from "@/types/types";
-import { API_URL } from "@/constants/config";
+import API_URL from "@/constants/config";
 
 // 체험 리스트 조회
 export const getActivity = async (): Promise<GetActivities> => {
