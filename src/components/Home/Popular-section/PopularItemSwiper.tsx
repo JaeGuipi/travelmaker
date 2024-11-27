@@ -21,13 +21,17 @@ const PopularItemSwiper: React.FC<GetActivities> = ({ sortedActivities }) => {
     <Swiper
       className={s.swiper}
       spaceBetween={24}
-      slidesPerView={3}
+      slidesPerView="auto"
       navigation={{
         nextEl: `.${s["swiper-next"]}`,
         prevEl: `.${s["swiper-prev"]}`,
       }}
       breakpoints={{
-        640: {
+        375: {
+          slidesPerView: 1.5,
+          spaceBetween: 16,
+        },
+        768: {
           slidesPerView: 1.5,
           spaceBetween: 16,
         },
