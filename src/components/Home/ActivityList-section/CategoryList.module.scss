@@ -1,16 +1,25 @@
 .category {
-  padding-top: 35px;
+  padding: 35px 0 15px;
   @include flex-start;
   gap: 20px;
+  scrollbar-width: none;
+  @include mobile {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+  }
+
   li {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 14%;
-    min-width: 154px;
-    height: 154px;
+    flex: 0 0 120px;
+    height: 120px;
     cursor: pointer;
+    @include mobile {
+      flex: 0 0 60px;
+      height: 100px;
+    }
     > span {
       @include text(md);
     }
