@@ -1,0 +1,37 @@
+.info {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 30px 20px;
+
+  * {
+    color: #fff;
+  }
+
+  .rating {
+    font-weight: 600;
+    @include text(md);
+  }
+
+  .title {
+    padding-top: 20px;
+    font-weight: 700;
+    word-break: keep-all;
+    @include text(3xl);
+  }
+
+  .price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-top: 20px;
+    font-weight: 700;
+    @include text(xl);
+    > span {
+      color: $gray03;
+      font-weight: 400;
+      @include text(md);
+    }
+  }
+}

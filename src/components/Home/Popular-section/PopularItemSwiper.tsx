@@ -4,11 +4,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { Activity } from "@/app/types/types";
 import Image from "next/image";
 import SwiperCore from "swiper";
-import Link from "next/link";
 import s from "./PopularItemSwiper.module.scss";
-import { Activity } from "@/app/types/types";
+import PopularItem from "./PopularItem";
 
 export interface GetActivities {
   sortedActivities: Activity[];
@@ -26,7 +26,6 @@ const PopularItemSwiper: React.FC<GetActivities> = ({ sortedActivities }) => {
         nextEl: `.${s["swiper-next"]}`,
         prevEl: `.${s["swiper-prev"]}`,
       }}
-      loop={true}
     >
       <div className={s["swiper-ctrl"]}>
         <div className={s["swiper-prev"]}>
@@ -38,21 +37,7 @@ const PopularItemSwiper: React.FC<GetActivities> = ({ sortedActivities }) => {
       </div>
       {sortedActivities.map((activity) => (
         <SwiperSlide key={activity.id} className={s["swiper-slide"]}>
-          <Link href="/">
-            <div>
-              <Image
-                src={activity.bannerImageUrl}
-                width={384}
-                height={384}
-                style={{ width: "auto", height: "100%" }}
-                alt="체험 이미지"
-              />
-            </div>
-            <h4>{activity.title}</h4>
-            <p>{activity.description}</p>
-            <span>${activity.price}</span>
-            <p>Rating: {activity.rating}</p>
-          </Link>
+          <PopularItem activity={activity} />
         </SwiperSlide>
       ))}
     </Swiper>
