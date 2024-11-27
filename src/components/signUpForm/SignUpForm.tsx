@@ -11,6 +11,7 @@ import FormLink from "../formLink/FormLink";
 import SocialLogin from "../socialLogin/socialLogin";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const cx = classNames.bind(s);
 
@@ -28,14 +29,21 @@ const SignUpForm = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<signUpSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: "onBlur",
+    mode: "onBlur", //focus-out 되었을 때 유효성 검사 실시
   });
+
+const [submitError, setSubmitError] = useState("")
+
   const onSubmit = async (data: FormValues) => {
-    await signUpUser({
+    try {
+     await signUpUser({
       email: data.email,
       nickname: data.nickname,
       password: data.password,
     });
+  } catch (err) {
+    
+  }
   };
 
   return (
