@@ -4,7 +4,9 @@
   bottom: 0;
   width: 100%;
   padding: 30px 20px;
-
+  @include mobile {
+    padding: 20px;
+  }
   * {
     color: #fff;
   }
@@ -19,6 +21,10 @@
     font-weight: 700;
     word-break: keep-all;
     @include text(3xl);
+    @include mobile {
+      padding-top: 6px;
+      @include text(2lg);
+    }
   }
 
   .price {
@@ -28,6 +34,11 @@
     padding-top: 20px;
     font-weight: 700;
     @include text(xl);
+    @include mobile {
+      padding-top: 6px;
+      @include text(lg);
+    }
+
     > span {
       color: $gray03;
       font-weight: 400;

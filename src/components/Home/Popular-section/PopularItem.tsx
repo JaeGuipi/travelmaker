@@ -1,8 +1,8 @@
+import { Activity } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import s from "./PopularItem.module.scss";
-import { Activity } from "@/types/types";
 
 export interface PopularItemProps {
   activity: Activity;
@@ -11,13 +11,7 @@ export interface PopularItemProps {
 const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {
   return (
     <Link href="/">
-      <Image
-        src={activity.bannerImageUrl}
-        width={384}
-        height={384}
-        style={{ width: "100%", height: "100%" }}
-        alt="체험 이미지"
-      />
+      <Image src={activity.bannerImageUrl} width={384} height={384} priority={true} alt="체험 이미지" />
       <div className={s.info}>
         <p className={s.rating}>
           <span>Rating icon</span>: {activity.rating} ({activity.reviewCount})
