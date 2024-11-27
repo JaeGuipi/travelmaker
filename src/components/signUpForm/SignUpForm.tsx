@@ -42,10 +42,9 @@ const SignUpForm = () => {
         nickname: data.nickname,
         password: data.password,
       });
-      route.push('/')
       showSuccess("가입이 완료되었습니다");
+      route.push('/login')
     } catch (err) {
-      console.log(err);
       showError((err as any).message);
     }
   };
