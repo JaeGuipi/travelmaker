@@ -12,9 +12,15 @@ import { PostImage, PostImageResponse } from "@/types/types";
 import API_URL from "@/constants/config";
 
 // 체험 리스트 조회
-export const getActivity = async (): Promise<GetActivities> => {
+export const getActivity = async (params: { size?: number } = {}): Promise<GetActivities> => {
   try {
     const query = new URLSearchParams({ method: "offset" });
+
+    // size가 있을 경우 추가
+    if (params.size) {
+      query.append("size", String(params.size));
+    }
+
     const response = await fetch(`${API_URL}/activities?${query}`, {
       method: "GET",
       headers: {
