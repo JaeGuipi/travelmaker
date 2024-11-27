@@ -1,4 +1,4 @@
-import useModalStore from "@/app/store/useModalStore";
+import useModalStore from "@/store/useModalStore";
 import React from "react";
 import Modal from "react-modal";
 import s from "./ModalContainer.module.scss";

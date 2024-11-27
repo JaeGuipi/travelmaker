@@ -1,5 +1,5 @@
 import { customFetch } from "@/utils/customFetch";
-import { GetMyReservations, PatchMyReservations, PostMyReservations } from "../../app/types/types";
+import { GetMyReservations, PatchMyReservations, PostMyReservations } from "../../types/types";
 import config from "@/constants/config";
 
 const API_URL = config.API_URL;
