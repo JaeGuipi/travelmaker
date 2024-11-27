@@ -11,7 +11,8 @@ import FormLink from "../formLink/FormLink";
 import SocialLogin from "../socialLogin/socialLogin";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useToast } from "@/hooks/useToast";
+import { useRouter } from "next/navigation";
 
 const cx = classNames.bind(s);
 
@@ -23,6 +24,8 @@ type FormValues = {
 };
 
 const SignUpForm = () => {
+  const route = useRouter();
+  const { showSuccess, showError } = useToast();
   const {
     register,
     handleSubmit,
@@ -32,25 +35,26 @@ const SignUpForm = () => {
     mode: "onBlur", //focus-out 되었을 때 유효성 검사 실시
   });
 
-const [submitError, setSubmitError] = useState("")
-
   const onSubmit = async (data: FormValues) => {
     try {
-     await signUpUser({
-      email: data.email,
-      nickname: data.nickname,
-      password: data.password,
-    });
-  } catch (err) {
-    
-  }
+      await signUpUser({
+        email: data.email,
+        nickname: data.nickname,
+        password: data.password,
+      });
+      route.push('/')
+      showSuccess("가입이 완료되었습니다");
+    } catch (err) {
+      console.log(err);
+      showError((err as any).message);
+    }
   };
 
   return (
     <div className={cx("form-container")}>
       <h2 className={cx("logo-container")}>
         <Link href="/">
-        <Image src="/images/logo.png" width={400} height={300} alt="travel-maker" />
+          <Image src="/images/logo.png" width={400} height={300} alt="travel-maker" />
         </Link>
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className={cx("form")}>
@@ -74,6 +78,7 @@ const [submitError, setSubmitError] = useState("")
           id="password"
           label="비밀번호"
           type="password"
+          iconType="password"
           placeholder="8자 이상 입력해 주세요"
           {...register("password")}
           errors={errors.password?.message}
@@ -82,6 +87,7 @@ const [submitError, setSubmitError] = useState("")
           id="password-confirm"
           label="비밀번호 확인"
           type="password"
+          iconType="password"
           placeholder="비밀번호를 한번 더 입력해 주세요"
           {...register("passwordConfirm")}
           errors={errors.passwordConfirm?.message}

@@ -7,6 +7,7 @@ const baseOptions = {
   style: {
     padding: "1.6rem",
     borderRadius: "0.8rem",
+    marginTop: "8rem",
   },
 };
 
