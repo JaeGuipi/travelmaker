@@ -14,12 +14,12 @@ import Link from "next/link";
 
 const cx = classNames.bind(s);
 
-// type FormValues = {
-//   email: string;
-//   nickname: string;
-//   password: string;
-//   passwordConfirm?: string;
-// };
+type FormValues = {
+  email: string;
+  nickname: string;
+  password: string;
+  passwordConfirm?: string;
+};
 
 const SignUpForm = () => {
   const {
@@ -28,9 +28,9 @@ const SignUpForm = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<signUpSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: "onSubmit",
+    mode: "onBlur",
   });
-  const onSubmit = async (data: signUpSchema) => {
+  const onSubmit = async (data: FormValues) => {
     await signUpUser({
       email: data.email,
       nickname: data.nickname,

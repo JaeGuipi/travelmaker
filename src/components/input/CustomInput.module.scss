@@ -35,6 +35,13 @@
   border-color: $red01;
 }
 
+.error-text {
+  color: $red01;
+  @include text(xs);
+  display: inline-block;
+  margin-top: 0.8rem;
+}
+
 .input-img {
   position: absolute;
   right: 0;
