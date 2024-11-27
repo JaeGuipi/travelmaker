@@ -32,9 +32,11 @@ const AllItemList: React.FC<GetActivities> = ({ activities = [], totalCount }) =
           </li>
         ))}
       </ul>
-      <FormButton size="medium" variant="emptyButton">
-        더보기
-      </FormButton>
+      <div className={s["btn-more"]}>
+        <FormButton size="medium" variant="emptyButton">
+          상품 더보기
+        </FormButton>
+      </div>
     </>
   );
 };
