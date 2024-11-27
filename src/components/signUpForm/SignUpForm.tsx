@@ -10,6 +10,7 @@ import { signUpUser } from "@/lib/api/user";
 import FormLink from "../formLink/FormLink";
 import SocialLogin from "../socialLogin/socialLogin";
 import Image from "next/image";
+import Link from "next/link";
 
 const cx = classNames.bind(s);
 
@@ -39,8 +40,10 @@ const SignUpForm = () => {
 
   return (
     <div className={cx("form-container")}>
-      <h2 className={cx("logo")}>
+      <h2 className={cx("logo-container")}>
+        <Link href="/">
         <Image src="/images/logo.png" width={400} height={300} alt="travel-maker" />
+        </Link>
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className={cx("form")}>
         <CustomInput
