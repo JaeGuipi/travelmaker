@@ -1,12 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormValues, LoginSchema } from "@/schema/zodSchema";
-
-import { loginUser } from "@/lib/api/auth";
-// import { useAuth } from "@/hooks/useAuth";
 
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
@@ -15,10 +11,10 @@ import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import SocialLogin from "@/components/Auth/SocialLogin/SocialLogin";
 import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
+import { useAuth } from "@/hooks/useAuth";
 
 const LoginForm = () => {
-  const router = useRouter();
-  // const { login, isPending, isError } = useAuth();
+  const { login } = useAuth();
   const { showSuccess, showError } = useToast();
 
   const {
@@ -36,10 +32,8 @@ const LoginForm = () => {
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      await loginUser(data);
+      await login(data);
       showSuccess(toastMessages.success.login);
-
-      router.push("/");
     } catch (error) {
       console.error(error);
       showError(toastMessages.error.login);
@@ -48,7 +42,7 @@ const LoginForm = () => {
 
   return (
     <section className="container">
-      <AuthForm title="회원이 아니신가요?" link="/signup" linkTitle="로그인하기">
+      <AuthForm title="회원이 아니신가요?" link="signup" linkTitle="회원가입 하기">
         <form onSubmit={handleSubmit(onSubmit)}>
           <CustomInput
             label="이메일"
