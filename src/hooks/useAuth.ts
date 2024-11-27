@@ -20,7 +20,6 @@ export const useAuth = () => {
     queryFn: async () => {
       return await getMyInfo();
     },
-    enabled: false,
   });
 
   // 로그인 처리
