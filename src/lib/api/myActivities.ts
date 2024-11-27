@@ -8,7 +8,7 @@ import {
   getMyActivitiesByScheduleQuery,
   getMyActivitiesByReservationsQuery,
   updateReservationStatusQuery,
-} from "@/app/types/myActivitiesTypes/myActivitiesTypes";
+} from "@/types/myActivitiesTypes/myActivitiesTypes";
 
 const BASE_PATH = "/my-activities";
 
