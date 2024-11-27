@@ -93,42 +93,24 @@ export interface GetMyActivitiesByReservations {
   reservations: ActivityReservation[];
 }
 
-//내 체험 예약 상태(승인,거절)업데이트
-export type PatchMyActivitiesByReservations = {
-  status: "pending" | "confirm" | "decline";
-};
+// //내 체험 예약 상태(승인,거절)업데이트
+// export type PatchMyActivitiesByReservations = {
+//   status: "pending" | "confirm" | "decline";
+// };
 
-//내 체험 수정
-export interface PatchMyActivities {
-  title: string;
-  category: string;
-  description: string;
-  price: number;
-  address: string;
-  bannerImageUrl: string;
-  subImageIdsToRemove: [];
-  subImageUrlsToAdd: [];
-  scheduleIdsToRemove: [];
-  schedulesToAdd: [];
-}
-
-//MyNotifications
-//내 알림 리스트 조회
-export type Notification = {
-  id: number;
-  teamId: string;
-  userId: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-};
-
-export interface GetMyNotifications {
-  cursorId: number;
-  notifications: Notification[];
-  totalCount: number;
-}
+// //내 체험 수정
+// export interface PatchMyActivities {
+//   title: string;
+//   category: string;
+//   description: string;
+//   price: number;
+//   address: string;
+//   bannerImageUrl: string;
+//   subImageIdsToRemove: [];
+//   subImageUrlsToAdd: [];
+//   scheduleIdsToRemove: [];
+//   schedulesToAdd: [];
+// }
 
 //MyReservations
 //내 예약 리스트 조회
@@ -172,18 +154,27 @@ export interface PostMyReservations {
   content: string;
 }
 
+//Auth
+//로그인
+export interface PostAuth {
+  email: string;
+  password: string;
+}
+
 //Oauth
-//post
+//apps
 export interface PostOauthApps {
   appKey: string;
   provider: "google" | "kakao";
 }
+
 //간편 회원가입
 export interface PostOauthSignUp {
   nickname: string;
   redirectUrl: string;
   token: string;
 }
+
 //간편 로그인
 export interface PostOauthSignIn {
   redirectUrl: string;
