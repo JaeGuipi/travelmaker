@@ -1,5 +1,6 @@
 import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
+import { customFetch } from "@/utils/customFetch";
 
 // 회원가입
 export const signUpUser = async (userData: SignUp) => {
@@ -20,7 +21,7 @@ export const signUpUser = async (userData: SignUp) => {
 
 // 내 정보 조회
 export const getMyInfo = async (): Promise<GetMe> => {
-  const response = await fetch(`${API_URL}/users/me`, {
+  const response = await customFetch(`${API_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -22,7 +22,6 @@ interface DropdownProps {
   children: ReactNode;
 }
 
-//드롭다운 컴포넌트
 const Dropdown: React.FC<DropdownProps> & {
   Toggle: typeof DropdownToggle;
   Menu: typeof DropdownMenu;
@@ -37,10 +36,9 @@ const Dropdown: React.FC<DropdownProps> & {
   );
 };
 
-//드롭다운 토글 컴포넌트
 const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantType }> = ({
   children,
-  variant = "defalut",
+  variant = "default",
 }) => {
   const context = useContext(DropdownContext);
   if (!context) {
@@ -58,7 +56,6 @@ const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantType }> 
   );
 };
 
-//드롭다운 메뉴 컴포넌트
 const DropdownMenu: React.FC<{ children: ReactNode }> = ({ children }) => {
   const context = useContext(DropdownContext);
   if (!context) {
@@ -72,7 +69,6 @@ const DropdownMenu: React.FC<{ children: ReactNode }> = ({ children }) => {
   return <div className={styles.menu}>{children}</div>;
 };
 
-//드로다운 아이템 컴포넌트
 const DropdownItem: React.FC<{ children: ReactNode; onClick?: () => void }> = ({ children, onClick }) => {
   return (
     <span onClick={onClick} className={styles.item}>
