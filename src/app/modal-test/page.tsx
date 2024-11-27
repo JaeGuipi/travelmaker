@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import useModalStore from "../store/useModalStore";
+import useModalStore from "../../store/useModalStore";
 import PopupModal from "@/components/Modal/Modal-components/PopupModal";
 import ConfirmModal from "@/components/Modal/Modal-components/ConfirmModal";
 import FormInfoModal from "@/components/Modal/Modal-components/FormInfoModal";

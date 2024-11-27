@@ -1,6 +1,6 @@
 import ModalContainer from "../ModalContainer";
 import FormButton from "@/components/Button/FormButton";
-import useModalStore from "@/app/store/useModalStore";
+import useModalStore from "@/store/useModalStore";
 import s from "./ModalStyle.module.scss";
 import Image from "next/image";
 

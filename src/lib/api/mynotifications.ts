@@ -1,6 +1,6 @@
 import { GetMyNotifications } from "@/app/types/notifications/notificationsTypes";
 import { customFetch } from "@/utils/customFetch";
-import { API_URL } from "@/constants/config";
+import API_URL from "@/constants/config";
 
 // 내 알림 리스트 조회
 export const getMyNotifications = async (size: number = 10, cursorId?: string): Promise<GetMyNotifications> => {

@@ -1,4 +1,4 @@
-import useModalStore from "@/app/store/useModalStore";
+import useModalStore from "@/store/useModalStore";
 import FormButton from "@/components/Button/FormButton";
 import s from "./ModalStyle.module.scss";
 import ModalContainer from "../ModalContainer";
