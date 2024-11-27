@@ -1,8 +1,9 @@
 "use client";
-import { GetActivities } from "@/app/types/activites/activitesTypes";
+
 import s from "./PopularItemList.module.scss";
 import classNames from "classnames/bind";
 import PopularItemSwiper from "./PopularItemSwiper";
+import { GetActivities } from "@/types/activites/activitesTypes";
 
 export const cx = classNames.bind(s);
 

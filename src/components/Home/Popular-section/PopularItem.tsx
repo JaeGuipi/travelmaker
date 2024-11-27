@@ -1,8 +1,8 @@
-import { Activity } from "@/app/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import s from "./PopularItem.module.scss";
+import { Activity } from "@/types/types";
 
 export interface PopularItemProps {
   activity: Activity;

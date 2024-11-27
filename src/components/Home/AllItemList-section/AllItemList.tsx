@@ -1,4 +1,4 @@
-import { GetActivities } from "@/app/types/activites/activitesTypes";
+import { GetActivities } from "@/types/activites/activitesTypes";
 import React from "react";
 
 const AllItemList: React.FC<GetActivities> = ({ activities }) => {

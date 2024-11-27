@@ -4,11 +4,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { Activity } from "@/types/types";
 import Image from "next/image";
 import SwiperCore from "swiper";
 import s from "./PopularItemSwiper.module.scss";
 import PopularItem from "./PopularItem";
-import { Activity } from "@/types/types";
 
 export interface GetActivities {
   sortedActivities: Activity[];
@@ -20,13 +20,17 @@ const PopularItemSwiper: React.FC<GetActivities> = ({ sortedActivities }) => {
   return (
     <Swiper
       className={s.swiper}
-      spaceBetween={16}
-      slidesPerView={2}
+      spaceBetween={24}
+      slidesPerView={3}
       navigation={{
         nextEl: `.${s["swiper-next"]}`,
         prevEl: `.${s["swiper-prev"]}`,
       }}
       breakpoints={{
+        640: {
+          slidesPerView: 1.5,
+          spaceBetween: 16,
+        },
         1280: {
           slidesPerView: 3,
           spaceBetween: 24,

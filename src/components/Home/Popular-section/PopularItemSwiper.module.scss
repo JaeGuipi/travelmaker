@@ -32,5 +32,9 @@
     width: 384px !important;
     height: 384px;
     border-radius: 24px;
+    @include mobile {
+      width: 186px !important;
+      height: 186px;
+    }
   }
 }
