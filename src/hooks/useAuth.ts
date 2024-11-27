@@ -56,6 +56,5 @@ export const useAuth = () => {
     isError,
     login: loginMutation.mutate,
     logout: logoutMutation.mutate,
-    refetchUser: refetch,
   };
 };
