@@ -8,7 +8,7 @@ import { LoginFormValues, LoginSchema } from "@/schema/zodSchema";
 import { loginUser } from "@/lib/api/auth";
 // import { useAuth } from "@/hooks/useAuth";
 
-import toast from "react-hot-toast";
+import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 
 import AuthForm from "@/components/Auth/AuthForm/AuthForm";
@@ -19,6 +19,7 @@ import FormButton from "@/components/Button/FormButton";
 const LoginForm = () => {
   const router = useRouter();
   // const { login, isPending, isError } = useAuth();
+  const { showSuccess, showError } = useToast();
 
   const {
     register,
@@ -36,12 +37,12 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await loginUser(data);
-      toast.success(toastMessages.success.login);
+      showSuccess(toastMessages.success.login);
 
       router.push("/");
     } catch (error) {
       console.error(error);
-      toast.error(toastMessages.error.login);
+      showError(toastMessages.error.login);
     }
   };
 
@@ -61,6 +62,7 @@ const LoginForm = () => {
             label="비밀번호"
             id="password"
             type="password"
+            iconType="password"
             placeholder="비밀번호를 입력해 주세요"
             errors={errors.password?.message}
             {...register("password")}
