@@ -1,4 +1,4 @@
-import {API_URL} from "@/constants/config";
+import API_URL from "@/constants/config";
 
 import {
   PatchMyActivities,
@@ -9,7 +9,6 @@ import {
   getMyActivitiesByReservationsQuery,
   updateReservationStatusQuery,
 } from "@/app/types/myActivitiesTypes/myActivitiesTypes";
-
 
 const BASE_PATH = "/my-activities";
 

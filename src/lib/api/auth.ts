@@ -1,8 +1,8 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { PostAuth } from "@/app/types/types";
-import { API_URL } from "@/constants/config";
+import { PostAuth } from "@/app/types/auth/authTypes";
+import API_URL from "@/constants/config";
 
 const setCookie = (name: string, value: string) => {
   const cookieStore = cookies();
