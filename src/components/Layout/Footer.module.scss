@@ -1,0 +1,38 @@
+.footer {
+  width: 100%;
+  background: $yellow02;
+
+  * {
+    color: #fff;
+    @include text(lg);
+  }
+
+  .ft-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    min-height: 160px;
+    padding: 32px 0;
+    @include mobile {
+      flex-wrap: wrap;
+    }
+
+    > ul {
+      @include flex-center;
+    }
+
+    .ft-info {
+      gap: 30px;
+      @include tablet {
+        gap: 15px;
+      }
+    }
+
+    .ft-sns {
+      gap: 12px;
+      > li {
+        width: 20px;
+      }
+    }
+  }
+}
