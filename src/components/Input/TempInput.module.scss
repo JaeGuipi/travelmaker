@@ -1,0 +1,55 @@
+.label {
+  @include text(lg);
+}
+
+.label + .input-container {
+  margin-top: 8px;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  border: 1.5px solid $gray06;
+  border-radius: 0.6rem;
+  padding: 1.6rem 2rem;
+  transition: all 0.5s ease-in-out;
+
+  &.border-yellow {
+    border-color: $yellow01;
+  }
+
+  &::placeholder {
+    @include text(md);
+    color: $gray04;
+  }
+
+  &:focus {
+    border-color: $yellow01;
+    outline: none;
+  }
+}
+
+.input-error {
+  border-color: $red01;
+}
+
+.error-text {
+  color: $red01;
+  @include text(md);
+  font-weight: 500;
+  padding-left: 0.5rem;
+  display: inline-block;
+  margin-top: 0.8rem;
+}
+
+.input-img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4.9rem;
+  height: 4.9rem;
+  background-color: transparent;
+}
