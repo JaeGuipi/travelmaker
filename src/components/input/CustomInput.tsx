@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, forwardRef } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
-import Image from "next/image";
 import styles from "./CustomInput.module.scss";
 import classNames from "classnames/bind";
+import Image from "next/image";
+import { useState, forwardRef } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -76,7 +76,6 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
     );
   },
 );
-
 CustomInput.displayName = "CustomInput";
 
 export default CustomInput;
