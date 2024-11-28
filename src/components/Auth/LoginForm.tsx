@@ -8,10 +8,10 @@ import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 
 import AuthForm from "@/components/Auth/AuthForm/AuthForm";
-import SocialLogin from "@/components/Auth/SocialLogin/SocialLogin";
-import CustomInput from "@/components/Input/CustomInput";
+import CustomInput from "@/components/input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
 import { useAuth } from "@/hooks/useAuth";
+import SocialLoginAndSignup from "@/components/SocialLoginAndSignup/SocialLoginAndSignup";
 
 const LoginForm = () => {
   const { login } = useAuth();
@@ -67,7 +67,7 @@ const LoginForm = () => {
           </FormButton>
         </form>
       </AuthForm>
-      <SocialLogin />
+      <SocialLoginAndSignup type="login" />
     </section>
   );
 };

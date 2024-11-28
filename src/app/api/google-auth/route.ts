@@ -1,14 +1,21 @@
 import API_URL from "@/constants/config";
 import { NextResponse } from "next/server";
 
+interface BackandRequest {
+  token: string;
+  redirectUri: string;
+  nickname?: string;
+}
+
 export async function GET(req: Request) {
   try {
-    // URL에서 쿼리스트링 추출
     const url = new URL(req.url);
-    const code = url.searchParams.get("code"); // 쿼리스트링에서 'code' 가져오기
+    const code = url.searchParams.get("code");
+    const state = url.searchParams.get("state"); // state 매개변수 추출
     const redirectUri = `http://localhost:3000/api/google-auth`;
+
     if (!code || !redirectUri) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json({ error: "필수 필드가 누락되었습니다." }, { status: 400 });
     }
 
     // Step 1: Google 토큰 엔드포인트에 요청
@@ -29,27 +36,42 @@ export async function GET(req: Request) {
     if (!tokenResponse.ok) {
       const errorDetails = await tokenResponse.json();
       console.error("Google 토큰 요청 실패:", errorDetails);
-      return NextResponse.json({ error: "Failed to retrieve tokens" }, { status: 400 });
+      return NextResponse.json({ error: "토큰을 가져오지 못했습니다." }, { status: 400 });
     }
 
     const tokenData = await tokenResponse.json();
-    console.log("Token Data:", tokenData);
     const { id_token } = tokenData;
 
-    // Step 2: 백엔드로 Google 인증 결과 전달
-    const backendResponse = await fetch(`${API_URL}/oauth/sign-in/google`, {
+    // Step 2: state에 따라 백엔드 엔드포인트 결정
+    let backendEndpoint = `${API_URL}/oauth/sign-in/google`;
+    let requestBody: BackandRequest = {
+      token: `${id_token}`,
+      redirectUri: redirectUri,
+    }; // 기본값은 로그인
+
+    if (state === "signup") {
+      backendEndpoint = `${API_URL}/oauth/sign-up/google`;
+      requestBody = {
+        ...requestBody,
+        nickname: "Google 사용자", // 닉네임은 필수가 아니므로 기본값 설정
+      };
+    }
+
+    // Step 3: 백엔드로 Google ID 토큰 전송
+    const backendResponse = await fetch(backendEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: `${id_token}`,
-        redirectUri: redirectUri,
-      }),
+      body: JSON.stringify(requestBody),
     });
 
     if (!backendResponse.ok) {
-      const backendError = await backendResponse.text();
+      const backendError = await backendResponse.json();
       console.error("백엔드 인증 실패:", backendError);
-      return NextResponse.redirect("http://localhost:3000/error", 302);
+      // 에러 메시지를 포함하여 리디렉션
+      return NextResponse.redirect(
+        `http://localhost:3000/signup?error=${encodeURIComponent(backendError.message)}`,
+        302,
+      );
     }
 
     const backendData = await backendResponse.json();
@@ -60,17 +82,15 @@ export async function GET(req: Request) {
       return NextResponse.redirect("http://localhost:3000/error", 302);
     }
 
-    // Step 3: 쿠키 설정
+    // Step 4: 쿠키 설정 및 리디렉션
     const response = NextResponse.redirect("http://localhost:3000/", 302);
     response.cookies.set("accessToken", accessToken, {
-      httpOnly: true, // 클라이언트에서 사용 가능
-      // secure: process.env.NODE_ENV === "production", // HTTPS에서만 사용
+      httpOnly: true,
       sameSite: "lax",
       maxAge: 60 * 60, // 1시간
     });
     response.cookies.set("refreshToken", refreshToken, {
-      httpOnly: true, // HttpOnly로 설정하여 JavaScript에서 접근 불가
-      // secure: process.env.NODE_ENV === "production", // HTTPS에서만 사용
+      httpOnly: true,
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 14, // 14일
     });

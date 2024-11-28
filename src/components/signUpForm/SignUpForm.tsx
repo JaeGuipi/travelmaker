@@ -1,15 +1,15 @@
 "use client";
 import { useForm } from "react-hook-form";
 import FormButton from "../Button/FormButton";
-import CustomInput from "@/components/Input/CustomInput";
+import CustomInput from "@/components/input/CustomInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "@/app/schema/zodSchema";
 import { signUpUser } from "@/lib/api/user";
-import SocialLogin from "../socialLogin/socialLogin";
 import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import AuthForm from "../Auth/AuthForm/AuthForm";
 import toastMessages from "@/lib/toastMessage";
+import SocialLoginAndSignup from "../SocialLoginAndSignup/SocialLoginAndSignup";
 
 type FormValues = {
   email: string;
@@ -88,7 +88,7 @@ const SignUpForm = () => {
           </FormButton>
         </form>
       </AuthForm>
-      <SocialLogin />
+      <SocialLoginAndSignup type="signup" />
     </section>
   );
 };
