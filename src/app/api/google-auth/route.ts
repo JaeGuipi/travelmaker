@@ -24,15 +24,6 @@ export async function POST(req: Request) {
       }),
     });
 
-    //디버깅용 콘솔
-    console.log("Google Token Request Body:", {
-      code,
-      client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-      client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET,
-      redirect_uri: redirectUri,
-      grant_type: "authorization_code",
-    });
-
     if (!tokenResponse.ok) {
       const errorDetails = await tokenResponse.json();
       console.error("Google 토큰 요청 실패:", errorDetails);
