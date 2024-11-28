@@ -6,7 +6,7 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 import s from "./Header.module.scss";
 import { useAuth } from "@/hooks/useAuth";
-import CustomInput from "@/components/input/CustomInput";
+import CustomInput from "@/components/Input/CustomInput";
 
 export const cx = classNames.bind(s);
 
@@ -41,8 +41,14 @@ const Header = () => {
               <Image src={"/icons/btn_alarm.svg"} width={15} height={17} alt="알림" />
             </button>
             <div className={s.userInfo} onClick={toggleDropdown}>
-              <Image className={s.profile} src={"/images/profile.png"} width={32} height={32} alt="프로필" />
-              <p className={s.name}>정만철</p>
+              <Image
+                className={s.profile}
+                src={user.profileImageUrl ? `/${user.profileImageUrl}` : "/images/profile.png"}
+                width={32}
+                height={32}
+                alt={user.nickname}
+              />
+              <p className={s.name}>{user.nickname}</p>
 
               {isDropdownOpen && (
                 <div className={s.logout}>
