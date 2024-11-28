@@ -1,3 +1,5 @@
+"use server";
+
 import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
 import { customFetch } from "@/utils/customFetch";
@@ -21,18 +23,24 @@ export const signUpUser = async (userData: SignUp) => {
 
 // 내 정보 조회
 export const getMyInfo = async (): Promise<GetMe> => {
-  const response = await customFetch(`${API_URL}/users/me`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await customFetch(`${API_URL}/users/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`내 정보 조회 실패: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`내 정보 조회 실패: ${response.statusText}`);
+    }
+
+    const data = (await response.json()) as Promise<GetMe>;
+    return data;
+  } catch (error) {
+    console.error("내 정보 조회 오류 발생: ", error);
+    throw new Error("내 정보 조회 요청 실패");
   }
-
-  return response.json() as Promise<GetMe>;
 };
 
 // 내 정보 수정

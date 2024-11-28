@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getMyInfo } from "@/lib/api/user";
+import { loginUser, logoutUser } from "@/lib/api/auth";
 
 export const useAuth = () => {
   const queryClient = useQueryClient();
@@ -13,17 +14,21 @@ export const useAuth = () => {
     data: user,
     isPending,
     isError,
+    refetch,
   } = useQuery({
     queryKey: ["user"],
-    queryFn: getMyInfo,
+    queryFn: async () => {
+      return await getMyInfo();
+    },
   });
 
   // 로그인 처리
   const loginMutation = useMutation({
-    //mutationFn: 로그인 api,
+    mutationFn: loginUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       router.push("/");
+      refetch();
     },
     onError: (error) => {
       console.error("로그인 실패", error);
@@ -32,9 +37,11 @@ export const useAuth = () => {
 
   // 로그아웃 처리
   const logoutMutation = useMutation({
-    //mutationFn: 로그아웃 api,
+    mutationFn: logoutUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.refetchQueries({ queryKey: ["user"] });
+      queryClient.setQueryData(["user"], null);
       router.push("/login");
     },
     onError: (error) => {
