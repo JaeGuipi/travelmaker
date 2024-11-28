@@ -23,10 +23,10 @@ const IconGroup = ({ icons }: IconGroupProps) => {
 
 const Footer = () => {
   const icons = [
-    { src: "/images/icons/icon_email.svg", alt: "이메일" },
-    { src: "/images/icons/icon_facebook.svg", alt: "페이스북" },
-    { src: "/images/icons/icon_instagram.svg", alt: "인스타그램" },
-    { src: "/images/icons/icon_instagram.svg", alt: "인스타그램" },
+    { src: "/icons/ft_facebook.svg", alt: "페이스북" },
+    { src: "/icons/ft_twitter.svg", alt: "트위터" },
+    { src: "/icons/ft_youtube.svg", alt: "유투브" },
+    { src: "/icons/ft_instagram.svg", alt: "인스타그램" },
   ];
 
   return (

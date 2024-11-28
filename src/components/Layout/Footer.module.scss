@@ -30,6 +30,9 @@
 
     .ft-sns {
       gap: 12px;
+      @include mobile {
+        flex: 1;
+      }
       > li {
         width: 20px;
       }
