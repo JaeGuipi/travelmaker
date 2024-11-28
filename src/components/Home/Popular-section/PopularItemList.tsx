@@ -8,7 +8,7 @@ export const cx = classNames.bind(s);
 
 const PopularItemList: React.FC<GetActivities> = ({ activities }) => {
   // rating 기준으로 정렬
-  const sortedActivities = (activities || []).sort((a, b) => b.rating - a.rating);
+  const sortedActivities = (activities || []).sort((a, b) => b.reviewCount - a.reviewCount);
 
   return (
     <section className={cx("popular-section", "container")}>
