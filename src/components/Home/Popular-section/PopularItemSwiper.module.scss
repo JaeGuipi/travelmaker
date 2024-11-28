@@ -1,0 +1,50 @@
+.swiper {
+  position: static;
+  padding-top: 32px;
+  @include mobile {
+    padding-top: 16px;
+  }
+  > div {
+    display: flex;
+  }
+
+  .swiper-ctrl {
+    position: absolute;
+    right: 0;
+    top: 0;
+    @include flex-center;
+    @include tablet {
+      display: none;
+    }
+
+    .swiper-next,
+    .swiper-prev {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+    }
+
+    :global(.swiper-button-disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .swiper-slide {
+    overflow: hidden;
+    position: relative;
+    width: 384px;
+    max-height: 384px;
+    border-radius: 24px;
+    @include mobile {
+      height: 50vw;
+      max-height: 384px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
