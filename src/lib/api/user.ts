@@ -15,7 +15,8 @@ export const signUpUser = async (userData: SignUp) => {
   });
 
   if (!response.ok) {
-    throw new Error(`회원가입 실패: ${response.statusText}`);
+    const errorData = await response.json()
+    throw new Error(errorData.message);
   }
 
   return response.json();
