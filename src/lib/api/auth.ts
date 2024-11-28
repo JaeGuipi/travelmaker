@@ -31,7 +31,7 @@ const deleteCookie = (cookieName: string) => {
 };
 
 // 로그인
-export const loginUser = async ({ email, password }: PostAuth) => {
+export const login = async ({ email, password }: PostAuth) => {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -49,8 +49,6 @@ export const loginUser = async ({ email, password }: PostAuth) => {
 
     setCookie("accessToken", data.accessToken);
     setCookie("refreshToken", data.refreshToken);
-
-    return { success: true, user: data.user };
   } catch (error) {
     console.error("로그인 오류 발생:", error);
     throw new Error("로그인 요청 실패");
@@ -58,7 +56,7 @@ export const loginUser = async ({ email, password }: PostAuth) => {
 };
 
 // 로그아웃
-export const logoutUser = async () => {
+export const logout = async () => {
   try {
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
