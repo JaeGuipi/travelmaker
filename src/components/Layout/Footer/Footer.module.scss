@@ -17,7 +17,7 @@
       flex-wrap: wrap;
     }
 
-    > ul {
+    & > ul {
       @include flex-center;
     }
 
@@ -33,7 +33,7 @@
       @include mobile {
         flex: 1;
       }
-      > li {
+      & > li {
         width: 20px;
       }
     }
