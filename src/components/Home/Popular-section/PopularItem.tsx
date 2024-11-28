@@ -10,7 +10,7 @@ export interface PopularItemProps {
 
 const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {
   return (
-    <Link href="/">
+    <Link href={`/activities/${activity.id}`}>
       <Image src={activity.bannerImageUrl} width={384} height={384} priority={true} alt="체험 이미지" />
       <div className={s.info}>
         <p className={s.rating}>

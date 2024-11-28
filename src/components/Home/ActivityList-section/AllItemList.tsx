@@ -10,7 +10,7 @@ const AllItemList: React.FC<GetActivities> = ({ activities = [], totalCount }) =
       <ul className={s["item-list"]}>
         {activities.map((activity) => (
           <li key={activity.id} className={s["item-box"]}>
-            <Link href="/">
+            <Link href={`/activities/${activity.id}`}>
               <Image
                 src={activity.bannerImageUrl || `/images/profile.png`}
                 width={283}
