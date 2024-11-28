@@ -37,10 +37,9 @@ const Dropdown: React.FC<DropdownProps> & {
   );
 };
 
-//드롭다운 토글 컴포넌트
 const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantType }> = ({
   children,
-  variant = "defalut",
+  variant = "default",
 }) => {
   const context = useContext(DropdownContext);
   if (!context) {
