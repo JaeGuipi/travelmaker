@@ -6,10 +6,6 @@ export const customFetch = async (input: RequestInfo | URL, init?: RequestInit) 
   const cookieStore = cookies();
   const accessToken = cookieStore.get("accessToken")?.value;
 
-  if (!accessToken) {
-    throw new Error("인증되지 않은 요청입니다.");
-  }
-
   const defaultHeaders: HeadersInit = {
     ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
   };

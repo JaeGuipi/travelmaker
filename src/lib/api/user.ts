@@ -32,7 +32,7 @@ export const getMyInfo = async (): Promise<GetMe> => {
   });
 
   if (!response.ok) {
-    throw new Error(`내 정보 조회 실패: ${response.statusText}`);
+    throw new Error(`서버에서 내 정보 조회 실패: ${response.statusText}`);
   }
 
   return response.json() as Promise<GetMe>;
