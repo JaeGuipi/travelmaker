@@ -1,15 +1,16 @@
 import { toast, ToastPosition } from "react-hot-toast";
 
 export function useToast() {
-const baseOptions = {
-  duration: 1500,
-  position: "top-center" as ToastPosition,
-  style: {
-    padding: "1.6rem",
-    borderRadius: "0.8rem",
-    marginTop: "8rem",
-  },
-};
+  const baseOptions = {
+    duration: 1500,
+    position: "top-center" as ToastPosition,
+    style: {
+      padding: "1.6rem",
+      borderRadius: "0.8rem",
+      marginTop: "8.5rem",
+      fontSize: "2rem",
+    },
+  };
 
   const showSuccess = (msg: string) => {
     toast.dismiss();
@@ -49,7 +50,6 @@ const baseOptions = {
       },
     });
   };
-
 
   return { showError, showSuccess, notify };
 }

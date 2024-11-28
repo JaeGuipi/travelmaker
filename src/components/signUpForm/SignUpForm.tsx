@@ -32,7 +32,7 @@ const SignUpForm = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<signUpSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: "onBlur", //focus-out 되었을 때 유효성 검사 실시
+    mode: "onChange", //focus-out 되었을 때 유효성 검사 실시
   });
 
   const onSubmit = async (data: FormValues) => {
