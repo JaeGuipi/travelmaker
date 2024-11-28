@@ -1,10 +1,12 @@
 import API_URL from "@/constants/config";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
-    const { code, redirectUri } = await req.json();
-
+    // URL에서 쿼리스트링 추출
+    const url = new URL(req.url);
+    const code = url.searchParams.get("code"); // 쿼리스트링에서 'code' 가져오기
+    const redirectUri = `http://localhost:3000/api/google-auth`;
     if (!code || !redirectUri) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
@@ -31,58 +33,51 @@ export async function POST(req: Request) {
     }
 
     const tokenData = await tokenResponse.json();
+    console.log("Token Data:", tokenData);
     const { id_token } = tokenData;
-    //나중에 Step 2를 이용하기 위해선 id_token과 같이 access_token을 전달해주기
 
-    // Step 2: (선택) Google 사용자 정보 요청
-    // const userInfoResponse = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
-    //   method: "GET",
-    //   headers: {
-    //     Authorization: `Bearer ${access_token}`,
-    //   },
-    // });
-
-    // if (!userInfoResponse.ok) {
-    //   const errorDetails = await userInfoResponse.json();
-    //   console.error("사용자 정보 요청 실패:", errorDetails);
-    //   return NextResponse.json({ error: "Failed to retrieve user info" }, { status: 400 });
-    // }
-
-    // const userInfo = await userInfoResponse.json();
-
-    // Step 3: 백엔드로 Google 인증 결과 전달
+    // Step 2: 백엔드로 Google 인증 결과 전달
     const backendResponse = await fetch(`${API_URL}/oauth/sign-in/google`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: id_token,
-        redirectUri: "http://localhost:3000/oauth/google",
+        token: `${id_token}`,
+        redirectUri: redirectUri,
       }),
     });
 
-    const backendResponseText = await backendResponse.text();
-    console.log("Backend Response Text:", backendResponseText);
-
     if (!backendResponse.ok) {
-      return NextResponse.json(
-        { error: "Failed to forward data to backend", details: backendResponseText },
-        { status: 400 },
-      );
+      const backendError = await backendResponse.text();
+      console.error("백엔드 인증 실패:", backendError);
+      return NextResponse.redirect("http://localhost:3000/error", 302);
     }
 
-    let backendData;
-    try {
-      backendData = JSON.parse(backendResponseText);
-    } catch (error) {
-      console.error(`백엔드 응답 JSON 파싱 실패:${error}`, backendResponseText);
-      return NextResponse.json({ error: "Invalid response from backend" }, { status: 500 });
+    const backendData = await backendResponse.json();
+    const { accessToken, refreshToken } = backendData;
+
+    if (!accessToken || !refreshToken) {
+      console.error("백엔드에서 토큰이 누락되었습니다.");
+      return NextResponse.redirect("http://localhost:3000/error", 302);
     }
 
-    return NextResponse.json(backendData, { status: 200 });
+    // Step 3: 쿠키 설정
+    const response = NextResponse.redirect("http://localhost:3000/", 302);
+    response.cookies.set("accessToken", accessToken, {
+      httpOnly: true, // 클라이언트에서 사용 가능
+      // secure: process.env.NODE_ENV === "production", // HTTPS에서만 사용
+      sameSite: "lax",
+      maxAge: 60 * 60, // 1시간
+    });
+    response.cookies.set("refreshToken", refreshToken, {
+      httpOnly: true, // HttpOnly로 설정하여 JavaScript에서 접근 불가
+      // secure: process.env.NODE_ENV === "production", // HTTPS에서만 사용
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 14, // 14일
+    });
+
+    return response;
   } catch (error) {
     console.error("OAuth 처리 중 오류 발생:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.redirect("/?error=server_error", 302);
   }
 }
