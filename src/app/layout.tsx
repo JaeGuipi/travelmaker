@@ -3,6 +3,7 @@ import "@/styles/globals.scss";
 import Header from "@/components/Layout/Header";
 import { Providers as QueryClientProvider } from "./providers";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Layout/Footer";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <ToastProvider />
           <Header />
           {children}
+          <Footer />
         </QueryClientProvider>
       </body>
     </html>
