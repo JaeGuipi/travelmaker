@@ -1,7 +1,9 @@
 .swiper {
   position: static;
   padding-top: 32px;
-
+  @include mobile {
+    padding-top: 16px;
+  }
   > div {
     display: flex;
   }

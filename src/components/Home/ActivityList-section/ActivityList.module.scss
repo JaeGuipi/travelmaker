@@ -1,8 +1,8 @@
 .allitem-section {
   position: relative;
-  margin-top: 60px;
-  @include tablet {
-    margin-top: 40px;
+  margin-top: 100px;
+  @include mobile {
+    margin-top: 50px;
   }
 }
 
@@ -10,4 +10,7 @@
   color: $black01;
   font-weight: bold;
   @include text(4xl);
+  @include mobile {
+    @include text(2lg);
+  }
 }

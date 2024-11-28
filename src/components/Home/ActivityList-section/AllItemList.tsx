@@ -5,7 +5,6 @@ import Image from "next/image";
 import FormButton from "@/components/Button/FormButton";
 
 const AllItemList: React.FC<GetActivities> = ({ activities = [], totalCount }) => {
-  console.log(totalCount);
   return (
     <>
       <ul className={s["item-list"]}>
