@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
-const ClientOnlyPathname = ({ children }: { children: React.ReactNode }) => {
+const ClientPathname = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const hideHeaderRoutes = ["/login", "/signup"];
   if (hideHeaderRoutes.includes(pathname)) return null;
@@ -10,4 +10,4 @@ const ClientOnlyPathname = ({ children }: { children: React.ReactNode }) => {
   if (hideHeaderRoutes) return <>{children}</>;
 };
 
-export default ClientOnlyPathname;
+export default ClientPathname;
