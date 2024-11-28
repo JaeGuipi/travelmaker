@@ -12,10 +12,9 @@
 
 .input {
   width: 100%;
-  border: 1.5px solid $gray06;
+  border: 1px solid $gray04;
   border-radius: 0.6rem;
   padding: 1.6rem 2rem;
-  transition: all 0.5s ease-in-out;
 
   &.border-yellow {
     border-color: $yellow01;
@@ -38,9 +37,7 @@
 
 .error-text {
   color: $red01;
-  @include text(md);
-  font-weight: 500;
-  padding-left: 0.5rem;
+  @include text(xs);
   display: inline-block;
   margin-top: 0.8rem;
 }
