@@ -41,17 +41,19 @@ export const login = async ({ email, password }: PostAuth) => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (!response.ok) {
-      throw new Error("로그인 실패");
-    }
-
     const data = await response.json();
+
+    if (!data.accessToken || !data.refreshToken) {
+      throw new Error("유효한 사용자 정보가 없습니다.");
+    }
 
     setCookie("accessToken", data.accessToken);
     setCookie("refreshToken", data.refreshToken);
+
+    return { success: true, message: "로그인 성공" };
   } catch (error) {
-    console.error("로그인 오류 발생:", error);
-    throw new Error("로그인 요청 실패");
+    console.error("로그인 요청 실패:", error);
+    throw new Error("로그인에 실패했습니다.");
   }
 };
 
