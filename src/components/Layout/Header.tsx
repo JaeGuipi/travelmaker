@@ -6,7 +6,7 @@ import Link from "next/link";
 import classNames from "classnames/bind";
 import s from "./Header.module.scss";
 import { useAuth } from "@/hooks/useAuth";
-import CustomInput from "@/components/Input/CustomInput";
+import CustomInput from "@/components/input/CustomInput";
 
 export const cx = classNames.bind(s);
 
