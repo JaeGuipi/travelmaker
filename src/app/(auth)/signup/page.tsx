@@ -1,5 +1,5 @@
 "use client";
-import SignUpForm from "@/components/signUpForm/SignUpForm";
+import SignUpForm from "@/components/SignUpForm/SignUpForm";
 
 
 const SignUp = () => {
