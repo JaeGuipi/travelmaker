@@ -82,18 +82,18 @@
         }
 
         .toggleDropdown {
+          @include text(md);
           position: absolute;
           right: 0;
           top: 5rem;
           color: $black02;
-          @include text(md);
-
           width: 100px;
           border-radius: 12px;
           background-color: white;
           padding: 1rem 0;
           border: 1.5px solid $gray06;
           text-align: center;
+          z-index: 100;
 
           button {
             width: 100%;

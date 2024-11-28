@@ -1,0 +1,41 @@
+.visual-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 1200px;
+  z-index: 10;
+  @include tablet {
+    padding: 0 24px;
+    @include mobile {
+      padding: 0 16px;
+    }
+  }
+
+  h2 {
+    color: #fff;
+    font-size: 6.8rem;
+    font-weight: bold;
+    @include tablet {
+      font-size: 5.4rem;
+      @include mobile {
+        @include text(2xl);
+      }
+    }
+  }
+
+  p {
+    padding-top: 20px;
+    color: #fff;
+    @include text(2xl);
+    font-weight: bold;
+    @include tablet {
+      padding-top: 8px;
+      @include text(xl);
+      @include mobile {
+        @include text(md);
+      }
+    }
+  }
+}
