@@ -20,7 +20,10 @@ const AllItemList: React.FC<GetActivities> = ({ activities = [], totalCount }) =
               />
               <div className={s.info}>
                 <p className={s.rating}>
-                  <span>Rating icon</span>: {activity.rating} <strong>({activity.reviewCount})</strong>
+                  <span className={s["rating-icon"]}>
+                    <Image src="/icons/rating_star.svg" fill alt="평점 아이콘" />
+                  </span>
+                  {activity.rating}&nbsp;({activity.reviewCount})
                 </p>
                 <h4 className={s.title}>{activity.title}</h4>
                 <p className={s.price}>

@@ -14,7 +14,10 @@ const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {
       <Image src={activity.bannerImageUrl} width={384} height={384} priority={true} alt="체험 이미지" />
       <div className={s.info}>
         <p className={s.rating}>
-          <span>Rating icon</span>: {activity.rating} ({activity.reviewCount})
+          <span className={s["rating-icon"]}>
+            <Image src="/icons/rating_star.svg" fill alt="평점 아이콘" />
+          </span>
+          {activity.rating} ({activity.reviewCount})
         </p>
         <h4 className={s.title}>{activity.title}</h4>
         <p className={s.price}>

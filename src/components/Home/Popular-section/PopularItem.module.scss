@@ -12,8 +12,18 @@
   }
 
   .rating {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
     font-weight: 600;
     @include text(md);
+    .rating-icon {
+      position: relative;
+      display: inline-block;
+      width: 17px;
+      height: 17px;
+    }
   }
 
   .title {

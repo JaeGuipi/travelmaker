@@ -29,10 +29,19 @@
       * {
         color: $black01;
       }
-
       .rating {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
         font-weight: 500;
         @include text(lg);
+        .rating-icon {
+          position: relative;
+          display: inline-block;
+          width: 17px;
+          height: 17px;
+        }
         > strong {
           color: $gray03;
           font-weight: 500;
