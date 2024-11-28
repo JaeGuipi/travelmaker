@@ -1,0 +1,33 @@
+.category {
+  padding: 30px 0 15px;
+  @include flex-start;
+  gap: 20px;
+  scrollbar-width: none;
+  @include mobile {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding: 15px 0 5px;
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 120px;
+    height: 120px;
+    cursor: pointer;
+    @include mobile {
+      flex: 0 0 60px;
+      height: 100px;
+    }
+    > span {
+      @include text(md);
+    }
+  }
+  li.selected {
+    > span {
+      font-weight: bold;
+    }
+  }
+}
