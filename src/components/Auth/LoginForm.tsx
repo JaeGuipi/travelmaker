@@ -23,7 +23,7 @@ const LoginForm = () => {
     formState: { errors, isValid },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(LoginSchema),
-    mode: "onBlur",
+    mode: "onChange",
     defaultValues: {
       email: "",
       password: "",
