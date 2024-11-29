@@ -15,7 +15,7 @@ export const signUpUser = async (userData: SignUp) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json()
+    const errorData = await response.json();
     throw new Error(errorData.message);
   }
 
@@ -32,9 +32,9 @@ export const getMyInfo = async (): Promise<GetMe> => {
       },
     });
 
-    if (!response.ok) {
-      throw new Error(`내 정보 조회 실패: ${response.statusText}`);
-    }
+    // if (!response.ok) {
+    //   throw new Error(`내 정보 조회 실패: ${response.statusText}`);
+    // }
 
     const data = (await response.json()) as Promise<GetMe>;
     return data;
@@ -46,7 +46,7 @@ export const getMyInfo = async (): Promise<GetMe> => {
 
 // 내 정보 수정
 export const updateMyInfo = async (updateData: PatchMe) => {
-  const response = await fetch(`${API_URL}/users/me`, {
+  const response = await customFetch(`${API_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -62,19 +62,23 @@ export const updateMyInfo = async (updateData: PatchMe) => {
 };
 
 // 프로필 이미지 URL 생성
-export const createProfileImageUrl = async (imageData: PostImage): Promise<PostImageResponse> => {
-  const formData = new FormData();
-  formData.append("image", imageData.file);
+export const createProfileImageUrl = async (formData: FormData): Promise<PostImageResponse> => {
+  // 서버 액션에서 FormData는 직접 처리할 수 없다.
+  console.log(formData);
 
-  const response = await fetch(`${API_URL}/users/me/image`, {
+  const response = await customFetch(`${API_URL}/users/me/image`, {
     method: "POST",
-    //Content-Type 설정하지 않음 (브라우저 자동 설정)
     body: formData,
   });
 
+  console.log(response);
+
   if (!response.ok) {
-    throw new Error(`프로필 이미지 URL 생성 실패: ${response.statusText}`);
+    const errorMessage = await response.text();
+    throw new Error(`프로필 이미지 URL 생성 실패: ${response.statusText} - ${errorMessage}`);
   }
 
-  return response.json() as Promise<PostImageResponse>;
+  // return response.json() as Promise<PostImageResponse>;
+  const data: PostImageResponse = await response.json();
+  return data;
 };
