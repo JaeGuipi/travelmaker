@@ -42,6 +42,12 @@
       align-items: center;
       gap: 12px;
 
+      @include mobile {
+        .alarm {
+          display: none;
+        }
+      }
+
       .userInfo {
         display: flex;
         align-items: center;
@@ -60,6 +66,10 @@
           width: 1px;
           height: 22px;
           background-color: $gray06;
+
+          @include mobile {
+            display: none;
+          }
         }
 
         .profile {
@@ -71,11 +81,29 @@
           @include text(md);
         }
 
-        .logout {
+        .toggleDropdown {
+          @include text(md);
           position: absolute;
           right: 0;
-          bottom: -3rem;
-          @include text(md);
+          top: 5rem;
+          color: $black02;
+          width: 100px;
+          border-radius: 12px;
+          background-color: white;
+          padding: 1rem 0;
+          border: 1.5px solid $gray06;
+          text-align: center;
+          z-index: 100;
+
+          button {
+            width: 100%;
+
+            &:nth-child(1) {
+              border-bottom: 1.5px solid $gray06;
+              padding-bottom: 0.5rem;
+              margin-bottom: 0.5rem;
+            }
+          }
         }
       }
     }

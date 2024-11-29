@@ -8,13 +8,14 @@ import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 
 import AuthForm from "@/components/Auth/AuthForm/AuthForm";
-import SocialLogin from "@/components/Auth/SocialLogin/SocialLogin";
+import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
 import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
-import { useAuth } from "@/hooks/useAuth";
+import { login } from "@/lib/api/auth";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const { login } = useAuth();
+  const router = useRouter();
   const { showSuccess, showError } = useToast();
 
   const {
@@ -33,6 +34,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await login(data);
+      router.push("/");
       showSuccess(toastMessages.success.login);
     } catch (error) {
       console.error(error);
@@ -67,7 +69,7 @@ const LoginForm = () => {
           </FormButton>
         </form>
       </AuthForm>
-      <SocialLogin />
+      <SocialLoginAndSignup type="login" />
     </section>
   );
 };
