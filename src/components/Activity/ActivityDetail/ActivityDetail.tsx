@@ -1,9 +1,10 @@
+import { ActivityDetailResponse } from "@/types/activites/activitesTypes";
 import API_URL from "@/constants/config";
 import s from "./ActivityDetail.module.scss";
 import Image from "next/image";
 
-async function getActivityDetail(activityId: number) {
-  const response = await fetch(`${API_URL}/activities/${activityId}`);
+async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
+  const response = await fetch(`${API_URL}/activities/${activityId}`, { cache: "no-store" });
   return response.json();
 }
 
