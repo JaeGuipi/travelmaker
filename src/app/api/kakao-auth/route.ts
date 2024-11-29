@@ -1,3 +1,4 @@
+// app/api/kakao-auth/route.ts
 import API_URL from "@/constants/config";
 import { NextResponse } from "next/server";
 
@@ -8,52 +9,30 @@ interface BackandRequest {
 }
 
 export async function GET(req: Request) {
+  const redirectUri = "http://localhost:3000/api/kakao-auth";
+
   try {
     const url = new URL(req.url);
+    //Setp 1: 카카오 code 추출
     const code = url.searchParams.get("code");
     const state = url.searchParams.get("state"); // state 매개변수 추출
-    const redirectUri = `http://localhost:3000/api/google-auth`;
 
-    if (!code || !redirectUri) {
-      return NextResponse.json({ error: "필수 필드가 누락되었습니다." }, { status: 400 });
+    if (!code) {
+      return NextResponse.json({ success: false, error: "Missing authorization code" }, { status: 400 });
     }
-
-    // Step 1: Google 토큰 엔드포인트에 요청
-    const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        code,
-        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
-        client_secret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET || "",
-        redirect_uri: redirectUri,
-        grant_type: "authorization_code",
-      }),
-    });
-
-    if (!tokenResponse.ok) {
-      const errorDetails = await tokenResponse.json();
-      console.error("Google 토큰 요청 실패:", errorDetails);
-      return NextResponse.json({ error: "토큰을 가져오지 못했습니다." }, { status: 400 });
-    }
-
-    const tokenData = await tokenResponse.json();
-    const { id_token } = tokenData;
 
     // Step 2: state에 따라 백엔드 엔드포인트 결정
-    let backendEndpoint = `${API_URL}/oauth/sign-in/google`;
+    let backendEndpoint = `${API_URL}/oauth/sign-in/kakao`;
     let requestBody: BackandRequest = {
-      token: `${id_token}`,
+      token: `${code}`,
       redirectUri: redirectUri,
     }; // 기본값은 로그인
 
     if (state === "signup") {
-      backendEndpoint = `${API_URL}/oauth/sign-up/google`;
+      backendEndpoint = `${API_URL}/oauth/sign-up/kakao`;
       requestBody = {
         ...requestBody,
-        nickname: "Google 사용자", // 닉네임은 필수가 아니므로 기본값 설정
+        nickname: "Kakko 사용자", // 닉네임은 필수가 아니므로 기본값 설정
       };
     }
 
@@ -66,7 +45,7 @@ export async function GET(req: Request) {
 
     if (!backendResponse.ok) {
       const backendError = await backendResponse.json();
-      console.error("백엔드 인증 실패:", backendError);
+      console.error("백엔드 인증 실패:", backendError.message);
       // 에러 메시지를 포함하여 리디렉션
       return NextResponse.redirect(
         `http://localhost:3000/signup?error=${encodeURIComponent(backendError.message)}`,

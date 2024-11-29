@@ -1,4 +1,5 @@
-"use Client";
+"use client";
+
 import { UseFormRegisterReturn } from "react-hook-form";
 import styles from "./CustomInput.module.scss";
 import classNames from "classnames/bind";
