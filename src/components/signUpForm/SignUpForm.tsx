@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import AuthForm from "../Auth/AuthForm/AuthForm";
 import toastMessages from "@/lib/toastMessage";
-import SocialLoginAndSignup from "../SocialLoginAndSignup/SocialLoginAndSignup";
+import SocialLoginAndSignup from "../Auth/SocialLoginAndSignup/SocialLoginAndSignup";
 
 type FormValues = {
   email: string;

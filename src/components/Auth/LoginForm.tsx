@@ -11,7 +11,7 @@ import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import CustomInput from "@/components/input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
 import { useAuth } from "@/hooks/useAuth";
-import SocialLoginAndSignup from "@/components/SocialLoginAndSignup/SocialLoginAndSignup";
+import SocialLoginAndSignup from "@/components/Auth/SocialLoginAndSignup/SocialLoginAndSignup";
 
 const LoginForm = () => {
   const { login } = useAuth();
