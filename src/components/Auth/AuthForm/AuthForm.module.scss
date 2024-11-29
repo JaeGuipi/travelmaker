@@ -1,0 +1,54 @@
+.form-link-container {
+  max-width: 640px;
+  margin: 5rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+
+  @include mobile {
+    gap: 2rem;
+    margin: 3rem auto;
+  }
+
+  .logo {
+    text-align: center;
+
+    img {
+      width: 340px;
+      @include mobile {
+        width: 200px;
+      }
+    }
+  }
+
+  form {
+    display: grid;
+    gap: 3rem;
+    @include mobile {
+      gap: 2rem;
+    }
+  }
+
+  .form-link-wrap {
+    text-align: center;
+
+    .form-link-title {
+      @include text(lg);
+      color: $black03;
+      margin-right: 1rem;
+      @include mobile {
+        @include text(md);
+      }
+    }
+
+    .form-link {
+      @include text(lg);
+      color: $yellow01;
+      font-weight: 500;
+      text-decoration: underline;
+      @include mobile {
+        @include text(md);
+      }
+    }
+  }
+}
