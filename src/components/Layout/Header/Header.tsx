@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import classNames from "classnames/bind";
 import s from "./Header.module.scss";
-import CustomInput from "@/components/Input/CustomInput";
 import { getMyInfo } from "@/lib/api/user";
 import User from "@/components/Layout/Header/User";
+import CustomInput from "@/components/Input/CustomInput";
 
 export const cx = classNames.bind(s);
 

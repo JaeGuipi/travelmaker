@@ -9,10 +9,10 @@ import toastMessages from "@/lib/toastMessage";
 
 import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
-import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
 import { login } from "@/lib/api/auth";
 import { useRouter } from "next/navigation";
+import CustomInput from "../Input/CustomInput";
 
 const LoginForm = () => {
   const router = useRouter();
