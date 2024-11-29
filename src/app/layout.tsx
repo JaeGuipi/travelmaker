@@ -26,7 +26,7 @@ export default function RootLayout({
         <QueryClientProvider>
           <div id="modal-root"></div>
           <ToastProvider />
-          {/* <Header /> */}
+          <Header />
           {children}
         </QueryClientProvider>
       </body>
