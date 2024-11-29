@@ -10,6 +10,13 @@ const protectedRoutes = ["/test/tokentest"];
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 토큰이 있으면 로그인, 회원가입 홈으로 리다이렉트
+  const token = request.cookies.get("accessToken")?.value;
+  const RoutesRedirect = ["/login", "/signup"];
+  if (token && RoutesRedirect.includes(request.nextUrl.pathname)) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   // 보호된 경로에만 미들웨어 적용
   if (protectedRoutes.some((route) => pathname.startsWith(route))) {
     const accessToken = request.cookies.get("accessToken")?.value;
@@ -107,6 +114,9 @@ async function refreshAccessToken(refreshToken: string): Promise<string | null> 
 }
 
 // 미들웨어 적용 경로 설정 (선택 사항)
+export const config = {
+  matcher: ["/login", "/signup"],
+};
 // export const config = {
 //   matcher: ["/dashboard/:path*", "/profile/:path*", "/settings/:path*"],
 // };
