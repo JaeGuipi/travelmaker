@@ -41,7 +41,7 @@ const NotificationItem = ({ id, content, createdAt, onDelete}: NotificationItemP
   };
 
   return (
-    <li className={cx("notification-container")}>
+    <li className={cx("notificationItem-container")}>
       <div className={cx("status-container")}>
         <span className={cx("status",`${dotColor}`)}></span>
         <button type="button" onClick={handleDelete}>
@@ -71,14 +71,14 @@ const Notificationlist = ({ isOpen, onClose }: NotificationlistProps) => {
     console.log("open")
   }
   return (
-    <div className={cx("notifications-container")}>
+    <div className={cx("notificationList-container")}>
       <div className={cx("conunt-container")}>
         <span className={cx("count")}>알림 6개</span>
         <button type="button" onClick={() => onClose()}>
           <Image src="/icons/btn_cancel_black.svg"  width={24} height={24} alt="닫기" />
         </button>
       </div>
-      <ul className={cx("notification-wrap")}>
+      <ul className={cx("notificationList-wrap")}>
         {notifications.map((notification) => (
           <NotificationItem
             key={notification.id}

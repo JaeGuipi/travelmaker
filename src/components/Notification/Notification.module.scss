@@ -1,4 +1,4 @@
-.notification-container {
+.notificationItem-container {
   width: 328px;
   background-color: #fff;
   padding: 1.6rem 1.2rem;
@@ -44,7 +44,7 @@
   color: $gray04;
 }
 
-.notifications-container {
+.notificationList-container {
   border-radius: 1rem;
   padding: 2.4rem 2rem;
   background-color: $green03;
@@ -64,7 +64,7 @@
   font-weight: 700;
 }
 
-.notification-wrap {
+.notificationList-wrap {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
