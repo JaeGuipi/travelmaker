@@ -11,11 +11,9 @@ import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
 import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
-import { login } from "@/lib/api/auth";
-import { useRouter } from "next/navigation";
+import { login } from "@/actions/auth.action";
 
 const LoginForm = () => {
-  const router = useRouter();
   const { showSuccess, showError } = useToast();
 
   const {
@@ -34,7 +32,6 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await login(data);
-      router.push("/");
       showSuccess(toastMessages.success.login);
     } catch (error) {
       console.error(error);
