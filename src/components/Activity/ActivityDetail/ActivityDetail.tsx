@@ -2,6 +2,7 @@ import { ActivityDetailResponse } from "@/types/activites/activitesTypes";
 import API_URL from "@/constants/config";
 import s from "./ActivityDetail.module.scss";
 import Image from "next/image";
+import Schedules from "../Schedules/Schedules";
 
 async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
   const response = await fetch(`${API_URL}/activities/${activityId}`, { cache: "no-store" });
@@ -59,10 +60,7 @@ export default async function ActivityDetail({ activityId }: { activityId: numbe
             <div></div>
           </div>
         </div>
-        <div className={s["calendar-fix"]}>
-          {/* <div>{res.schedules}</div> */}
-          <div>날짜영역임</div>
-        </div>
+        <Schedules activityId={activityId} schedules={res.schedules} />
       </div>
     </section>
   );

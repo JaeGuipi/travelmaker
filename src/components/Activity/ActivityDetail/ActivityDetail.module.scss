@@ -104,12 +104,18 @@
 .detail-info {
   display: flex;
   justify-content: space-between;
-  align-items: flex-star;
+  align-items: flex-start;
   gap: 24px;
   padding-top: 85px;
 
   .info-wrap {
-    flex: 1;
+    flex: 0 0 800px;
+    @include tablet {
+      flex: 0 0 453px;
+    }
+    @include mobile {
+      flex: 1;
+    }
 
     > div {
       padding-top: 40px;
@@ -130,14 +136,5 @@
       font-weight: 700;
       @include text(xl);
     }
-  }
-
-  .calendar-fix {
-    flex: 0 0 384px;
-    max-height: 746px;
-    padding: 18px 0 24px;
-    border: 1px solid rgba(248, 154, 5, 0.25);
-    border-radius: 12px;
-    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
   }
 }
