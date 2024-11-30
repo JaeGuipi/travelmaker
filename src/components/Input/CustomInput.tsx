@@ -12,15 +12,17 @@ interface CustomInputProps {
   id: string;
   label?: string;
   type: string;
+  value?: string;
   placeholder?: string;
   errors?: string;
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
+  readOnly?: boolean;
 }
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ id, label, type, register, errors, iconType, borderColor = "default", ...rest }, ref) => {
+  ({ id, label, type, value, register, errors, iconType, borderColor = "default", readOnly = false, ...rest }, ref) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const handleClickVisible = () => {
@@ -39,10 +41,13 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             className={cx("input", {
               "input-error": errors,
               "border-yellow": borderColor === "yellow",
+              "input-readOnly": readOnly,
             })}
             type={iconType === "password" && isVisible ? "text" : type}
+            value={value}
             id={id}
             ref={ref}
+            readOnly={readOnly}
             {...register}
             {...rest}
           />
