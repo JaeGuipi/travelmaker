@@ -2,6 +2,7 @@ import { ScheduleList } from "@/types/activites/activitesTypes";
 import { Schedule } from "@/types/types";
 import s from "./Schedules.module.scss";
 import API_URL from "@/constants/config";
+import Calendar from "./Calendar";
 
 type SchedulesProps = {
   activityId: number;
@@ -16,8 +17,6 @@ async function getAvailableSchedule(activityId: number, year: string, month: str
 }
 
 export default async function Schedules({ activityId, schedules }: SchedulesProps) {
-  console.log("스케줄", schedules);
-
   const { date, times } = await getAvailableSchedule(activityId);
   console.log("날짜", date);
   console.log("시간", times);
@@ -33,7 +32,11 @@ export default async function Schedules({ activityId, schedules }: SchedulesProp
         {date}
         {times}
         {/* <div>{res.schedules}</div> */}
-        <div>날짜영역임</div>
+        {/* 날짜 클릭하면 year . month 추출되어 함수 호출 체험 예약 가능일 조회  */}
+        {/* response 로 date, times [{endTime, startTime, id}] 응답  */}
+        {/* times 클릭하여 예약 신청 버튼 누르면 POST 체험 예약 신청 body에 scheduleId(times에서 조회된 id) , headCount(인원수) 포함  */}
+        <p>금액</p>
+        <Calendar schedules={schedules} />
       </div>
     </>
   );
