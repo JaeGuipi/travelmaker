@@ -4,7 +4,6 @@ import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { PostAuth } from "@/types/auth/authTypes";
-import { PatchMe } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
 
 const cookieStore = cookies();
@@ -24,7 +23,7 @@ const setCookie = (name: string, value: string) => {
   });
 };
 
-export async function login(loginData: PostAuth) {
+export const login = async (loginData: PostAuth) => {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -49,7 +48,7 @@ export async function login(loginData: PostAuth) {
 
   revalidateTag("users");
   redirect("/");
-}
+};
 
 // 로그아웃
 export const logout = async () => {
