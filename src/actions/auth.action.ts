@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { PostAuth } from "@/types/auth/authTypes";
 import API_URL from "@/constants/config";
@@ -47,7 +46,6 @@ export const login = async (loginData: PostAuth) => {
   }
 
   revalidateTag("users");
-  redirect("/");
 };
 
 // 로그아웃
@@ -60,7 +58,7 @@ export const logout = async () => {
     throw new Error("로그아웃 실패");
   }
 
-  revalidateTag("user");
+  revalidateTag("users");
 };
 
 // 내 정보 수정
@@ -83,7 +81,7 @@ export const updateUsers = async (data: { profileImageUrl?: string; nickname?: s
     throw new Error("내 정보 수정 실패");
   }
 
-  revalidateTag("user"); // revalidateTag 넣어줘야지 서버액션에서 버튼 클릭시 바로 반영
+  revalidateTag("users");
 };
 
 // 프로필 이미지 URL 생성
@@ -106,23 +104,7 @@ export const uploadProfileImage = async (formData: FormData) => {
   return data.profileImageUrl; // 업로드된 이미지 URL 반환
 };
 
-// export const updateUserProfile = async (profileImageUrl: string) => {
-//   const response = await fetch(`${API_URL}/users/me`, {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${accessToken}`,
-//     },
-//     body: JSON.stringify({ profileImageUrl }),
-//   });
-
-//   if (!response.ok) {
-//     throw new Error("사용자 정보 업데이트 실패");
-//   }
-
-//   return response.json();
-// };
-
+// 토큰 재발급
 export const authTokens = async () => {
   const refreshToken = cookies().get("refreshToken")?.value;
 
