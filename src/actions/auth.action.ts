@@ -22,6 +22,7 @@ const setCookie = (name: string, value: string) => {
   });
 };
 
+// 로그인
 export const login = async (loginData: PostAuth) => {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
