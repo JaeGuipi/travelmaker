@@ -1,0 +1,18 @@
+.total {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(248, 154, 5, 0.25);
+  @include flex-between;
+
+  .title {
+    color: $black01;
+    font-weight: 700;
+    @include text(xl);
+  }
+
+  .total-price {
+    color: $black01;
+    font-weight: 700;
+    @include text(xl);
+  }
+}

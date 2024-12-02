@@ -4,12 +4,12 @@ import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
-import interactionPlugin from "@fullcalendar/interaction";
+import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import s from "./Calendar.module.scss";
 import "./CalendarStyle.scss";
 
 interface Schedule {
-  id: string;
+  id: number;
   date: string;
   startTime: string;
   endTime: string;
@@ -17,13 +17,20 @@ interface Schedule {
 
 interface CalendarProps {
   schedules: Schedule[];
+  onTimeSelect: (scheduleId: number) => void; // 부모로 scheduleId를 전달하는 콜백
 }
 
-const Calendar: React.FC<CalendarProps> = ({ schedules }) => {
+const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [activeScheduleId, setActiveScheduleId] = useState<number | null>(null);
 
-  const handleDateClick = (info: any) => {
+  const handleDateClick = (info: DateClickArg) => {
     setSelectedDate(info.dateStr);
+  };
+
+  const handleTimeSelect = (scheduleId: number) => {
+    setActiveScheduleId(scheduleId); // 클릭한 일정 ID를 상태에 저장
+    onTimeSelect(scheduleId); // 부모에게 선택된 일정 ID 전달
   };
 
   return (
@@ -43,7 +50,7 @@ const Calendar: React.FC<CalendarProps> = ({ schedules }) => {
           dateClick={handleDateClick}
           fixedWeekCount={false}
           events={schedules.map((schedule) => ({
-            id: schedule.id,
+            id: String(schedule.id), // id를 string으로 변환
           }))}
           dayCellClassNames={(arg) => {
             // 이벤트 배열에서 날짜와 일치하는 이벤트가 있는지 확인
@@ -73,8 +80,12 @@ const Calendar: React.FC<CalendarProps> = ({ schedules }) => {
               .filter((schedule) => schedule.date === selectedDate)
               .map((schedule) => (
                 <li key={schedule.id}>
-                  <button type="button">
-                    {schedule.startTime} - {schedule.endTime}
+                  <button
+                    type="button"
+                    onClick={() => handleTimeSelect(schedule.id)}
+                    className={activeScheduleId === schedule.id ? s.active : ""}
+                  >
+                    {schedule.startTime} ~ {schedule.endTime}
                   </button>
                 </li>
               ))}

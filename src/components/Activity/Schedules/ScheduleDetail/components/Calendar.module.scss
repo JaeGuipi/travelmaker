@@ -28,6 +28,10 @@
       font-weight: 500;
       @include text(lg);
     }
+    & button.active {
+      background: $yellow01;
+      color: #fff;
+    }
   }
 }
 
