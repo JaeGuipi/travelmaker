@@ -1,0 +1,13 @@
+.userTabContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  width: 350px;
+  border: 1.5px solid $gray06;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  box-shadow: 0 0 16px $gray07;
+  @include mobile {
+    display: none;
+  }
+}

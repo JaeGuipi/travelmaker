@@ -1,0 +1,44 @@
+.profileContainer {
+  .profileImgWrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: auto;
+
+    .profileImgBox {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .profileButton {
+      position: absolute;
+      right: 1rem;
+      bottom: 0;
+      display: block;
+      width: 44px;
+      height: 44px;
+      border-radius: 100px;
+      background-color: $yellow01;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $yellow02;
+      }
+
+      img {
+        padding: 1rem;
+      }
+    }
+
+    .profileInput {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+    }
+  }
+}
