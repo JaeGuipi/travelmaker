@@ -102,7 +102,7 @@ export const uploadProfileImage = async (formData: FormData) => {
   const data = await response.json();
   console.log("Upload successful:", data);
 
-  return data.profileImageUrl; // 업로드된 이미지 URL 반환
+  return data.profileImageUrl;
 };
 
 // 토큰 재발급
