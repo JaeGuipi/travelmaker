@@ -2,7 +2,7 @@ import { ScheduleList } from "@/types/activites/activitesTypes";
 import { Schedule } from "@/types/types";
 import s from "./Schedules.module.scss";
 import API_URL from "@/constants/config";
-import Calendar from "./Calendar";
+import ScheduleDetail from "./ScheduleDetail/ScheduleDetail";
 
 type SchedulesProps = {
   activityId: number;
@@ -39,8 +39,7 @@ export default async function Schedules({ activityId, schedules, price }: Schedu
         <p className={s.price}>
           ₩ {price} <span>/ 인</span>
         </p>
-        <Calendar schedules={schedules} />
-        {/* 총 합계 */}
+        <ScheduleDetail schedules={schedules} price={price} />
       </div>
     </>
   );

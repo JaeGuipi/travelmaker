@@ -1,17 +1,7 @@
-.calendar {
-  .calendar-inner {
-    padding: 16px 24px;
-    .title {
-      color: $black01;
-      font-weight: 700;
-      @include text(xl);
-    }
-    .sub-title {
-      color: $black01;
-      font-weight: 700;
-      @include text(2lg);
-    }
-  }
+.sub-title {
+  color: $black01;
+  font-weight: 700;
+  @include text(2lg);
 }
 
 .fullcalendar {
@@ -41,6 +31,7 @@
   }
 }
 
-.dayheader {
-  border: 1px solid green;
+.not-possible {
+  padding-top: 14px;
+  @include text(md);
 }

@@ -59,7 +59,16 @@
   border: 0;
 }
 
-/* 날짜 - 영역 */
+.fc-theme-standard td.active {
+  border-radius: 8px;
+  background-color: var(--fc-today-bg-color);
+}
+
+/* 날짜 - today */
+.fc .fc-daygrid-day.fc-day-today {
+  background: transparent;
+}
+
 .fc .fc-daygrid-day-frame {
   display: flex;
   justify-content: center;
@@ -67,18 +76,23 @@
   width: 35px;
   height: 32px;
   cursor: pointer;
+
+  /* 날짜 - 숫자 */
+  .fc-daygrid-day-number {
+    padding: 0;
+  }
+
+  /* 날짜 - 이벤트 */
+  .fc-daygrid-day-events {
+    display: none;
+  }
+
+  .fc-highlight {
+    border-radius: 8px;
+    background-color: $yellow01;
+  }
 }
 
-/* 날짜 - 숫자 */
-.fc .fc-daygrid-day-number {
-  padding: 0;
-}
-
-/* 날짜 - 이벤트 */
-.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
-  display: none;
-}
-
-.fc-license-message {
+.fc .fc-license-message {
   display: none;
 }
