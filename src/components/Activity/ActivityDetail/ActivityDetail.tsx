@@ -67,7 +67,7 @@ export default async function ActivityDetail({ activityId }: { activityId: numbe
             <div></div>
           </div>
         </div>
-        <Schedules activityId={activityId} schedules={res.schedules} />
+        <Schedules activityId={activityId} schedules={res.schedules} price={res.price} />
       </div>
     </section>
   );

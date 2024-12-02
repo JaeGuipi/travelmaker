@@ -14,4 +14,27 @@
     background: #fff;
     border-radius: 0;
   }
+
+  .price {
+    gap: 5px;
+    padding: 0 16px;
+    color: $black01;
+    font-weight: 700;
+    @include flex-start;
+    @include text(3xl);
+    @include tablet {
+      padding: 0 24px;
+      @include text(2xl);
+    }
+
+    > span {
+      color: $gray01;
+      font-weight: 400;
+      @include text(xl);
+      @include tablet {
+        padding: 0 24px;
+        @include text(lg);
+      }
+    }
+  }
 }

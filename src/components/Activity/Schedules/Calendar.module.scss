@@ -1,11 +1,21 @@
 .calendar {
   .calendar-inner {
     padding: 16px 24px;
+    .title {
+      color: $black01;
+      font-weight: 700;
+      @include text(xl);
+    }
+    .sub-title {
+      color: $black01;
+      font-weight: 700;
+      @include text(2lg);
+    }
   }
 }
 
 .fullcalendar {
-  margin: 0 15px;
+  margin: 16px 15px;
   padding: 10px 27px;
   border: 1px solid #eee;
   border-radius: 8px;
@@ -15,7 +25,20 @@
 }
 
 .selectedDate {
-  border: 1px solid blue;
+  gap: 6px 12px;
+  padding-top: 14px;
+  flex-wrap: wrap;
+  @include flex-start;
+
+  & li {
+    & button {
+      padding: 10px 12px;
+      border: 1px solid $yellow01;
+      border-radius: 8px;
+      font-weight: 500;
+      @include text(lg);
+    }
+  }
 }
 
 .dayheader {
