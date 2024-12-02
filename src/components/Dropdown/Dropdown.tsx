@@ -37,7 +37,7 @@ const Dropdown: React.FC<DropdownProps> & {
   );
 };
 
-const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantType }> = ({
+export const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantType }> = ({
   children,
   variant = "default",
 }) => {
@@ -58,7 +58,7 @@ const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantType }> 
 };
 
 //드롭다운 메뉴 컴포넌트
-const DropdownMenu: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const DropdownMenu: React.FC<{ children: ReactNode }> = ({ children }) => {
   const context = useContext(DropdownContext);
   if (!context) {
     throw new Error("DropdownMenu는 Dropdown 내부에서 사용되어야 합니다.");
@@ -72,7 +72,7 @@ const DropdownMenu: React.FC<{ children: ReactNode }> = ({ children }) => {
 };
 
 //드로다운 아이템 컴포넌트
-const DropdownItem: React.FC<{ children: ReactNode; onClick?: () => void }> = ({ children, onClick }) => {
+export const DropdownItem: React.FC<{ children: ReactNode; onClick?: () => void }> = ({ children, onClick }) => {
   return (
     <span onClick={onClick} className={styles.item}>
       {children}

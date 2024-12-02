@@ -3,9 +3,7 @@
     padding: 16px 24px;
   }
 }
-.fc-theme-standard td {
-  border: 1px solid red;
-}
+
 .fullcalendar {
   margin: 0 15px;
   padding: 10px 27px;
@@ -13,16 +11,6 @@
   border-radius: 8px;
   .calendarview {
     border: 0;
-    > table {
-      > thead {
-        > tr {
-          th {
-          }
-        }
-      }
-    }
-    > tbody {
-    }
   }
 }
 

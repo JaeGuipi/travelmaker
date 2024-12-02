@@ -3,6 +3,7 @@ import API_URL from "@/constants/config";
 import s from "./ActivityDetail.module.scss";
 import Image from "next/image";
 import Schedules from "../Schedules/Schedules";
+import Dropdown, { DropdownItem, DropdownMenu, DropdownToggle } from "@/components/Dropdown/Dropdown";
 
 async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
   const response = await fetch(`${API_URL}/activities/${activityId}`, { cache: "no-store" });
@@ -19,7 +20,13 @@ export default async function ActivityDetail({ activityId }: { activityId: numbe
         <p className={s.cate}>{res.category}</p>
         <div>
           <h2>{res.title}</h2>
-          드롭다운
+          <Dropdown>
+            <DropdownToggle>아이콘</DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>메뉴</DropdownItem>
+              <DropdownItem>메뉴</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
         <div className={s["rating-address"]}>
           <p className={s.rating}>

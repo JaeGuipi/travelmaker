@@ -1,0 +1,84 @@
+.fc-direction-ltr {
+  min-height: 241px;
+}
+.fc .fc-button-primary {
+  background-color: transparent;
+  border-color: transparent;
+  color: #000;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    border-color: transparent;
+    color: inherit;
+  }
+  .fc-icon-chevron-left::before {
+    content: "<<";
+  }
+  .fc-icon-chevron-right::before {
+    content: ">>";
+  }
+}
+
+/* 월 & 년 */
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0;
+  padding: 5px 0;
+
+  .fc-toolbar-title {
+    font-weight: 700;
+    @include text(md);
+  }
+}
+
+/* 요일 */
+.fc-col-header {
+  width: 100% !important;
+  .fc-col-header-cell-cushion {
+    padding: 6.5px 4.5px;
+    font-weight: 700;
+  }
+}
+
+.fc-scroller {
+  overflow: visible !important;
+}
+.fc-theme-standard .fc-scrollgrid {
+  border: 0;
+}
+
+/* 날짜 */
+.fc .fc-daygrid-body {
+  width: 100% !important;
+  .fc-scrollgrid-sync-table {
+    width: 100% !important;
+  }
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 0;
+}
+
+/* 날짜 - 영역 */
+.fc .fc-daygrid-day-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 32px;
+  cursor: pointer;
+}
+
+/* 날짜 - 숫자 */
+.fc .fc-daygrid-day-number {
+  padding: 0;
+}
+
+/* 날짜 - 이벤트 */
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+  display: none;
+}
+
+.fc-license-message {
+  display: none;
+}
