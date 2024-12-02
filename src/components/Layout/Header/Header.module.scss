@@ -21,21 +21,12 @@
     @include mobile {
       display: none;
     }
-
-    input {
-      border-radius: 12px;
-    }
   }
 
   .userWrap {
     display: flex;
     align-items: center;
     font-weight: 500;
-
-    a {
-      color: $black01;
-      @include text(md);
-    }
 
     .loginOn {
       display: flex;
@@ -72,9 +63,17 @@
           }
         }
 
-        .profile {
-          border-radius: 50px;
+        .profileImgWrap {
+          position: relative;
+          width: 32px;
+          height: 32px;
+          border-radius: 100px;
           margin-left: 1rem;
+          overflow: hidden;
+
+          .profile {
+            object-fit: cover;
+          }
         }
 
         .name {
@@ -107,10 +106,15 @@
         }
       }
     }
+  }
 
-    .loginOff {
-      display: flex;
-      gap: 24px;
+  .loginOff {
+    display: flex;
+    gap: 24px;
+
+    a {
+      color: $black01;
+      @include text(md);
     }
   }
 }
