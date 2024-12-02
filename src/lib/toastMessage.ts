@@ -7,7 +7,7 @@ const toastMessages = {
   error: {
     login: "로그인에 실패하였습니다.",
     signup: "회원가입에 실패하였습니다.",
-    editInfo: "내 정보가 수정에 실패하였습니다.",
+    editInfo: "내 정보 수정에 실패하였습니다.",
   },
 };
 

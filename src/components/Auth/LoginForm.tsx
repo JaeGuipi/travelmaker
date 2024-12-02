@@ -12,9 +12,11 @@ import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
 import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
 import { login } from "@/actions/auth.action";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const { showSuccess, showError } = useToast();
+  const router = useRouter();
 
   const {
     register,
@@ -32,6 +34,7 @@ const LoginForm = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       await login(data);
+      router.push("/");
       showSuccess(toastMessages.success.login);
     } catch (error) {
       console.error(error);
