@@ -1,0 +1,54 @@
+.mypageContainer {
+  display: flex;
+  align-items: center;
+  margin: 6rem auto 8rem;
+  gap: 5rem;
+  @include mobile {
+    flex-direction: column;
+    margin: 2rem auto 3rem;
+  }
+
+  .userTabContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    width: 350px;
+    border: 1.5px solid $gray06;
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 0 16px $gray07;
+    @include mobile {
+      width: 100%;
+      padding: 3rem 2rem 2rem;
+    }
+  }
+
+  .mypageFormContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    @include mobile {
+      width: 100%;
+      margin-bottom: 5rem;
+    }
+
+    .mypageHeader {
+      @include flex-between;
+
+      h2 {
+        @include text(3xl);
+        font-weight: 700;
+        @include mobile {
+          @include text(2xl);
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+  }
+}
