@@ -15,7 +15,7 @@ type ScheduleDetailProps = {
 };
 
 const ScheduleDetail = ({ schedules, price }: ScheduleDetailProps) => {
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
   const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -24,8 +24,8 @@ const ScheduleDetail = ({ schedules, price }: ScheduleDetailProps) => {
     console.log("선택된 scheduleId:", scheduleId);
   };
 
-  const MIN_COUNT = 0; // 최소값
-  const MAX_COUNT = 100; // 예시 최대값 (필요에 따라 변경 가능)
+  const MIN_COUNT = 1; // 최소값
+  const MAX_COUNT = 100; // 예시 최대값
 
   // 증가 핸들러
   const handleIncrease = () => setCount((prev) => Math.min(prev + 1, MAX_COUNT)); // 최대값을 초과하지 않도록 제한
@@ -47,7 +47,7 @@ const ScheduleDetail = ({ schedules, price }: ScheduleDetailProps) => {
 
   // 예약하기 버튼 핸들러
   const handleReservation = async () => {
-    if (!selectedScheduleId || count <= 0) {
+    if (!selectedScheduleId || count <= 1) {
       alert("날짜와 참여 인원수를 확인해주세요.");
       return;
     }
