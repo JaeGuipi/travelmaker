@@ -11,11 +11,11 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 토큰이 있으면 로그인, 회원가입 홈으로 리다이렉트
-  const token = request.cookies.get("accessToken")?.value;
-  const RoutesRedirect = ["/login", "/signup"];
-  if (token && RoutesRedirect.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // const token = request.cookies.get("accessToken")?.value;
+  // const RoutesRedirect = ["/login", "/signup"];
+  // if (token && RoutesRedirect.includes(request.nextUrl.pathname)) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   // 보호된 경로에만 미들웨어 적용
   if (protectedRoutes.some((route) => pathname.startsWith(route))) {
