@@ -25,14 +25,6 @@ export default async function Page({ searchParams }: SearchPageProps) {
   const { keyword, sort = "latest", page = "1", size = "20" } = searchParams;
 
   // 검색어가 없는 경우 처리
-  if (!keyword) {
-    return (
-      <main>
-        <SearchBar />
-        <div>검색어를 입력해주세요.</div>
-      </main>
-    );
-  }
 
   // 쿼리스트링 생성
   const queryParams = new URLSearchParams({
@@ -41,7 +33,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
     sort,
     page,
     size,
-  });
+  } as Record<string, string>);
 
   // API 호출
   const res = await fetch(`${API_URL}/activities?${queryParams.toString()}`, {
@@ -64,7 +56,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
       <div className={cx("searchbar")}>
         <SearchBar />
       </div>
-      <SearchResults data={data} searchParams={searchParams} />
+      {!keyword ? <div>검색어를 입력해주세요.</div> : <SearchResults data={data} searchParams={searchParams} />}
     </main>
   );
 }

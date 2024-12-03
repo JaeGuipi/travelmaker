@@ -9,10 +9,7 @@ import Image from "next/image";
 import { GetMyActivities } from "@/types/types";
 import Link from "next/link";
 import s from "./SearchResults.module.scss";
-import classNames from "classnames/bind";
 import Pagination from "@/components/Button/Pagination";
-
-const cx = classNames.bind(s);
 
 interface SearchResultsProps {
   data: GetMyActivities;
