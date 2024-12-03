@@ -11,12 +11,12 @@ import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
 import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
-import { login } from "@/lib/api/auth";
+import { login } from "@/actions/auth.action";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const router = useRouter();
   const { showSuccess, showError } = useToast();
+  const router = useRouter();
 
   const {
     register,
