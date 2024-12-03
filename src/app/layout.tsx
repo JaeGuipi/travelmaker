@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import "@/styles/globals.scss";
 import { Providers as QueryClientProvider } from "./providers";
 import { Toaster } from "react-hot-toast";
-import ClientPathname from "@/components/Layout/ClientPathname";
+import ClientPathname from "@/app/ClientPathname";
 import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
 
@@ -28,11 +28,11 @@ export default function RootLayout({
         <QueryClientProvider>
           <div id="modal-root"></div>
           <ToastProvider />
-          <ClientPathname>
+          <ClientPathname hideRoutes={["/login", "/signup"]}>
             <Header />
           </ClientPathname>
           {children}
-          <ClientPathname>
+          <ClientPathname hideRoutes={["/login", "/signup"]}>
             <Footer />
           </ClientPathname>
         </QueryClientProvider>

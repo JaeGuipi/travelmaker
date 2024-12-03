@@ -18,8 +18,9 @@ export interface GetMe {
 //내 정보 수정
 export interface PatchMe {
   nickname: string;
-  profileImageUrl: string;
+  profileImageUrl?: string | null;
   newPassword: string;
+  newPasswordConfirm?: string;
 }
 
 //프로필 이미지 url 생성
