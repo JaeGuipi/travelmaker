@@ -1,0 +1,136 @@
+.item-container {
+  display: flex;
+  background-color: #fff;
+  height: 204px;
+  border-radius: 2.4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.4rem;
+  
+  @include tablet {
+    height: 156px;
+  }
+
+  @include mobile {
+    height: 128px;
+  }
+}
+
+.img-container { 
+  flex-shrink: 1;
+}
+
+.img {
+  border-radius: 2.4rem 0 0 2.4rem;
+
+  @include tablet {
+    width: 156px;
+    height: 156px;
+  }
+
+  @include mobile {
+    width: 128px;
+    height: 128px;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 2.1rem 2.4rem;
+  min-width: 0;
+  position: relative;
+
+  @include tablet {
+    padding: 1.2rem 1.8rem;
+  }
+
+  @include mobile {
+    padding: 1.1rem 0.8rem;
+  }
+}
+
+.status {
+  @include text(lg);
+  font-weight: 700;
+  color: $red01;
+  margin-bottom: 0.8rem;
+
+  @include mobile {
+    @include text(md);
+  }
+}
+
+.title {
+  @include text(xl);
+  font-weight: 700;
+  color: #112211;
+  margin-bottom: 1.2rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include tablet {
+    @include text(2lg);
+    margin-bottom: 0.4rem;
+  }
+
+  @include mobile {
+    @include text(md);
+    margin-bottom: 0;
+  }
+}
+.schedule-container {
+  display: flex;
+}
+
+.schedule {
+  @include text(2lg);
+  color: #112211;
+  margin-bottom: 1.6rem;
+
+  &.schedule:not(:last-child)::after {
+    content: "·";
+    margin: 0 8px;
+    color: inherit;
+  }
+
+  @include tablet {
+    @include text(md);
+    margin-bottom: 1rem;
+  }
+
+  @include mobile {
+    @include text(xs);
+    margin-bottom: 0;
+  }
+}
+
+.price {
+  @include text(2xl);
+  font-weight: 500;
+  color: #112211;
+
+  @include tablet {
+    @include text(xl);
+  }
+
+  @include mobile {
+    @include text(2lg);
+  }
+}
+
+.button {
+  position: absolute;
+  right: 2.4rem;
+  bottom: 2.1rem;
+
+  // @include tablet {
+  //   @include text(xl);
+  // }
+
+  @include mobile {
+    @include text(md);
+  }
+}
