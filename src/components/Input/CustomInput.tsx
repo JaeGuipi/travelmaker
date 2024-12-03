@@ -17,6 +17,8 @@ interface CustomInputProps {
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
