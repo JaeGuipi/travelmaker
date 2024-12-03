@@ -12,12 +12,14 @@ interface CustomInputProps {
   id: string;
   label?: string;
   type: string;
+  value: string;
   placeholder?: string;
   errors?: string;
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
   readOnly?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
