@@ -5,7 +5,10 @@ import API_URL from "@/constants/config";
 import SearchBar from "@/components/SearchBar";
 import SearchResults from "./SearchResults";
 import { GetMyActivities } from "@/types/types";
+import classNames from "classnames/bind";
+import styles from "./page.module.scss";
 
+const cx = classNames.bind(styles);
 interface SearchParams {
   keyword?: string;
   sort?: string;
@@ -18,7 +21,7 @@ interface SearchPageProps {
   searchParams: SearchParams;
 }
 
-export default async function SearchPage({ searchParams }: SearchPageProps) {
+export default async function Page({ searchParams }: SearchPageProps) {
   const { keyword, sort = "latest", page = "1", size = "20" } = searchParams;
 
   // 검색어가 없는 경우 처리
@@ -57,8 +60,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const data: GetMyActivities = await res.json();
 
   return (
-    <main className="container">
-      <SearchBar />
+    <main className={cx("container", "mainbox")}>
+      <div className={cx("searchbar")}>
+        <SearchBar />
+      </div>
       <SearchResults data={data} searchParams={searchParams} />
     </main>
   );

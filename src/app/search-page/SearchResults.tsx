@@ -55,7 +55,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
   return (
     <div>
       {data.activities.length > 0 ? (
-        <>
+        <div className={s["search-wrap"]}>
           <div className={s["list-setup"]}>
             <p>&quot;{keyword}&quot;의 검색결과</p>
             <Dropdown>
@@ -96,7 +96,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
             ))}
           </ul>
           <Pagination currentPage={Number(page)} totalPages={totalPage} onPageChange={handlePageChange} />
-        </>
+        </div>
       ) : (
         <p>검색 결과가 없습니다.</p>
       )}

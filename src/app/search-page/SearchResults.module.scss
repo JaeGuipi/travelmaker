@@ -89,7 +89,6 @@
 }
 .list-setup {
   height: 60px;
-  // position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -97,4 +96,11 @@
     font-weight: 500;
     @include text(lg);
   }
+}
+
+.search-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 30px;
 }
