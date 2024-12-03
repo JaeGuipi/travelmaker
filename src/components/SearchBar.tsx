@@ -17,7 +17,7 @@ const SearchBar = () => {
       const params = new URLSearchParams(currentParams.toString());
       params.set("keyword", searchQuery);
       params.set("page", "1"); // 새로운 검색 시 페이지를 1로 초기화
-      router.push(`/search?${params.toString()}`);
+      router.push(`/search-page?${params.toString()}`);
     }
   };
 

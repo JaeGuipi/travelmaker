@@ -4,18 +4,7 @@ import React from "react";
 import API_URL from "@/constants/config";
 import SearchBar from "@/components/SearchBar";
 import SearchResults from "./SearchResults";
-
-interface DataItem {
-  id: number;
-  title: string;
-  description: string;
-}
-
-interface DataResponse {
-  cursorId: number | null;
-  totalCount: number;
-  activities: DataItem[];
-}
+import { GetMyActivities } from "@/types/types";
 
 interface SearchParams {
   keyword?: string;
@@ -35,10 +24,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   // 검색어가 없는 경우 처리
   if (!keyword) {
     return (
-      <div>
+      <main>
         <SearchBar />
         <div>검색어를 입력해주세요.</div>
-      </div>
+      </main>
     );
   }
 
@@ -65,12 +54,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     throw new Error("데이터를 가져오는데 실패했습니다.");
   }
 
-  const data: DataResponse = await res.json();
+  const data: GetMyActivities = await res.json();
 
   return (
-    <div>
+    <main className="container">
       <SearchBar />
       <SearchResults data={data} searchParams={searchParams} />
-    </div>
+    </main>
   );
 }
