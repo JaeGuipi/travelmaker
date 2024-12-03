@@ -8,14 +8,15 @@ type SchedulesProps = {
   price: number;
 };
 
-export default async function Schedules({ schedules, price }: SchedulesProps) {
+export default async function Schedules({ activityId, schedules, price }: SchedulesProps) {
   return (
     <>
       <div className={s.schedules}>
         <p className={s.price}>
           ₩ {price} <span>/ 인</span>
         </p>
-        <ScheduleDetail schedules={schedules} price={price} />
+        {/* 클라이언트 컴포넌트 */}
+        <ScheduleDetail activityId={activityId} schedules={schedules} price={price} />
       </div>
     </>
   );

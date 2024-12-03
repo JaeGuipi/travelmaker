@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Schedule } from "@/types/types";
-import { postReservation } from "@/actions/activites.action";
 import Calendar from "./components/Calendar";
 import FormButton from "@/components/Button/FormButton";
 import s from "./ScheduleDetail.module.scss";
@@ -10,18 +9,18 @@ import HeadCountSelector from "./components/HeadCountSelector";
 import TotalPrice from "./components/TotalPrice";
 
 type ScheduleDetailProps = {
+  activityId: number;
   schedules: Schedule[];
   price: number;
 };
 
-const ScheduleDetail = ({ schedules, price }: ScheduleDetailProps) => {
+const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) => {
   const [count, setCount] = useState<number>(1);
   const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleScheduleSelect = (scheduleId: number) => {
     setSelectedScheduleId(scheduleId);
-    console.log("선택된 scheduleId:", scheduleId);
   };
 
   const MIN_COUNT = 1; // 최소값
@@ -51,20 +50,35 @@ const ScheduleDetail = ({ schedules, price }: ScheduleDetailProps) => {
       alert("날짜와 참여 인원수를 확인해주세요.");
       return;
     }
+    setIsSubmitting(true);
 
-    setIsSubmitting(true); // 중복 클릭 방지
     try {
-      const reservationData = {
-        scheduleId: selectedScheduleId,
-        headCount: count,
-      };
-      await postReservation(selectedScheduleId, reservationData);
-      alert("예약이 성공적으로 완료되었습니다!");
+      const response = await fetch(`/api/activities/${activityId}/reservations`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          scheduleId: selectedScheduleId,
+          headCount: count,
+        }),
+      });
+
+      const contentType = response.headers.get("Content-Type");
+      let data = {};
+
+      if (!response.ok) {
+        data = await response.json();
+        console.error("에러데이터", data);
+      } else {
+        if (contentType && contentType.includes("application/json")) {
+          data = await response.json();
+        }
+      }
     } catch (error) {
-      console.error("예약 중 오류 발생:", error);
-      alert("예약 중 문제가 발생했습니다. 다시 시도해주세요.");
+      console.error("예약 오류:", error);
     } finally {
-      setIsSubmitting(false); // 중복 클릭 방지 해제
+      setIsSubmitting(false);
     }
   };
 
