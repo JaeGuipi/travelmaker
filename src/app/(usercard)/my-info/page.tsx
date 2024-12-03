@@ -16,8 +16,7 @@ const getUsers = async () => {
       return null;
     }
 
-    const data = await response.json();
-    return data;
+    return response.json();
   } catch (error) {
     console.error("유저 정보 가져오기 실패:", error);
     return null;
