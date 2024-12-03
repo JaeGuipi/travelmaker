@@ -1,49 +1,52 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
-import s from "@/components/Layout/Header/Header.module.scss";
+import { useRouter } from "next/navigation";
 import { GetMe } from "@/types/users/usersTypes";
 import { logout } from "@/lib/api/auth";
+import Image from "next/image";
+import Link from "next/link";
+import s from "@/components/Layout/Header/Header.module.scss";
 
-const User = ({ user }: { user: GetMe | null }) => {
+const User = ({ users }: { users: GetMe | null }) => {
+  const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
+  const handleLogout = async () => {
+    await logout();
+    router.push("/login");
+  };
+
   return (
     <div className={s.userWrap}>
-      {user ? (
+      {users && (
         <div className={s.loginOn}>
           <button className={s.alarm}>
             <Image src={"/icons/btn_alarm.svg"} width={15} height={17} alt="알림" />
           </button>
 
           <div className={s.userInfo} onClick={toggleDropdown}>
-            <Image
-              className={s.profile}
-              src={user.profileImageUrl ? `/${user.profileImageUrl}` : "/images/profile.png"}
-              width={32}
-              height={32}
-              alt={user.nickname}
-            />
-            <p className={s.name}>{user.nickname}</p>
+            <div className={s.profileImgWrap}>
+              <Image
+                className={s.profile}
+                src={users.profileImageUrl ? `${users.profileImageUrl}` : "/images/profile.png"}
+                fill
+                alt={users.nickname}
+              />
+            </div>
+            <p className={s.name}>{users.nickname}</p>
 
             {isDropdownOpen && (
               <div className={s.toggleDropdown}>
-                <button onClick={() => logout()}>로그아웃</button>
-                <Link href={"/mypage"}>마이페이지</Link>
+                <button onClick={handleLogout}>로그아웃</button>
+                <Link href={"/my-info"}>마이페이지</Link>
               </div>
             )}
           </div>
-        </div>
-      ) : (
-        <div className={s.loginOff}>
-          <Link href={"/login"}>로그인</Link>
-          <Link href={"/signup"}>회원가입</Link>
         </div>
       )}
     </div>

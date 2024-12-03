@@ -6,7 +6,7 @@
 .formButton {
   font-weight: bold;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
   transition: background-color 0.3s;
   background-color: #f89a05;
   color: white;
@@ -18,6 +18,9 @@
 
   &.medium {
     @include buttonStyles(16px, 12px 33px);
+    @include mobile {
+      @include buttonStyles(14px, 9px 20px);
+    }
   }
 
   &.large {
