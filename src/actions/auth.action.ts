@@ -106,38 +106,37 @@ export const uploadProfileImage = async (formData: FormData) => {
   return data.profileImageUrl;
 };
 
-// 토큰 재발급
-export const authTokens = async () => {
-  const refreshToken = cookies().get("refreshToken")?.value;
+// export const authTokens = async () => {
+//   const refreshToken = cookies().get("refreshToken")?.value;
 
-  if (!refreshToken) {
-    console.error("refreshToken이 없습니다.");
-    throw new Error("인증되지 않은 사용자");
-  }
+//   if (!refreshToken) {
+//     console.error("refreshToken이 없습니다.");
+//     throw new Error("인증되지 않은 사용자");
+//   }
 
-  try {
-    const response = await fetch(`${API_URL}/auth/tokens`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${refreshToken}`,
-      },
-    });
+//   try {
+//     const response = await fetch(`${API_URL}/auth/tokens`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${refreshToken}`,
+//       },
+//     });
 
-    if (!response.ok) {
-      console.error("refreshToken 재발급 에러 발생");
-      throw new Error("refreshToken 재발급 실패");
-    }
+//     if (!response.ok) {
+//       console.error("refreshToken 재발급 에러 발생");
+//       throw new Error("refreshToken 재발급 실패");
+//     }
 
-    const { accessToken } = await response.json();
-    setCookie("accessToken", accessToken);
+//     const { accessToken } = await response.json();
+//     setCookie("accessToken", accessToken);
 
-    return { success: true, message: "refreshToken 요청 성공" };
-  } catch (error) {
-    console.error("refreshToken 에러 발생: ", error);
-    throw new Error("refreshToken 요청 실패");
-  }
-};
+//     return { success: true, message: "refreshToken 요청 성공" };
+//   } catch (error) {
+//     console.error("refreshToken 에러 발생: ", error);
+//     throw new Error("refreshToken 요청 실패");
+//   }
+// };
 
 // 회원가입
 export const signUpUser = async (userData: SignUp) => {

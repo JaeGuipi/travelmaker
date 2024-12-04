@@ -5,17 +5,17 @@ import { jwtDecode } from "jwt-decode";
 import API_URL from "./constants/config";
 
 // 보호된 경로 설정
-const protectedRoutes = ["/test/tokentest"];
+const protectedRoutes = ["/"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 토큰이 있으면 로그인, 회원가입 홈으로 리다이렉트
-  const token = request.cookies.get("accessToken")?.value;
-  const RoutesRedirect = ["/login", "/signup"];
-  if (token && RoutesRedirect.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // const token = request.cookies.get("accessToken")?.value;
+  // const RoutesRedirect = ["/login", "/signup"];
+  // if (token && RoutesRedirect.includes(request.nextUrl.pathname)) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   // 보호된 경로에만 미들웨어 적용
   if (protectedRoutes.some((route) => pathname.startsWith(route))) {
@@ -53,15 +53,15 @@ export async function middleware(request: NextRequest) {
           return response;
         } else {
           // 토큰 갱신 실패 시 로그인 페이지로 리디렉션
-          return NextResponse.redirect(new URL("/test/login", request.url));
+          // return NextResponse.redirect(new URL("/test/login", request.url));
         }
       } else {
         // 리프레시 토큰이 만료된 경우 로그인 페이지로 리디렉션
-        return NextResponse.redirect(new URL("/test/login", request.url));
+        // return NextResponse.redirect(new URL("/test/login", request.url));
       }
     } else {
       // 리프레시 토큰이 없는 경우 로그인 페이지로 리디렉션
-      return NextResponse.redirect(new URL("/test/login", request.url));
+      // return NextResponse.redirect(new URL("/test/login", request.url));
     }
   }
 
@@ -114,9 +114,6 @@ async function refreshAccessToken(refreshToken: string): Promise<string | null> 
 }
 
 // 미들웨어 적용 경로 설정 (선택 사항)
-export const config = {
-  matcher: ["/login", "/signup"],
-};
 // export const config = {
-//   matcher: ["/dashboard/:path*", "/profile/:path*", "/settings/:path*"],
+//   matcher: ["/login", "/signup", "/dashboard/:path*", "/profile/:path*", "/settings/:path*"],
 // };

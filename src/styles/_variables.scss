@@ -83,6 +83,21 @@ $font-styles: (
   }
 }
 
+.layoutContainer {
+  min-height: calc(100vh - 91px - 160px);
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  @include mobile {
+    min-height: calc(100vh - 71px - 160px);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+}
+
 /* 커스텀 스타일은 아래에 추가하여 사용해주세요. */
 /* ----------------------- start: flex custom --------------------- */
 @mixin flex-center {
