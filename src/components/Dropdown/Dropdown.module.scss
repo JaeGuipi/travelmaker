@@ -14,6 +14,8 @@
   color: black;
   border: none;
   cursor: pointer;
+  background-color: #fff;
+
 
   &.kebab {
     width: 40px;
@@ -32,7 +34,8 @@
     width: 160px;
 
     /* green/green_0B3B2D */
-    border: 1px solid #0b3b2d;
+    // border: 1px solid #0b3b2d;
+    border: 1px solid $yellow01;
     border-radius: 15px;
   }
 }
@@ -43,6 +46,9 @@
   border-radius: 10px;
   border: 1px solid #dddddd;
   width: 160px;
+  position: absolute;
+  top: 65px;
+  overflow: hidden;
 }
 
 .item {
@@ -51,12 +57,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 18px 46px;
+  // padding: 18px 46px;
   gap: 10px;
   height: 62px;
   border-bottom: 1px solid #dddddd;
+  background-color: #fff;
+  cursor: pointer;
 
   &:last-child {
     border-bottom: none;
   }
+  z-index: 50;
 }

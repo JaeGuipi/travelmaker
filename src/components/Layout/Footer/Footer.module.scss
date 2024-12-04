@@ -10,7 +10,7 @@
   .ft-inner {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: flex-start;
     min-height: 160px;
     padding: 32px 0;
     @include mobile {
