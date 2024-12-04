@@ -1,6 +1,13 @@
+.header {
+  border-bottom: 1px solid $gray06;
+}
+
 .headerContainer {
   @include flex-between;
   height: 90px;
+  @include mobile {
+    height: 70px;
+  }
 
   .logo {
     position: relative;
