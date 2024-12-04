@@ -5,9 +5,6 @@ import { cookies } from "next/headers";
 import { PostAuth } from "@/types/auth/authTypes";
 import API_URL from "@/constants/config";
 
-const cookieStore = cookies();
-const accessToken = cookieStore.get("accessToken")?.value;
-
 // 쿠키 저장 함수
 const setCookie = (name: string, value: string) => {
   const cookieStore = cookies();
@@ -52,6 +49,7 @@ export const login = async (loginData: PostAuth) => {
 // 로그아웃
 export const logout = async () => {
   try {
+    const cookieStore = cookies();
     cookieStore.delete("accessToken");
     cookieStore.delete("refreshToken");
   } catch (error) {
@@ -63,8 +61,15 @@ export const logout = async () => {
 };
 
 // 내 정보 수정
-export const updateUsers = async (data: { profileImageUrl?: string; nickname?: string; newPassword?: string }) => {
+export const updateUsers = async (data: {
+  nickname?: string;
+  profileImageUrl?: string | null;
+  newPassword?: string;
+}) => {
   try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+
     const response = await fetch(`${API_URL}/users/me`, {
       method: "PATCH",
       body: JSON.stringify(data),
@@ -87,6 +92,9 @@ export const updateUsers = async (data: { profileImageUrl?: string; nickname?: s
 
 // 프로필 이미지 URL 생성
 export const uploadProfileImage = async (formData: FormData) => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
   const response = await fetch(`${API_URL}/users/me/image`, {
     method: "POST",
     headers: {
@@ -101,6 +109,8 @@ export const uploadProfileImage = async (formData: FormData) => {
 
   const data = await response.json();
   console.log("Upload successful:", data);
+
+  revalidateTag("users");
 
   return data.profileImageUrl;
 };
