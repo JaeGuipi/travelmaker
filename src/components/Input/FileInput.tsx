@@ -12,7 +12,7 @@ interface FileInputProps {
 
 const FileInput = ({ users, preview, handleImageChange, readOnly }: FileInputProps) => {
   return (
-    <section className={s.profileContainer}>
+    <div className={s.profileContainer}>
       <div className={s.profileImgWrap}>
         <div className={s.profileImgBox}>
           <Image src={preview ? preview : users.profileImageUrl} fill alt={users.nickname} />
@@ -30,7 +30,7 @@ const FileInput = ({ users, preview, handleImageChange, readOnly }: FileInputPro
           disabled={readOnly}
         />
       </div>
-    </section>
+    </div>
   );
 };
 
