@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
-  inset: 0px;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0px; //스크롤이 되고 있습니다!
+  background-color: rgba(0, 0, 0, 0.05); //0.7이 너무 어두워서 수정했습니다! 
 }
 
 .content {

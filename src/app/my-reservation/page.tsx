@@ -1,7 +1,6 @@
 import API_URL from "@/constants/config";
 import s from "./page.module.scss";
 import classNames from "classnames/bind";
-
 import { MyReservation } from "@/types/types";
 import MyReservationList from "@/components/MyReservationList/MyReservationList";
 import { customFetch } from "@/utils/customFetch";
@@ -16,18 +15,15 @@ const MyReservationPage = async () => {
   if (!response.ok) {
     console.error("예약 데이터를 불러오는 데 실패했습니다.");
   }
-  const myReservation = await response.json(); //totalCount,cursorId,reservations 객체
+  const myReservation = await response.json();
   const cursorId = myReservation.cursorId;
   const reservationList: MyReservation[] = myReservation.reservations;
-  console.log(myReservation)
-  console.log(reservationList)
 
   return (
     <section className={cx("container", "reservation")}>
       <div className={s.reservation}>
         <div className={cx("list-title-container")}>
           <h2 className={cx("list-title")}>예약 내역</h2>
-          
         </div>
         <MyReservationList initialReservations={reservationList} cursorId={cursorId} />
       </div>

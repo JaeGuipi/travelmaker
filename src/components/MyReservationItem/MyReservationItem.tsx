@@ -1,42 +1,42 @@
-import classNames from "classnames/bind";
 import s from "./MyReservationItem.module.scss";
+import classNames from "classnames/bind";
 import { MyReservation } from "@/types/types";
-import Image from "next/image";
-import FormButton from "@/components/Button/FormButton";
+import getStatusText from "@/utils/getStatusText";
+import ItemLayout from "../ItemLayout/ItemLayout";
+import FormButton from "../Button/FormButton";
+import ConfirmModal from "../Modal/ModalComponents/ConfirmModal";
+import useModalStore from "@/store/useModalStore";
+import FormInfoModal from "../Modal/ModalComponents/FormInfoModal";
 
 const cx = classNames.bind(s);
 
-const getStatusText = (status: string) => {
-  switch (status) {
-    case "pending":
-      return "예약 신청";
-    case "confirmed":
-      return "예약 승인";
-    case "declinde":
-      return "예약 거절";
-    case "canceled":
-      return "예약 취소";
-    case "completed":
-      return "체험 완료";
-    default:
-      return "";
-  }
-};
+const MyReservationItem = ({
+  reservation,
+  onDelete,
+}: {
+  reservation: MyReservation;
+  onDelete: (id: number) => void;
+}) => {
+  const { toggleModal } = useModalStore();
 
-
-const MyReservationItem = ({ reservation, onDelete }: { reservation: MyReservation, onDelete:(id:number) => void; }) => {
-  
-  const onDeleteItem = (id: number) => {
+  const handleDeleteItem = (id: number) => {
     onDelete(id);
   };
-  
+
   return (
-    <div className={cx("item-container")}>
-      <div className={cx("img-container")}>
-        <Image src="/images/profile.png" width={204} height={204} alt="체험 이미지" className={s.img} />
-      </div>
+    <ItemLayout src={"/images/profile.png"} alt={"체험 이미지"}>
       <div className={s.info}>
-        <p className={s.status}>{getStatusText(reservation.status)}</p>
+        <p
+          className={cx("status", {
+            pending: reservation.status === "pending",
+            confirmed: reservation.status === "confirmed",
+            declinde: reservation.status === "declined",
+            canceled: reservation.status === "canceled",
+            completed: reservation.status === "completed",
+          })}
+        >
+          {getStatusText(reservation.status)}
+        </p>
         <p className={s.title}>{reservation.activity.title}</p>
         <div className={cx("schedule-container")}>
           <p className={s.schedule}>{reservation.date}</p>
@@ -44,24 +44,25 @@ const MyReservationItem = ({ reservation, onDelete }: { reservation: MyReservati
           <p className={s.schedule}>{`${reservation.headCount}명`}</p>
         </div>
         <em className={s.price}>{`₩${reservation.totalPrice}`}</em>
-        {reservation.status === "체험 완료" && (
+        {reservation.status === "completed" && (
           <div className={s.button}>
-            <FormButton>후기 작성</FormButton>
+            <FormButton type="button" onClick={() => toggleModal("후기 작성")}>
+              후기 작성
+            </FormButton>
           </div>
         )}
-        {reservation.status === "예약 승인" && (
+        {reservation.status === "pending" && (
           <div className={s.button}>
-            <FormButton type="button">예약 취소</FormButton>
+            <FormButton type="button" variant="emptyButton" onClick={() => toggleModal("canceled")}>
+              예약 취소
+            </FormButton>
           </div>
         )}
-        <div className={s.button}>
-          <FormButton type="button" variant="emptyButton" onClick={()=> onDeleteItem(reservation.id)}>
-            예약 취소
-          </FormButton>
-        </div>
       </div>
-    </div>
+      <ConfirmModal text="canceled" id={reservation.id} onCancel={(id) => handleDeleteItem(id)} />
+      <FormInfoModal title="후기 작성" />
+    </ItemLayout>
   );
 };
 
-export default MyReservationItem
+export default MyReservationItem;
