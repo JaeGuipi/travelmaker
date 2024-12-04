@@ -52,6 +52,11 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
     try {
       let profileImageUrl = preview;
 
+      if (!selectedFile) {
+        showError(toastMessages.error.profileImage);
+        return;
+      }
+
       if (selectedFile) {
         const formData = new FormData();
         formData.append("image", selectedFile);

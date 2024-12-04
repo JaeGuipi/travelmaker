@@ -30,7 +30,7 @@ export const signUpSchema = z
 export const MyPageSchema = z
   .object({
     nickname: z.string().min(1, { message: "닉네임을 입력해주세요." }),
-    profileImageUrl: z.string(),
+    profileImageUrl: z.string().url().nullable().optional(),
     newPassword: z.string().min(8, "8자 이상 입력해주세요."),
     newPasswordConfirm: z.string().min(8, "8자 이상 입력해주세요."),
   })
