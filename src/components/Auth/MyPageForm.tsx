@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import s from "./MyPageForm.module.scss";
-import classNames from "classnames/bind";
 
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
@@ -19,12 +18,10 @@ import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
 import UserTabList from "@/components/UserTab/UserTabList";
 
-export const cx = classNames.bind(s);
-
 const MyPageForm = ({ users }: { users: GetMe }) => {
   const { showSuccess, showError } = useToast();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState(users.profileImageUrl || "/images/profile.png");
+  const [preview, setPreview] = useState(users.profileImageUrl);
 
   const {
     register,
@@ -35,7 +32,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
     mode: "onChange",
     defaultValues: {
       nickname: users.nickname,
-      profileImageUrl: users.profileImageUrl,
+      profileImageUrl: users.profileImageUrl || null,
       newPassword: "",
     },
   });
@@ -64,7 +61,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
 
       const updatedData = {
         nickname: data.nickname,
-        profileImageUrl,
+        profileImageUrl: profileImageUrl || null,
         newPassword: data.newPassword || undefined,
       };
 
@@ -77,7 +74,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
   };
 
   return (
-    <section className={cx("mypageContainer", "container")}>
+    <div className={s.mypageContainer}>
       <div className={s.userTabContainer}>
         <FileInput users={users} preview={preview} handleImageChange={handleImageChange} />
         <UserTabList />
@@ -121,7 +118,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
           />
         </form>
       </div>
-    </section>
+    </div>
   );
 };
 

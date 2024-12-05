@@ -15,7 +15,7 @@ const FileInput = ({ users, preview, handleImageChange, readOnly }: FileInputPro
     <section className={s.profileContainer}>
       <div className={s.profileImgWrap}>
         <div className={s.profileImgBox}>
-          <Image src={preview ? preview : users.profileImageUrl} fill alt={users.nickname} />
+          <Image src={preview ? preview : "/images/profile.png"} fill alt={users.nickname} />
         </div>
 
         <label htmlFor="profile-image-input" className={s.profileButton}>

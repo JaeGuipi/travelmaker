@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, createContext, useContext, ReactNode } from "react";
+import React, { useState, createContext, useContext, ReactNode, useRef, useEffect } from "react";
 import styles from "./Dropdown.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
@@ -29,10 +29,27 @@ const Dropdown: React.FC<DropdownProps> & {
   Item: typeof DropdownItem;
 } = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <DropdownContext.Provider value={{ isOpen, setIsOpen }}>
-      <div className={styles.dropdown}>{children}</div>
+      <div className={styles.dropdown} ref={dropdownRef}>
+        {children}
+      </div>
     </DropdownContext.Provider>
   );
 };
@@ -73,8 +90,18 @@ export const DropdownMenu: React.FC<{ children: ReactNode }> = ({ children }) =>
 
 //드로다운 아이템 컴포넌트
 export const DropdownItem: React.FC<{ children: ReactNode; onClick?: () => void }> = ({ children, onClick }) => {
+  const context = useContext(DropdownContext);
+  if (!context) {
+    throw new Error("DropdownMenu는 Dropdown 내부에서 사용되어야 합니다.");
+  }
+  const { setIsOpen } = context;
+
+  const handleClick = () => {
+    if (onClick) onClick();
+    if (setIsOpen) setIsOpen(false); //옵션을 누르면 닫히도록
+  };
   return (
-    <span onClick={onClick} className={styles.item}>
+    <span onClick={handleClick} className={styles.item}>
       {children}
     </span>
   );

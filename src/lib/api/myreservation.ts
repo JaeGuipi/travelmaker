@@ -16,20 +16,20 @@ export const getMyReservations = async (): Promise<GetMyReservations> => {
   return data;
 };
 
-// 내 예약 수정 (취소)
-export const updateMyReservation = async (reservationId: number, updateData: PatchMyReservations) => {
-  const response = await customFetch(`${API_URL}/my-reservations/${reservationId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updateData),
-  });
+// // 내 예약 수정 (취소)
+// export const updateMyReservation = async (reservationId: number, updateData: PatchMyReservations) => {
+//   const response = await customFetch(`${API_URL}/my-reservations/${reservationId}`, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(updateData),
+//   });
 
-  if (!response.ok) {
-    throw new Error(`내 예약 수정 실패: ${response.statusText}`);
-  }
-};
+//   if (!response.ok) {
+//     throw new Error(`내 예약 수정 실패: ${response.statusText}`);
+//   }
+// };
 
 // 내 예약 리뷰 작성
 export const createMyReservationReview = async (reservationId: number, reviewData: PostMyReservations) => {

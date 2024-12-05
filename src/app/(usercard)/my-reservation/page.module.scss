@@ -1,0 +1,27 @@
+.reservation {
+  margin-top: 7.2rem;
+  margin-bottom: 10.3rem;
+}
+
+.reservation {
+  max-width: 792px;
+  min-height: calc(100vh - 29rem);
+  position: relative;
+}
+
+.list-title-container {
+  @include flex-between;
+  margin-bottom: 2.4rem;
+}
+
+.list-title {
+  @include text(3xl);
+  font-weight: 600;
+  color: $black01;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
