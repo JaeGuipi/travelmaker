@@ -31,6 +31,7 @@ export const getActivity = async (params: { size?: number; category?: string } =
     });
     return await response.json();
   } catch (error) {
+    console.error("Fetch error:", error);
     throw error;
   }
 };
