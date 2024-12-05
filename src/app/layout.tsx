@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import ClientPathname from "@/app/ClientPathname";
 import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
+import BottomBar from "@/components/BottomBar/BottomBar";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -34,6 +35,7 @@ export default function RootLayout({
           {children}
           <ClientPathname hideRoutes={["/login", "/signup"]}>
             <Footer />
+            <BottomBar />
           </ClientPathname>
         </QueryClientProvider>
       </body>

@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import s from "./Header.module.scss";
 import classNames from "classnames/bind";
-import CustomInput from "@/components/Input/CustomInput";
 import User from "@/components/Layout/Header/User";
+import SearchBar from "@/components/SearchBar";
 
 export const cx = classNames.bind(s);
 
@@ -47,22 +47,15 @@ const Header = async () => {
   } catch (error) {
     console.error("유저 정보 요청 실패", error);
   }
-
   return (
     <header className={cx("headerContainer", "container")}>
       <Link href={"/"} className={s.logo}>
         <Image src={"/images/logo.png"} fill alt="TRAVEL MAKER" />
       </Link>
 
-      <Link href={"/search-page"} className={s.search}>
-        <CustomInput
-          id="search"
-          type="text"
-          iconType="search"
-          borderColor="yellow"
-          placeholder="무엇을 체험하고 싶으신가요?"
-        />
-      </Link>
+      <div className={s.search}>
+        <SearchBar />
+      </div>
 
       {!users ? (
         <div className={s.loginOff}>
