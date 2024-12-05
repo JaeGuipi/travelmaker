@@ -7,6 +7,9 @@ import FormButton from "@/components/Button/FormButton";
 import s from "./ScheduleDetail.module.scss";
 import HeadCountSelector from "./components/HeadCountSelector";
 import TotalPrice from "./components/TotalPrice";
+import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
+import useModalStore from "@/store/useModalStore";
+import { useMediaQuery } from "react-responsive";
 
 type ScheduleDetailProps = {
   activityId: number;
@@ -18,6 +21,10 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
   const [count, setCount] = useState<number>(1);
   const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const { modals, toggleModal } = useModalStore();
+  const calendarModal = "날짜";
+  const isTabletOrBelow = useMediaQuery({ query: "(max-width: 1200px)" });
 
   const handleScheduleSelect = (scheduleId: number) => {
     setSelectedScheduleId(scheduleId);
@@ -86,7 +93,21 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
     <div className={s.calendar}>
       <div className={s["calendar-inner"]}>
         <h4 className={s["title"]}>날짜</h4>
-        <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+        {isTabletOrBelow ? (
+          <>
+            <button className={s.openButton} onClick={() => toggleModal(calendarModal)}>
+              날짜 선택하기
+            </button>
+            {modals[calendarModal] && (
+              <FormInfoModal title={calendarModal} showSubmit={true} buttonTxt={"확인"}>
+                <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+              </FormInfoModal>
+            )}
+          </>
+        ) : (
+          <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+        )}
+
         <HeadCountSelector
           count={count}
           onIncrease={handleIncrease}
