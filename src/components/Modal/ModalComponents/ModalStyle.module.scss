@@ -72,12 +72,9 @@
 }
 
 /* 폼 & 정보 모달 */
-.forminfo-overlay {
-  background-color: transparent !important;
-}
-
 .forminfo-modal {
   width: 480px;
+  text-align: left;
   @include mobile {
     width: 100%;
     height: 100vh;
@@ -101,6 +98,10 @@
 
   .contents {
     padding: 20px 0;
+
+    & > button {
+      margin-top: 24px;
+    }
   }
 
   .button-wrap {

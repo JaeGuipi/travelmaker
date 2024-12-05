@@ -23,6 +23,14 @@ const MyReservationList = ({
   const [reservationStatus, setReservationStatus] = useState("");
   const observerRef = useRef<HTMLDivElement | null>(null);
 
+  const dropdownItems = [
+    { key: "pending", label: "예약 완료" },
+    { key: "canceled", label: "예약 취소" },
+    { key: "confirmed", label: "예약 승인" },
+    { key: "declined", label: "예약 거절" },
+    { key: "completed", label: "체험 완료" },
+  ];
+
   const handleDeleteItem = async (id: number) => {
     const response = await fetch(`/api/my-reservations/${id}`, {
       method: "PATCH",
@@ -76,8 +84,6 @@ const MyReservationList = ({
       }
     };
 
-   
-
     const observer = new IntersectionObserver((entries) => {
       const target = entries[0];
       if (target.isIntersecting && !isLoading) loadMoreList();
@@ -89,7 +95,7 @@ const MyReservationList = ({
     return () => {
       if (refValue) observer.unobserve(refValue);
     };
-  }, [isLoading, currentCursorId, reservationList]);
+  }, [isLoading, currentCursorId, reservationList, reservationStatus]);
 
   if (reservationList.length === 0) {
     return (
@@ -106,47 +112,17 @@ const MyReservationList = ({
         <Dropdown>
           <DropdownToggle>{selectedStatus}</DropdownToggle>
           <DropdownMenu>
-            <DropdownItem
-              onClick={() => {
-                console.log("온클릭");
-                orderedList("pending");
-                setSelectedStatus("예약 완료");
-              }}
-            >
-              예약 완료
-            </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                orderedList("canceled");
-                setSelectedStatus("예약 취소");
-              }}
-            >
-              예약 취소
-            </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                orderedList("confirmed");
-                setSelectedStatus("예약 승인");
-              }}
-            >
-              예약 승인
-            </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                orderedList("declined");
-                setSelectedStatus("예약 거절");
-              }}
-            >
-              예약 거절
-            </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                orderedList("completed");
-                setSelectedStatus("체험 완료");
-              }}
-            >
-              체험 완료
-            </DropdownItem>
+            {dropdownItems.map(({ key, label }) => (
+              <DropdownItem
+                key={key}
+                onClick={() => {
+                  orderedList(key);
+                  setSelectedStatus(label);
+                }}
+              >
+                {label}
+              </DropdownItem>
+            ))}
           </DropdownMenu>
         </Dropdown>
       </div>

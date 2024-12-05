@@ -7,9 +7,10 @@ import Image from "next/image";
 interface ModalProps {
   title: string;
   showSubmit?: boolean;
+  children: React.ReactNode;
 }
 
-const FormInfoModal = ({ title, showSubmit }: ModalProps) => {
+const FormInfoModal = ({ title, showSubmit, children }: ModalProps) => {
   const { toggleModal } = useModalStore();
 
   return (
@@ -20,8 +21,7 @@ const FormInfoModal = ({ title, showSubmit }: ModalProps) => {
           <Image src="/icons/btn_cancel_black.svg" fill alt="close" />
         </button>
       </div>
-      {/* 컨텐츠 작업 */}
-      <div className={s.contents}>contents</div>
+      <div className={s.contents}>{children}</div>
       {showSubmit && (
         <div className={s["button-wrap"]}>
           <FormButton size="large" disabled={true}>

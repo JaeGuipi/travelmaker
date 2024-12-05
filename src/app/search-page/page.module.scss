@@ -1,0 +1,14 @@
+.searchbar {
+  min-width: 350px;
+  width: 50%;
+  margin: 0 auto;
+  display: none;
+  @include mobile {
+    display: block;
+  }
+}
+.mainbox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

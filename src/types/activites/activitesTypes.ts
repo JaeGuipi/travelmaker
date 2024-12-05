@@ -35,7 +35,7 @@ export type SubImage = {
   imageUrl: string;
 };
 
-export type ActivityDetail = Activity & {
+export type ActivityDetailResponse = Activity & {
   subImages: SubImage[];
   schedules: Schedule[];
 };

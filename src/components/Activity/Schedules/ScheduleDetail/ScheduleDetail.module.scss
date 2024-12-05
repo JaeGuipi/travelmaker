@@ -1,0 +1,39 @@
+.calendar {
+  .calendar-inner {
+    padding: 16px 24px;
+    @include mobile {
+      padding: 0;
+      @include flex-between;
+    }
+    .title {
+      color: $black01;
+      font-weight: 700;
+      @include text(xl);
+      @include mobile {
+        display: none;
+      }
+    }
+
+    .openButton {
+      margin-top: 0;
+      padding-top: 5px;
+      font-weight: 600;
+      @include text(md);
+    }
+
+    & > button {
+      margin-top: 24px;
+
+      @include mobile {
+        flex: 0 0 106px;
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+/* 모바일 */
+.total {
+  @include flex-align-start;
+  flex-direction: column;
+}
