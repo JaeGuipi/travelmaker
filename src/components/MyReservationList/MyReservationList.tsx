@@ -126,7 +126,7 @@ const MyReservationList = ({
           </DropdownMenu>
         </Dropdown>
       </div>
-      <div className={cx("list-container")}>
+      <div>
         {reservationList.map((reservation) => (
           <MyReservationItem key={reservation?.id} reservation={reservation} onDelete={handleDeleteItem} />
         ))}
