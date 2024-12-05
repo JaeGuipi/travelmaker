@@ -17,12 +17,13 @@ const MyReservationItem = ({
   reservation: MyReservation;
   onDelete: (id: number) => void;
 }) => {
-  const { toggleModal } = useModalStore();
-
+  const { modals, toggleModal } = useModalStore();
   const handleDeleteItem = (id: number) => {
     onDelete(id);
   };
 
+  const canceledKey = `canceled-${reservation.id}`;
+  const completedKey = `completed-${reservation.id}`;
   return (
     <ItemLayout src={"/images/profile.png"} alt={"체험 이미지"}>
       <div className={s.info}>
@@ -46,21 +47,30 @@ const MyReservationItem = ({
         <em className={s.price}>{`₩${reservation.totalPrice}`}</em>
         {reservation.status === "completed" && (
           <div className={s.button}>
-            <FormButton type="button" onClick={() => toggleModal("후기 작성")}>
+            <FormButton type="button" onClick={() => toggleModal(completedKey)}>
               후기 작성
             </FormButton>
           </div>
         )}
         {reservation.status === "pending" && (
           <div className={s.button}>
-            <FormButton type="button" variant="emptyButton" onClick={() => toggleModal("canceled")}>
+            <FormButton type="button" variant="emptyButton" onClick={() => toggleModal(canceledKey)}>
               예약 취소
             </FormButton>
           </div>
         )}
       </div>
-      <ConfirmModal text="canceled" id={reservation.id} onCancel={(id) => handleDeleteItem(id)} />
-      <FormInfoModal title="후기 작성" />
+      <ConfirmModal
+        modalKey={canceledKey}
+        text="canceled"
+        id={reservation.id}
+        onCancel={(id) => handleDeleteItem(id)}
+      />
+      {modals[completedKey] && (
+        <FormInfoModal modalKey={completedKey} title="후기 작성">
+          hello
+        </FormInfoModal>
+      )}
     </ItemLayout>
   );
 };
