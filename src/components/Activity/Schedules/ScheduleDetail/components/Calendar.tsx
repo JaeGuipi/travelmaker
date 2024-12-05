@@ -53,21 +53,9 @@ const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
             id: String(schedule.id), // id를 string으로 변환
           }))}
           dayCellClassNames={(arg) => {
-            // 이벤트 배열에서 날짜와 일치하는 이벤트가 있는지 확인
-            const hasActiveEvent = schedules.some((schedule) => {
-              const cellDate = new Date(arg.date); // 현재 셀 날짜
-              const eventDate = new Date(schedule.date); // 이벤트 날짜
-
-              // 날짜와 ID 조건 확인
-              return (
-                cellDate.getFullYear() === eventDate.getFullYear() &&
-                cellDate.getMonth() === eventDate.getMonth() &&
-                cellDate.getDate() === eventDate.getDate() &&
-                schedule.id // schedule.id가 존재해야 함
-              );
-            });
-
-            return hasActiveEvent ? "active" : ""; // 조건에 따라 "active" 클래스 추가
+            const cellDate = new Date(arg.date).toDateString();
+            const isSelected = selectedDate && cellDate === new Date(selectedDate).toDateString();
+            return isSelected ? "active" : "";
           }}
         />
       </div>

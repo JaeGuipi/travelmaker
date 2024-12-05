@@ -46,7 +46,7 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
 
   // 예약하기 버튼 핸들러
   const handleReservation = async () => {
-    if (!selectedScheduleId || count <= 1) {
+    if (!selectedScheduleId || count < 1) {
       alert("날짜와 참여 인원수를 확인해주세요.");
       return;
     }
@@ -95,7 +95,12 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
           minCount={MIN_COUNT}
           maxCount={MAX_COUNT}
         />
-        <FormButton type="submit" size="large" onClick={handleReservation}>
+        <FormButton
+          type="submit"
+          size="large"
+          onClick={handleReservation}
+          disabled={!selectedScheduleId || isSubmitting}
+        >
           예약하기
         </FormButton>
         <TotalPrice price={price} count={count} />
