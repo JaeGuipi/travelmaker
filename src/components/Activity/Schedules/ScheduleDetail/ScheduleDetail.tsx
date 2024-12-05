@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Schedule } from "@/types/types";
+import { useMediaQuery } from "react-responsive";
+import { useToast } from "@/hooks/useToast";
 import Calendar from "./components/Calendar";
 import FormButton from "@/components/Button/FormButton";
 import s from "./ScheduleDetail.module.scss";
@@ -9,7 +11,7 @@ import HeadCountSelector from "./components/HeadCountSelector";
 import TotalPrice from "./components/TotalPrice";
 import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
 import useModalStore from "@/store/useModalStore";
-import { useMediaQuery } from "react-responsive";
+import toastMessages from "@/lib/toastMessage";
 
 type ScheduleDetailProps = {
   activityId: number;
@@ -24,6 +26,7 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { modals, toggleModal } = useModalStore();
   const isTabletOrBelow = useMediaQuery({ query: "(max-width: 1200px)" });
+  const { showSuccess, showError } = useToast();
 
   const calendarModal = "날짜";
 
@@ -43,13 +46,8 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
   const MIN_COUNT = 1; // 최소값
   const MAX_COUNT = 100; // 예시 최대값
 
-  // 증가 핸들러
-  const handleIncrease = () => setCount((prev) => Math.min(prev + 1, MAX_COUNT)); // 최대값을 초과하지 않도록 제한
-
-  // 감소 핸들러
-  const handleDecrease = () => setCount((prev) => Math.max(prev - 1, MIN_COUNT)); // 최소값을 초과하지 않도록 제한
-
-  // 직접 입력 핸들러
+  const handleIncrease = () => setCount((prev) => Math.min(prev + 1, MAX_COUNT));
+  const handleDecrease = () => setCount((prev) => Math.max(prev - 1, MIN_COUNT));
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
 
@@ -81,19 +79,21 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
         }),
       });
 
-      const contentType = response.headers.get("Content-Type");
-      let data = {};
+      const data = await response.json();
 
       if (!response.ok) {
-        data = await response.json();
-        console.error("에러데이터", data);
-      } else {
-        if (contentType && contentType.includes("application/json")) {
-          data = await response.json();
+        if (response.status === 401) {
+          showError(toastMessages.error.requestLogin);
+          return;
         }
+
+        showError(data.message);
+        return;
       }
+
+      showSuccess(toastMessages.success.reservation);
     } catch (error) {
-      console.error("예약 오류:", error);
+      throw error;
     } finally {
       setIsSubmitting(false);
     }

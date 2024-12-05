@@ -31,7 +31,6 @@
       font-weight: 400;
       @include text(xl);
       @include tablet {
-        padding: 0 24px;
         @include text(lg);
       }
     }
