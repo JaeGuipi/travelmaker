@@ -1,0 +1,13 @@
+.reviewList {
+  & > li {
+    display: flex;
+  }
+}
+
+.profileImg {
+  overflow: hidden;
+  position: relative;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
