@@ -21,7 +21,7 @@ const FormInfoModal = ({ title, showSubmit, children }: ModalProps) => {
           <Image src="/icons/btn_cancel_black.svg" fill alt="close" />
         </button>
       </div>
-      {children}
+      <div className={s.contents}>{children}</div>
       {showSubmit && (
         <div className={s["button-wrap"]}>
           <FormButton size="large" disabled={true}>
