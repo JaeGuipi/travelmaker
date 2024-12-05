@@ -1,13 +1,48 @@
-.reviewList {
-  & > li {
-    display: flex;
+.ratingWrap {
+  gap: 16px;
+  padding-top: 24px;
+  @include flex-start;
+
+  .rating {
+    font-size: 5rem;
+    font-weight: 600;
   }
 }
 
-.profileImg {
-  overflow: hidden;
-  position: relative;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+.reviewList {
+  & > li {
+    gap: 16px;
+    padding: 24px 0;
+    @include flex-start;
+    align-items: flex-start;
+    .profileImg {
+      overflow: hidden;
+      position: relative;
+      flex: 0 0 45px;
+      height: 45px;
+      border-radius: 50%;
+    }
+    .reviewInfo {
+      .userInfo {
+        gap: 5px;
+        font-weight: 700;
+        @include text(lg);
+        @include flex-start;
+
+        > span {
+          color: $gray04;
+          font-weight: 400;
+          @include text(md);
+        }
+      }
+      .content {
+        padding-top: 8px;
+        word-break: break-all;
+        @include text(lg);
+      }
+    }
+  }
+  & > li + li {
+    border-top: 1px solid $yellow01;
+  }
 }

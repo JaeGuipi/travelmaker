@@ -16,14 +16,12 @@ async function getActivityReview(activityId: number): Promise<GetReviews> {
 export default async function ReviewList({ activity }: ReviewListProps) {
   const { reviews, totalCount, averageRating } = await getActivityReview(activity.id);
 
-  console.log("리뷰데이터", reviews);
-  console.log("리뷰토탈카운터", totalCount);
-  console.log("평균점수", averageRating);
-
   return (
     <section>
-      <div>{averageRating}</div>
-      <div>{totalCount}</div>
+      <div className={s.ratingWrap}>
+        <p className={s.rating}>{averageRating}</p>
+        <p>{totalCount}개 후기</p>
+      </div>
       <ul className={s.reviewList}>
         {reviews.map((review) => (
           <li key={review.id}>
@@ -34,11 +32,12 @@ export default async function ReviewList({ activity }: ReviewListProps) {
                 alt="프로필"
               />
             </div>
-            <div>
-              <p>
-                {review.user.nickname} | <span>{timeDiff(review.createdAt)}</span>
+            <div className={s.reviewInfo}>
+              <p className={s.userInfo}>
+                {review.user.nickname}
+                <span>| {timeDiff(review.createdAt)}</span>
               </p>
-              <p>{review.content}</p>
+              <p className={s.content}>{review.content}</p>
             </div>
           </li>
         ))}
