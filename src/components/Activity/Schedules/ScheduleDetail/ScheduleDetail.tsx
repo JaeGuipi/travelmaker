@@ -40,7 +40,7 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
     return null;
   }
 
-  const handleScheduleSelect = (scheduleId: number, scheduleDate?: string, scheduleTime?: string) => {
+  const handleScheduleSelect = (scheduleId: number, scheduleDate: string, scheduleTime: string) => {
     setSelectedScheduleId(scheduleId);
     setSelectedDateTime(`${scheduleDate} ${scheduleTime}`);
   };
