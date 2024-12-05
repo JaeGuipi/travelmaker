@@ -16,6 +16,13 @@ export default async function ReviewList({ activityId }: { activityId: number })
     <section>
       <div>{averageRating}</div>
       <div>{totalCount}</div>
+      <ul>
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <div></div>
+          </li>
+        ))}
+      </ul>
       {/* <div>{reviewData.reviews}</div> */}
     </section>
   );
