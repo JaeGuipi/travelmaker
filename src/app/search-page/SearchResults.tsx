@@ -22,6 +22,13 @@ interface SearchResultsProps {
   };
 }
 
+const dropdownOptions = [
+  { value: "latest", label: "최신순" },
+  { value: "most_reviewed", label: "인기순" },
+  { value: "price_asc", label: "낮은 가격순" },
+  { value: "price_desc", label: "높은 가격순" },
+];
+
 const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => {
   const router = useRouter();
   const currentParams = useSearchParams();
@@ -58,10 +65,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
             <Dropdown>
               <Dropdown.Toggle>{sortOptions[sort]}</Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item onClick={() => handleSortChange("latest")}>최신순</Dropdown.Item>
-                <Dropdown.Item onClick={() => handleSortChange("most_reviewed")}>인기순</Dropdown.Item>
-                <Dropdown.Item onClick={() => handleSortChange("price_asc")}>낮은 가격순</Dropdown.Item>
-                <Dropdown.Item onClick={() => handleSortChange("price_desc")}>높은 가격순</Dropdown.Item>
+                {dropdownOptions.map((options) => (
+                  <Dropdown.Item key={options.value} onClick={() => handleSortChange(options.value)}>
+                    {options.label}
+                  </Dropdown.Item>
+                ))}
               </Dropdown.Menu>
             </Dropdown>
           </div>

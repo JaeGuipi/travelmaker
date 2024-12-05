@@ -24,8 +24,6 @@ interface SearchPageProps {
 export default async function Page({ searchParams }: SearchPageProps) {
   const { keyword, sort = "latest", page = "1", size = "20" } = searchParams;
 
-  // 검색어가 없는 경우 처리
-
   // 쿼리스트링 생성
   const queryParams = new URLSearchParams({
     method: "offset",
