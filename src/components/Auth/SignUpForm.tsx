@@ -4,7 +4,7 @@ import FormButton from "../Button/FormButton";
 import CustomInput from "@/components/Input/CustomInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "@/schema/zodSchema";
-import { signUpUser } from "@/lib/api/user";
+import { signUpUser } from "@/actions/auth.action";
 import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
 import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ const SignUpForm = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<signUpSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: "onChange", //focus-out 되었을 때 유효성 검사 실시
+    mode: "onChange", 
   });
 
   const onSubmit = async (data: FormValues) => {

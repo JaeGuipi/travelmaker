@@ -1,0 +1,20 @@
+.no-list {
+  margin-top: 5.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3.69rem;
+}
+
+.no-list-notice {
+@include text(2xl);
+font-weight: 500;
+color: $gray02;
+}
+
+.dropdown-container {
+  position: absolute;
+  right: 0;
+  top: 0
+}
