@@ -3,16 +3,34 @@
   padding-top: 16px;
   border-top: 1px solid rgba(248, 154, 5, 0.25);
   @include flex-between;
+  @include mobile {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
 
   .title {
     color: $black01;
     font-weight: 700;
     @include text(xl);
+
+    @include mobile {
+      display: none;
+    }
   }
 
   .total-price {
     color: $black01;
     font-weight: 700;
     @include text(xl);
+
+    .count {
+      display: none;
+      @include mobile {
+        display: inline-block;
+        font-weight: 500;
+        @include text(2lg);
+      }
+    }
   }
 }

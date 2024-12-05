@@ -1,4 +1,3 @@
-// TotalPrice.tsx
 import React from "react";
 import s from "./TotalPrice.module.scss";
 
@@ -12,7 +11,10 @@ const TotalPrice: React.FC<TotalPriceProps> = ({ price, count }) => {
   return (
     <div className={s.total}>
       <h4 className={s.title}>총 합계</h4>
-      <p className={s["total-price"]}>₩ {totalPrice.toLocaleString()}</p>
+      <p className={s["total-price"]}>
+        ₩ {totalPrice.toLocaleString()}
+        <span className={s.count}>&nbsp;/ {count}명</span>
+      </p>
     </div>
   );
 };

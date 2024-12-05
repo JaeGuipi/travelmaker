@@ -17,7 +17,7 @@ interface Schedule {
 
 interface CalendarProps {
   schedules: Schedule[];
-  onTimeSelect: (scheduleId: number) => void; // 부모로 scheduleId를 전달하는 콜백
+  onTimeSelect: (scheduleId: number, scheduleDate: string, scheduleTime: string) => void; // 부모로 일정 전달하는 콜백
 }
 
 const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
@@ -28,9 +28,9 @@ const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
     setSelectedDate(info.dateStr);
   };
 
-  const handleTimeSelect = (scheduleId: number) => {
+  const handleTimeSelect = (scheduleId: number, scheduleDate: string, scheduleTime: string) => {
     setActiveScheduleId(scheduleId); // 클릭한 일정 ID를 상태에 저장
-    onTimeSelect(scheduleId); // 부모에게 선택된 일정 ID 전달
+    onTimeSelect(scheduleId, scheduleDate, scheduleTime); // 부모에게 선택된 일정 전달
   };
 
   return (
@@ -70,7 +70,7 @@ const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
                 <li key={schedule.id}>
                   <button
                     type="button"
-                    onClick={() => handleTimeSelect(schedule.id)}
+                    onClick={() => handleTimeSelect(schedule.id, schedule.date, schedule.startTime)}
                     className={activeScheduleId === schedule.id ? s.active : ""}
                   >
                     {schedule.startTime} ~ {schedule.endTime}

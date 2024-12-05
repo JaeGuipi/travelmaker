@@ -23,14 +23,15 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
   const [isClient, setIsClient] = useState(false);
   const [count, setCount] = useState<number>(1);
   const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
+  const [selectedDateTime, setSelectedDateTime] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const { modals, toggleModal } = useModalStore();
   const isTabletOrBelow = useMediaQuery({ query: "(max-width: 1200px)" });
+  const isMobileOrBelow = useMediaQuery({ query: "(max-width: 768px)" });
   const { showSuccess, showError } = useToast();
 
   const calendarModal = "날짜";
 
-  // 반응형에 따른 button 노출 상태때문에 서버와 클라이언트가 일치하지 않아 오류생김
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -39,19 +40,18 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
     return null;
   }
 
-  const handleScheduleSelect = (scheduleId: number) => {
+  const handleScheduleSelect = (scheduleId: number, scheduleDate?: string, scheduleTime?: string) => {
     setSelectedScheduleId(scheduleId);
+    setSelectedDateTime(`${scheduleDate} ${scheduleTime}`);
   };
 
-  const MIN_COUNT = 1; // 최소값
-  const MAX_COUNT = 100; // 예시 최대값
+  const MIN_COUNT = 1;
+  const MAX_COUNT = 100;
 
   const handleIncrease = () => setCount((prev) => Math.min(prev + 1, MAX_COUNT));
   const handleDecrease = () => setCount((prev) => Math.max(prev - 1, MIN_COUNT));
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
-
-    // 입력값이 숫자가 아니거나 범위를 초과하면 무시
     if (isNaN(value)) {
       setCount(MIN_COUNT);
     } else {
@@ -59,14 +59,13 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
     }
   };
 
-  // 예약하기 버튼 핸들러
+  // 예약하기 핸들러
   const handleReservation = async () => {
     if (!selectedScheduleId || count < 1) {
       alert("날짜와 참여 인원수를 확인해주세요.");
       return;
     }
     setIsSubmitting(true);
-
     try {
       const response = await fetch(`/api/activities/${activityId}/reservations`, {
         method: "POST",
@@ -86,7 +85,6 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
           showError(toastMessages.error.requestLogin);
           return;
         }
-
         showError(data.message);
         return;
       }
@@ -102,19 +100,31 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
   return (
     <div className={s.calendar}>
       <div className={s["calendar-inner"]}>
-        <h4 className={s["title"]}>날짜</h4>
-        {isTabletOrBelow ? (
+        {/* 모바일 화면 */}
+        {isMobileOrBelow && (
           <>
-            <button className={s.openButton} onClick={() => toggleModal(calendarModal)}>
-              날짜 선택하기
-            </button>
+            <div className={s.total}>
+              <TotalPrice price={price} count={count} />
+              <button className={s.openButton} onClick={() => toggleModal(calendarModal)}>
+                {selectedDateTime ? `${selectedDateTime}` : "날짜 선택하기"}
+              </button>
+            </div>
+
             {modals[calendarModal] && (
               <FormInfoModal title={calendarModal} showSubmit={false}>
                 <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+                <HeadCountSelector
+                  count={count}
+                  onIncrease={handleIncrease}
+                  onDecrease={handleDecrease}
+                  onChange={handleChange}
+                  minCount={MIN_COUNT}
+                  maxCount={MAX_COUNT}
+                />
                 <FormButton
                   type="submit"
                   size="large"
-                  onClick={handleReservation}
+                  onClick={() => toggleModal(calendarModal)}
                   disabled={!selectedScheduleId || isSubmitting}
                 >
                   예약하기
@@ -122,18 +132,51 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
               </FormInfoModal>
             )}
           </>
-        ) : (
-          <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
         )}
 
-        <HeadCountSelector
-          count={count}
-          onIncrease={handleIncrease}
-          onDecrease={handleDecrease}
-          onChange={handleChange}
-          minCount={MIN_COUNT}
-          maxCount={MAX_COUNT}
-        />
+        {/* 테블릿 이하 화면, 모바일 화면 제외 */}
+        {isTabletOrBelow && !isMobileOrBelow && (
+          <>
+            <button className={s.openButton} onClick={() => toggleModal(calendarModal)}>
+              {selectedDateTime ? `${selectedDateTime}` : "날짜 선택하기"}
+            </button>
+            {modals[calendarModal] && (
+              <FormInfoModal title={calendarModal} showSubmit={false}>
+                <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+                <FormButton
+                  type="submit"
+                  size="large"
+                  onClick={() => toggleModal(calendarModal)} // 모달 닫기
+                  disabled={!selectedScheduleId || isSubmitting}
+                >
+                  예약하기
+                </FormButton>
+              </FormInfoModal>
+            )}
+          </>
+        )}
+
+        {/* 데스크탑 화면 */}
+        {!isTabletOrBelow && (
+          <>
+            <h4 className={s["title"]}>날짜</h4>
+            <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+          </>
+        )}
+
+        {/* 데스크탑과 테블릿 화면의 인원 수 조정 */}
+        {!isMobileOrBelow && (
+          <HeadCountSelector
+            count={count}
+            onIncrease={handleIncrease}
+            onDecrease={handleDecrease}
+            onChange={handleChange}
+            minCount={MIN_COUNT}
+            maxCount={MAX_COUNT}
+          />
+        )}
+
+        {/* 예약 버튼 */}
         <FormButton
           type="submit"
           size="large"
@@ -142,7 +185,8 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
         >
           예약하기
         </FormButton>
-        <TotalPrice price={price} count={count} />
+
+        {!isMobileOrBelow && <TotalPrice price={price} count={count} />}
       </div>
     </div>
   );
