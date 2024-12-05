@@ -8,10 +8,9 @@ interface ModalProps {
   title: string;
   showSubmit?: boolean;
   children: React.ReactNode;
-  buttonTxt: string;
 }
 
-const FormInfoModal = ({ title, showSubmit, children, buttonTxt }: ModalProps) => {
+const FormInfoModal = ({ title, showSubmit, children }: ModalProps) => {
   const { toggleModal } = useModalStore();
 
   return (
@@ -25,7 +24,9 @@ const FormInfoModal = ({ title, showSubmit, children, buttonTxt }: ModalProps) =
       {children}
       {showSubmit && (
         <div className={s["button-wrap"]}>
-          <FormButton size="large">{buttonTxt}</FormButton>
+          <FormButton size="large" disabled={true}>
+            작성하기
+          </FormButton>
         </div>
       )}
     </ModalContainer>

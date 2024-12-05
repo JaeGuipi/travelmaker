@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Schedule } from "@/types/types";
 import Calendar from "./components/Calendar";
 import FormButton from "@/components/Button/FormButton";
@@ -18,13 +18,23 @@ type ScheduleDetailProps = {
 };
 
 const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) => {
+  const [isClient, setIsClient] = useState(false);
   const [count, setCount] = useState<number>(1);
   const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-
   const { modals, toggleModal } = useModalStore();
-  const calendarModal = "날짜";
   const isTabletOrBelow = useMediaQuery({ query: "(max-width: 1200px)" });
+
+  const calendarModal = "날짜";
+
+  // 반응형에 따른 button 노출 상태때문에 서버와 클라이언트가 일치하지 않아 오류생김
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   const handleScheduleSelect = (scheduleId: number) => {
     setSelectedScheduleId(scheduleId);
@@ -99,8 +109,16 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
               날짜 선택하기
             </button>
             {modals[calendarModal] && (
-              <FormInfoModal title={calendarModal} showSubmit={true} buttonTxt={"확인"}>
+              <FormInfoModal title={calendarModal} showSubmit={false}>
                 <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+                <FormButton
+                  type="submit"
+                  size="large"
+                  onClick={handleReservation}
+                  disabled={!selectedScheduleId || isSubmitting}
+                >
+                  예약하기
+                </FormButton>
               </FormInfoModal>
             )}
           </>
