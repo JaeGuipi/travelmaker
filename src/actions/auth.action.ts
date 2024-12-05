@@ -3,6 +3,7 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { PostAuth } from "@/types/auth/authTypes";
+import { SignUp } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
 
 // 쿠키 저장 함수
@@ -113,4 +114,22 @@ export const uploadProfileImage = async (formData: FormData) => {
   revalidateTag("users");
 
   return data.profileImageUrl;
+};
+
+// 회원가입
+export const signUpUser = async (userData: SignUp) => {
+  const response = await fetch(`${API_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
+
+  return response.json();
 };

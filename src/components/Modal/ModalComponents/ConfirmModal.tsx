@@ -9,9 +9,11 @@ const cx = classNames.bind(s);
 
 interface ModalProps {
   text: string;
+  onCancel?: (id: number) => void; //콜백 함수 추가
+  id: number;
 }
 
-const ConfirmModal = ({ text }: ModalProps) => {
+const ConfirmModal = ({ text, onCancel,id }: ModalProps) => {
   const { toggleModal } = useModalStore();
 
   return (
@@ -25,7 +27,15 @@ const ConfirmModal = ({ text }: ModalProps) => {
           <FormButton size="small" variant="emptyButton" onClick={() => toggleModal(text)}>
             아니오
           </FormButton>
-          <FormButton size="small">취소하기</FormButton>
+          <FormButton
+            size="small"
+            onClick={() => {
+              toggleModal(text);
+              if (onCancel) onCancel(id);
+            }}
+          >
+            취소하기
+          </FormButton>
         </div>
       </ModalContainer>
     </>
