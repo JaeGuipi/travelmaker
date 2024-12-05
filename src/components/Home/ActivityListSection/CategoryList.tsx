@@ -13,7 +13,7 @@ interface CategoryListProps {
 
 const categoryGifMap: Record<string, string> = {
   전체: "/icons/category/cate_all.gif",
-  문화: "/icons/category/cate_culture.gif",
+  "문화 · 예술": "/icons/category/cate_culture.gif",
   식음료: "/icons/category/cate_food.gif",
   스포츠: "/icons/category/cate_sports.gif",
   투어: "/icons/category/cate_tour.gif",

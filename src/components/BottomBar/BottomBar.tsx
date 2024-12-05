@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 const BottomBar = () => {
   return (
     <div className={cx("bottom-bar")}>
-      <Link href="/" className={cx("bottom-bar-item")}>
+      <Link href="/search-page" className={cx("bottom-bar-item")}>
         <IoSearch size={20} />
         <span>검색</span>
       </Link>

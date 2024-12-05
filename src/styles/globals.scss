@@ -18,3 +18,7 @@ body {
     min-width: 375px;
   }
 }
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}

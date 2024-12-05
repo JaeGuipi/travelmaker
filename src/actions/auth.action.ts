@@ -3,10 +3,8 @@
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { PostAuth } from "@/types/auth/authTypes";
+import { SignUp } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
-
-const cookieStore = cookies();
-const accessToken = cookieStore.get("accessToken")?.value;
 
 // 쿠키 저장 함수
 const setCookie = (name: string, value: string) => {
@@ -52,6 +50,7 @@ export const login = async (loginData: PostAuth) => {
 // 로그아웃
 export const logout = async () => {
   try {
+    const cookieStore = cookies();
     cookieStore.delete("accessToken");
     cookieStore.delete("refreshToken");
   } catch (error) {
@@ -63,8 +62,15 @@ export const logout = async () => {
 };
 
 // 내 정보 수정
-export const updateUsers = async (data: { profileImageUrl?: string; nickname?: string; newPassword?: string }) => {
+export const updateUsers = async (data: {
+  nickname?: string;
+  profileImageUrl?: string | null;
+  newPassword?: string;
+}) => {
   try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+
     const response = await fetch(`${API_URL}/users/me`, {
       method: "PATCH",
       body: JSON.stringify(data),
@@ -87,6 +93,9 @@ export const updateUsers = async (data: { profileImageUrl?: string; nickname?: s
 
 // 프로필 이미지 URL 생성
 export const uploadProfileImage = async (formData: FormData) => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
   const response = await fetch(`${API_URL}/users/me/image`, {
     method: "POST",
     headers: {
@@ -102,37 +111,25 @@ export const uploadProfileImage = async (formData: FormData) => {
   const data = await response.json();
   console.log("Upload successful:", data);
 
+  revalidateTag("users");
+
   return data.profileImageUrl;
 };
 
-// export const authTokens = async () => {
-//   const refreshToken = cookies().get("refreshToken")?.value;
+// 회원가입
+export const signUpUser = async (userData: SignUp) => {
+  const response = await fetch(`${API_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
 
-//   if (!refreshToken) {
-//     console.error("refreshToken이 없습니다.");
-//     throw new Error("인증되지 않은 사용자");
-//   }
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
 
-//   try {
-//     const response = await fetch(`${API_URL}/auth/tokens`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${refreshToken}`,
-//       },
-//     });
-
-//     if (!response.ok) {
-//       console.error("refreshToken 재발급 에러 발생");
-//       throw new Error("refreshToken 재발급 실패");
-//     }
-
-//     const { accessToken } = await response.json();
-//     setCookie("accessToken", accessToken);
-
-//     return { success: true, message: "refreshToken 요청 성공" };
-//   } catch (error) {
-//     console.error("refreshToken 에러 발생: ", error);
-//     throw new Error("refreshToken 요청 실패");
-//   }
-// };
+  return response.json();
+};

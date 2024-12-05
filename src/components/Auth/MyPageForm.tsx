@@ -21,7 +21,7 @@ import UserTabList from "@/components/UserTab/UserTabList";
 const MyPageForm = ({ users }: { users: GetMe }) => {
   const { showSuccess, showError } = useToast();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState(users.profileImageUrl || "/images/profile.png");
+  const [preview, setPreview] = useState(users.profileImageUrl);
 
   const {
     register,
@@ -32,7 +32,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
     mode: "onChange",
     defaultValues: {
       nickname: users.nickname,
-      profileImageUrl: users.profileImageUrl,
+      profileImageUrl: users.profileImageUrl || null,
       newPassword: "",
     },
   });
@@ -61,7 +61,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
 
       const updatedData = {
         nickname: data.nickname,
-        profileImageUrl,
+        profileImageUrl: profileImageUrl || null,
         newPassword: data.newPassword || undefined,
       };
 

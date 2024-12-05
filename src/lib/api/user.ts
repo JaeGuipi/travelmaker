@@ -4,23 +4,23 @@ import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/types/us
 import API_URL from "@/constants/config";
 import { customFetch } from "@/utils/customFetch";
 
-// 회원가입
-export const signUpUser = async (userData: SignUp) => {
-  const response = await fetch(`${API_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
+// // 회원가입
+// export const signUpUser = async (userData: SignUp) => {
+//   const response = await fetch(`${API_URL}/users`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userData),
+//   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message);
-  }
+//   if (!response.ok) {
+//     const errorData = await response.json();
+//     throw new Error(errorData.message);
+//   }
 
-  return response.json();
-};
+//   return response.json();
+// };
 
 // 내 정보 조회
 export const getMyInfo = async (): Promise<GetMe> => {
