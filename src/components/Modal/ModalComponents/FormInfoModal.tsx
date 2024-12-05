@@ -13,9 +13,10 @@ const cx = classNames.bind(s);
 interface ModalProps {
   title: string;
   showSubmit?: boolean;
+  children: React.ReactNode;
 }
 
-const FormInfoModal = ({ title, showSubmit }: ModalProps) => {
+const FormInfoModal = ({ title, showSubmit, children }: ModalProps) => {
   const { toggleModal } = useModalStore();
   const [rating, setRating] = useState(3);
 

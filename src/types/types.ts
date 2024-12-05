@@ -1,7 +1,7 @@
 //체험 등록
 export type Schedule = {
-  id?: number;
-  date?: string;
+  id: number;
+  date: string;
   startTime: string;
   endTime: string;
 };
