@@ -4,6 +4,8 @@ import s from "./ActivityDetail.module.scss";
 import Image from "next/image";
 import Schedules from "../Schedules/Schedules";
 import Dropdown, { DropdownItem, DropdownMenu, DropdownToggle } from "@/components/Dropdown/Dropdown";
+import MapInfo from "./MapInfo";
+import { FaMapMarkerAlt } from "react-icons/fa";
 
 async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
   const response = await fetch(`${API_URL}/activities/${activityId}`, { cache: "no-store" });
@@ -37,7 +39,7 @@ export default async function ActivityDetail({ activityId }: { activityId: numbe
           </p>
           <p className={s.address}>
             <span className={s["mark-icon"]}>
-              <Image src="/icons/icon_mark.svg" fill alt="평점 아이콘" />
+              <FaMapMarkerAlt size={18} />
             </span>
             {res.address}
           </p>
@@ -61,7 +63,15 @@ export default async function ActivityDetail({ activityId }: { activityId: numbe
             <h3 className={s["info-title"]}>체험 설명</h3>
             <p className={s.description}>{res.description}</p>
           </div>
-          <div>지도</div>
+          <div>
+            <MapInfo address={res.address} />
+            <p className={s.mapInfo}>
+              <span className={s["mark-icon"]}>
+                <FaMapMarkerAlt size={18} />
+              </span>
+              <span>{res.address}</span>
+            </p>
+          </div>
           <div>
             <h3 className={s["info-title"]}>후기</h3>
             <div></div>

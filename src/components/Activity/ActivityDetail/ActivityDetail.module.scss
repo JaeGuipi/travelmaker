@@ -1,3 +1,8 @@
+.mark-icon {
+  margin-right: 2px;
+  color: $yellow02;
+}
+
 /* 타이틀 영역 */
 .title-wrap {
   .cate {
@@ -47,11 +52,6 @@
       justify-content: flex-start;
       align-items: center;
       color: $yellow02;
-      .mark-icon {
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-      }
     }
   }
 }
@@ -124,6 +124,11 @@
       .description {
         padding-top: 16px;
         @include text(lg);
+      }
+
+      .mapInfo {
+        padding-top: 8px;
+        @include text(md);
       }
     }
 
