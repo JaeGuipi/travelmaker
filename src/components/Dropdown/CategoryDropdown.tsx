@@ -11,31 +11,10 @@ interface CategoryDropdownProps {
   onChange: (value: string) => void;
 }
 
-// const CategoryDropdown = forwardRef<HTMLSelectElement, CategoryDropdownProps>(({ id, register }, ref) => {
-//   const options = ["문화·예술", "식음료", "스포츠", "투어", "관광", "웰빙"];
-
-//   return (
-//     <div className={s.categoryDropdown}>
-//       <select id={id} {...register} ref={ref}>
-//         <option value="">카테고리</option>
-//         {options.map((option) => (
-//           <option key={option} value={option}>
-//             {option}
-//           </option>
-//         ))}
-//       </select>
-//     </div>
-//   );
-// });
-
-// CategoryDropdown.displayName = "CategoryDropdown";
-
-// export default CategoryDropdown;
-
 const CategoryDropdown = forwardRef<HTMLDivElement, CategoryDropdownProps>(({ value, onChange }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-  const options = ["문화·예술", "식음료", "스포츠", "투어", "관광", "웰빙"];
+  const options = ["문화 · 예술", "식음료", "스포츠", "투어", "관광", "웰빙"];
 
   const handleSelect = (value: string) => {
     onChange(value);

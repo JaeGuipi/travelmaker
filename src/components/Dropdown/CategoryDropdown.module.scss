@@ -12,6 +12,9 @@
     transition: all 0.3s ease-in-out;
     outline: none;
     cursor: pointer;
+    @include mobile {
+      padding: 1rem 1.5rem;
+    }
 
     &.focused {
       border-color: $yellow01;
@@ -35,6 +38,9 @@
     border-radius: 12px;
     overflow: hidden;
     z-index: 1;
+    @include mobile {
+      top: 48.33px;
+    }
 
     li {
       @include text(md);
