@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { GetMe } from "@/types/users/usersTypes";
 import { logout } from "@/lib/api/auth";
@@ -11,10 +11,25 @@ import s from "@/components/Layout/Header/Header.module.scss";
 const User = ({ users }: { users: GetMe | null }) => {
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -22,7 +37,7 @@ const User = ({ users }: { users: GetMe | null }) => {
   };
 
   return (
-    <div className={s.userWrap}>
+    <div className={s.userWrap} ref={dropdownRef}>
       {users && (
         <div className={s.loginOn}>
           <button className={s.alarm}>

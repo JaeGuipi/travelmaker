@@ -1,26 +1,36 @@
 import { ChangeEventHandler } from "react";
+import { GetMe } from "@/types/users/usersTypes";
 import s from "./FileInput.module.scss";
 import Image from "next/image";
-import { GetMe } from "@/types/users/usersTypes";
 
 interface FileInputProps {
-  preview?: string;
   users: GetMe;
+  preview?: string;
   handleImageChange?: ChangeEventHandler;
   readOnly?: boolean;
 }
 
 const FileInput = ({ users, preview, handleImageChange, readOnly }: FileInputProps) => {
+  const profileImage = preview || users.profileImageUrl || "/images/profile.png";
+
   return (
     <div className={s.profileContainer}>
       <div className={s.profileImgWrap}>
         <div className={s.profileImgBox}>
-          <Image src={preview ? preview : "/images/profile.png"} fill alt={users.nickname} />
+          <Image
+            src={profileImage}
+            fill
+            alt={users.nickname || "프로필 이미지"}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         </div>
 
-        <label htmlFor="profile-image-input" className={s.profileButton}>
-          <Image src={"/icons/btn_pen.svg"} fill alt="프로필 이미지 수정" />
-        </label>
+        {!readOnly && (
+          <label htmlFor="profile-image-input" className={s.profileButton}>
+            <Image src="/icons/btn_pen.svg" fill alt="프로필 이미지 수정" />
+          </label>
+        )}
+
         <input
           id="profile-image-input"
           type="file"
