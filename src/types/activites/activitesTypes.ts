@@ -14,7 +14,7 @@ export type Activity = {
 };
 
 export type Schedule = {
-  id: number;
+  id?: number;
   date: string;
   startTime: string;
   endTime: string;

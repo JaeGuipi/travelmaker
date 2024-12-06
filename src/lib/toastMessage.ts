@@ -13,6 +13,9 @@ const toastMessages = {
     requestLogin: "로그인 후 이용해주세요.",
     activity: "체험 등록에 실패하였습니다.",
   },
+  notify: {
+    imageUpload: "이미지는 최대 4개까지 등록 가능합니다.",
+  },
 };
 
 export default toastMessages;
