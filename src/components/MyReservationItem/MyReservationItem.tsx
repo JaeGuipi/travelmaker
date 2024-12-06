@@ -60,7 +60,7 @@ const MyReservationItem = ({
         )}
       </div>
       <ConfirmModal text="canceled" id={reservation.id} onCancel={(id) => handleDeleteItem(id)} />
-      <FormInfoModal title="후기 작성" />
+      <FormInfoModal title="후기 작성" reservation={reservation}>후기</FormInfoModal>
     </ItemLayout>
   );
 };
