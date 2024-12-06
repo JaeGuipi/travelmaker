@@ -1,86 +1,32 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import FormButton from "../Button/FormButton";
-import CustomInput from "../Input/CustomInput";
+import { useRouter } from "next/navigation";
 import s from "./ActivityForm.module.scss";
-import classNames from "classnames/bind";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { postActivity, uploadActivityImage } from "@/actions/activity.action";
-import Image from "next/image";
+import { PostActivity } from "@/types/activites/activitesTypes";
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
-import CategoryDropdown from "../Dropdown/CategoryDropdown";
-
-const cx = classNames.bind(s);
-
-export const ScheduleInput = ({ control, register, errors }) => {
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "schedules", // schedules 필드 이름
-  });
-
-  return (
-    <div>
-      <label>예약 가능한 시간대</label>
-      {fields.map((field, index) => (
-        <div key={field.id} style={{ display: "flex", marginBottom: "10px" }}>
-          {/* 날짜 */}
-          <CustomInput
-            type="date"
-            name="date"
-            {...register(`schedules.${index}.date`, {
-              required: "날짜를 선택해주세요.",
-            })}
-          />
-          {errors.schedules?.[index]?.date && <p>{errors.schedules[index].date.message}</p>}
-
-          {/* 시작 시간 */}
-          <CustomInput
-            type="time"
-            name="time"
-            {...register(`schedules.${index}.startTime`, {
-              required: "시작 시간을 선택해주세요.",
-            })}
-          />
-          {errors.schedules?.[index]?.startTime && <p>{errors.schedules[index].startTime.message}</p>}
-
-          {/* 종료 시간 */}
-          <CustomInput
-            type="time"
-            name="time"
-            {...register(`schedules.${index}.endTime`, {
-              required: "종료 시간을 선택해주세요.",
-            })}
-          />
-          {errors.schedules?.[index]?.endTime && <p>{errors.schedules[index].endTime.message}</p>}
-
-          {/* 삭제 버튼 */}
-          <button type="button" onClick={() => remove(index)}>
-            삭제
-          </button>
-        </div>
-      ))}
-
-      {/* 추가 버튼 */}
-      <button type="button" onClick={() => append({ date: "", startTime: "", endTime: "" })}>
-        + 추가
-      </button>
-    </div>
-  );
-};
+import FormButton from "@/components/Button/FormButton";
+import CustomInput from "@/components/Input/CustomInput";
+import ScheduleInput from "@/components/Input/ScheduleInput";
+import BannerInput from "@/components/Input/BannerInput";
+import CategoryDropdown from "@/components/Dropdown/CategoryDropdown";
 
 const ActivityForm = () => {
-  const { showSuccess, showError } = useToast();
-  const [selectedFile, setSelectedFile] = useState<File>();
-  const [preview, setPreview] = useState("");
-
+  const { showSuccess, showError, notify } = useToast();
+  const router = useRouter();
+  const [selectedBannerFile, setSelectedBannerFile] = useState<File | null>(null);
+  const [selectedSubFiles, setSelectedSubFiles] = useState<File[]>([]);
+  const [bannerPreview, setBannerPreview] = useState<string>("");
+  const [subImagePreviews, setSubImagePreviews] = useState<string[]>([]);
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<PostActivity>({
     defaultValues: {
       title: "",
       category: "",
@@ -93,41 +39,72 @@ const ActivityForm = () => {
     },
   });
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleBannerImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0) return;
 
     const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
-
-    setSelectedFile(file);
-    setPreview(URL.createObjectURL(file));
+    setSelectedBannerFile(file);
+    setBannerPreview(URL.createObjectURL(file));
   };
 
-  const onSubmit = async (data) => {
+  const handleSubImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+
+    const files = Array.from(e.target.files);
+    if (selectedSubFiles.length + files.length > 4) {
+      notify(toastMessages.notify.imageUpload);
+      return;
+    }
+
+    const newFiles = [...selectedSubFiles, ...files];
+    const newPreviews = [...subImagePreviews, ...files.map((file) => URL.createObjectURL(file))];
+
+    setSelectedSubFiles(newFiles);
+    setSubImagePreviews(newPreviews);
+  };
+
+  const handleBannerImageRemove = () => {
+    setSelectedBannerFile(null);
+    setBannerPreview("");
+  };
+
+  const handleSubImageRemove = (index: number) => {
+    setSelectedSubFiles((prev) => prev.filter((_, i) => i !== index));
+    setSubImagePreviews((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const onSubmit = async (data: PostActivity) => {
     try {
-      let activityImageUrl = preview;
+      let activityImageUrl = bannerPreview;
+      const subImageUrls: string[] = [];
 
-      if (selectedFile) {
+      if (selectedBannerFile) {
         const formData = new FormData();
-        formData.append("image", selectedFile);
-
+        formData.append("image", selectedBannerFile);
         activityImageUrl = await uploadActivityImage(formData);
+      }
 
-        console.log("Final image URL:", activityImageUrl);
+      if (selectedSubFiles.length > 0) {
+        for (const file of selectedSubFiles) {
+          const formData = new FormData();
+          formData.append("image", file);
+          const subImageUrl = await uploadActivityImage(formData);
+          subImageUrls.push(subImageUrl);
+        }
       }
 
       const updatedData = {
         ...data,
         bannerImageUrl: activityImageUrl,
-        subImageUrls: [activityImageUrl],
+        subImageUrls: subImageUrls,
       };
 
       console.log("폼 데이터:", updatedData);
 
       console.log("POST 요청 보내기 준비됨:", updatedData);
       await postActivity(updatedData);
-      showSuccess(toastMessages.error.activity);
+      showSuccess(toastMessages.success.activity);
+      router.push("/my-activities");
       console.log("POST 요청 전송 완료");
     } catch (error) {
       console.error(error);
@@ -166,9 +143,22 @@ const ActivityForm = () => {
           />
           <CustomInput label="주소" id="address" type="text" placeholder="주소" {...register("address")} />
           <ScheduleInput control={control} register={register} errors={errors} />
-
-          <Image src={preview} width={100} height={100} alt="체험 배너 이미지" />
-          <input id="profile-image-input" type="file" accept="image/*" onChange={handleImageChange} />
+          <BannerInput
+            title="배너 이미지"
+            inputId="bannerImageUrl"
+            imagePreviews={bannerPreview}
+            handleImageChange={handleBannerImageChange}
+            handleImageRemove={handleBannerImageRemove}
+            isSingle={true}
+          />
+          <BannerInput
+            title="소개 이미지"
+            inputId="subImageUrls"
+            imagePreviews={subImagePreviews}
+            handleImageChange={handleSubImageChange}
+            handleImageRemove={handleSubImageRemove}
+            maxImages={4}
+          />
         </div>
       </form>
     </section>
