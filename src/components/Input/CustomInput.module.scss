@@ -19,6 +19,9 @@
   border-radius: 12px;
   padding: 1.6rem 2rem;
   transition: all 0.3s ease-in-out;
+  @include mobile {
+    padding: 1rem 1.5rem;
+  }
 
   &.border-yellow {
     border-color: $yellow01;
