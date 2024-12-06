@@ -13,4 +13,4 @@ const ItemLayout = ({ children, src, alt }: { children: ReactNode; src: string; 
   );
 };
 
-export default ItemLayout
+export default ItemLayout;
