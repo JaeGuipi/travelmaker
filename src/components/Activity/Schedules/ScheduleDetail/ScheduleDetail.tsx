@@ -111,7 +111,7 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
             </div>
 
             {modals[calendarModal] && (
-              <FormInfoModal title={calendarModal} showSubmit={false}>
+              <FormInfoModal modalKey={calendarModal} title={calendarModal} showSubmit={false}>
                 <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
                 <HeadCountSelector
                   count={count}
@@ -141,7 +141,7 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
               {selectedDateTime ? `${selectedDateTime}` : "날짜 선택하기"}
             </button>
             {modals[calendarModal] && (
-              <FormInfoModal title={calendarModal} showSubmit={false}>
+              <FormInfoModal modalKey={calendarModal} title={calendarModal} showSubmit={false}>
                 <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
                 <FormButton
                   type="submit"
