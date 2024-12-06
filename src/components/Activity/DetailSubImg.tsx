@@ -1,4 +1,5 @@
 import { ActivityDetailResponse } from "@/types/activites/activitesTypes";
+import { FaStar } from "react-icons/fa";
 import Image from "next/image";
 import Dropdown, { DropdownItem, DropdownMenu, DropdownToggle } from "../Dropdown/Dropdown";
 import s from "./DetailSubImg.module.scss";
@@ -26,7 +27,7 @@ const DetailSubImg = ({ activity }: DetailSubImgProps) => {
         <div className={s["rating-address"]}>
           <p className={s.rating}>
             <span className={s["rating-icon"]}>
-              <Image src="/icons/rating_star.svg" fill alt="평점 아이콘" />
+              <FaStar />
             </span>
             {activity.rating} ({activity.reviewCount})
           </p>
