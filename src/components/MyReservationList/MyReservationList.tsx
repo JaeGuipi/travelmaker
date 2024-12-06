@@ -6,6 +6,7 @@ import s from "./MyReservationList.module.scss";
 import MyReservationItem from "../MyReservationItem/MyReservationItem";
 import Image from "next/image";
 import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "../Dropdown/Dropdown";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const cx = classNames.bind(s);
 
@@ -126,11 +127,11 @@ const MyReservationList = ({
           </DropdownMenu>
         </Dropdown>
       </div>
-      <div className={cx("list-container")}>
+      <div>
         {reservationList.map((reservation) => (
           <MyReservationItem key={reservation?.id} reservation={reservation} onDelete={handleDeleteItem} />
         ))}
-        {currentCursorId !== null && <div ref={observerRef}>{isLoading && <p>Loading...</p>}</div>}
+        {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
       </div>
     </>
   );

@@ -8,29 +8,30 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(s);
 
 interface ModalProps {
+  modalKey: string;
   text: string;
   onCancel?: (id: number) => void; //콜백 함수 추가
   id: number;
 }
 
-const ConfirmModal = ({ text, onCancel,id }: ModalProps) => {
+const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
   const { toggleModal } = useModalStore();
 
   return (
     <>
-      <ModalContainer modalKey={text} className={s["confirm-modal"]}>
+      <ModalContainer modalKey={modalKey} className={s["confirm-modal"]}>
         <span className={s.icon}>
           <Image src="/icons/btn_check.svg" fill alt={text} />
         </span>
         <p className={s.text}>{text}</p>
         <div className={cx("button-wrap", "flex")}>
-          <FormButton size="small" variant="emptyButton" onClick={() => toggleModal(text)}>
+          <FormButton size="small" variant="emptyButton" onClick={() => toggleModal(modalKey)}>
             아니오
           </FormButton>
           <FormButton
             size="small"
             onClick={() => {
-              toggleModal(text);
+              toggleModal(modalKey);
               if (onCancel) onCancel(id);
             }}
           >
