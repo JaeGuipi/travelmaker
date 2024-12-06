@@ -24,7 +24,7 @@ const MyReservationItem = ({
   };
 
   return (
-    <ItemLayout src={"/images/profile.png"} alt={"체험 이미지"}>
+    <ItemLayout src={reservation.activity.bannerImageUrl} alt={"체험 이미지"}>
       <div className={s.info}>
         <p
           className={cx("status", {
@@ -43,7 +43,7 @@ const MyReservationItem = ({
           <p className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</p>
           <p className={s.schedule}>{`${reservation.headCount}명`}</p>
         </div>
-        <em className={s.price}>{`₩${reservation.totalPrice}`}</em>
+        <em className={s.price}>{`₩${((reservation.totalPrice).toLocaleString())}`}</em>
         {reservation.status === "completed" && (
           <div className={s.button}>
             <FormButton type="button" onClick={() => toggleModal("후기 작성")}>
@@ -60,6 +60,7 @@ const MyReservationItem = ({
         )}
       </div>
       <ConfirmModal text="canceled" id={reservation.id} onCancel={(id) => handleDeleteItem(id)} />
+      <FormInfoModal title="후기 작성">후기</FormInfoModal>
       <FormInfoModal title="후기 작성" reservation={reservation}>후기</FormInfoModal>
     </ItemLayout>
   );
