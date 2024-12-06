@@ -6,7 +6,7 @@ import API_URL from "@/constants/config";
 import { PostActivity } from "@/types/activites/activitesTypes";
 
 // 체험 등록
-export const postActivity = async (activityData) => {
+export const postActivity = async (activityData: PostActivity) => {
   try {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
@@ -23,7 +23,7 @@ export const postActivity = async (activityData) => {
     });
 
     if (!response.ok) {
-      throw new Error(`체험 등록 실패`);
+      throw new Error("체험 등록 실패");
     }
 
     const data = await response.json();
@@ -31,10 +31,9 @@ export const postActivity = async (activityData) => {
     return data;
   } catch (error) {
     console.log("체험 등록 중 오류 발생: ", error);
-    //throw new Error("체험 등록 실패");
   }
 
-  // revalidateTag("activity");
+  revalidateTag("activity");
 };
 
 // 체험 이미지 URL 생성
