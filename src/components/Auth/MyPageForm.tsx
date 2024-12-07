@@ -92,7 +92,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
           <CustomInput
             label="닉네임"
             id="nickname"
-            type="nickname"
+            type="text"
             placeholder="닉네임을 입력해 주세요"
             errors={errors.nickname?.message}
             {...register("nickname")}

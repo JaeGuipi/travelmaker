@@ -1,7 +1,11 @@
-const Page = () => {
-  return (
-    <div>액티비티</div>
-  )
-}
+import Link from "next/link";
 
-export default Page
+const MyActivities = async () => {
+  return (
+    <>
+      <Link href={"/my-activities/register-activity"}>등록하기</Link>
+    </>
+  );
+};
+
+export default MyActivities;
