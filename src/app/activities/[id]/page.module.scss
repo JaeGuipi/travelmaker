@@ -6,4 +6,20 @@
   @include mobile {
     padding: 16px 0;
   }
+
+  .detailInfo {
+    gap: 24px;
+    padding-top: 85px;
+    @include flex-align-start;
+
+    .infoWrap {
+      flex: 0 0 800px;
+      @include tablet {
+        flex: 0 0 453px;
+      }
+      @include mobile {
+        flex: 1;
+      }
+    }
+  }
 }

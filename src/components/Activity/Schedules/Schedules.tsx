@@ -8,7 +8,7 @@ type SchedulesProps = {
   price: number;
 };
 
-export default async function Schedules({ activityId, schedules, price }: SchedulesProps) {
+export default function Schedules({ activityId, schedules, price }: SchedulesProps) {
   return (
     <>
       <div className={s.schedules}>

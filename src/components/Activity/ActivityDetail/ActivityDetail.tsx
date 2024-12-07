@@ -1,5 +1,4 @@
 import { ActivityDetailResponse } from "@/types/activites/activitesTypes";
-import API_URL from "@/constants/config";
 import s from "./ActivityDetail.module.scss";
 import Image from "next/image";
 import Schedules from "../Schedules/Schedules";
@@ -7,15 +6,11 @@ import Dropdown, { DropdownItem, DropdownMenu, DropdownToggle } from "@/componen
 import MapInfo from "./MapInfo";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
-  const response = await fetch(`${API_URL}/activities/${activityId}`, { cache: "no-store" });
-  return response.json();
+interface ActivityDetailProps {
+  activity: ActivityDetailResponse;
 }
 
-export default async function ActivityDetail({ activityId }: { activityId: number }) {
-  const res = await getActivityDetail(activityId);
-  const { subImages } = res;
-
+export default async function ActivityDetail({ activity }: ActivityDetailProps) {
   return (
     <section>
       <div className={s["title-wrap"]}>
@@ -77,7 +72,6 @@ export default async function ActivityDetail({ activityId }: { activityId: numbe
             <div></div>
           </div>
         </div>
-        <Schedules activityId={activityId} schedules={res.schedules} price={res.price} />
       </div>
     </section>
   );
