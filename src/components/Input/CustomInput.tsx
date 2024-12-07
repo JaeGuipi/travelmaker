@@ -4,7 +4,7 @@ import { UseFormRegisterReturn } from "react-hook-form";
 import styles from "./CustomInput.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, ChangeEventHandler } from "react";
 
 const cx = classNames.bind(styles);
 
@@ -14,16 +14,32 @@ interface CustomInputProps {
   type: string;
   value?: string;
   placeholder?: string;
+  isTextArea?: boolean;
   errors?: string;
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
   readOnly?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: ChangeEventHandler;
 }
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
-  ({ id, label, type, value, register, errors, iconType, borderColor = "default", readOnly = false, ...rest }, ref) => {
+  (
+    {
+      id,
+      label,
+      type,
+      value,
+      register,
+      errors,
+      isTextArea,
+      iconType,
+      borderColor = "default",
+      readOnly = false,
+      ...rest
+    },
+    ref,
+  ) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const handleClickVisible = () => {
@@ -38,20 +54,36 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
           </label>
         )}
         <div className={cx("input-container")}>
-          <input
-            className={cx("input", {
-              "input-error": errors,
-              "border-yellow": borderColor === "yellow",
-              "input-readOnly": readOnly,
-            })}
-            type={iconType === "password" && isVisible ? "text" : type}
-            value={value}
-            id={id}
-            ref={ref}
-            readOnly={readOnly}
-            {...register}
-            {...rest}
-          />
+          {isTextArea ? (
+            <textarea
+              className={cx("textarea", {
+                "input-error": errors,
+                "border-yellow": borderColor === "yellow",
+                "input-readOnly": readOnly,
+              })}
+              value={value}
+              id={id}
+              ref={ref as React.Ref<HTMLTextAreaElement>}
+              readOnly={readOnly}
+              {...register}
+              {...rest}
+            />
+          ) : (
+            <input
+              className={cx("input", {
+                "input-error": errors,
+                "border-yellow": borderColor === "yellow",
+                "input-readOnly": readOnly,
+              })}
+              type={iconType === "password" && isVisible ? "text" : type}
+              value={value}
+              id={id}
+              ref={ref}
+              readOnly={readOnly}
+              {...register}
+              {...rest}
+            />
+          )}
           {errors && (
             <span className={cx("error-text")} role="alert">
               {errors}
@@ -82,6 +114,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
     );
   },
 );
+
 CustomInput.displayName = "CustomInput";
 
 export default CustomInput;

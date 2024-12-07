@@ -1,0 +1,22 @@
+.activityForm {
+  flex: 1;
+
+  .activityFormHeader {
+    @include flex-between;
+    margin-bottom: 3rem;
+
+    h2 {
+      @include text(3xl);
+      font-weight: 700;
+      @include mobile {
+        @include text(2xl);
+      }
+    }
+  }
+
+  .activityFormBody {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
