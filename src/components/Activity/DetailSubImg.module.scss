@@ -1,0 +1,99 @@
+/* 타이틀 영역 */
+.title-wrap {
+  .cate {
+    color: $yellow02;
+    @include text(md);
+  }
+
+  > div {
+    @include flex-between;
+
+    h2 {
+      color: $black01;
+      font-weight: 700;
+      @include text(3xl);
+    }
+  }
+
+  .rating-address {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+
+    > p {
+      @include text(md);
+      > span {
+        position: relative;
+      }
+    }
+
+    .rating {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+      @include text(md);
+      .rating-icon {
+        color: $yellow01;
+      }
+    }
+
+    .address {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: $yellow02;
+      .mark-icon {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+/* 이미지 영역 */
+.img-wrap {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 8px;
+  height: 534px;
+  margin-top: 25px;
+  border-radius: 12px;
+  @include tablet {
+    grid-gap: 4px;
+    height: 310px;
+  }
+  @include mobile {
+    display: block;
+    border-radius: 0;
+  }
+
+  > div {
+    overflow: hidden;
+  }
+
+  > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    @include tablet {
+      gap: 4px;
+    }
+    @include mobile {
+      display: block;
+    }
+
+    > li {
+      position: relative;
+      width: 49.3%;
+      height: 263px;
+      @include tablet {
+        height: 152px;
+      }
+    }
+  }
+}
