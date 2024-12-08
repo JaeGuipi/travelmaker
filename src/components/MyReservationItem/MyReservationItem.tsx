@@ -4,7 +4,6 @@ import { MyReservation } from "@/types/types";
 import getStatusText from "@/utils/getStatusText";
 import ItemLayout from "../ItemLayout/ItemLayout";
 import FormButton from "../Button/FormButton";
-import useModalStore from "@/store/useModalStore";
 
 const cx = classNames.bind(s);
 
@@ -16,10 +15,6 @@ const MyReservationItem = ({
   onDelete: (id: number) => void;
   onOpenModal: (key: string, reservation: MyReservation) => void;
 }) => {
-
-  // const handleDeleteItem = (id: number) => {
-  //   onDelete(id);
-  // };
 
   return (
     <ItemLayout src={reservation.activity.bannerImageUrl} alt={"체험 이미지"}>
@@ -37,14 +32,14 @@ const MyReservationItem = ({
         </p>
         <p className={s.title}>{reservation.activity.title}</p>
         <div className={cx("schedule-container")}>
-          <p className={s.schedule}>{reservation.date}</p>
-          <p className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</p>
-          <p className={s.schedule}>{`${reservation.headCount}명`}</p>
+          <span className={s.schedule}>{reservation.date}</span>
+          <span className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</span>
+          <span className={s.schedule}>{`${reservation.headCount}명`}</span>
         </div>
         <em className={s.price}>{`₩${reservation.totalPrice.toLocaleString()}`}</em>
         {reservation.status === "completed" && (
           <div className={s.button}>
-            <FormButton type="button" onClick={() => onOpenModal("review",reservation)}>
+            <FormButton type="button" onClick={() => onOpenModal("review", reservation)}>
               후기 작성
             </FormButton>
           </div>

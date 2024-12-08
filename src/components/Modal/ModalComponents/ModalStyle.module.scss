@@ -128,6 +128,7 @@
   }
 
   .activity-container {
+    flex: 1;
     position: relative;
     overflow: hidden;
   }
@@ -137,6 +138,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     @include text(xl);
     font-weight: 600;
 
@@ -166,7 +168,7 @@
 
   .price {
     @include text(3xl);
-    
+
     font-weight: 600;
     margin-top: 2.4rem;
     text-align: left;
@@ -179,9 +181,14 @@
       height: 1px;
       background-color: $gray06;
     }
- 
+
     @include mobile {
-      @include text(xl)
+      @include text(xl);
+      margin-top: 1.3rem;
+
+      &::before {
+        bottom: 3.4rem;
+      }
     }
   }
 
@@ -228,7 +235,6 @@
   font-family: Pretendard;
 
   &::placeholder {
-    
     @include text(lg);
     color: $gray02;
   }

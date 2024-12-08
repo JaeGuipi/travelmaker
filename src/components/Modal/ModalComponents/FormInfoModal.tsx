@@ -82,9 +82,9 @@ const FormInfoModal = ({ modalKey, title, reservation }: ModalProps) => {
         <div className={s["activity-container"]}>
           <p className={s["activity-title"]}>{reservation.activity.title}</p>
           <div className={s["schedule-container"]}>
-            <p className={s.schedule}>{reservation.date}</p>
-            <p className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</p>
-            <p className={s.schedule}>{`${reservation.headCount}명`}</p>
+            <span className={s.schedule}>{reservation.date}</span>
+            <span className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</span>
+            <span className={s.schedule}>{`${reservation.headCount}명`}</span>
           </div>
           <p className={s.price}>{`₩${reservation.totalPrice.toLocaleString()}`}</p>
         </div>
