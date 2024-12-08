@@ -28,6 +28,18 @@ export interface getMyActivitiesByDashboardQuery {
   month: string;
 }
 
+// 예약 상태에 대한 타입 정의
+interface ReservationStatus {
+  completed: number;
+  confirmed: number;
+  pending: number;
+}
+
+export interface ResponsReservationMonthData {
+  date: string;
+  reservations: ReservationStatus; // 예약 상태
+}
+
 export interface getMyActivitiesByScheduleQuery {
   activityId: string;
   date: string;
