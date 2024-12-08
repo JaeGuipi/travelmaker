@@ -7,6 +7,9 @@ import { useState } from "react";
 import classNames from "classnames/bind";
 import { FaStar } from "react-icons/fa";
 import { MyReservation } from "@/types/types";
+import { postReview } from "@/actions/myReservation";
+import { useToast } from "@/hooks/useToast";
+import toastMessages from "@/lib/toastMessage";
 
 const cx = classNames.bind(s);
 
@@ -23,16 +26,38 @@ const FormInfoModal = ({ modalKey, title, reservation }: ModalProps) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
 
+  const { showSuccess, showError } = useToast();
+
   const starArr = [1, 2, 3, 4, 5];
 
   const handleStarClick = (star: number) => {
     setRating(star);
   };
 
-  const handleClickClose = (modalKey:string) => {
+  const handleClickClose = (modalKey: string) => {
     toggleModal(modalKey);
     setRating(0);
     setReview("");
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("reservationId", reservation.id.toString());
+    formData.append("rating", rating.toString());
+    formData.append("content", review);
+
+    try {
+      await postReview(formData);
+      showSuccess(toastMessages.success.review);
+    } catch (error) {
+      if (error instanceof Error) {
+        showError(error.message);
+      }
+    } finally {
+      handleClickClose(modalKey);
+    }
   };
 
   return (
@@ -65,7 +90,7 @@ const FormInfoModal = ({ modalKey, title, reservation }: ModalProps) => {
         </div>
       </div>
       {/* {showSubmit && ( */}
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className={s["rating-stars"]}>
           {starArr.map((star) => (
             <FaStar
@@ -76,11 +101,8 @@ const FormInfoModal = ({ modalKey, title, reservation }: ModalProps) => {
             />
           ))}
         </div>
-        <input hidden readOnly name="reservationId" value={reservation.id} />
-        <input hidden readOnly name="rating" value={rating} />
         <textarea
           className={s.review}
-          name="content"
           value={review}
           onChange={(e) => setReview(e.target.value)}
           placeholder="후기를 작성해주세요"
