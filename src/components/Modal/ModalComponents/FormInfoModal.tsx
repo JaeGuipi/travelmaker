@@ -1,4 +1,3 @@
-"use client";
 import ModalContainer from "../ModalContainer";
 import FormButton from "@/components/Button/FormButton";
 import useModalStore from "@/store/useModalStore";
@@ -15,12 +14,11 @@ interface ModalProps {
   modalKey: string;
   title: string;
   showSubmit?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   reservation: MyReservation;
 }
 
-const FormInfoModal = ({ modalKey, title, showSubmit, children }: ModalProps) => {
-const FormInfoModal = ({ title, showSubmit, children, reservation }: ModalProps) => {
+const FormInfoModal = ({ modalKey, title, reservation }: ModalProps) => {
   const { toggleModal } = useModalStore();
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
@@ -31,24 +29,31 @@ const FormInfoModal = ({ title, showSubmit, children, reservation }: ModalProps)
     setRating(star);
   };
 
-  const handleClickClose = () => {
-    toggleModal(title);
+  const handleClickClose = (modalKey:string) => {
+    toggleModal(modalKey);
     setRating(0);
-    setContent("");
+    setReview("");
   };
 
   return (
     <ModalContainer modalKey={modalKey} className={s["forminfo-modal"]} overlayClassName={s["forminfo-overlay"]}>
       <div className={s["title-wrap"]}>
         <h2 className={s.text}>{title}</h2>
-        <button onClick={() => toggleModal(modalKey)} className={s["btn-close"]}>
-        <button onClick={() => handleClickClose()} className={s["btn-close"]}>
+        <button onClick={() => handleClickClose(modalKey)} className={s["btn-close"]}>
           <Image src="/icons/btn_cancel_black.svg" fill alt="close" />
         </button>
       </div>
       {/* 컨텐츠 작업 */}
       <div className={s.contents}>
-        <Image className={s.img} src="/images/profile.png" width={126} height={126} alt="체험 이미지" />
+        <div className={s["img-container"]}>
+          <Image
+            className={s.img}
+            src={reservation.activity.bannerImageUrl}
+            width={126}
+            height={126}
+            alt="체험 이미지"
+          />
+        </div>
         <div className={s["activity-container"]}>
           <p className={s["activity-title"]}>{reservation.activity.title}</p>
           <div className={s["schedule-container"]}>
@@ -56,7 +61,7 @@ const FormInfoModal = ({ title, showSubmit, children, reservation }: ModalProps)
             <p className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</p>
             <p className={s.schedule}>{`${reservation.headCount}명`}</p>
           </div>
-          <em className={s.price}>{`₩${reservation.totalPrice.toLocaleString()}`}</em>
+          <p className={s.price}>{`₩${reservation.totalPrice.toLocaleString()}`}</p>
         </div>
       </div>
       {/* {showSubmit && ( */}

@@ -12,10 +12,12 @@ interface ModalProps {
   text: string;
   onCancel?: (id: number) => void; //콜백 함수 추가
   id: number;
+  onClose: () => void;
 }
 
-const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
+const ConfirmModal = ({ modalKey, text, onCancel, onClose, id }: ModalProps) => {
   const { toggleModal } = useModalStore();
+  console.log(id);
 
   return (
     <>
