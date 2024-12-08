@@ -8,7 +8,7 @@ export function useToast() {
       padding: "1.6rem",
       borderRadius: "0.8rem",
       marginTop: "8.5rem",
-      fontSize: "2rem",
+      fontSize: "1.6rem",
     },
   };
 
@@ -44,6 +44,7 @@ export function useToast() {
       ...baseOptions,
       icon: "🔔",
       style: {
+        ...baseOptions.style,
         border: "1px solid #f89a05",
         padding: "1.6rem",
         color: "#f89a05",

@@ -14,20 +14,20 @@ const UserTabList = () => {
 
   return (
     <div className={s.userTabList}>
-      <Link href={"/my-info"} className={pathname === "/my-info" ? s.active : ""}>
+      <Link href="/my-info" className={pathname.startsWith("/my-info") ? s.active : ""}>
         <RiUserSettingsLine />내 정보
       </Link>
 
-      <Link href={"/my-reservation"} className={pathname === "/my-reservation" ? s.active : ""}>
+      <Link href="/my-reservation" className={pathname.startsWith("/my-reservation") ? s.active : ""}>
         <GoChecklist />
         예약 내역
       </Link>
 
-      <Link href={"/my-activities"} className={pathname === "/my-activities" ? s.active : ""}>
+      <Link href="/my-activities" className={pathname.startsWith("/my-activities") ? s.active : ""}>
         <AiOutlineSetting />내 체험 관리
       </Link>
 
-      <Link href={"/reservation-status"} className={pathname === "/reservation-status" ? s.active : ""}>
+      <Link href="/reservation-status" className={pathname.startsWith("/reservation-status") ? s.active : ""}>
         <TbCalendarCheck />
         예약 현황
       </Link>
