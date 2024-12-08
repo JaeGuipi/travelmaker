@@ -37,7 +37,6 @@ const MyReservationList = ({
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   const { toggleModal } = useModalStore();
-  //modal
   const confirmModal = "confirm";
   const reviewModal = "review";
 
@@ -50,7 +49,7 @@ const MyReservationList = ({
     setModalState({ key: null, reservation: null });
   };
 
-  console.log(modalState)
+  console.log(modalState);
   const dropdownItems = [
     { key: "pending", label: "예약 완료" },
     { key: "canceled", label: "예약 취소" },
@@ -59,17 +58,24 @@ const MyReservationList = ({
     { key: "completed", label: "체험 완료" },
   ];
 
-  //서버액션 사용해보기
+  //서버액션으로 바꿔보기...
   const handleDeleteItem = async (id: number) => {
-    const response = await fetch(`/api/my-reservations/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status: "canceled" }),
-    });
-    if (response.ok) {
-      setReservationList((prev) => prev.filter((reservation) => reservation.id !== id));
+    try {
+      const response = await fetch(`/api/my-reservations/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: "canceled" }),
+      });
+      if (response.ok) {
+        setReservationList((prev) =>
+          prev.map((reservation) => (reservation.id === id ? { ...reservation, status: "canceled" } : reservation)),
+        );
+      }
+      console.log("예약취소성공");
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -174,6 +180,7 @@ const MyReservationList = ({
             text="예약을 취소하시겠어요?"
             id={modalState.reservation.id}
             onClose={handleCloseModal}
+            onCancel={handleDeleteItem}
           />
         )}
       </div>

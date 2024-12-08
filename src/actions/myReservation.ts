@@ -13,7 +13,6 @@ export const postReview = async (formData: FormData) => {
   const rating = Number(formData.get("rating"));
   const content = formData.get("content");
 
-  
     const response = await fetch(`${API_URL}/my-reservations/${reservationId}/reviews`, {
       method: "POST",
       headers: {

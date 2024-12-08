@@ -10,12 +10,12 @@ const cx = classNames.bind(s);
 interface ModalProps {
   modalKey: string;
   text: string;
-  onCancel?: (id: number) => void; //콜백 함수 추가
+  onCancel: (id: number) => void;
   id: number;
   onClose: () => void;
 }
 
-const ConfirmModal = ({ modalKey, text, onCancel, onClose, id }: ModalProps) => {
+const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
   const { toggleModal } = useModalStore();
   console.log(id);
 
@@ -34,7 +34,7 @@ const ConfirmModal = ({ modalKey, text, onCancel, onClose, id }: ModalProps) => 
             size="small"
             onClick={() => {
               toggleModal(modalKey);
-              if (onCancel) onCancel(id);
+              onCancel(id);
             }}
           >
             취소하기
