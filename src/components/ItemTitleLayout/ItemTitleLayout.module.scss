@@ -1,8 +1,8 @@
-.reservation {
-  flex: 1;
-  position: relative;
-overflow: hidden;
-}
+// .title-container {
+//   flex: 1;
+//   position: relative;
+//   overflow: hidden;
+// }
 
 .list-title-container {
   @include flex-between;
@@ -11,6 +11,6 @@ overflow: hidden;
 
 .list-title {
   @include text(3xl);
-  font-weight: 600;
+  font-weight: 700;
   color: $black01;
 }

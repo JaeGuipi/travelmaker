@@ -4,7 +4,7 @@
   flex: 1;
   padding: 2.1rem 2.4rem;
   position: relative;
-  width: calc(100% - 25.6rem);
+  // width: calc(100% - 25.6rem);
 
   @include tablet {
     padding: 1.2rem 1.8rem;
@@ -49,9 +49,10 @@
   color: #112211;
   margin-bottom: 1.2rem;
 
-  overflow: hidden;
   text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
+  
 
   @include tablet {
     @include text(2lg);

@@ -1,0 +1,45 @@
+.info {
+  flex: 1;
+  padding: 1.4rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rating-container {
+  margin-bottom: 0.6rem;
+}
+
+.star {
+  color: $yellow02;
+  margin-right: 0.7rem;
+}
+
+.rating {
+  @include text(lg);
+}
+
+.title {
+  @include text(xl);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  @include text(2xl);
+  font-weight: 500;
+}
+
+.per-head {
+  @include text(lg);
+  color: $gray01;
+  margin-left: 1rem;
+}
+
+.kebab-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

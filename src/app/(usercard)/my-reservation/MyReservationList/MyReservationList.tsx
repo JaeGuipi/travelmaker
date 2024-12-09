@@ -1,23 +1,21 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { MyReservation } from "@/types/types";
-import classNames from "classnames/bind";
 import s from "./MyReservationList.module.scss";
 import MyReservationItem from "../MyReservationItem/MyReservationItem";
-import Image from "next/image";
-import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "../Dropdown/Dropdown";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-
-const cx = classNames.bind(s);
+import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "../../../../components/Dropdown/Dropdown";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import NoList from "./NoList";
+import ItemTitleLayout from "@/components/ItemTitleLayout/ItemTitleLayout";
 
 const MyReservationList = ({
-  initialReservations,
+  initialReservationList,
   cursorId,
 }: {
-  initialReservations: MyReservation[];
+  initialReservationList: MyReservation[];
   cursorId: number;
 }) => {
-  const [reservationList, setReservationList] = useState(initialReservations);
+  const [reservationList, setReservationList] = useState(initialReservationList);
   const [currentCursorId, setCurrentCursorId] = useState(cursorId);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("예약 상태");
@@ -99,39 +97,38 @@ const MyReservationList = ({
   }, [isLoading, currentCursorId, reservationList, reservationStatus]);
 
   if (reservationList.length === 0) {
-    return (
-      <div className={cx("no-list")}>
-        <Image src="/images/no-list.png" width={110} height={149} alt="" />
-        <p className={cx("no-list-notice")}>아직 등록한 체험이 없어요</p>
-      </div>
-    );
+    return <NoList text="아직 등록한 체험이 없어요" />;
   }
 
   return (
     <>
-      <div className={cx("dropdown-container")}>
-        <Dropdown>
-          <DropdownToggle>{selectedStatus}</DropdownToggle>
-          <DropdownMenu>
-            {dropdownItems.map(({ key, label }) => (
-              <DropdownItem
-                key={key}
-                onClick={() => {
-                  orderedList(key);
-                  setSelectedStatus(label);
-                }}
-              >
-                {label}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-      <div>
-        {reservationList.map((reservation) => (
-          <MyReservationItem key={reservation?.id} reservation={reservation} onDelete={handleDeleteItem} />
-        ))}
-        {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
+      <div className={s["content-container"]}>
+        <ItemTitleLayout title="예약 내역">
+          <div className={s["dropdown-container"]}>
+            <Dropdown>
+              <DropdownToggle>{selectedStatus}</DropdownToggle>
+              <DropdownMenu>
+                {dropdownItems.map(({ key, label }) => (
+                  <DropdownItem
+                    key={key}
+                    onClick={() => {
+                      orderedList(key);
+                      setSelectedStatus(label);
+                    }}
+                  >
+                    {label}
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          </div>
+        </ItemTitleLayout>
+        <div>
+          {reservationList.map((reservation) => (
+            <MyReservationItem key={reservation?.id} reservation={reservation} onDelete={handleDeleteItem} />
+          ))}
+          {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
+        </div>
       </div>
     </>
   );
