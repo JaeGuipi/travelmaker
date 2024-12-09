@@ -27,7 +27,6 @@ export const postActivity = async (activityData: PostActivity) => {
     }
 
     const data = await response.json();
-    console.log("체험 등록 데이터", data);
     return data;
   } catch (error) {
     console.error("체험 등록 중 오류 발생: ", error);
@@ -58,7 +57,6 @@ export const updateActivity = async (activityId: number, activityData: PostActiv
     }
 
     const data = await response.json();
-    console.log("체험 수정 데이터", data);
     return data;
   } catch (error) {
     console.error("체험 수정 중 오류 발생: ", error);
