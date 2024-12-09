@@ -1,6 +1,4 @@
 .info {
-  display: flex;
-  flex-direction: column;
   flex: 1;
   padding: 2.1rem 2.4rem;
   position: relative;
@@ -46,7 +44,6 @@
 .title {
   @include text(xl);
   font-weight: 700;
-  color: #112211;
   margin-bottom: 1.2rem;
 
   text-overflow: ellipsis;
@@ -65,13 +62,14 @@
   }
 }
 .schedule-container {
-  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 1.6rem;
 }
 
 .schedule {
   @include text(2lg);
-  color: #112211;
-  margin-bottom: 1.6rem;
 
   &.schedule:not(:last-child)::after {
     content: "·";
