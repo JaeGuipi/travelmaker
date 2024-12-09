@@ -1,0 +1,46 @@
+.swiper {
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  @include mobile {
+    width: 100%;
+  }
+
+  &:hover .swiper-ctrl {
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+
+  .swiper-ctrl {
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+
+    .swiper-next,
+    .swiper-prev {
+      position: absolute;
+      transform: translateY(-50%);
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .swiper-next {
+      right: 0;
+    }
+
+    .swiper-prev {
+      left: 0;
+    }
+  }
+}
