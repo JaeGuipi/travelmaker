@@ -1,19 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { Schedule } from "@/types/activites/activitesTypes";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import resourceTimelinePlugin from "@fullcalendar/resource-timeline";
 import interactionPlugin, { DateClickArg } from "@fullcalendar/interaction";
 import s from "./Calendar.module.scss";
 import "./CalendarStyle.scss";
-
-interface Schedule {
-  id: number;
-  date: string;
-  startTime: string;
-  endTime: string;
-}
 
 interface CalendarProps {
   schedules: Schedule[];

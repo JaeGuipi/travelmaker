@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Schedule } from "@/types/types";
 import { useMediaQuery } from "react-responsive";
 import { useToast } from "@/hooks/useToast";
+import { Schedule } from "@/types/activites/activitesTypes";
 import Calendar from "./components/Calendar";
 import FormButton from "@/components/Button/FormButton";
 import s from "./ScheduleDetail.module.scss";

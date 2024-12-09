@@ -1,6 +1,6 @@
-import { Schedule } from "@/types/types";
 import s from "./Schedules.module.scss";
 import ScheduleDetail from "./ScheduleDetail/ScheduleDetail";
+import { Schedule } from "@/types/activites/activitesTypes";
 
 type SchedulesProps = {
   activityId: number;
