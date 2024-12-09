@@ -160,12 +160,10 @@ const ActivityForm = () => {
       };
 
       if (activityId) {
-        // 체험 수정
         const id = Number(activityId);
         await updateActivity(id, updatedData);
         showSuccess(toastMessages.success.activityUpdate);
       } else {
-        // 체험 등록
         await postActivity(updatedData);
         showSuccess(toastMessages.success.activity);
       }
@@ -173,7 +171,11 @@ const ActivityForm = () => {
       router.push("/my-activities");
     } catch (error) {
       console.error(error);
-      showError(toastMessages.error.activity);
+      if (activityId) {
+        showError(toastMessages.error.activityUpdate);
+      } else {
+        showError(toastMessages.error.activity);
+      }
     }
   };
 

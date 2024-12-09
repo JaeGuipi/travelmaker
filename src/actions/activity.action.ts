@@ -12,8 +12,6 @@ export const postActivity = async (activityData: PostActivity) => {
     const cookieStore = cookies();
     const accessToken = cookieStore.get("accessToken")?.value;
 
-    console.log("전송 데이터:", activityData);
-
     const response = await fetch(`${API_URL}/activities`, {
       method: "POST",
       headers: {
@@ -24,26 +22,26 @@ export const postActivity = async (activityData: PostActivity) => {
     });
 
     if (!response.ok) {
-      throw new Error("체험 등록 실패");
+      const errorResponse = await response.json();
+      throw new Error(errorResponse?.message || "체험 등록 실패");
     }
 
     const data = await response.json();
     console.log("체험 등록 데이터", data);
     return data;
   } catch (error) {
-    console.log("체험 등록 중 오류 발생: ", error);
+    console.error("체험 등록 중 오류 발생: ", error);
+    throw error;
+  } finally {
+    revalidateTag("activity");
   }
-
-  revalidateTag("activity");
 };
 
 // 체험 수정
 export const updateActivity = async (activityId: number, activityData: PostActivity) => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-
   try {
-    console.log("전송 데이터:", activityData);
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
 
     const response = await fetch(`${API_URL}/my-activities/${activityId}`, {
       method: "PATCH",
@@ -55,7 +53,8 @@ export const updateActivity = async (activityId: number, activityData: PostActiv
     });
 
     if (!response.ok) {
-      throw new Error("체험 수정 실패");
+      const errorResponse = await response.json();
+      throw new Error(errorResponse?.message || "체험 수정 실패");
     }
 
     const data = await response.json();
@@ -63,9 +62,10 @@ export const updateActivity = async (activityId: number, activityData: PostActiv
     return data;
   } catch (error) {
     console.error("체험 수정 중 오류 발생: ", error);
+    throw error;
+  } finally {
+    revalidateTag("activity");
   }
-
-  revalidateTag("activity");
 };
 
 // 체험 상세 조회
