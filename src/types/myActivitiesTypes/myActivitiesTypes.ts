@@ -40,6 +40,17 @@ export interface ResponsReservationMonthData {
   reservations: ReservationStatus; // 예약 상태
 }
 
+export interface ResponsReservedSchduleData {
+  scheduleId: number;
+  startTime: string;
+  endTime: string;
+  count: {
+    declined: number;
+    confirmed: number;
+    pending: number;
+  };
+}
+
 export interface getMyActivitiesByScheduleQuery {
   activityId: string;
   date: string;

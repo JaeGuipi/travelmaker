@@ -5,43 +5,39 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { ResponsReservationMonthData } from "@/types/myActivitiesTypes/myActivitiesTypes";
+import useModalStore from "@/store/useModalStore";
+import ModalContainer from "@/components/Modal/ModalContainer";
+import ReservationDetailModalContent from "@/components/Modal/ModalComponents/ReservationDetailModalContent";
+import { useEffect, useState } from "react";
 
 type Props = {
   activityId?: string;
   defaultYear: number;
   defaultMonth: number;
-  data: ResponsReservationMonthData[];
+  dashboardData: ResponsReservationMonthData[];
 };
 
-const CalendarView = ({ activityId, defaultYear, defaultMonth, data }: Props) => {
+const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  console.log(data);
+  const { toggleModal } = useModalStore();
+  const [selectedDate, setSelectedDate] = useState<string | null>(null); // 선택한 날짜
 
-  // FullCalendar에 전달할 이벤트 변환
-  const events = data.map((d) => {
-    const { completed, confirmed, pending } = d.reservations;
-    return {
-      start: d.date,
-      end: d.date,
-      title: `완료: ${completed}, 승인: ${confirmed}, 예약: ${pending}`,
-      // 필요하다면 색상이나 다른 스타일 지정 가능
-      color: confirmed > 0 ? "blue" : pending > 0 ? "orange" : "green",
-    };
-  });
+  const events = dashboardData.map((d) => ({
+    start: d.date,
+    end: d.date,
+    title: `완료: ${d.reservations.completed}, 승인: ${d.reservations.confirmed}, 예약: ${d.reservations.pending}`,
+    color: d.reservations.confirmed > 0 ? "blue" : d.reservations.pending > 0 ? "orange" : "green",
+    extendedProps: { date: d.date, reservations: d.reservations },
+  }));
 
-  const handleDatesSet = (arg: { view: { currentStart: Date } }) => {
-    const newYear = arg.view.currentStart.getFullYear();
-    const newMonth = arg.view.currentStart.getMonth() + 1;
+  // 🔥 날짜 클릭 시 모달 열기
+  const handleEventClick = (info: any) => {
+    const { extendedProps } = info.event;
+    const clickedDate = extendedProps.date;
 
-    const query = new URLSearchParams(searchParams as unknown as URLSearchParams);
-    query.set("year", newYear.toString());
-    query.set("month", newMonth.toString());
-    if (activityId) {
-      query.set("activity", activityId);
-    }
-
-    router.push(`?${query.toString()}`);
+    setSelectedDate(clickedDate); // 선택한 날짜 저장
+    toggleModal("reservationDetail");
   };
 
   return (
@@ -52,8 +48,21 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, data }: Props) =>
         initialView="dayGridMonth"
         initialDate={new Date(defaultYear, defaultMonth - 1, 1)}
         events={events}
-        datesSet={handleDatesSet}
+        datesSet={(arg) => {
+          const newYear = arg.view.currentStart.getFullYear();
+          const newMonth = arg.view.currentStart.getMonth() + 1;
+          const query = new URLSearchParams(searchParams as unknown as URLSearchParams);
+          query.set("year", newYear.toString());
+          query.set("month", newMonth.toString());
+          if (activityId) query.set("activity", activityId);
+          router.push(`?${query.toString()}`);
+        }}
+        eventClick={handleEventClick}
       />
+
+      <ModalContainer modalKey="reservationDetail">
+        {selectedDate && activityId && <ReservationDetailModalContent activityId={activityId} date={selectedDate} />}
+      </ModalContainer>
     </div>
   );
 };
