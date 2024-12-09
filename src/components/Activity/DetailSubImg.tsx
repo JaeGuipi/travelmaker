@@ -33,10 +33,10 @@ const DetailSubImg = ({ activity }: DetailSubImgProps) => {
         <div>
           <h2>{activity.title}</h2>
           <Dropdown>
-            <DropdownToggle>아이콘</DropdownToggle>
+            <DropdownToggle variant="kebab"></DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>메뉴</DropdownItem>
-              <DropdownItem>메뉴</DropdownItem>
+              <DropdownItem>수정하기</DropdownItem>
+              <DropdownItem>삭제하기</DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </div>

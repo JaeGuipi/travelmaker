@@ -5,13 +5,20 @@
     @include text(md);
   }
 
-  > div {
+  & > div {
     @include flex-between;
 
-    h2 {
+    & h2 {
       color: $black01;
       font-weight: 700;
       @include text(3xl);
+    }
+
+    & > div {
+      & > div {
+        top: 40px;
+        right: 0;
+      }
     }
   }
 
