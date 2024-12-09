@@ -4,24 +4,17 @@ import { MyReservation } from "@/types/types";
 import getStatusText from "@/utils/getStatusText";
 import ItemLayout from "../ItemLayout/ItemLayout";
 import FormButton from "../Button/FormButton";
-import ConfirmModal from "../Modal/ModalComponents/ConfirmModal";
-import useModalStore from "@/store/useModalStore";
-import FormInfoModal from "../Modal/ModalComponents/FormInfoModal";
 
 const cx = classNames.bind(s);
 
 const MyReservationItem = ({
   reservation,
-  onDelete,
+  onOpenModal,
 }: {
   reservation: MyReservation;
   onDelete: (id: number) => void;
+  onOpenModal: (key: string, reservation: MyReservation) => void;
 }) => {
-  const { toggleModal } = useModalStore();
-
-  const handleDeleteItem = (id: number) => {
-    onDelete(id);
-  };
 
   return (
     <ItemLayout src={reservation.activity.bannerImageUrl} alt={"체험 이미지"}>
@@ -39,28 +32,26 @@ const MyReservationItem = ({
         </p>
         <p className={s.title}>{reservation.activity.title}</p>
         <div className={cx("schedule-container")}>
-          <p className={s.schedule}>{reservation.date}</p>
-          <p className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</p>
-          <p className={s.schedule}>{`${reservation.headCount}명`}</p>
+          <span className={s.schedule}>{reservation.date}</span>
+          <span className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</span>
+          <span className={s.schedule}>{`${reservation.headCount}명`}</span>
         </div>
-        <em className={s.price}>{`₩${((reservation.totalPrice).toLocaleString())}`}</em>
+        <em className={s.price}>{`₩${reservation.totalPrice.toLocaleString()}`}</em>
         {reservation.status === "completed" && (
           <div className={s.button}>
-            <FormButton type="button" onClick={() => toggleModal("후기 작성")}>
+            <FormButton type="button" onClick={() => onOpenModal("review", reservation)}>
               후기 작성
             </FormButton>
           </div>
         )}
         {reservation.status === "pending" && (
           <div className={s.button}>
-            <FormButton type="button" variant="emptyButton" onClick={() => toggleModal("canceled")}>
+            <FormButton type="button" variant="emptyButton" onClick={() => onOpenModal("confirm", reservation)}>
               예약 취소
             </FormButton>
           </div>
         )}
       </div>
-      <ConfirmModal text="canceled" id={reservation.id} onCancel={(id) => handleDeleteItem(id)} />
-      <FormInfoModal title="후기 작성">후기</FormInfoModal>
     </ItemLayout>
   );
 };

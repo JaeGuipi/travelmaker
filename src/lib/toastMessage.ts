@@ -6,6 +6,7 @@ const toastMessages = {
     reservation: "예약이 완료되었습니다.",
     activity: "체험이 등록되었습니다.",
     activityUpdate: "체험이 수정되었습니다.",
+    review: "후기 작성이 완료되었습니다.",
   },
   error: {
     login: "로그인에 실패하였습니다.",
