@@ -11,9 +11,10 @@ import DetailSubImgSwiper from "./DetailSubImgSwiper";
 
 interface DetailSubImgProps {
   activity: ActivityDetailResponse;
+  userId: number;
 }
 
-const DetailSubImg = ({ activity }: DetailSubImgProps) => {
+const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
   const { subImages } = activity;
   const [isClient, setIsClient] = useState(false);
   const isMobileOrBelow = useMediaQuery({ query: "(max-width: 768px)" });
@@ -32,13 +33,15 @@ const DetailSubImg = ({ activity }: DetailSubImgProps) => {
         <p className={s.cate}>{activity.category}</p>
         <div>
           <h2>{activity.title}</h2>
-          <Dropdown>
-            <DropdownToggle variant="kebab"></DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem>수정하기</DropdownItem>
-              <DropdownItem>삭제하기</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {userId === activity.id && (
+            <Dropdown>
+              <DropdownToggle variant="kebab"></DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>수정하기</DropdownItem>
+                <DropdownItem>삭제하기</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          )}
         </div>
         <div className={s["rating-address"]}>
           <p className={s.rating}>
