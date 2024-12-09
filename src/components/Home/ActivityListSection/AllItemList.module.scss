@@ -13,13 +13,14 @@
   }
   .item-box {
     img {
-      max-height: 283px;
+      height: 283px;
       border-radius: 20px;
+      object-fit: cover;
       @include tablet {
-        height: 30vw;
+        height: 221px;
       }
       @include mobile {
-        height: 43vw;
+        height: 168px;
       }
     }
 

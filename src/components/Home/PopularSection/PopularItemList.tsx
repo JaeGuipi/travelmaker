@@ -7,7 +7,6 @@ import PopularItemSwiper from "./PopularItemSwiper";
 export const cx = classNames.bind(s);
 
 const PopularItemList: React.FC<GetActivities> = ({ activities }) => {
-  // rating 기준으로 정렬
   const sortedActivities = (activities || []).sort((a, b) => b.reviewCount - a.reviewCount);
 
   return (
