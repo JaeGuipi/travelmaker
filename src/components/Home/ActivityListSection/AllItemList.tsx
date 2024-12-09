@@ -4,7 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import FormButton from "@/components/Button/FormButton";
 
-const AllItemList: React.FC<GetActivities> = ({ activities = [], totalCount }) => {
+interface AllItemListProps extends GetActivities {
+  onLoadMore: () => void;
+}
+
+const AllItemList: React.FC<AllItemListProps> = ({ activities = [], onLoadMore }) => {
   return (
     <>
       <ul className={s["item-list"]}>
@@ -35,7 +39,7 @@ const AllItemList: React.FC<GetActivities> = ({ activities = [], totalCount }) =
         ))}
       </ul>
       <div className={s["btn-more"]}>
-        <FormButton size="medium" variant="emptyButton">
+        <FormButton size="medium" variant="emptyButton" onClick={onLoadMore}>
           상품 더보기
         </FormButton>
       </div>
