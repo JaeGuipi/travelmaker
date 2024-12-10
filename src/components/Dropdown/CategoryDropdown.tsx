@@ -29,7 +29,7 @@ const CategoryDropdown = forwardRef<HTMLDivElement, CategoryDropdownProps>(({ va
   }, [value]);
 
   return (
-    <div className={cx("categoryDropdown")} ref={ref}>
+    <div className={s.categoryDropdown} ref={ref}>
       <div
         className={cx("selectBox", isFocused ? "focused" : "", errors && "errors")}
         tabIndex={0}
