@@ -1,7 +1,6 @@
 "use server";
 
 import API_URL from "@/constants/config";
-import { error } from "console";
 import { cookies } from "next/headers";
 
 // 내 예약 리뷰 작성

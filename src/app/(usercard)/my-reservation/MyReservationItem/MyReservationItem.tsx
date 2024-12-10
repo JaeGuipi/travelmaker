@@ -2,13 +2,8 @@ import s from "./MyReservationItem.module.scss";
 import classNames from "classnames/bind";
 import { MyReservation } from "@/types/types";
 import getStatusText from "@/utils/getStatusText";
-import ItemLayout from "../ItemLayout/ItemLayout";
-import FormButton from "../Button/FormButton";
-import ItemLayout from "@/components/ItemLayout/ItemLayout";
+import ItemLayout from "@/app/(usercard)/my-reservation/ItemLayout/ItemLayout";
 import FormButton from "@/components/Button/FormButton";
-import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
-import useModalStore from "@/store/useModalStore";
-import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
 
 const cx = classNames.bind(s);
 
@@ -20,7 +15,6 @@ const MyReservationItem = ({
   onDelete: (id: number) => void;
   onOpenModal: (key: string, reservation: MyReservation) => void;
 }) => {
-
   return (
     <ItemLayout src={reservation.activity.bannerImageUrl} alt="체험 이미지">
       <div className={s.info}>
@@ -35,9 +29,8 @@ const MyReservationItem = ({
         >
           {getStatusText(reservation.status)}
         </p>
-        {/* <p className={s.title}>{reservation.activity.title}</p> */}
-        <p className={s.title}>오버플로우히든때문에 드롭다운이 나타나지 않는다. 이걸 어떻게 바꿔야 할지 매우 고민중</p>
-        <div className={cx("schedule-container")}>
+        <p className={s.title}>{reservation.activity.title}</p>
+        <div className={s["schedule-container"]}>
           <span className={s.schedule}>{reservation.date}</span>
           <span className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</span>
           <span className={s.schedule}>{`${reservation.headCount}명`}</span>
@@ -58,8 +51,6 @@ const MyReservationItem = ({
           </div>
         )}
       </div>
-      {/* <ConfirmModal text="canceled" id={reservation.id} onCancel={(id) => handleDeleteItem(id)} />
-      <FormInfoModal title="후기 작성">후기</FormInfoModal> */}
     </ItemLayout>
   );
 };

@@ -1,4 +1,4 @@
-import ItemTitleLayout from "@/components/ItemTitleLayout/ItemTitleLayout";
+import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 import MyActivityList from "./MyActivityList/MyActivityList";
 import Link from "next/link";
 import { customFetch } from "@/utils/customFetch";

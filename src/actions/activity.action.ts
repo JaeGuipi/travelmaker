@@ -58,3 +58,29 @@ export const uploadActivityImage = async (formData: FormData) => {
 
   return data.activityImageUrl;
 };
+
+//체험 삭제
+export const deleteActivity = async (activityId: number) => {
+  try {
+    const cookieStore = cookies();
+    const accessToken = cookieStore.get("accessToken")?.value;
+
+    const response = await fetch(`${API_URL}/my-activities/${activityId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      return { status: response.status, message: errorData.message}
+    }
+    return { status: 204}
+
+  } catch (error) {
+    if (error instanceof Error) {
+      return { status: 500, message: error.message };
+    }
+  }
+};

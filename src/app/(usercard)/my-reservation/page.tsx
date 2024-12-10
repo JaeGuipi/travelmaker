@@ -2,7 +2,7 @@ import API_URL from "@/constants/config";
 import { MyReservation } from "@/types/types";
 import MyReservationList from "@/app/(usercard)/my-reservation/MyReservationList/MyReservationList";
 import { customFetch } from "@/utils/customFetch";
-import ItemTitleLayout from "@/components/ItemTitleLayout/ItemTitleLayout";
+import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 
 const MyReservationPage = async () => {
   const response = await customFetch(`${API_URL}/my-reservations?size=6`);
@@ -14,11 +14,7 @@ const MyReservationPage = async () => {
   const cursorId = myReservation.cursorId;
   const reservationList: MyReservation[] = myReservation.reservations;
 
-  return (
-    
-      <MyReservationList initialReservationList={reservationList} cursorId={cursorId} />
-    
-  );
+  return <MyReservationList initialReservationList={reservationList} cursorId={cursorId} />;
 };
 
 export default MyReservationPage;

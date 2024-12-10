@@ -4,22 +4,17 @@ import { MyReservation } from "@/types/types";
 import s from "./MyReservationList.module.scss";
 import MyReservationItem from "../MyReservationItem/MyReservationItem";
 import Image from "next/image";
-import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "../Dropdown/Dropdown";
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import ConfirmModal from "../Modal/ModalComponents/ConfirmModal";
+import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "@/components/Dropdown/Dropdown";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
 import useModalStore from "@/store/useModalStore";
-import FormInfoModal from "../Modal/ModalComponents/FormInfoModal";
-
-const cx = classNames.bind(s);
+import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
+import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 
 interface ModalState {
   key: string | null;
   reservation: MyReservation | null;
 }
-import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "../../../../components/Dropdown/Dropdown";
-import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import NoList from "./NoList";
-import ItemTitleLayout from "@/components/ItemTitleLayout/ItemTitleLayout";
 
 const MyReservationList = ({
   initialReservationList,
@@ -52,7 +47,6 @@ const MyReservationList = ({
     setModalState({ key: null, reservation: null });
   };
 
-  console.log(modalState);
   const dropdownItems = [
     { key: "pending", label: "예약 완료" },
     { key: "canceled", label: "예약 취소" },
@@ -88,7 +82,6 @@ const MyReservationList = ({
     setReservationStatus(status);
     try {
       const response = await fetch(`/api/my-reservations?size=6&status=${status}`);
-      console.log("요청 URL:", response);
       const { reservations: newReservations, cursorId: nextCursorId } = await response.json();
       setReservationList([...newReservations]);
       setCurrentCursorId(nextCursorId || null);
@@ -136,80 +129,59 @@ const MyReservationList = ({
   }, [isLoading, currentCursorId, reservationList, reservationStatus]);
 
   if (reservationList.length === 0) {
-    return <NoList text="아직 등록한 체험이 없어요" />;
+    return (
+      <div className={s["no-list"]}>
+        <Image src="/images/no-list.png" width={110} height={149} alt="" />
+        <p className={s["no-list-notice"]}>아직 등록한 체험이 없어요</p>
+      </div>
+    );
   }
 
   return (
-    <>
-      <div className={cx("dropdown-container")}>
-        <Dropdown>
-          <DropdownToggle>{selectedStatus}</DropdownToggle>
-          <DropdownMenu>
-            {dropdownItems.map(({ key, label }) => (
-              <DropdownItem
-                key={key}
-                onClick={() => {
-                  orderedList(key);
-                  setSelectedStatus(label);
-                }}
-              >
-                {label}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-      <div>
-        {reservationList.map((reservation) => (
-          <MyReservationItem
-            key={reservation?.id}
-            reservation={reservation}
-            onDelete={handleDeleteItem}
-            onOpenModal={handleOpenModal}
-          />
-        ))}
-        {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
-        {modalState.key === reviewModal && modalState.reservation && (
-          <FormInfoModal modalKey={reviewModal} title="후기 작성" reservation={modalState.reservation} />
-        )}
-        {modalState.key === confirmModal && modalState.reservation && (
-          <ConfirmModal
-            modalKey={confirmModal}
-            text="예약을 취소하시겠어요?"
-            id={modalState.reservation.id}
-            onClose={handleCloseModal}
-            onCancel={handleDeleteItem}
-          />
-        )}
-      <div className={s["content-container"]}>
-        <ItemTitleLayout title="예약 내역">
-          <div className={s["dropdown-container"]}>
-            <Dropdown>
-              <DropdownToggle>{selectedStatus}</DropdownToggle>
-              <DropdownMenu>
-                {dropdownItems.map(({ key, label }) => (
-                  <DropdownItem
-                    key={key}
-                    onClick={() => {
-                      orderedList(key);
-                      setSelectedStatus(label);
-                    }}
-                  >
-                    {label}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        </ItemTitleLayout>
-        <div>
-          {reservationList.map((reservation) => (
-            <MyReservationItem key={reservation?.id} reservation={reservation} onDelete={handleDeleteItem} />
-          ))}
-          {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
+    <div className={s["content-container"]}>
+      <ItemTitleLayout title="예약 내역">
+        <div className={s["dropdown-container"]}>
+          <Dropdown>
+            <DropdownToggle>{selectedStatus}</DropdownToggle>
+            <DropdownMenu>
+              {dropdownItems.map(({ key, label }) => (
+                <DropdownItem
+                  key={key}
+                  onClick={() => {
+                    orderedList(key);
+                    setSelectedStatus(label);
+                  }}
+                >
+                  {label}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
         </div>
-      </div>
-    </>
+      </ItemTitleLayout>
+
+      {reservationList.map((reservation) => (
+        <MyReservationItem
+          key={reservation?.id}
+          reservation={reservation}
+          onDelete={handleDeleteItem}
+          onOpenModal={handleOpenModal}
+        />
+      ))}
+      {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
+      {modalState.key === reviewModal && modalState.reservation && (
+        <FormInfoModal modalKey={reviewModal} title="후기 작성" reservation={modalState.reservation} />
+      )}
+      {modalState.key === confirmModal && modalState.reservation && (
+        <ConfirmModal
+          modalKey={confirmModal}
+          text="예약을 취소하시겠어요?"
+          id={modalState.reservation.id}
+          onClose={handleCloseModal}
+          onCancel={handleDeleteItem}
+        />
+      )}
+    </div>
   );
 };
 
