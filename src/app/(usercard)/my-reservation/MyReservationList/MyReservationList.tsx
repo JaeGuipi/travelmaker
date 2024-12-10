@@ -129,34 +129,6 @@ const MyReservationList = ({
     };
   }, [isLoading, currentCursorId, reservationList, reservationStatus]);
 
-  // if (reservationList.length === 0) {
-  //   return (
-  //     <>
-  //       <ItemTitleLayout title="예약 내역">
-  //         <div className={s["dropdown-container"]}>
-  //           <Dropdown>
-  //             <DropdownToggle>{selectedStatus}</DropdownToggle>
-  //             <DropdownMenu>
-  //               {dropdownItems.map(({ key, label }) => (
-  //                 <DropdownItem
-  //                   key={key}
-  //                   onClick={() => {
-  //                     orderedList(key);
-  //                     setSelectedStatus(label);
-  //                   }}
-  //                 >
-  //                   {label}
-  //                 </DropdownItem>
-  //               ))}
-  //             </DropdownMenu>
-  //           </Dropdown>
-  //         </div>
-  //       </ItemTitleLayout>
-  //       <NoList text="아직 등록한 체험이 없어요" />
-  //     </>
-  //   );
-  // }
-
   return (
     <div className={s["content-container"]}>
       <ItemTitleLayout title="예약 내역">
