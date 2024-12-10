@@ -2,7 +2,7 @@
 
 import { GetActivities } from "@/types/activites/activitesTypes";
 import { getActivity } from "@/lib/api/activities";
-import { Activity } from "@/types/types";
+import { MyActivity } from "@/types/types";
 import { useEffect, useState } from "react";
 import s from "./ActivityList.module.scss";
 import classNames from "classnames/bind";
@@ -13,7 +13,7 @@ export const cx = classNames.bind(s);
 
 const ActivityList: React.FC<GetActivities> = ({ activities, totalCount }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("전체");
-  const [filteredActivities, setFilteredActivities] = useState<Activity[]>(activities || []);
+  const [filteredActivities, setFilteredActivities] = useState<MyActivity[]>(activities || []);
   const [loading, setLoading] = useState<boolean>(false);
 
   // 카테고리 목록 조회

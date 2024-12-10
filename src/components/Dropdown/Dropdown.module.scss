@@ -16,9 +16,9 @@
   cursor: pointer;
   background-color: #fff;
 
-
   &.kebab {
     width: 40px;
+
     img {
       width: 100%;
     }
@@ -46,6 +46,13 @@
   position: absolute;
   top: 65px;
   overflow: hidden;
+  z-index: 100;
+
+  .toggle.kebab + & {
+    position: absolute;
+    left: -113px;
+    top:43px;
+  }
 }
 
 .item {

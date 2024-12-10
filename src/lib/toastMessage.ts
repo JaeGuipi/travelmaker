@@ -4,9 +4,11 @@ const toastMessages = {
     signup: "회원가입에 성공하였습니다.",
     editInfo: "내 정보가 수정되었습니다.",
     reservation: "예약이 완료되었습니다.",
-    activity: "등록이 완료되었습니다.",
+    activity: "체험이 등록되었습니다.",
     activityUpdate: "수정이 완료되었습니다.",
     review: "후기 작성이 완료되었습니다.",
+    deleteActivity: "체험이 삭제되었습니다."
+
   },
   error: {
     login: "로그인에 실패하였습니다.",

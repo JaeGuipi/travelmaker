@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   gap: 3.69rem;
+  flex: 1;
 }
 
 .no-list-notice {
@@ -12,10 +13,3 @@
 font-weight: 500;
 color: $gray02;
 }
-
-.dropdown-container {
-  position: absolute;
-  right: 0;
-  top: 0
-}
-
