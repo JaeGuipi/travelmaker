@@ -8,7 +8,7 @@
   border: none;
   border-radius: 12px;
   transition: background-color 0.3s;
-  background-color: #f89a05;
+  background-color: $yellow01;
   color: white;
   cursor: pointer;
 
@@ -29,13 +29,13 @@
   }
 
   &.emptyButton {
-    border: 1px solid #f89a05;
-    background-color: #ffffff;
-    color: #f89a05;
+    border: 1px solid $yellow01;
+    background-color: white;
+    color: $yellow01;
   }
 
   &:disabled {
-    background-color: #a4a1aa;
+    background-color: $gray05;
     color: white;
     cursor: not-allowed;
   }
