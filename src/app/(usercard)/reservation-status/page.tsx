@@ -1,8 +1,8 @@
-import ReservationStatus from "./ReservationStatus";
 import CalendarView from "./CalendarView";
 import { Suspense } from "react";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
+import ReservationTitle from "./ReservationTItle";
 
 const ReservationsPage = async ({
   searchParams,
@@ -32,7 +32,7 @@ const ReservationsPage = async ({
   return (
     <div style={{ width: "100%" }}>
       <h1>체험 예약 관리</h1>
-      <ReservationStatus data={activities} />
+      <ReservationTitle data={activities} />
       <Suspense fallback={<div>로딩 중...</div>}>
         {activityId ? (
           <CalendarView activityId={activityId} defaultYear={year} defaultMonth={month} dashboardData={reservations} />

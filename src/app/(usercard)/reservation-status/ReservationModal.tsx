@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import ModalTabs from "../ModalTabs";
-import s from "./ReservationDetailModalContent.module.scss";
+import ModalTabs from "../../../components/Modal/ModalTabs";
+import s from "./ReservationModal.module.scss";
 import classNames from "classnames/bind";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import ReservationStatusDetail from "@/app/(usercard)/reservation-status/ReservationStatusDetail";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import Image from "next/image";
+import canclebutton from "@/../public/icons/btn_cancel_black.svg";
+import useModalStore from "@/store/useModalStore";
 
 type Props = {
   activityId: string;
@@ -23,7 +26,8 @@ interface ReservationDetail {
 
 const cx = classNames.bind(s);
 
-const ReservationDetailModalContent = ({ activityId, date }: Props) => {
+const ReservationModal = ({ activityId, date }: Props) => {
+  const { toggleModal } = useModalStore();
   const [reservationDetails, setReservationDetails] = useState<ReservationDetail[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -120,10 +124,19 @@ const ReservationDetailModalContent = ({ activityId, date }: Props) => {
     setSelectedReservationTime({ id: activity.scheduleId, title: `${activity.startTime} ~ ${activity.endTime}` });
     setIsDropdownOpen(false);
   };
+  const formatDate = (dateString: string): string => {
+    const [year, month, day] = dateString.split("-");
+    return `${year}년 ${parseInt(month, 10)}월 ${parseInt(day, 10)}일`;
+  };
 
   return (
-    <div>
-      <h2 className={s.modalhead}>예약 정보</h2>
+    <div className={s.container}>
+      <div className={s.headwrap}>
+        <h2 className={s.modalhead}>예약 정보</h2>
+        <button onClick={() => toggleModal("reservationDetail")}>
+          <Image src={canclebutton} alt="취소버튼" />
+        </button>
+      </div>
 
       {/* 🔥 탭 메뉴 */}
       <ModalTabs
@@ -134,19 +147,19 @@ const ReservationDetailModalContent = ({ activityId, date }: Props) => {
         ]}
         onChange={(key) => setActiveTab(key as TabType)}
       />
-      <div>
-        <p>예약 날짜</p>
-        <p>{date}</p>
+      <div className={s.datewrap}>
+        <p className={s.modaltitle}>예약 날짜</p>
+        <p className={s.date}>{formatDate(date)}</p>
         {renderDropdown()}
       </div>
 
       {/* 🔥 탭 콘텐츠 */}
       <div>
-        <p>예약 내역</p>
+        <p className={s.modaltitle}>예약 내역</p>
         {tabContent[activeTab]}
       </div>
     </div>
   );
 };
 
-export default ReservationDetailModalContent;
+export default ReservationModal;

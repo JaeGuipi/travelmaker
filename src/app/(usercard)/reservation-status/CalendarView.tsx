@@ -7,9 +7,10 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { ResponsReservationMonthData } from "@/types/myActivitiesTypes/myActivitiesTypes";
 import useModalStore from "@/store/useModalStore";
 import ModalContainer from "@/components/Modal/ModalContainer";
-import ReservationDetailModalContent from "@/components/Modal/ModalComponents/ReservationDetailModalContent";
 import { useState } from "react";
 import s from "./CalendarView.module.scss";
+import "./Calendar.scss";
+import ReservationModal from "@/app/(usercard)/reservation-status/ReservationModal";
 
 type Props = {
   activityId?: string;
@@ -24,31 +25,57 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
   const { toggleModal } = useModalStore();
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // 선택한 날짜
 
+  console.log("🔥 CalendarView:", dashboardData);
+
   // 🔥 완료, 승인, 예약 각각의 이벤트 생성
-  const events = dashboardData.flatMap((d) => [
-    {
-      start: d.date,
-      end: d.date,
-      title: `완료: ${d.reservations.completed}`,
-      color: "#dddddd",
-      textColor: "#000000",
-      extendedProps: { date: d.date, type: "completed", count: d.reservations.completed, reservations: d.reservations },
-    },
-    {
-      start: d.date,
-      end: d.date,
-      title: `승인: ${d.reservations.confirmed}`,
-      color: "#FFF4E8",
-      extendedProps: { date: d.date, type: "confirmed", count: d.reservations.confirmed, reservations: d.reservations },
-    },
-    {
-      start: d.date,
-      end: d.date,
-      title: `예약: ${d.reservations.pending}`,
-      color: "#0085FF",
-      extendedProps: { date: d.date, type: "pending", count: d.reservations.pending, reservations: d.reservations },
-    },
-  ]);
+  const events = dashboardData.flatMap((d) => {
+    const eventList = [];
+
+    if (d.reservations.completed > 0) {
+      eventList.push({
+        start: d.date,
+        end: d.date,
+        title: `완료: ${d.reservations.completed}`,
+        color: "#dddddd",
+        textColor: "#4B4B4B",
+        extendedProps: {
+          date: d.date,
+          type: "completed",
+          count: d.reservations.completed,
+          reservations: d.reservations,
+        },
+      });
+    }
+
+    if (d.reservations.confirmed > 0) {
+      eventList.push({
+        start: d.date,
+        end: d.date,
+        title: `승인: ${d.reservations.confirmed}`,
+        color: "#FFF4E8",
+        textColor: "#FF7C1D",
+        extendedProps: {
+          date: d.date,
+          type: "confirmed",
+          count: d.reservations.confirmed,
+          reservations: d.reservations,
+        },
+      });
+    }
+
+    if (d.reservations.pending > 0) {
+      eventList.push({
+        start: d.date,
+        end: d.date,
+        title: `예약: ${d.reservations.pending}`,
+        color: "#0085FF",
+        textColor: "#ffffff",
+        extendedProps: { date: d.date, type: "pending", count: d.reservations.pending, reservations: d.reservations },
+      });
+    }
+
+    return eventList;
+  });
 
   // 🔥 날짜 클릭 시 모달 열기
   const handleEventClick = (info: any) => {
@@ -80,7 +107,7 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
       />
 
       <ModalContainer modalKey="reservationDetail">
-        {selectedDate && activityId && <ReservationDetailModalContent activityId={activityId} date={selectedDate} />}
+        {selectedDate && activityId && <ReservationModal activityId={activityId} date={selectedDate} />}
       </ModalContainer>
     </div>
   );

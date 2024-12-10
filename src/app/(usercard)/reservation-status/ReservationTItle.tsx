@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import classNames from "classnames/bind";
-import s from "./ReservationStatus.module.scss";
+import s from "./ReservationTitle.module.scss";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { useRouter } from "next/navigation";
 
 const cx = classNames.bind(s);
 
-const ReservationStatus = ({ data }: { data: { activities: Array<{ id: string; title: string }> } }) => {
+const ReservationTitle = ({ data }: { data: { activities: Array<{ id: string; title: string }> } }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -74,4 +74,4 @@ const ReservationStatus = ({ data }: { data: { activities: Array<{ id: string; t
   );
 };
 
-export default ReservationStatus;
+export default ReservationTitle;

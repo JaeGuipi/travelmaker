@@ -66,3 +66,27 @@ export interface updateReservationStatusQuery {
   activityId: string;
   reservationId: string;
 }
+
+interface Reservation {
+  id: number; // 예약의 고유 ID
+  nickname: string; // 사용자의 닉네임
+  userId: number; // 사용자의 고유 ID
+  teamId: string; // 팀 ID
+  activityId: number; // 활동 ID
+  scheduleId: number; // 일정 ID
+  status: string; // 예약 상태 (예: pending, confirmed, declined 등)
+  reviewSubmitted: boolean; // 리뷰 제출 여부
+  totalPrice: number; // 총 가격
+  headCount: number; // 인원 수
+  date: string; // 예약 날짜 (YYYY-MM-DD 형식의 문자열)
+  startTime: string; // 시작 시간 (HH:MM 형식의 문자열)
+  endTime: string; // 종료 시간 (HH:MM 형식의 문자열)
+  createdAt: string; // 생성 시간 (ISO 8601 형식의 날짜 문자열)
+  updatedAt: string; // 수정 시간 (ISO 8601 형식의 날짜 문자열)
+}
+
+export interface ReservationResponse {
+  cursorId: number; // 다음 페이지의 커서 ID
+  totalCount: number; // 총 예약 수
+  reservations: Reservation[]; // 예약 목록 (Reservation 배열)
+}
