@@ -18,7 +18,7 @@
 
   &.kebab {
     width: 40px;
-
+    background: transparent;
     img {
       width: 100%;
     }
@@ -51,7 +51,7 @@
   .toggle.kebab + & {
     position: absolute;
     left: -113px;
-    top:43px;
+    top: 43px;
   }
 }
 
