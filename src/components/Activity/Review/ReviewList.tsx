@@ -44,7 +44,7 @@ const ReviewList = ({ reviews, totalCount, averageRating, page, size }: ReviewLi
   return (
     <section>
       <div className={s.ratingWrap}>
-        <p className={s.rating}>{averageRating}</p>
+        <p className={s.rating}>{parseFloat(averageRating.toFixed(1))}</p>
         <p className={s.reviewCount}>
           <span>{getSatisfactionText(averageRating)}</span>
           <span className={s.count}>

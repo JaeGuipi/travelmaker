@@ -1,13 +1,4 @@
-import {
-  GetActivities,
-  PostActivity,
-  PostActivityResponse,
-  // ActivityDetail,
-  // GetReviews,
-  PostReservation,
-  ScheduleList,
-  PostReservationResponse,
-} from "@/types/activites/activitesTypes";
+import { GetActivities, PostActivity, PostActivityResponse, ScheduleList } from "@/types/activites/activitesTypes";
 import { PostImage, PostImageResponse } from "@/types/types";
 import API_URL from "@/constants/config";
 
@@ -49,21 +40,6 @@ export const postActivity = async (activeData: PostActivity): Promise<PostActivi
   }
 };
 
-// 체험 상세 조회
-// export const getActivityDetail = async (activityId: number): Promise<ActivityDetail> => {
-//   try {
-//     const response = await fetch(`${API_URL}/activities/${activityId}`, {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     return await response.json();
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
 // 체험 예약 가능일 조회
 export const getAvailableSchedule = async (activityId: number, year: string, month: string): Promise<ScheduleList> => {
   try {
@@ -78,37 +54,6 @@ export const getAvailableSchedule = async (activityId: number, year: string, mon
     throw error;
   }
 };
-
-// 체험 리뷰 조회
-// export const getActivityReview = async (activityId: number): Promise<GetReviews> => {
-//   try {
-//     const response = await fetch(`${API_URL}/activities/${activityId}/reviews`, {
-//       method: "GET",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//     });
-//     return await response.json();
-//   } catch (error) {
-//     throw error;
-//   }
-// };
-
-// 체험 예약 신청
-// export const postReservation = async (
-//   activityId: number,
-//   reservationData: PostReservation,
-// ): Promise<PostReservationResponse> => {
-//   try {
-//     const response = await fetch(`${API_URL}/activities/${activityId}/reservations`, {
-//       method: "POST",
-//       body: JSON.stringify(reservationData),
-//     });
-//     return await response.json();
-//   } catch (error) {
-//     throw error;
-//   }
-// };
 
 // 체험 이미지 url 생성
 export const createActivityImage = async ({ file }: PostImage): Promise<PostImageResponse> => {

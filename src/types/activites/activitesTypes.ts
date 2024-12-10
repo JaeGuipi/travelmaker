@@ -14,7 +14,7 @@ export type Activity = {
 };
 
 export type Schedule = {
-  id?: number;
+  id: number;
   date: string;
   startTime: string;
   endTime: string;
@@ -36,6 +36,7 @@ export interface PostActivity {
   schedules: Schedule[];
   bannerImageUrl: string;
   subImageUrls: string[];
+  subImages: SubImage[] | null;
 }
 
 export type PostActivityResponse = Activity & {
