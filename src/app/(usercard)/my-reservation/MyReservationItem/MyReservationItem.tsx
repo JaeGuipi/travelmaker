@@ -38,7 +38,11 @@ const MyReservationItem = ({
         <em className={s.price}>{`₩${reservation.totalPrice.toLocaleString()}`}</em>
         {reservation.status === "completed" && (
           <div className={s.button}>
-            <FormButton type="button" onClick={() => onOpenModal("review", reservation)}>
+            <FormButton
+              type="button"
+              onClick={() => onOpenModal("review", reservation)}
+              disabled={reservation.reviewSubmitted}
+            >
               후기 작성
             </FormButton>
           </div>

@@ -11,7 +11,7 @@ import toastMessages from "@/lib/toastMessage";
 
 const cx = classNames.bind(s);
 
-const ReviewContent = ({ reservation }: { reservation: MyReservation }) => {
+const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation; onSuccess: () => void }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
 
@@ -32,16 +32,18 @@ const ReviewContent = ({ reservation }: { reservation: MyReservation }) => {
 
       await postReview(formData);
       showSuccess(toastMessages.success.review);
+      onSuccess()
     } catch (error) {
-      if (error instanceof Error) {
-        showError(error.message);
-      }
+      // if (error instanceof Error) {
+      //   showError(error.message);
+      // }
+      console.error(error)
     }
   };
 
   return (
-    <div>
-      <div className={s.contents}>
+    <div className={s["content-box"]}>
+      <div className={s["review-container"]}>
         <div className={s["img-container"]}>
           <Image
             className={s.img}
