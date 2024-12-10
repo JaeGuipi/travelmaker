@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import { MyReservation } from "@/types/types";
 import s from "./MyReservationList.module.scss";
 import MyReservationItem from "../MyReservationItem/MyReservationItem";
-import Image from "next/image";
 import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "@/components/Dropdown/Dropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
@@ -11,6 +10,7 @@ import useModalStore from "@/store/useModalStore";
 import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
 import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 import NoList from "./NoList";
+import ReviewContent from "./ReviewContent";
 
 interface ModalState {
   key: string | null;
@@ -165,7 +165,9 @@ const MyReservationList = ({
           ))}
           {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
           {modalState.key === reviewModal && modalState.reservation && (
-            <FormInfoModal modalKey={reviewModal} title="후기 작성" reservation={modalState.reservation} />
+            <FormInfoModal modalKey={reviewModal} title="후기작성" showSubmit={false}>
+              <ReviewContent reservation={modalState.reservation}/>
+            </FormInfoModal>
           )}
           {modalState.key === confirmModal && modalState.reservation && (
             <ConfirmModal

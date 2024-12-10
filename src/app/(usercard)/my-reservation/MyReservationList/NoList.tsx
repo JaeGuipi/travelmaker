@@ -1,5 +1,5 @@
 import Image from "next/image";
-import s from "./NoList.module.scss"
+import s from "./MyReservationList.module.scss"
 
 const NoList = ({text}:{text:string}) => {
   return (
