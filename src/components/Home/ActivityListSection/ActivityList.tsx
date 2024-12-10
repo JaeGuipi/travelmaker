@@ -1,8 +1,7 @@
 "use client";
 
-import { GetActivities } from "@/types/activites/activitesTypes";
+import { Activity, GetActivities } from "@/types/activites/activitesTypes";
 import { getActivity } from "@/lib/api/activities";
-import { MyActivity } from "@/types/types";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import s from "./ActivityList.module.scss";
