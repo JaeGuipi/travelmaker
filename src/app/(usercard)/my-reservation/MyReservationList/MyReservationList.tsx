@@ -10,6 +10,7 @@ import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
 import useModalStore from "@/store/useModalStore";
 import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
 import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
+import NoList from "./NoList";
 
 interface ModalState {
   key: string | null;
@@ -128,14 +129,33 @@ const MyReservationList = ({
     };
   }, [isLoading, currentCursorId, reservationList, reservationStatus]);
 
-  if (reservationList.length === 0) {
-    return (
-      <div className={s["no-list"]}>
-        <Image src="/images/no-list.png" width={110} height={149} alt="" />
-        <p className={s["no-list-notice"]}>아직 등록한 체험이 없어요</p>
-      </div>
-    );
-  }
+  // if (reservationList.length === 0) {
+  //   return (
+  //     <>
+  //       <ItemTitleLayout title="예약 내역">
+  //         <div className={s["dropdown-container"]}>
+  //           <Dropdown>
+  //             <DropdownToggle>{selectedStatus}</DropdownToggle>
+  //             <DropdownMenu>
+  //               {dropdownItems.map(({ key, label }) => (
+  //                 <DropdownItem
+  //                   key={key}
+  //                   onClick={() => {
+  //                     orderedList(key);
+  //                     setSelectedStatus(label);
+  //                   }}
+  //                 >
+  //                   {label}
+  //                 </DropdownItem>
+  //               ))}
+  //             </DropdownMenu>
+  //           </Dropdown>
+  //         </div>
+  //       </ItemTitleLayout>
+  //       <NoList text="아직 등록한 체험이 없어요" />
+  //     </>
+  //   );
+  // }
 
   return (
     <div className={s["content-container"]}>
@@ -159,27 +179,32 @@ const MyReservationList = ({
           </Dropdown>
         </div>
       </ItemTitleLayout>
-
-      {reservationList.map((reservation) => (
-        <MyReservationItem
-          key={reservation?.id}
-          reservation={reservation}
-          onDelete={handleDeleteItem}
-          onOpenModal={handleOpenModal}
-        />
-      ))}
-      {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
-      {modalState.key === reviewModal && modalState.reservation && (
-        <FormInfoModal modalKey={reviewModal} title="후기 작성" reservation={modalState.reservation} />
-      )}
-      {modalState.key === confirmModal && modalState.reservation && (
-        <ConfirmModal
-          modalKey={confirmModal}
-          text="예약을 취소하시겠어요?"
-          id={modalState.reservation.id}
-          onClose={handleCloseModal}
-          onCancel={handleDeleteItem}
-        />
+      {reservationList.length === 0 ? (
+        <NoList text="아직 등록한 체험이 없어요" />
+      ) : (
+        <>
+          {reservationList.map((reservation) => (
+            <MyReservationItem
+              key={reservation?.id}
+              reservation={reservation}
+              onDelete={handleDeleteItem}
+              onOpenModal={handleOpenModal}
+            />
+          ))}
+          {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
+          {modalState.key === reviewModal && modalState.reservation && (
+            <FormInfoModal modalKey={reviewModal} title="후기 작성" reservation={modalState.reservation} />
+          )}
+          {modalState.key === confirmModal && modalState.reservation && (
+            <ConfirmModal
+              modalKey={confirmModal}
+              text="예약을 취소하시겠어요?"
+              id={modalState.reservation.id}
+              onClose={handleCloseModal}
+              onCancel={handleDeleteItem}
+            />
+          )}
+        </>
       )}
     </div>
   );
