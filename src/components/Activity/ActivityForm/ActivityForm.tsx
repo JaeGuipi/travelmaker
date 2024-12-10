@@ -14,7 +14,7 @@ import ScheduleInput from "@/components/Input/ScheduleInput";
 import BannerInput from "@/components/Input/BannerInput";
 import CategoryDropdown from "@/components/Dropdown/CategoryDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import AddressInput from "../Input/AddressInput";
+import AddressInput from "../../Input/AddressInput";
 
 const ActivityForm = () => {
   const { showSuccess, showError, notify } = useToast();

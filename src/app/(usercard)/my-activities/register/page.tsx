@@ -1,4 +1,4 @@
-import ActivityForm from "@/components/Activity/ActivityForm";
+import ActivityForm from "@/components/Activity/ActivityForm/ActivityForm";
 
 const RegisterActivity = async () => {
   return <ActivityForm />;
