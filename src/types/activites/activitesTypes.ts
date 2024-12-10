@@ -36,6 +36,7 @@ export interface PostActivity {
   schedules: Schedule[];
   bannerImageUrl: string;
   subImageUrls: string[];
+  subImages: SubImage[] | null;
 }
 
 export type PostActivityResponse = Activity & {

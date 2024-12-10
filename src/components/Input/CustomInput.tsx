@@ -9,7 +9,7 @@ import { useState, forwardRef, ChangeEventHandler } from "react";
 const cx = classNames.bind(styles);
 
 interface CustomInputProps {
-  id: string;
+  id?: string;
   label?: string;
   type: string;
   value?: string;
