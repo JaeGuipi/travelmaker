@@ -44,12 +44,6 @@ const AddressInput = ({ control, errors }: AddressInputProps) => {
     });
   };
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined" && typeof daum !== "undefined") {
-  //     console.log("다음 API 로드 완료");
-  //   }
-  // }, []);
-
   return (
     <Controller
       name="address"
