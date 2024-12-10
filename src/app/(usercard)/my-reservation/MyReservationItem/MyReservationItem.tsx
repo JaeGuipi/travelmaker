@@ -2,8 +2,8 @@ import s from "./MyReservationItem.module.scss";
 import classNames from "classnames/bind";
 import { MyReservation } from "@/types/types";
 import getStatusText from "@/utils/getStatusText";
-import ItemLayout from "../ItemLayout/ItemLayout";
-import FormButton from "../Button/FormButton";
+import ItemLayout from "@/app/(usercard)/my-reservation/ItemLayout/ItemLayout";
+import FormButton from "@/components/Button/FormButton";
 
 const cx = classNames.bind(s);
 
@@ -15,9 +15,8 @@ const MyReservationItem = ({
   onDelete: (id: number) => void;
   onOpenModal: (key: string, reservation: MyReservation) => void;
 }) => {
-
   return (
-    <ItemLayout src={reservation.activity.bannerImageUrl} alt={"체험 이미지"}>
+    <ItemLayout src={reservation.activity.bannerImageUrl} alt="체험 이미지">
       <div className={s.info}>
         <p
           className={cx("status", {
@@ -31,7 +30,7 @@ const MyReservationItem = ({
           {getStatusText(reservation.status)}
         </p>
         <p className={s.title}>{reservation.activity.title}</p>
-        <div className={cx("schedule-container")}>
+        <div className={s["schedule-container"]}>
           <span className={s.schedule}>{reservation.date}</span>
           <span className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</span>
           <span className={s.schedule}>{`${reservation.headCount}명`}</span>

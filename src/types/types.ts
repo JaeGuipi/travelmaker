@@ -17,7 +17,7 @@ export interface PostActivites {
 
 //MyActivities
 //내체험리스트 조회
-export type Activity = {
+export type MyActivity = {
   id: number;
   userId: number;
   title: string;
@@ -32,10 +32,10 @@ export type Activity = {
   updatedAt: string;
 };
 
-export interface GetMyActivities {
+export interface MyActivities {
   cursorId: number;
   totalCount: number;
-  activities: Activity[];
+  activities: MyActivity[];
 }
 
 //내 체험 월별 예약 현황 조회
@@ -131,11 +131,11 @@ export type MyReservation = {
   updatedAt: string;
 };
 
-export type MyActivity = {
-  bannerImageUrl: string;
-  title: string;
-  id: number;
-};
+// export type MyActivity = {
+//   bannerImageUrl: string;
+//   title: string;
+//   id: number;
+// };
 
 export interface GetMyReservations {
   cursorId: number;
