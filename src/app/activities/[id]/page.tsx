@@ -49,8 +49,7 @@ async function getActivityReview(activityId: number, page: number, size: number)
 
 export default async function Page({ params }: { params: { id: number } }) {
   const users = await getUsers();
-  const userId = users.id;
-  console.log(userId);
+  const userId = users?.id || null;
   const activity = await getActivityDetail(params.id);
 
   // 페이지네이션을 위한 초기 값

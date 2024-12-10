@@ -13,6 +13,14 @@
     width: 100%;
   }
 
+  .swiper-slide {
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
   &:hover .swiper-ctrl {
     visibility: visible;
     opacity: 1;
