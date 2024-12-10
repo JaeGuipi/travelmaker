@@ -31,7 +31,7 @@ const getUsers = async () => {
 
 // 체험 상세 정보 조회
 async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
-  const response = await fetch(`${API_URL}/activities/${activityId}`, { cache: "no-store" });
+  const response = await fetch(`${API_URL}/activities/${activityId}`, { next: { tags: ["activity"] } });
   return response.json();
 }
 

@@ -69,11 +69,11 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
   return (
     <div className={s["content-container"]}>
       <ItemTitleLayout title="내 체험관리">
-        <FormButton onClick={() => router.push("/my-activities/register-activity")}>체험 등록하기</FormButton>
+        <FormButton onClick={() => router.push("/my-activities/register")}>체험 등록하기</FormButton>
       </ItemTitleLayout>
-        {activityList.map((activity) => (
-          <MyActivityItem key={activity.id} activity={activity} onDelete={handleDeleteItem}></MyActivityItem>
-        ))}
+      {activityList.map((activity) => (
+        <MyActivityItem key={activity.id} activity={activity} onDelete={handleDeleteItem}></MyActivityItem>
+      ))}
     </div>
   );
 };

@@ -16,7 +16,6 @@ const getUsers = async () => {
         "Content-Type": "application/json",
       },
       next: { tags: ["users"] },
-      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -44,9 +43,9 @@ const Header = async () => {
         <Link href={"/"} className={s.logo}>
           <Image src={"/images/logo.png"} fill alt="TRAVEL MAKER" />
         </Link>
-      <div className={s.search}>
-        <SearchBar />
-      </div>
+        <div className={s.search}>
+          <SearchBar />
+        </div>
         {!users ? (
           <div className={s.loginOff}>
             <Link href={"/login"}>로그인</Link>
