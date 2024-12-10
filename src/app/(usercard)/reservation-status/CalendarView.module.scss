@@ -1,0 +1,42 @@
+.calendarContainer {
+  max-width: 1000px; /* 🔥 캘린더 전체 너비 고정 */
+  height: 800px; /* 🔥 캘린더 전체 높이 고정 */
+  overflow: hidden; /* 🔥 불필요한 오버플로우 방지 */
+}
+
+.calendarContainer .fc {
+  height: 100% !important;
+}
+
+.calendarContainer .fc-daygrid {
+  height: 100% !important;
+}
+
+.calendarContainer .fc-daygrid-body {
+  height: 100% !important;
+}
+
+.calendarContainer .fc-daygrid-day-frame {
+  height: 100px !important; /* 🔥 칸의 높이 고정 */
+}
+
+.calendarContainer .fc-daygrid-day {
+  width: 100px !important; /* 🔥 칸의 너비 고정 */
+  max-width: 100px !important;
+}
+
+.calendarContainer .fc-col-header-cell {
+  height: 40px !important; /* 🔥 요일 헤더 높이 고정 */
+}
+
+.calendarContainer .fc-scrollgrid {
+  height: 100% !important;
+}
+
+.calendarContainer .fc-scrollgrid-section-body {
+  height: 100% !important;
+}
+
+.calendarContainer .fc-button {
+  border-radius: 20px !important; /* 🔥 버튼 스타일 수정 */
+}

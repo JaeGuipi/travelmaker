@@ -1,54 +1,150 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import ModalTabs from "../ModalTabs";
+import s from "./ReservationDetailModalContent.module.scss";
+import classNames from "classnames/bind";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import ReservationStatusDetail from "@/app/(usercard)/reservation-status/ReservationStatusDetail";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 type Props = {
   activityId: string;
   date: string;
 };
 
+type TabType = "pending" | "confirmed" | "declined";
+
+interface ReservationDetail {
+  scheduleId: string;
+  startTime: string;
+  endTime: string;
+}
+
+const cx = classNames.bind(s);
+
 const ReservationDetailModalContent = ({ activityId, date }: Props) => {
-  const [data, setData] = useState<any>(null);
+  const [reservationDetails, setReservationDetails] = useState<ReservationDetail[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<TabType>("pending");
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isDropdownFocused, setIsDropdownFocused] = useState<boolean>(false);
+  const [selectedReservationTime, setSelectedReservationTime] = useState<{ id: string; title: string } | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // 🔥 모달이 열리면 데이터 fetch
+  // 🔥 데이터 가져오기
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(`/api/my-activities/reserved-schedule?activityId=${activityId}&date=${date}`);
-        if (!res.ok) throw new Error(`Failed to fetch reservation detail: ${res.statusText}`);
-        const result = await res.json();
-        setData(result);
-      } catch (error) {
-        setError("데이터를 불러오는 중 오류가 발생했습니다.");
-      } finally {
-        setLoading(false);
+    fetchReservationDetails();
+  }, [activityId, date]);
+
+  const fetchReservationDetails = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(`/api/my-activities/reserved-schedule?activityId=${activityId}&date=${date}`);
+      if (!response.ok) throw new Error(`Failed to fetch reservation detail: ${response.statusText}`);
+      const result = await response.json();
+      setReservationDetails(result);
+
+      // 🔥 기본값 설정 - 0번 인덱스의 예약 시간을 기본값으로 설정
+      if (result?.length > 0) {
+        setSelectedReservationTime({
+          id: result[0].scheduleId,
+          title: `${result[0].startTime} ~ ${result[0].endTime}`,
+        });
+      }
+    } catch (error) {
+      setError("데이터를 불러오는 중 오류가 발생했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🔥 외부 클릭 감지
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
       }
     };
 
-    fetchData();
-  }, [activityId, date]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-  if (loading) return <div>로딩 중...</div>;
-
+  if (loading) return <LoadingSpinner />;
   if (error) return <div>{error}</div>;
 
-  return (
-    <div>
-      <h2>{date}의 예약 세부 정보</h2>
-      {data ? (
-        <ul>
-          {data.map((item: any, index: number) => (
-            <li key={index}>
-              {item.scheduleId} - {item.startTime}
+  // 🔥 카테고리 드롭다운 UI
+  const renderDropdown = () => (
+    <div className={s.categoryDropdown} ref={dropdownRef}>
+      <div
+        className={cx("selectBox", isDropdownFocused ? "focused" : "")}
+        tabIndex={0}
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        onFocus={() => setIsDropdownFocused(true)}
+        onBlur={() => setIsDropdownFocused(false)}
+      >
+        <span className={cx("placeholder", !selectedReservationTime ? "gray" : "")}>
+          {selectedReservationTime?.title || "시간 선택"}
+        </span>
+        {isDropdownOpen ? <IoIosArrowUp size={15} /> : <IoIosArrowDown size={15} />}
+      </div>
+      {isDropdownOpen && (
+        <ul className={s.dropdownList}>
+          {reservationDetails.map((item) => (
+            <li key={item.scheduleId} onClick={() => handleSelectReservationTime(item)}>
+              {item.startTime} ~ {item.endTime}
             </li>
           ))}
         </ul>
-      ) : (
-        <p>예약 데이터가 없습니다.</p>
       )}
+    </div>
+  );
+
+  // 🔥 탭 콘텐츠 UI
+  const tabContent = {
+    pending: (
+      <ReservationStatusDetail scheduleId={selectedReservationTime?.id} tapSatus={activeTab} activityId={activityId} />
+    ),
+    declined: (
+      <ReservationStatusDetail scheduleId={selectedReservationTime?.id} tapSatus={activeTab} activityId={activityId} />
+    ),
+    confirmed: (
+      <ReservationStatusDetail scheduleId={selectedReservationTime?.id} tapSatus={activeTab} activityId={activityId} />
+    ),
+  };
+
+  // 🔥 활동 선택 핸들러
+  const handleSelectReservationTime = (activity: { scheduleId: string; startTime: string; endTime: string }) => {
+    setSelectedReservationTime({ id: activity.scheduleId, title: `${activity.startTime} ~ ${activity.endTime}` });
+    setIsDropdownOpen(false);
+  };
+
+  return (
+    <div>
+      <h2 className={s.modalhead}>예약 정보</h2>
+
+      {/* 🔥 탭 메뉴 */}
+      <ModalTabs
+        tabs={[
+          { key: "pending", label: "신청" },
+          { key: "confirmed", label: "승인" },
+          { key: "declined", label: "거절" },
+        ]}
+        onChange={(key) => setActiveTab(key as TabType)}
+      />
+      <div>
+        <p>예약 날짜</p>
+        <p>{date}</p>
+        {renderDropdown()}
+      </div>
+
+      {/* 🔥 탭 콘텐츠 */}
+      <div>
+        <p>예약 내역</p>
+        {tabContent[activeTab]}
+      </div>
     </div>
   );
 };

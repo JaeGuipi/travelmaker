@@ -8,7 +8,8 @@ import { ResponsReservationMonthData } from "@/types/myActivitiesTypes/myActivit
 import useModalStore from "@/store/useModalStore";
 import ModalContainer from "@/components/Modal/ModalContainer";
 import ReservationDetailModalContent from "@/components/Modal/ModalComponents/ReservationDetailModalContent";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import s from "./CalendarView.module.scss";
 
 type Props = {
   activityId?: string;
@@ -23,13 +24,31 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
   const { toggleModal } = useModalStore();
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // 선택한 날짜
 
-  const events = dashboardData.map((d) => ({
-    start: d.date,
-    end: d.date,
-    title: `완료: ${d.reservations.completed}, 승인: ${d.reservations.confirmed}, 예약: ${d.reservations.pending}`,
-    color: d.reservations.confirmed > 0 ? "blue" : d.reservations.pending > 0 ? "orange" : "green",
-    extendedProps: { date: d.date, reservations: d.reservations },
-  }));
+  // 🔥 완료, 승인, 예약 각각의 이벤트 생성
+  const events = dashboardData.flatMap((d) => [
+    {
+      start: d.date,
+      end: d.date,
+      title: `완료: ${d.reservations.completed}`,
+      color: "#dddddd",
+      textColor: "#000000",
+      extendedProps: { date: d.date, type: "completed", count: d.reservations.completed, reservations: d.reservations },
+    },
+    {
+      start: d.date,
+      end: d.date,
+      title: `승인: ${d.reservations.confirmed}`,
+      color: "#FFF4E8",
+      extendedProps: { date: d.date, type: "confirmed", count: d.reservations.confirmed, reservations: d.reservations },
+    },
+    {
+      start: d.date,
+      end: d.date,
+      title: `예약: ${d.reservations.pending}`,
+      color: "#0085FF",
+      extendedProps: { date: d.date, type: "pending", count: d.reservations.pending, reservations: d.reservations },
+    },
+  ]);
 
   // 🔥 날짜 클릭 시 모달 열기
   const handleEventClick = (info: any) => {
@@ -41,7 +60,7 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
   };
 
   return (
-    <div>
+    <div className={s.calendarContainer}>
       <FullCalendar
         key={activityId || "default"}
         plugins={[dayGridPlugin, interactionPlugin]}
