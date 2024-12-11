@@ -61,6 +61,24 @@ export const logout = async () => {
   revalidateTag("users");
 };
 
+// 회원가입
+export const signUpUser = async (userData: SignUp) => {
+  const response = await fetch(`${API_URL}/users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message);
+  }
+
+  return response.json();
+};
+
 // 내 정보 수정
 export const updateUsers = async (data: {
   nickname?: string;
@@ -114,22 +132,4 @@ export const uploadProfileImage = async (formData: FormData) => {
   revalidateTag("users");
 
   return data.profileImageUrl;
-};
-
-// 회원가입
-export const signUpUser = async (userData: SignUp) => {
-  const response = await fetch(`${API_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message);
-  }
-
-  return response.json();
 };
