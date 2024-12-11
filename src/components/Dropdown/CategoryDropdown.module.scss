@@ -20,6 +20,10 @@
       border-color: $yellow01;
     }
 
+    &.errors {
+      border-color: $red01;
+    }
+
     .placeholder {
       font-size: 1.4rem;
 
@@ -63,5 +67,14 @@
         background-color: $orange02;
       }
     }
+  }
+
+  .errorText {
+    color: $red01;
+    @include text(sm);
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 0.8rem;
+    padding-left: 0.5rem;
   }
 }

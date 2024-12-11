@@ -38,3 +38,33 @@ export const MyPageSchema = z
     path: ["newPasswordConfirm"],
     message: "비밀번호가 일치하지 않습니다.",
   });
+
+// 체험 등록, 수정
+export const ActivityFormSchema = z.object({
+  title: z.string().min(1, { message: "제목을 입력해주세요." }),
+  category: z
+    .string()
+    .min(1, { message: "카테고리를 선택해주세요." })
+    .refine((value) => value !== "카테고리", {
+      message: "카테고리를 선택해주세요.",
+    }),
+  description: z.string().min(8, { message: "설명을 8자 이상 입력해주세요." }),
+  price: z.number().min(1000, { message: "가격은 1000원 이상 입력해주세요." }),
+  address: z.string().min(1, { message: "주소를 검색해주세요." }),
+  schedules: z
+    .array(
+      z.object({
+        date: z.string().min(1, { message: "날짜를 입력해주세요." }).optional(),
+        startTime: z.string().min(1, { message: "시작 시간을 입력해주세요." }).optional(),
+        endTime: z.string().min(1, { message: "종료 시간을 입력해주세요." }).optional(),
+      }),
+    )
+    .optional()
+    .default([]),
+  bannerImageUrl: z
+    .string()
+    .url({ message: "유효한 URL을 입력해주세요." })
+    .min(1, { message: "배너 사진을 선택해주세요." })
+    .optional(),
+  subImageUrls: z.array(z.string().url()).optional().default([]),
+});
