@@ -1,23 +1,37 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { PostAuth } from "@/app/types/types";
-import { API_URL } from "@/constants/config";
+import { PostAuth } from "@/types/auth/authTypes";
+import API_URL from "@/constants/config";
 
+// 쿠키 저장 함수
 const setCookie = (name: string, value: string) => {
   const cookieStore = cookies();
   cookieStore.set({
     name,
     value,
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    sameSite: "strict",
     maxAge: 60 * 60 * 24 * 7, // 일주일 동안 유지
+    path: "/",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
   });
 };
 
-export const loginUser = async ({ email, password }: PostAuth) => {
+// 쿠키 삭제 함수
+const deleteCookie = (cookieName: string) => {
+  const cookieStore = cookies();
+  cookieStore.set(cookieName, "", {
+    maxAge: 0,
+    path: "/",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+  });
+};
+
+// 로그인
+export const login = async ({ email, password }: PostAuth) => {
   try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
@@ -27,19 +41,32 @@ export const loginUser = async ({ email, password }: PostAuth) => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (!response.ok) {
-      throw new Error("로그인 실패");
-    }
-
     const data = await response.json();
+
+    if (!data.accessToken || !data.refreshToken) {
+      throw new Error("유효한 사용자 정보가 없습니다.");
+    }
 
     setCookie("accessToken", data.accessToken);
     setCookie("refreshToken", data.refreshToken);
 
-    return { success: true, user: data.user };
+    return { success: true, message: "로그인 성공" };
   } catch (error) {
-    console.error("로그인 오류 발생:", error);
-    throw new Error("로그인 요청 실패");
+    console.error("로그인 요청 실패:", error);
+    throw new Error("로그인에 실패했습니다.");
+  }
+};
+
+// 로그아웃
+export const logout = async () => {
+  try {
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+
+    console.log("로그아웃 성공");
+  } catch (error) {
+    console.error("로그아웃 중 오류 발생:", error);
+    throw new Error("로그아웃 실패");
   }
 };
 

@@ -1,0 +1,34 @@
+.mark-icon {
+  margin-right: 2px;
+  color: $yellow02;
+}
+
+/* 정보 영역 */
+.detail-info {
+  .info-wrap {
+    > div {
+      padding-top: 40px;
+      border-top: 1px solid rgba(248, 154, 5, 0.25);
+
+      .description {
+        padding-top: 16px;
+        @include text(lg);
+      }
+
+      .mapInfo {
+        padding-top: 8px;
+        @include text(md);
+      }
+    }
+
+    > div + div {
+      margin-top: 40px;
+    }
+
+    h3 {
+      color: $yellow02;
+      font-weight: 700;
+      @include text(xl);
+    }
+  }
+}

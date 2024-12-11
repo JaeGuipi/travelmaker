@@ -1,20 +1,20 @@
-import {
-  GetActivities,
-  PostActivity,
-  PostActivityResponse,
-  ActivityDetail,
-  GetReviews,
-  PostReservation,
-  ScheduleList,
-  PostReservationResponse,
-} from "@/app/types/activites/activitesTypes";
-import { PostImage, PostImageResponse } from "@/app/types/types";
-import { API_URL } from "@/constants/config";
+import { GetActivities, PostActivity, PostActivityResponse, ScheduleList } from "@/types/activites/activitesTypes";
+import { PostImage, PostImageResponse } from "@/types/types";
+import API_URL from "@/constants/config";
 
 // 체험 리스트 조회
-export const getActivity = async (): Promise<GetActivities> => {
+export const getActivity = async (params: { size?: number; category?: string } = {}): Promise<GetActivities> => {
   try {
-    const response = await fetch(`${API_URL}/activities?method=offset`, {
+    const query = new URLSearchParams({ method: "offset" });
+
+    // params 객체에서 존재하는 키만 쿼리에 추가
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined) {
+        query.append(key, String(value));
+      }
+    });
+
+    const response = await fetch(`${API_URL}/activities?${query}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -22,6 +22,7 @@ export const getActivity = async (): Promise<GetActivities> => {
     });
     return await response.json();
   } catch (error) {
+    console.error("Fetch error:", error);
     throw error;
   }
 };
@@ -39,21 +40,6 @@ export const postActivity = async (activeData: PostActivity): Promise<PostActivi
   }
 };
 
-// 체험 상세 조회
-export const getActivityDetail = async (activityId: number): Promise<ActivityDetail> => {
-  try {
-    const response = await fetch(`${API_URL}/activities/${activityId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
-
 // 체험 예약 가능일 조회
 export const getAvailableSchedule = async (activityId: number, year: string, month: string): Promise<ScheduleList> => {
   try {
@@ -62,37 +48,6 @@ export const getAvailableSchedule = async (activityId: number, year: string, mon
       headers: {
         "Content-Type": "application/json",
       },
-    });
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
-
-// 체험 리뷰 조회
-export const getActivityReview = async (activityId: number): Promise<GetReviews> => {
-  try {
-    const response = await fetch(`${API_URL}/activities/${activityId}/reviews`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
-
-// 체험 예약 신청
-export const postReservation = async (
-  activityId: number,
-  reservationData: PostReservation,
-): Promise<PostReservationResponse> => {
-  try {
-    const response = await fetch(`${API_URL}/activities/${activityId}/reservations`, {
-      method: "POST",
-      body: JSON.stringify(reservationData),
     });
     return await response.json();
   } catch (error) {

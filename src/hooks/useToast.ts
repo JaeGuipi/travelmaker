@@ -1,14 +1,16 @@
 import { toast, ToastPosition } from "react-hot-toast";
 
 export function useToast() {
-const baseOptions = {
-  duration: 1500,
-  position: "top-center" as ToastPosition,
-  style: {
-    padding: "1.6rem",
-    borderRadius: "0.8rem",
-  },
-};
+  const baseOptions = {
+    duration: 1500,
+    position: "top-center" as ToastPosition,
+    style: {
+      padding: "1.2rem",
+      borderRadius: "0.8rem",
+      marginTop: "15rem",
+      fontSize: "1.6rem",
+    },
+  };
 
   const showSuccess = (msg: string) => {
     toast.dismiss();
@@ -17,7 +19,6 @@ const baseOptions = {
       style: {
         ...baseOptions.style,
         border: "1px solid #00ac07",
-        padding: "1.6rem",
         color: "#00ac07",
       },
     });
@@ -30,7 +31,6 @@ const baseOptions = {
       style: {
         ...baseOptions.style,
         border: "1px solid #ff472e",
-        padding: "16px",
         color: "#ff472e",
       },
     });
@@ -42,13 +42,12 @@ const baseOptions = {
       ...baseOptions,
       icon: "🔔",
       style: {
+        ...baseOptions.style,
         border: "1px solid #f89a05",
-        padding: "1.6rem",
         color: "#f89a05",
       },
     });
   };
-
 
   return { showError, showSuccess, notify };
 }

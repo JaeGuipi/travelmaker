@@ -1,8 +1,6 @@
 import { customFetch } from "@/utils/customFetch";
-import { GetMyReservations, PatchMyReservations, PostMyReservations } from "../../app/types/types";
-import config from "@/constants/config";
-
-const API_URL = config.API_URL;
+import { GetMyReservations, PatchMyReservations, PostMyReservations } from "@/types/types";
+import API_URL from "@/constants/config";
 
 // 내 예약 리스트 조회
 export const getMyReservations = async (): Promise<GetMyReservations> => {
@@ -18,20 +16,20 @@ export const getMyReservations = async (): Promise<GetMyReservations> => {
   return data;
 };
 
-// 내 예약 수정 (취소)
-export const updateMyReservation = async (reservationId: number, updateData: PatchMyReservations) => {
-  const response = await customFetch(`${API_URL}/my-reservations/${reservationId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updateData),
-  });
+// // 내 예약 수정 (취소)
+// export const updateMyReservation = async (reservationId: number, updateData: PatchMyReservations) => {
+//   const response = await customFetch(`${API_URL}/my-reservations/${reservationId}`, {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(updateData),
+//   });
 
-  if (!response.ok) {
-    throw new Error(`내 예약 수정 실패: ${response.statusText}`);
-  }
-};
+//   if (!response.ok) {
+//     throw new Error(`내 예약 수정 실패: ${response.statusText}`);
+//   }
+// };
 
 // 내 예약 리뷰 작성
 export const createMyReservationReview = async (reservationId: number, reviewData: PostMyReservations) => {

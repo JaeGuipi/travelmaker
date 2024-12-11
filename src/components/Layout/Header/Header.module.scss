@@ -1,0 +1,132 @@
+.header {
+  border-bottom: 1px solid $gray06;
+}
+
+.headerContainer {
+  @include flex-between;
+  height: 90px;
+  @include mobile {
+    height: 70px;
+  }
+
+  .logo {
+    position: relative;
+    display: block;
+    width: 350px;
+    height: 54px;
+    object-fit: cover;
+    @include mobile {
+      width: 202px;
+      height: 32px;
+    }
+  }
+
+  .search {
+    flex: 1;
+    padding: 0 5rem;
+    cursor: pointer;
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .userWrap {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    .loginOn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      @include mobile {
+        .alarm {
+          display: none;
+        }
+      }
+
+      .userInfo {
+        display: flex;
+        align-items: center;
+        position: relative;
+        gap: 12px;
+        cursor: pointer;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          display: block;
+          width: 1px;
+          height: 22px;
+          background-color: $gray06;
+
+          @include mobile {
+            display: none;
+          }
+        }
+
+        .profileImgWrap {
+          position: relative;
+          width: 32px;
+          height: 32px;
+          border-radius: 100px;
+          margin-left: 1rem;
+          overflow: hidden;
+
+          .profile {
+            object-fit: cover;
+          }
+        }
+
+        .name {
+          @include text(md);
+          color: $black02;
+        }
+
+        .toggleDropdown {
+          @include text(sm);
+          font-weight: 400;
+          position: absolute;
+          right: 0;
+          top: 5rem;
+          color: $black02;
+          width: 100px;
+          border-radius: 12px;
+          background-color: white;
+          padding: 1rem 0;
+          border: 1px solid $gray06;
+          text-align: center;
+          z-index: 10;
+          @include mobile {
+            top: 4rem;
+          }
+
+          button {
+            width: 100%;
+
+            &:nth-child(1) {
+              border-bottom: 1px solid $gray06;
+              padding-bottom: 0.5rem;
+              margin-bottom: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .loginOff {
+    display: flex;
+    gap: 24px;
+
+    a {
+      color: $black02;
+      @include text(md);
+    }
+  }
+}

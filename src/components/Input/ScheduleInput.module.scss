@@ -1,0 +1,104 @@
+.scheduleInputContainer {
+  margin-top: 1rem;
+
+  .titleLabel {
+    @include text(lg);
+    font-weight: 500;
+  }
+
+  .scheduleInputWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .fieldList {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    @include tablet {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    &:not(:first-child) {
+      border-top: 1px solid $gray06;
+      margin-top: 1rem;
+      padding-top: 1rem;
+    }
+
+    .timeSeparator {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $gray04;
+      margin-bottom: 2rem;
+      @include tablet {
+        display: none;
+      }
+    }
+
+    .fieldItem {
+      flex: 1;
+      @include tablet {
+        width: 25%;
+      }
+
+      &.titme {
+        flex: 0.5;
+      }
+
+      .subLabel {
+        @include text(md);
+        color: $gray04;
+        padding-left: 0.3rem;
+      }
+
+      input {
+        color: $gray05;
+        font-family: Pretendard;
+      }
+    }
+
+    &.active {
+      input {
+        color: $gray01;
+      }
+    }
+  }
+
+  .addButton,
+  .removeButton {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 9px;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 0.3rem;
+    @include flex-center;
+    @include mobile {
+      min-width: 40px;
+      min-height: 40px;
+    }
+
+    svg {
+      font-size: 3rem;
+      color: white;
+    }
+  }
+
+  .addButton {
+    background-color: $yellow03;
+
+    &:hover {
+      background-color: $yellow02;
+    }
+  }
+
+  .removeButton {
+    background-color: $gray06;
+
+    &:hover {
+      background-color: $gray05;
+    }
+  }
+}

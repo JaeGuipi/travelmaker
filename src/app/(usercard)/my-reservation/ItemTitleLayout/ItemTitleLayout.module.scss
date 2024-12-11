@@ -1,0 +1,10 @@
+.list-title-container {
+  @include flex-between;
+  margin-bottom: 2.4rem;
+}
+
+.list-title {
+  @include text(3xl);
+  font-weight: 700;
+  color: $black01;
+}

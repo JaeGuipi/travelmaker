@@ -1,26 +1,30 @@
-import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/app/types/types";
-import { API_URL } from "@/constants/config";
+"use server";
 
-// 회원가입
-export const signUpUser = async (userData: SignUp) => {
-  const response = await fetch(`${API_URL}/users`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
+import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/types/users/usersTypes";
+import API_URL from "@/constants/config";
+import { customFetch } from "@/utils/customFetch";
 
-  if (!response.ok) {
-    throw new Error(`회원가입 실패: ${response.statusText}`);
-  }
+// // 회원가입
+// export const signUpUser = async (userData: SignUp) => {
+//   const response = await fetch(`${API_URL}/users`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userData),
+//   });
 
-  return response.json();
-};
+//   if (!response.ok) {
+//     const errorData = await response.json();
+//     throw new Error(errorData.message);
+//   }
+
+//   return response.json();
+// };
 
 // 내 정보 조회
 export const getMyInfo = async (): Promise<GetMe> => {
-  const response = await fetch(`${API_URL}/users/me`, {
+  const response = await customFetch(`${API_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +32,7 @@ export const getMyInfo = async (): Promise<GetMe> => {
   });
 
   if (!response.ok) {
-    throw new Error(`내 정보 조회 실패: ${response.statusText}`);
+    throw new Error(`서버에서 내 정보 조회 실패: ${response.statusText}`);
   }
 
   return response.json() as Promise<GetMe>;
@@ -36,7 +40,7 @@ export const getMyInfo = async (): Promise<GetMe> => {
 
 // 내 정보 수정
 export const updateMyInfo = async (updateData: PatchMe) => {
-  const response = await fetch(`${API_URL}/users/me`, {
+  const response = await customFetch(`${API_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -52,19 +56,23 @@ export const updateMyInfo = async (updateData: PatchMe) => {
 };
 
 // 프로필 이미지 URL 생성
-export const createProfileImageUrl = async (imageData: PostImage): Promise<PostImageResponse> => {
-  const formData = new FormData();
-  formData.append("image", imageData.file);
+export const createProfileImageUrl = async (formData: FormData): Promise<PostImageResponse> => {
+  // 서버 액션에서 FormData는 직접 처리할 수 없다.
+  console.log(formData);
 
-  const response = await fetch(`${API_URL}/users/me/image`, {
+  const response = await customFetch(`${API_URL}/users/me/image`, {
     method: "POST",
-    //Content-Type 설정하지 않음 (브라우저 자동 설정)
     body: formData,
   });
 
+  console.log(response);
+
   if (!response.ok) {
-    throw new Error(`프로필 이미지 URL 생성 실패: ${response.statusText}`);
+    const errorMessage = await response.text();
+    throw new Error(`프로필 이미지 URL 생성 실패: ${response.statusText} - ${errorMessage}`);
   }
 
-  return response.json() as Promise<PostImageResponse>;
+  // return response.json() as Promise<PostImageResponse>;
+  const data: PostImageResponse = await response.json();
+  return data;
 };

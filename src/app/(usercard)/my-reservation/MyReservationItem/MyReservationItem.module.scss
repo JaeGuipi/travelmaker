@@ -1,0 +1,119 @@
+.info {
+  flex: 1;
+  padding: 2.1rem 2.4rem;
+  position: relative;
+  overflow: hidden;
+
+  @include tablet {
+    padding: 1.2rem 1.8rem;
+  }
+
+  @include mobile {
+    padding: 1.1rem 0.8rem;
+  }
+}
+
+.status {
+  @include text(lg);
+  font-weight: 700;
+  color: $red01;
+  margin-bottom: 0.8rem;
+
+  @include mobile {
+    @include text(md);
+  }
+
+  &.pending {
+    color: $blue02;
+  }
+
+  &.confirmed {
+    color: $orange01;
+  }
+
+  &.declined {
+    color: $red01;
+  }
+
+  &.canceled,
+  &.completed {
+    color: $gray02;
+  }
+}
+
+.title {
+  @include text(xl);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include tablet {
+    @include text(2lg);
+    margin-bottom: 0.4rem;
+  }
+
+  @include mobile {
+    @include text(md);
+    margin-bottom: 0;
+  }
+}
+.schedule-container {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 1.6rem;
+}
+
+.schedule {
+  @include text(2lg);
+
+  &.schedule:not(:last-child)::after {
+    content: "·";
+    margin: 0 8px;
+    color: inherit;
+  }
+
+  @include tablet {
+    @include text(md);
+    margin-bottom: 1rem;
+  }
+
+  @include mobile {
+    @include text(xs);
+    margin-bottom: 0;
+  }
+}
+
+.price {
+  @include text(2xl);
+  font-weight: 500;
+  color: #112211;
+
+  @include tablet {
+    @include text(xl);
+  }
+
+  @include mobile {
+    @include text(2lg);
+  }
+}
+
+.button {
+  position: absolute;
+  right: 2.4rem;
+  bottom: 2.1rem;
+
+  @include tablet {
+    right: 1.8rem;
+    bottom: 1.2rem;
+  }
+
+  @include mobile {
+    @include text(md);
+    right: 1.1rem;
+    bottom: 0.8rem;
+  }
+}
