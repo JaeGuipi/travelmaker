@@ -53,6 +53,17 @@
         color: $gray04;
         padding-left: 0.3rem;
       }
+
+      input {
+        color: $gray05;
+        font-family: Pretendard;
+      }
+    }
+
+    &.active {
+      input {
+        color: $gray01;
+      }
     }
   }
 
@@ -60,7 +71,6 @@
   .removeButton {
     min-width: 50px;
     min-height: 50px;
-    background-color: $yellow02;
     border-radius: 9px;
     transition: all 0.3s ease-in-out;
     margin-bottom: 0.3rem;

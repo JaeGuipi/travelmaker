@@ -1,0 +1,33 @@
+.addressInputContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  @include tablet {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .customInput {
+    flex: 1;
+  }
+
+  .searchButton {
+    @include text(md);
+    font-weight: 500;
+    color: white;
+    padding: 0 1rem;
+    min-height: 40px;
+    background-color: $yellow03;
+    border-radius: 9px;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 0.5rem;
+    @include flex-center;
+    @include mobile {
+      min-height: 30px;
+    }
+
+    &:hover {
+      background-color: $yellow02;
+    }
+  }
+}
