@@ -37,6 +37,7 @@ const Header = async () => {
   } catch (error) {
     console.error("유저 정보 요청 실패", error);
   }
+
   return (
     <header className={s.header}>
       <section className={cx("headerContainer", "container")}>
