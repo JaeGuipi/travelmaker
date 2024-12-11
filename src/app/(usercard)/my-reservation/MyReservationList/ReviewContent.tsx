@@ -1,4 +1,5 @@
 import FormButton from "@/components/Button/FormButton";
+import s from "@/components/Modal/ModalComponents/ModalStyle.module.scss";
 import Image from "next/image";
 import { useState } from "react";
 import classNames from "classnames/bind";
@@ -7,7 +8,6 @@ import { MyReservation } from "@/types/types";
 import { postReview } from "@/actions/myReservation";
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
-import s from "./ReviewContent.module.scss";
 
 const cx = classNames.bind(s);
 
