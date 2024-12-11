@@ -14,6 +14,7 @@ import ScheduleInput from "@/components/Input/ScheduleInput";
 import BannerInput from "@/components/Input/BannerInput";
 import CategoryDropdown from "@/components/Dropdown/CategoryDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import AddressInput from "../../Input/AddressInput";
 
 const ActivityForm = () => {
   const { showSuccess, showError, notify } = useToast();
@@ -31,6 +32,7 @@ const ActivityForm = () => {
     formState: { errors, isValid },
     reset,
   } = useForm<PostActivity>({
+    mode: "onChange",
     defaultValues: {
       title: "",
       category: "",
@@ -39,7 +41,7 @@ const ActivityForm = () => {
       price: 0,
       schedules: [],
       bannerImageUrl: "",
-      subImageUrls: [""],
+      subImageUrls: [],
     },
   });
 
@@ -193,13 +195,38 @@ const ActivityForm = () => {
           </FormButton>
         </div>
         <div className={s.activityFormBody}>
-          <CustomInput id="title" type="text" placeholder="제목" {...register("title")} />
+          <CustomInput
+            id="title"
+            type="text"
+            placeholder="제목"
+            {...register("title", {
+              required: { value: true, message: "제목을 입력해주세요." },
+            })}
+            errors={errors.title?.message}
+          />
           <Controller
             name="category"
             control={control}
-            render={({ field }) => <CategoryDropdown id="category" value={field.value} onChange={field.onChange} />}
+            render={({ field }) => (
+              <CategoryDropdown
+                id="category"
+                value={field.value}
+                onChange={field.onChange}
+                errors={errors.category?.message}
+              />
+            )}
           />
-          <CustomInput id="description" type="text" placeholder="설명" {...register("description")} isTextArea />
+          <CustomInput
+            id="description"
+            type="text"
+            placeholder="설명"
+            {...register("description", {
+              required: { value: true, message: "설명을 입력해주세요." },
+              minLength: { value: 8, message: "설명을 8자 이상 입력해주세요." },
+            })}
+            isTextArea
+            errors={errors.description?.message}
+          />
           <CustomInput
             label="가격"
             id="price"
@@ -207,12 +234,14 @@ const ActivityForm = () => {
             placeholder="가격"
             {...register("price", {
               valueAsNumber: true,
-              required: "가격을 입력해주세요.",
-              min: { value: 1, message: "가격은 1 이상이어야 합니다." },
+              required: { value: true, message: "가격을 입력해주세요." },
+              min: { value: 1000, message: "가격은 1000원 이상 입력해주세요." },
+              validate: (value) => value >= 1000 || "가격은 1000원 이상 입력해주세요.",
             })}
+            errors={errors.price?.message}
           />
-          <CustomInput label="주소" id="address" type="text" placeholder="주소" {...register("address")} />
-          <ScheduleInput control={control} register={register} errors={errors} />
+          <AddressInput control={control} errors={errors.address?.message} />
+          <ScheduleInput control={control} register={register} />
           <BannerInput
             title="배너 이미지"
             inputId="bannerImageUrl"

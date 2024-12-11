@@ -71,9 +71,9 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
       <ItemTitleLayout title="내 체험관리">
         <FormButton onClick={() => router.push("/my-activities/register")}>체험 등록하기</FormButton>
       </ItemTitleLayout>
-        {activityList.map((activity) => (
-          <MyActivityItem key={activity.id} activity={activity} onDelete={handleDeleteItem}></MyActivityItem>
-        ))}
+      {activityList.map((activity) => (
+        <MyActivityItem key={activity.id} activity={activity} onDelete={handleDeleteItem}></MyActivityItem>
+      ))}
     </div>
   );
 };
