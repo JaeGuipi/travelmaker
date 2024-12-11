@@ -7,6 +7,11 @@ import { logout } from "@/lib/api/auth";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
+import { RiUserSettingsLine } from "react-icons/ri";
+import { GoChecklist } from "react-icons/go";
+import { AiOutlineSetting } from "react-icons/ai";
+import { TbCalendarCheck } from "react-icons/tb";
+import { MdOutlineLogout } from "react-icons/md";
 
 const User = ({ users }: { users: GetMe | null }) => {
   const router = useRouter();
@@ -57,8 +62,26 @@ const User = ({ users }: { users: GetMe | null }) => {
 
             {isDropdownOpen && (
               <div className={s.toggleDropdown}>
-                <button onClick={handleLogout}>로그아웃</button>
-                <Link href={"/my-info"}>마이페이지</Link>
+                <Link href={"/my-info"}>
+                  <RiUserSettingsLine />내 프로필
+                </Link>
+                <Link href={"/my-reservation"}>
+                  <GoChecklist />
+                  예약 내역
+                </Link>
+                <Link href={"/my-activities"}>
+                  <AiOutlineSetting />내 체험 관리
+                </Link>
+                <Link href={"/reservation-status"}>
+                  <TbCalendarCheck />
+                  예약 현황
+                </Link>
+                <div className={s.logout}>
+                  <button onClick={handleLogout}>
+                    <MdOutlineLogout />
+                    로그아웃
+                  </button>
+                </div>
               </div>
             )}
           </div>
