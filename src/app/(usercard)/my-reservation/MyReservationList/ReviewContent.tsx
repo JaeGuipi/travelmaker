@@ -1,13 +1,13 @@
 import FormButton from "@/components/Button/FormButton";
-import s from "@/components/Modal/ModalComponents/ModalStyle.module.scss";
+import s from "./ReviewContent.module.scss";
 import Image from "next/image";
 import { useState } from "react";
 import classNames from "classnames/bind";
 import { FaStar } from "react-icons/fa";
 import { MyReservation } from "@/types/types";
 import { postReview } from "@/actions/myReservation";
-import { useToast } from "@/hooks/useToast";
-import toastMessages from "@/lib/toastMessage";
+// import { useToast } from "@/hooks/useToast";
+// import toastMessages from "@/lib/toastMessage";
 
 const cx = classNames.bind(s);
 
@@ -15,7 +15,7 @@ const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation;
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
 
-  const { showSuccess, showError } = useToast();
+  // const { showSuccess, showError } = useToast();
 
   const starArr = [1, 2, 3, 4, 5];
 
@@ -23,7 +23,7 @@ const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation;
     setRating(star);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async () => {
     try {
       const formData = new FormData();
       formData.append("reservationId", reservation.id.toString());
@@ -31,13 +31,13 @@ const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation;
       formData.append("content", review);
 
       await postReview(formData);
-      showSuccess(toastMessages.success.review);
-      onSuccess()
+      // showSuccess(toastMessages.success.review);
+      onSuccess();
     } catch (error) {
       // if (error instanceof Error) {
       //   showError(error.message);
       // }
-      console.error(error)
+      console.error(error);
     }
   };
 
