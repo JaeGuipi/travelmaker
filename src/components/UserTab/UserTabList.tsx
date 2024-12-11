@@ -15,7 +15,7 @@ const UserTabList = () => {
   return (
     <div className={s.userTabList}>
       <Link href="/my-info" className={pathname.startsWith("/my-info") ? s.active : ""}>
-        <RiUserSettingsLine />내 정보
+        <RiUserSettingsLine />내 프로필
       </Link>
 
       <Link href="/my-reservation" className={pathname.startsWith("/my-reservation") ? s.active : ""}>

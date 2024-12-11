@@ -6,5 +6,7 @@
 .list-title {
   @include text(3xl);
   font-weight: 700;
-  color: $black01;
+  @include mobile {
+    @include text(2xl);
+  }
 }

@@ -5,7 +5,7 @@ import styles from "./Dropdown.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
 import kebab from "@/../public/icons/btn_kebab.svg";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 const cx = classNames.bind(styles);
 
@@ -63,13 +63,13 @@ export const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantT
     throw new Error("DropdownToggle은 Dropdown 내부에서 사용되어야 합니다.");
   }
 
-  const { setIsOpen } = context;
+  const { isOpen, setIsOpen } = context;
 
   return (
     <button onClick={() => setIsOpen((prev) => !prev)} className={cx("toggle", variant)}>
       {children}
       {variant === "kebab" && <Image src={kebab} alt="캐밥아이콘" />}
-      {variant === "default" && <IoMdArrowDropdown size={20} />}
+      {variant === "default" && (isOpen ? <IoIosArrowUp size={15} /> : <IoIosArrowDown size={15} />)}
     </button>
   );
 };
