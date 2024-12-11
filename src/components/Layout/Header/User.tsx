@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { GetMe } from "@/types/users/usersTypes";
-import { logout } from "@/lib/api/auth";
+import { logout } from "@/actions/auth.action";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
