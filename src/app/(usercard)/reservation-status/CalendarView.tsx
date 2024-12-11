@@ -89,25 +89,27 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
 
   return (
     <div className={s.calendarContainer}>
-      <FullCalendar
-        key={activityId || "default"}
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        initialDate={new Date(defaultYear, defaultMonth - 1, 1)}
-        events={events}
-        datesSet={(arg) => {
-          const newYear = arg.view.currentStart.getFullYear();
-          const newMonth = arg.view.currentStart.getMonth() + 1;
-          const query = new URLSearchParams(searchParams as unknown as URLSearchParams);
-          query.set("year", newYear.toString());
-          query.set("month", newMonth.toString());
-          if (activityId) query.set("activity", activityId);
-          router.push(`?${query.toString()}`);
-        }}
-        eventClick={handleEventClick}
-      />
+      <div className="fcr">
+        <FullCalendar
+          key={activityId || "default"}
+          plugins={[dayGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          initialDate={new Date(defaultYear, defaultMonth - 1, 1)}
+          events={events}
+          datesSet={(arg) => {
+            const newYear = arg.view.currentStart.getFullYear();
+            const newMonth = arg.view.currentStart.getMonth() + 1;
+            const query = new URLSearchParams(searchParams as unknown as URLSearchParams);
+            query.set("year", newYear.toString());
+            query.set("month", newMonth.toString());
+            if (activityId) query.set("activity", activityId);
+            router.push(`?${query.toString()}`);
+          }}
+          eventClick={handleEventClick}
+        />
+      </div>
 
-      <ModalContainer modalKey="reservationDetail">
+      <ModalContainer modalKey="reservationDetail" className={s.reviewmodal}>
         {selectedDate && activityId && <ReservationModal activityId={activityId} date={selectedDate} />}
       </ModalContainer>
     </div>
