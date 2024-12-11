@@ -1,117 +1,114 @@
-.fc-direction-ltr {
-  min-height: 241px;
-}
+.fullcalendar {
+  .fc-direction-ltr {
+    min-height: 241px;
+  }
 
-.fc .fc-button-primary {
-  background-color: transparent;
-  border-color: transparent;
-  color: #000;
-
-  &:hover,
-  &:focus {
+  .fc .fc-button-primary {
     background-color: transparent;
     border-color: transparent;
-    color: inherit;
+    color: #000;
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+      border-color: transparent;
+      color: inherit;
+    }
+
+    .fc-icon {
+      width: 16px;
+      height: 15px;
+    }
+
+    .fc-icon::before {
+      content: "";
+    }
+
+    .fc-icon-chevron-left {
+      display: block;
+      background-image: url("/icons/calendar_prev.svg");
+      background-size: 16px;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .fc-icon-chevron-right {
+      background-image: url("/icons/calendar_next.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 
-  .fc-icon {
-    width: 16px;
-    height: 15px;
+  /* 월 & 년 */
+  .fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0;
+    padding: 5px 0;
+
+    .fc-toolbar-title {
+      font-weight: 700;
+      @include text(md);
+    }
   }
 
-  .fc-icon::before {
-    content: "";
-  }
-
-  .fc-icon-chevron-left {
-    display: block;
-    background-image: url("/icons/calendar_prev.svg");
-    background-size: 16px;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  .fc-icon-chevron-right {
-    background-image: url("/icons/calendar_next.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-}
-
-/* 월 & 년 */
-.fc .fc-toolbar.fc-header-toolbar {
-  margin-bottom: 0;
-  padding: 5px 0;
-
-  .fc-toolbar-title {
-    font-weight: 700;
-    @include text(md);
-  }
-}
-
-/* 요일 */
-.fc-col-header {
-  width: 100% !important;
-  .fc-col-header-cell-cushion {
-    padding: 6.5px 4.5px;
-    font-weight: 700;
-  }
-}
-
-.fc-scroller {
-  overflow: visible !important;
-}
-.fc-theme-standard .fc-scrollgrid {
-  border: 0;
-}
-
-/* 날짜 */
-.fc .fc-daygrid-body {
-  width: 100% !important;
-  .fc-scrollgrid-sync-table {
+  /* 요일 */
+  .fc-col-header {
     width: 100% !important;
-  }
-}
-
-.fc-theme-standard td,
-.fc-theme-standard th {
-  border: 0;
-}
-
-.fc-theme-standard td.active {
-  border-radius: 8px;
-  background-color: var(--fc-today-bg-color);
-}
-
-/* 날짜 - active */
-.fc .fc-daygrid-day.active {
-  background: $yellow01;
-}
-
-.fc .fc-daygrid-day-frame {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 32px;
-  cursor: pointer;
-
-  /* 날짜 - 숫자 */
-  .fc-daygrid-day-number {
-    padding: 0;
+    .fc-col-header-cell-cushion {
+      padding: 6.5px 4.5px;
+      font-weight: 700;
+    }
   }
 
-  /* 날짜 - 이벤트 */
-  .fc-daygrid-day-events {
+  .fc-scroller {
+    overflow: visible !important;
+  }
+  .fc-theme-standard .fc-scrollgrid {
+    border: 0;
+  }
+
+  /* 날짜 영역 */
+  .fc .fc-daygrid-body {
+    width: 100% !important;
+    .fc-scrollgrid-sync-table {
+      width: 100% !important;
+    }
+  }
+
+  .fc-theme-standard td,
+  .fc-theme-standard th {
+    border: 0;
+  }
+
+  .fc-theme-standard td.active {
+    border-radius: 8px;
+    background-color: var(--fc-today-bg-color);
+  }
+
+  .fc .fc-daygrid-day-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 32px;
+    cursor: pointer;
+
+    /* 날짜 - 숫자 */
+    .fc-daygrid-day-number {
+      padding: 0;
+    }
+
+    /* 날짜 - 이벤트 */
+    .fc-daygrid-day-events {
+      display: none;
+    }
+
+    .fc-highlight {
+      border-radius: 8px;
+      background-color: $yellow01;
+    }
+  }
+
+  .fc .fc-license-message {
     display: none;
   }
-
-  .fc-highlight {
-    border-radius: 8px;
-    background-color: $yellow01;
-  }
-}
-
-.fc .fc-license-message {
-  display: none;
 }
