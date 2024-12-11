@@ -12,10 +12,11 @@ import DetailSubImgSwiper from "./DetailSubImgSwiper";
 interface DetailSubImgProps {
   activity: ActivityDetailResponse;
   userId: number;
+  subImages?: { id: number; imageUrl: string }[];
 }
 
 const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
-  const { subImages } = activity;
+  const { subImages = [] } = activity;
   const [isClient, setIsClient] = useState(false);
   const isMobileOrBelow = useMediaQuery({ query: "(max-width: 768px)" });
 
@@ -25,6 +26,10 @@ const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
 
   if (!isClient) {
     return null;
+  }
+
+  if (!Array.isArray(subImages)) {
+    return <p>이미지가 없습니다.</p>;
   }
 
   return (
@@ -65,11 +70,12 @@ const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
           </li>
           <li>
             <ul>
-              {subImages.map((subImg) => (
-                <li key={subImg.id}>
-                  <Image src={subImg.imageUrl} width={294} height={263} alt="상세 서브이미지" />
-                </li>
-              ))}
+              {Array.isArray(subImages) &&
+                subImages.map((subImg) => (
+                  <li key={subImg.id}>
+                    <Image src={subImg.imageUrl} width={294} height={263} alt="상세 서브이미지" />
+                  </li>
+                ))}
             </ul>
           </li>
         </ul>

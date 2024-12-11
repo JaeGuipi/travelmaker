@@ -39,3 +39,8 @@
   padding-top: 14px;
   @include text(md);
 }
+
+.hasEvent {
+  border-radius: 8px;
+  background: $orange02;
+}
