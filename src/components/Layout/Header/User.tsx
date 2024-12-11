@@ -7,20 +7,32 @@ import { logout } from "@/lib/api/auth";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
+import Notificationlist from "@/components/Notification/Notification";
+import { MyNotifications } from "@/types/notifications/notificationsTypes";
 
-const User = ({ users }: { users: GetMe | null }) => {
+const User = ({ users, initialNotifications }: { users: GetMe | null; initialNotifications: MyNotifications }) => {
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const notificationRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
+    setIsModalOpen(false);
+  };
+
+  const toggleNotification = () => {
+    setIsDropdownOpen(false);
+    setIsModalOpen(!isModalOpen);
   };
 
   const handleClickOutside = (e: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
       setIsDropdownOpen(false);
     }
+
+    if (notificationRef.current && !notificationRef.current.contains(e.target as Node)) setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -40,10 +52,16 @@ const User = ({ users }: { users: GetMe | null }) => {
     <div className={s.userWrap} ref={dropdownRef}>
       {users && (
         <div className={s.loginOn}>
-          <button className={s.alarm}>
+          <button className={s.alarm} onClick={toggleNotification}>
             <Image src={"/icons/btn_alarm.svg"} width={15} height={17} alt="알림" />
           </button>
-
+          {isModalOpen && (
+            <Notificationlist
+              ref={notificationRef}
+              onClose={() => setIsModalOpen(false)}
+              notifications={initialNotifications}
+            />
+          )}
           <div className={s.userInfo} onClick={toggleDropdown}>
             <div className={s.profileImgWrap}>
               <Image

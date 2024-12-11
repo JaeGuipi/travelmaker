@@ -6,8 +6,7 @@
   flex-direction: column;
   gap: 0.4rem;
   border-radius: 0.5rem;
-
-  
+  z-index: 300;
 }
 
 .status-container {
@@ -45,12 +44,14 @@
 }
 
 .notificationList-container {
+  border: 1px solid #ddd;
   border-radius: 1rem;
   padding: 2.4rem 2rem;
-  background-color: $green03;
+  background-color: $orange02;
   position: absolute;
-  right: 50px;
-  top: 100px;
+  right: 0;
+  top: 50px;
+  z-index: 300;
 }
 
 .conunt-container {
