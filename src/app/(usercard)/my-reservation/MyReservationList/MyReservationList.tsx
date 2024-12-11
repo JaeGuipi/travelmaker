@@ -48,6 +48,12 @@ const MyReservationList = ({
     setModalState({ key: null, reservation: null });
   };
 
+  const handleReviewSuccess = (id: number) => {
+    setReservationList((prev) =>
+      prev.map((reservation) => (reservation.id === id ? { ...reservation, reviewSubmitted: true } : reservation)),
+    );
+  };
+
   const dropdownItems = [
     { key: "pending", label: "예약 완료" },
     { key: "canceled", label: "예약 취소" },
@@ -166,7 +172,10 @@ const MyReservationList = ({
           {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
           {modalState.key === reviewModal && modalState.reservation && (
             <FormInfoModal modalKey={reviewModal} title="후기작성" showSubmit={false}>
-              <ReviewContent reservation={modalState.reservation}/>
+              <ReviewContent reservation={modalState.reservation} onSuccess={() => {
+                handleReviewSuccess(modalState.reservation!.id);
+                handleCloseModal()
+              }}/>
             </FormInfoModal>
           )}
           {modalState.key === confirmModal && modalState.reservation && (
