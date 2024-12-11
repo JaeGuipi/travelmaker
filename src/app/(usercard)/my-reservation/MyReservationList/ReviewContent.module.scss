@@ -1,0 +1,131 @@
+.contents {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.img-container {
+  width: 12.6rem;
+  height: 12.6rem;
+  flex-shrink: 0;
+
+  @include mobile {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.2rem;
+}
+
+.activity-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-title {
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include text(xl);
+  font-weight: 600;
+
+  @include mobile {
+    @include text(lg);
+  }
+}
+
+.schedule-container {
+  display: flex;
+  margin-top: 1.2rem;
+}
+
+.schedule {
+  @include text(lg);
+
+  &.schedule:not(:last-child)::after {
+    content: "·";
+    margin: 0 8px;
+    color: inherit;
+  }
+
+  @include mobile {
+    @include text(md);
+  }
+}
+
+.price {
+  @include text(3xl);
+
+  font-weight: 600;
+  margin-top: 2.4rem;
+  text-align: left;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 5.4rem;
+    width: 100%;
+    height: 1px;
+    background-color: $gray06;
+  }
+
+  @include mobile {
+    @include text(xl);
+    margin-top: 1.3rem;
+
+    &::before {
+      bottom: 3.4rem;
+    }
+  }
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  margin-top: 0.4rem;
+}
+
+.star {
+  color: $gray04;
+
+  &:hover {
+    color: $gray04;
+    opacity: 0.5;
+  }
+}
+
+.star.selected {
+  color: $yellow02;
+}
+
+.review {
+  width: 100%;
+  margin: 2.4rem 0;
+  resize: none;
+  height: 24rem;
+  border: 1px solid $gray04;
+  border-radius: 4px;
+  padding: 1.6rem;
+  @include text(lg);
+  font-family: Pretendard;
+
+  &::placeholder {
+    @include text(lg);
+    color: $gray02;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
