@@ -23,8 +23,10 @@ const MyActivityItem = ({ activity, onDelete }: { activity: MyActivity; onDelete
     <ItemLayout src={activity.bannerImageUrl} alt="체험 이미지">
       <div className={s["info"]}>
         <div className={s["rating-container"]}>
+          <div className={s["rating-box"]}>
           <FaStar size={19} className={s["star"]} />
           <span className={s["rating"]}>{`${activity.rating} (${activity.reviewCount})`}</span>
+          </div>
           <p className={s["title"]}>{activity.title}</p>
         </div>
         <div className={s["kebab-container"]}>

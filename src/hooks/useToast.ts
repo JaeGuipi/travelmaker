@@ -5,9 +5,9 @@ export function useToast() {
     duration: 1500,
     position: "top-center" as ToastPosition,
     style: {
-      padding: "1.6rem",
+      padding: "1.2rem",
       borderRadius: "0.8rem",
-      marginTop: "8.5rem",
+      marginTop: "15rem",
       fontSize: "1.6rem",
     },
   };
@@ -19,7 +19,6 @@ export function useToast() {
       style: {
         ...baseOptions.style,
         border: "1px solid #00ac07",
-        padding: "1.6rem",
         color: "#00ac07",
       },
     });
@@ -32,7 +31,6 @@ export function useToast() {
       style: {
         ...baseOptions.style,
         border: "1px solid #ff472e",
-        padding: "16px",
         color: "#ff472e",
       },
     });
@@ -46,7 +44,6 @@ export function useToast() {
       style: {
         ...baseOptions.style,
         border: "1px solid #f89a05",
-        padding: "1.6rem",
         color: "#f89a05",
       },
     });
