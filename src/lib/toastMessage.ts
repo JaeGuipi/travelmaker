@@ -7,7 +7,8 @@ const toastMessages = {
     activity: "체험이 등록되었습니다.",
     activityUpdate: "수정이 완료되었습니다.",
     review: "후기 작성이 완료되었습니다.",
-    deleteActivity: "체험이 삭제되었습니다."
+    deleteActivity: "체험이 삭제되었습니다.",
+    deleteNotification: "알림이 삭제되었습니다."
 
   },
   error: {

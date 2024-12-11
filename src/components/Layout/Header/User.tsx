@@ -7,7 +7,7 @@ import { logout } from "@/lib/api/auth";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
-import Notificationlist from "@/components/Notification/Notification";
+import Notificationlist from "@/components/Layout/Header/Notification/Notification";
 import { MyNotifications } from "@/types/notifications/notificationsTypes";
 
 const User = ({ users, initialNotifications }: { users: GetMe | null; initialNotifications: MyNotifications }) => {

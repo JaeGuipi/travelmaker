@@ -38,14 +38,12 @@ const Header = async () => {
   } catch (error) {
     console.error("유저 정보 요청 실패", error);
   }
-
+  
   const response = await customFetch(`${API_URL}/my-notifications?size=4`)
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패")
   }
-
   const myNotifications = await response.json();
-  console.log(myNotifications)
 
   return (
     <header className={s.header}>
