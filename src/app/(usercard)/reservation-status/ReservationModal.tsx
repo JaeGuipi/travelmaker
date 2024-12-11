@@ -59,6 +59,7 @@ const ReservationModal = ({ activityId, date }: Props) => {
       }
     } catch (error) {
       setError("데이터를 불러오는 중 오류가 발생했습니다.");
+      throw new Error(`Failed to fetch reservation detail: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -154,7 +155,7 @@ const ReservationModal = ({ activityId, date }: Props) => {
       </div>
 
       {/* 🔥 탭 콘텐츠 */}
-      <div>
+      <div className={s.tabContentContainer}>
         <p className={s.modaltitle}>예약 내역</p>
         {tabContent[activeTab]}
       </div>

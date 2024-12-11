@@ -11,6 +11,7 @@ import { useState } from "react";
 import s from "./CalendarView.module.scss";
 import "./Calendar.scss";
 import ReservationModal from "@/app/(usercard)/reservation-status/ReservationModal";
+import { EventClickArg } from "@fullcalendar/core";
 
 type Props = {
   activityId?: string;
@@ -78,7 +79,7 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
   });
 
   // 🔥 날짜 클릭 시 모달 열기
-  const handleEventClick = (info: any) => {
+  const handleEventClick = (info: EventClickArg) => {
     const { extendedProps } = info.event;
     const clickedDate = extendedProps.date;
 
