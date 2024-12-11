@@ -36,29 +36,31 @@ const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
   return (
     <>
       <div className={s.fullcalendar}>
-        <FullCalendar
-          plugins={[dayGridPlugin, resourceTimelinePlugin, interactionPlugin]}
-          headerToolbar={{
-            left: "prev",
-            center: "title",
-            right: "next",
-          }}
-          initialView="dayGridMonth"
-          nowIndicator={true}
-          editable={true}
-          selectable={true}
-          dateClick={handleDateClick}
-          fixedWeekCount={false}
-          events={schedules.map((schedule) => ({
-            id: String(schedule.id), // id를 string으로 변환
-          }))}
-          dayCellClassNames={(arg) => {
-            const cellDate = new Date(arg.date).toDateString();
-            const isSelected = selectedDate && cellDate === new Date(selectedDate).toDateString();
-            const hasEvent = schedules.some((schedule) => new Date(schedule.date).toDateString() === cellDate);
-            return `${isSelected ? s.active : ""} ${hasEvent ? s.hasEvent : ""}`;
-          }}
-        />
+        <div className="calendar-wrap">
+          <FullCalendar
+            plugins={[dayGridPlugin, resourceTimelinePlugin, interactionPlugin]}
+            headerToolbar={{
+              left: "prev",
+              center: "title",
+              right: "next",
+            }}
+            initialView="dayGridMonth"
+            nowIndicator={true}
+            editable={true}
+            selectable={true}
+            dateClick={handleDateClick}
+            fixedWeekCount={false}
+            events={schedules.map((schedule) => ({
+              id: String(schedule.id), // id를 string으로 변환
+            }))}
+            dayCellClassNames={(arg) => {
+              const cellDate = new Date(arg.date).toDateString();
+              const isSelected = selectedDate && cellDate === new Date(selectedDate).toDateString();
+              const hasEvent = schedules.some((schedule) => new Date(schedule.date).toDateString() === cellDate);
+              return `${isSelected ? s.active : ""} ${hasEvent ? s.hasEvent : ""}`;
+            }}
+          />
+        </div>
       </div>
       {/* 예약 가능한 시간 */}
       <div className={s["time-wrap"]}>
