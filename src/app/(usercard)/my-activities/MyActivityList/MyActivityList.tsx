@@ -25,9 +25,7 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
     if (response?.status === 204) {
       setActivityList((prev) => prev.filter((activity) => activity.id !== id));
       notify(toastMessages.success.deleteActivity);
-    } else {
-      showError(response?.message);
-    }
+    } else showError(response?.message);
   };
 
   useEffect(() => {
