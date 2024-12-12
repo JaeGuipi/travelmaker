@@ -9,9 +9,10 @@ interface CategoryDropdownProps {
   id: string;
   value: string;
   onChange: (value: string) => void;
+  errors?: string;
 }
 
-const CategoryDropdown = forwardRef<HTMLDivElement, CategoryDropdownProps>(({ value, onChange }, ref) => {
+const CategoryDropdown = forwardRef<HTMLDivElement, CategoryDropdownProps>(({ value, onChange, errors }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const options = ["문화 · 예술", "식음료", "스포츠", "투어", "관광", "웰빙"];
@@ -30,7 +31,7 @@ const CategoryDropdown = forwardRef<HTMLDivElement, CategoryDropdownProps>(({ va
   return (
     <div className={s.categoryDropdown} ref={ref}>
       <div
-        className={cx("selectBox", isFocused ? "focused" : "")}
+        className={cx("selectBox", isFocused ? "focused" : "", errors && "errors")}
         tabIndex={0}
         onClick={() => setIsOpen(!isOpen)}
         onFocus={() => setIsFocused(true)}
@@ -50,6 +51,7 @@ const CategoryDropdown = forwardRef<HTMLDivElement, CategoryDropdownProps>(({ va
           ))}
         </ul>
       )}
+      {errors && <span className={s.errorText}>{errors}</span>}
     </div>
   );
 });

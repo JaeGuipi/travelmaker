@@ -9,7 +9,6 @@ const getUsers = async () => {
         "Content-Type": "application/json",
       },
       next: { tags: ["users"] },
-      cache: "no-store",
     });
 
     if (!response.ok) {

@@ -1,10 +1,7 @@
-import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 import MyActivityList from "./MyActivityList/MyActivityList";
-import Link from "next/link";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import { MyActivity } from "@/types/types";
-import FormButton from "@/components/Button/FormButton";
 
 const MyActivities = async () => {
   const response = await customFetch(`${API_URL}/my-activities?size=6`);
