@@ -1,14 +1,15 @@
-import { GetActivities } from "@/types/activites/activitesTypes";
+import { Activity } from "@/types/activites/activitesTypes";
 import s from "./AllItemList.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import FormButton from "@/components/Button/FormButton";
 
-interface AllItemListProps extends GetActivities {
+interface AllItemListProps {
   onLoadMore: () => void;
+  activities: Activity[];
 }
 
-const AllItemList: React.FC<AllItemListProps> = ({ activities = [], onLoadMore }) => {
+const AllItemList = ({ activities = [], onLoadMore }: AllItemListProps) => {
   return (
     <>
       <ul className={s["item-list"]}>

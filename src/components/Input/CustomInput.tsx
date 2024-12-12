@@ -20,7 +20,7 @@ interface CustomInputProps {
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
   readOnly?: boolean;
-  onChange?: ChangeEventHandler;
+  onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(

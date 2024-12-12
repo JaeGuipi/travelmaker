@@ -1,4 +1,6 @@
 // app/api/kakao-auth/route.ts
+export const runtime = "nodejs";
+
 import API_URL from "@/constants/config";
 import { NextResponse } from "next/server";
 
@@ -77,6 +79,6 @@ export async function GET(req: Request) {
     return response;
   } catch (error) {
     console.error("OAuth 처리 중 오류 발생:", error);
-    return NextResponse.redirect("/?error=server_error", 302);
+    return NextResponse.redirect("http://localhost:3000/?error=server_error", 302);
   }
 }

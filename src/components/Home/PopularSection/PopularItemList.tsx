@@ -1,12 +1,12 @@
 "use client";
-import { GetActivities } from "@/types/activites/activitesTypes";
+import { Activity } from "@/types/activites/activitesTypes";
 import s from "./PopularItemList.module.scss";
 import classNames from "classnames/bind";
 import PopularItemSwiper from "./PopularItemSwiper";
 
 export const cx = classNames.bind(s);
 
-const PopularItemList: React.FC<GetActivities> = ({ activities }) => {
+const PopularItemList = ({ activities }: { activities: Activity[] }) => {
   const sortedActivities = (activities || []).sort((a, b) => b.reviewCount - a.reviewCount);
 
   return (

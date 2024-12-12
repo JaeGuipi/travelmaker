@@ -1,0 +1,104 @@
+.categoryDropdown {
+  position: relative;
+
+  .selectBox {
+    width: 100%;
+    font-size: 1.4rem;
+    @include flex-between;
+    background-color: white;
+    border: 1px solid $gray06;
+    border-radius: 12px;
+    padding: 1.6rem 2rem;
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    cursor: pointer;
+
+    &.focused {
+      border-color: $yellow01;
+    }
+
+    .placeholder {
+      font-size: 1.4rem;
+
+      &.gray {
+        color: $gray05;
+      }
+    }
+  }
+
+  .dropdownList {
+    position: absolute;
+    left: 0;
+    top: 60.33px;
+    width: 100%;
+    border: 1px solid $gray06;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 5;
+
+    li {
+      @include text(md);
+      font-weight: 400;
+      color: $gray03;
+      background-color: white;
+      border-bottom: 1px solid $gray06;
+      padding: 1rem 2rem;
+      transition: all 0.3s ease-in-out;
+      outline: none;
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        font-weight: 600;
+        color: $gray02;
+        background-color: $orange02;
+      }
+    }
+  }
+}
+
+.modalhead {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.modaltitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: left;
+  margin: 1.6rem 0;
+}
+
+.headwrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  max-width: 429px;
+  padding: 0px;
+  min-height: 500px;
+  @include mobile {
+    width: 100%;
+  }
+}
+
+.date {
+  font-size: 1.6rem;
+  text-align: left;
+}
+
+.datewrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tabContentContainer {
+  height: 400px;
+  overflow-y: auto;
+}

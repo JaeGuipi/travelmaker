@@ -1,0 +1,23 @@
+.calendarContainer {
+  max-width: 1000px; /* 🔥 캘린더 전체 너비 고정 */
+  height: 800px; /* 🔥 캘린더 전체 높이 고정 */
+  overflow: hidden; /* 🔥 불필요한 오버플로우 방지 */
+}
+
+/* 폼 & 정보 모달 */
+.reviewmodal {
+  width: 480px;
+
+  @include mobile {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0 !important;
+  }
+
+  > div {
+    @include mobile {
+      position: relative;
+      height: 100%;
+    }
+  }
+}
