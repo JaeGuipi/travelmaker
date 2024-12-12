@@ -8,7 +8,6 @@ import { logout } from "@/actions/auth.action";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
-import Notificationlist from "@/components/Layout/Header/Notification/Notification";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { GoChecklist } from "react-icons/go";
 import { AiOutlineSetting } from "react-icons/ai";
