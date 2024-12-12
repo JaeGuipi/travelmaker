@@ -22,23 +22,7 @@
     padding: 2rem;
   }
 
-  &::-webkit-scrollbar {
-    width: 0.6rem; 
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $yellow03; 
-    border-radius: 0.4rem; 
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: $yellow02; 
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $orange02; 
-    border-radius: 0.4rem;
-  }
+ @include scrollbar
 }
 
 
