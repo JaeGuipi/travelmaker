@@ -12,7 +12,7 @@ import SocialLoginAndSignup from "./SocialLoginAndSignup/SocialLoginAndSignup";
 import FormButton from "@/components/Button/FormButton";
 import { login } from "@/actions/auth.action";
 import { useRouter } from "next/navigation";
-import CustomInput from "../Input/CustomInput";
+import CustomInput from "@/components/Input/CustomInput";
 
 const LoginForm = () => {
   const { showSuccess, showError } = useToast();
