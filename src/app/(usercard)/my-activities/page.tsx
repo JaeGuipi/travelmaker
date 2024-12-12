@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import MyActivityList from "./MyActivityList/MyActivityList";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
-import { MyActivity } from "@/types/types";
+import { Activity } from "@/types/activites/activitesTypes";
 
 const MyActivities = async () => {
   const response = await customFetch(`${API_URL}/my-activities?size=6`);
@@ -13,7 +13,7 @@ const MyActivities = async () => {
 
   const myActivity = await response.json();
   const cursorId = myActivity.cursorId;
-  const myActivityList: MyActivity[] = myActivity.activities;
+  const myActivityList: Activity[] = myActivity.activities;
 
   return (
     <>
