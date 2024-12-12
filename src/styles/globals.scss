@@ -17,6 +17,7 @@ body {
   @include mobile {
     min-width: 375px;
   }
+  @include scrollbar;
 }
 
 .ReactModal__Body--open {
