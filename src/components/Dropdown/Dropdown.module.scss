@@ -6,16 +6,12 @@
 }
 
 .toggle {
-  display: flex;
+  @include flex-between;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   gap: 5px;
-  color: $gray02;
-  font-weight: 600;
   border: none;
   cursor: pointer;
-  background-color: #fff;
+  background-color: white;
 
   &.kebab {
     width: 40px;
@@ -27,21 +23,24 @@
 
   &.default {
     font-size: 16px;
-    display: flex;
+    font-weight: 500;
+    @include flex-between;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 20px;
+    padding: 12px 2rem;
     width: 160px;
     border: 1px solid $yellow01;
-    border-radius: 15px;
+    border-radius: 12px;
+    @include mobile {
+      width: 140px;
+      font-size: 14px;
+    }
   }
 }
 
 .menu {
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 12px;
   border: 1px solid #dddddd;
   width: 160px;
   position: absolute;
@@ -49,6 +48,9 @@
   overflow: hidden;
   z-index: 100;
   color: $gray02;
+  @include mobile {
+    width: 140px;
+  }
 
   .toggle.kebab + & {
     position: absolute;
@@ -58,16 +60,18 @@
 }
 
 .item {
-  font-size: 18px;
-  display: flex;
+  @include text(lg);
+  @include flex-center;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
-  height: 62px;
-  border-bottom: 1px solid #dddddd;
-  background-color: #fff;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid $gray06;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
   cursor: pointer;
+  @include mobile {
+    @include text(md);
+  }
 
   &:last-child {
     border-bottom: none;
@@ -76,7 +80,7 @@
 
   &:hover {
     font-weight: 600;
-    color: $gray02;
+    color: $black02;
     background-color: $orange02;
   }
 }

@@ -4,7 +4,7 @@ import s from "./ActivityForm.module.scss";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
-import { getActivityById, postActivity, updateActivity, uploadActivityImage } from "@/actions/activity.action";
+import { postActivity, updateActivity, uploadActivityImage } from "@/actions/activity.action";
 import { PostActivity, SubImage } from "@/types/activites/activitesTypes";
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
@@ -14,9 +14,9 @@ import ScheduleInput from "@/components/Input/ScheduleInput";
 import BannerInput from "@/components/Input/BannerInput";
 import CategoryDropdown from "@/components/Dropdown/CategoryDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import AddressInput from "../../Input/AddressInput";
+import AddressInput from "@/components/Input/AddressInput";
 
-const ActivityForm = () => {
+const ActivityForm = ({ activities }: { activities: PostActivity }) => {
   const { showSuccess, showError, notify } = useToast();
   const router = useRouter();
   const { activityId } = useParams();
@@ -49,18 +49,20 @@ const ActivityForm = () => {
   useEffect(() => {
     const fetchActivities = async () => {
       if (activityId) {
-        const id = Number(activityId);
-        const selectedActivity = await getActivityById(id);
-        if (selectedActivity) {
-          setActivity(selectedActivity);
-          reset({ ...selectedActivity });
-          setBannerPreview(selectedActivity.bannerImageUrl || "");
-          setSubImagePreviews(selectedActivity.subImages?.map((img: SubImage) => img.imageUrl) || []);
+        if (activities) {
+          setActivity(activities);
+          reset({ ...activities });
+          setBannerPreview(activities.bannerImageUrl || "");
+          setSubImagePreviews(activities.subImages?.map((img: SubImage) => img.imageUrl) || []);
         }
       }
     };
     fetchActivities();
-  }, [activityId, reset]);
+  }, [activityId, activities, reset]);
+
+  if (activityId && !activity) {
+    return <LoadingSpinner />;
+  }
 
   // 배너 이미지 체인지 이벤트
   const handleBannerImageChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -180,10 +182,6 @@ const ActivityForm = () => {
       }
     }
   };
-
-  if (activityId && !activity) {
-    return <LoadingSpinner />;
-  }
 
   return (
     <section className={s.activityForm}>
