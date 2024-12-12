@@ -1,14 +1,18 @@
-import { customFetch } from "@/utils/customFetch";
+import { cookies } from "next/headers";
 import API_URL from "@/constants/config";
 import UserTabList from "@/components/UserTab/UserTabList";
 import FileInput from "@/components/Input/FileInput";
 import s from "./UserTab.module.scss";
 
 const getUsers = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
   try {
-    const response = await customFetch(`${API_URL}/users/me`, {
+    const response = await fetch(`${API_URL}/users/me`, {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       next: { tags: ["users"] },
     });
@@ -19,7 +23,7 @@ const getUsers = async () => {
 
     return response.json();
   } catch (error) {
-    console.error("유저 정보 가져오기 실패:", error);
+    console.error("유저 정보 가져오기 실패", error);
     return null;
   }
 };
