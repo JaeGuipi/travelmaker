@@ -1,10 +1,12 @@
+export const dynamic = "force-dynamic";
+
 // app/search/page.tsx
 
 import React from "react";
 import API_URL from "@/constants/config";
 import SearchBar from "@/components/SearchBar";
 import SearchResults from "./SearchResults";
-import { GetMyActivities } from "@/types/types";
+import { GetActivities } from "@/types/activites/activitesTypes";
 import classNames from "classnames/bind";
 import styles from "./page.module.scss";
 
@@ -47,7 +49,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
     throw new Error("데이터를 가져오는데 실패했습니다.");
   }
 
-  const data: GetMyActivities = await res.json();
+  const data: GetActivities = await res.json();
 
   return (
     <main className={cx("container", "mainbox")}>

@@ -16,7 +16,7 @@ import CategoryDropdown from "@/components/Dropdown/CategoryDropdown";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import AddressInput from "@/components/Input/AddressInput";
 
-const ActivityForm = ({ activities }: { activities: PostActivity }) => {
+const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
   const { showSuccess, showError, notify } = useToast();
   const router = useRouter();
   const { activityId } = useParams();

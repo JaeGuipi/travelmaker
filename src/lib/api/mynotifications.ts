@@ -1,9 +1,9 @@
-import { GetMyNotifications } from "@/types/notifications/notificationsTypes";
+import { MyNotifications } from "@/types/notifications/notificationsTypes";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 
 // 내 알림 리스트 조회
-export const getMyNotifications = async (size: number = 10, cursorId?: string): Promise<GetMyNotifications> => {
+export const getMyNotifications = async (size: number = 10, cursorId?: string): Promise<MyNotifications> => {
   const response = await customFetch(
     `${API_URL}/my-notifications?size=${size}${cursorId ? `&cursorId=${cursorId}` : ""}`,
     {
@@ -15,7 +15,7 @@ export const getMyNotifications = async (size: number = 10, cursorId?: string): 
     throw new Error(`내 알림 리스트 조회 실패: ${response.statusText}`);
   }
 
-  const data: GetMyNotifications = await response.json();
+  const data: MyNotifications = await response.json();
   return data;
 };
 
