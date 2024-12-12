@@ -5,7 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import API_URL from "./constants/config";
 
 // 보호된 경로 설정
-const protectedRoutes = ["/"];
+const protectedRoutes = ["/", "/reservation-status"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -73,10 +73,8 @@ export async function middleware(request: NextRequest) {
 function verifyToken(token: string): boolean {
   try {
     const decoded: { exp?: number } = jwtDecode(token);
-
     const expirationTime = decoded.exp;
     const currentTime = Math.floor(Date.now() / 1000);
-
     if (expirationTime && expirationTime > currentTime) {
       return true; // 토큰이 유효함
     } else {

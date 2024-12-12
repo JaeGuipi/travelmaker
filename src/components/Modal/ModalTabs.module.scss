@@ -1,0 +1,16 @@
+.tapwarp {
+  font-weight: normal;
+  font-size: 16px;
+  display: flex;
+}
+
+.tapbutton {
+  color: #4b4b4b;
+  padding: 8px 8px 2px 8px;
+}
+
+.active {
+  color: $yellow01;
+  font-weight: bold;
+  border-bottom: $yellow01 2px solid;
+}
