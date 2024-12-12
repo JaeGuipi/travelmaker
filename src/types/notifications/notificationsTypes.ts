@@ -1,5 +1,5 @@
 //내 알림 리스트 조회
-export type Notification = {
+export type MyNotification = {
   id: number;
   teamId: string;
   userId: number;
@@ -9,8 +9,8 @@ export type Notification = {
   deletedAt: string;
 };
 
-export interface GetMyNotifications {
+export interface MyNotifications {
   cursorId: number;
-  notifications: Notification[];
+  notifications: MyNotification[];
   totalCount: number;
 }

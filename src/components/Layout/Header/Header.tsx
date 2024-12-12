@@ -37,6 +37,12 @@ const Header = async () => {
   } catch (error) {
     console.error("유저 정보 요청 실패", error);
   }
+  
+  const response = await customFetch(`${API_URL}/my-notifications?size=4`)
+  if (!response.ok) {
+    console.error("내 알림 리스트 조회 실패")
+  }
+  const myNotifications = await response.json();
 
   return (
     <header className={s.header}>
@@ -53,7 +59,7 @@ const Header = async () => {
             <Link href={"/signup"}>회원가입</Link>
           </div>
         ) : (
-          <User users={users} />
+          <User users={users} initialNotifications={myNotifications} />
         )}
       </section>
     </header>
