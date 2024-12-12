@@ -1,6 +1,6 @@
 "use server";
 
-import { GetMe, PatchMe, PostImage, PostImageResponse, SignUp } from "@/types/users/usersTypes";
+import { GetMe, PatchMe, PostImageResponse } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
 import { customFetch } from "@/utils/customFetch";
 

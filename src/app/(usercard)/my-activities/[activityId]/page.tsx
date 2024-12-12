@@ -1,7 +1,7 @@
 import ActivityForm from "@/components/Activity/ActivityForm/ActivityForm";
 import API_URL from "@/constants/config";
 
-export const getActivityById = async (activityId: number) => {
+const getActivityById = async (activityId: number) => {
   try {
     const response = await fetch(`${API_URL}/activities/${activityId}`, {
       headers: {
