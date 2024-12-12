@@ -1,0 +1,48 @@
+.fcr {
+  .fc-daygrid {
+    height: 100% !important;
+  }
+
+  .fc-daygrid-body {
+    height: 100% !important;
+  }
+  .fc-daygrid-day-frame {
+    height: 60px !important; /* 🔥 칸의 높이 고정 */
+  }
+
+  .fc-scrollgrid {
+    height: 100% !important;
+  }
+
+  .fc-scrollgrid-section-body {
+    height: 100% !important;
+  }
+
+  .fc-button {
+    border-radius: 20px !important; /* 🔥 버튼 스타일 수정 */
+  }
+  .fc-toolbar-title {
+    font-size: 2rem !important; /* 🔥 타이틀 폰트 사이즈 수정 */
+    font-weight: bold !important; /* 🔥 타이틀 폰트 굵기 수정 */
+  }
+  .fc-toolbar {
+    margin: 20px 0;
+    justify-content: space-between;
+  }
+  .fc-button-group {
+    gap: 5px;
+  }
+  .fc-event-title {
+    font-weight: normal;
+  }
+  .fc-event-title-container {
+    min-height: 17px;
+  }
+  .fc-button-primary {
+    background-color: $yellow01 !important; /* 🔥 버튼 색상 수정 */
+    border-color: $yellow01 !important; /* 🔥 버튼 색상 수정 */
+  }
+  .fc-button .fc-icon {
+    font-size: 2rem !important; /* 🔥 아이콘 사이즈 수정 */
+  }
+}
