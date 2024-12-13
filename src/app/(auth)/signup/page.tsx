@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import SignUpForm from "@/components/Auth/SignUpForm";
 
 const SignUp = () => {

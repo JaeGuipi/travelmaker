@@ -1,8 +1,8 @@
 "use client";
 import MyActivityItem from "@/app/(usercard)/my-activities/MyActivityItem/MyActivityItem";
-import { MyActivity } from "@/types/types";
+import { Activity } from "@/types/activites/activitesTypes";
 import { useEffect, useRef, useState } from "react";
-import NoList from "../../my-reservation/MyReservationList/NoList";
+import NoList from "@/app/(usercard)/my-reservation/MyReservationList/NoList";
 import s from "@/app/(usercard)/my-reservation/MyReservationList/MyReservationList.module.scss";
 import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 import FormButton from "@/components/Button/FormButton";
@@ -11,7 +11,7 @@ import { deleteActivity } from "@/actions/activity.action";
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 
-const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList: MyActivity[]; cursorId: number }) => {
+const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList: Activity[]; cursorId: number }) => {
   const [activityList, setActivityList] = useState(initialActivityList);
   const [currentCursorId, setCurrentCursorId] = useState(cursorId);
   const [isLoading, setIsLoading] = useState(false);

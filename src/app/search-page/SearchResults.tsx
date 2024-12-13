@@ -1,18 +1,16 @@
-// components/SearchResults.tsx
-
 "use client";
 
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Dropdown from "@/components/Dropdown/Dropdown";
 import Image from "next/image";
-import { GetMyActivities } from "@/types/types";
+import { GetActivities } from "@/types/activites/activitesTypes";
 import Link from "next/link";
 import s from "./SearchResults.module.scss";
 import Pagination from "@/components/Button/Pagination";
 
 interface SearchResultsProps {
-  data: GetMyActivities;
+  data: GetActivities;
   searchParams: {
     keyword?: string;
     sort?: string;
@@ -58,7 +56,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
   };
   return (
     <div>
-      {data.activities.length > 0 ? (
+      {data?.activities.length > 0 ? (
         <div className={s["search-wrap"]}>
           <div className={s["list-setup"]}>
             <p>&quot;{keyword}&quot;의 검색결과</p>

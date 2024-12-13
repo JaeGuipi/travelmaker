@@ -1,6 +1,6 @@
 import s from "./MyReservationItem.module.scss";
 import classNames from "classnames/bind";
-import { MyReservation } from "@/types/types";
+import { MyReservation } from "@/types/myReservationsTypes/myReservationsTypes";
 import getStatusText from "@/utils/getStatusText";
 import ItemLayout from "@/app/(usercard)/my-reservation/ItemLayout/ItemLayout";
 import FormButton from "@/components/Button/FormButton";
