@@ -11,18 +11,20 @@ interface FileInputProps {
 }
 
 const FileInput = ({ users, preview, handleImageChange, readOnly }: FileInputProps) => {
-  const profileImage = preview || users.profileImageUrl || "/images/profile.png";
+  const profileImage = preview || users?.profileImageUrl || "/images/profile.png";
 
   return (
     <div className={s.profileContainer}>
       <div className={s.profileImgWrap}>
         <div className={s.profileImgBox}>
-          <Image
-            src={profileImage}
-            fill
-            alt={users.nickname || "프로필 이미지"}
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+          {users && (
+            <Image
+              src={profileImage}
+              fill
+              alt={users.nickname || "프로필 이미지"}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          )}
         </div>
 
         {!readOnly && (

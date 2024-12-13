@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { ActivityDetailResponse, GetReviews } from "@/types/activites/activitesTypes";
 import ReviewList from "@/components/Activity/Review/ReviewList";
 import ActivityDetail from "@/components/Activity/ActivityDetail/ActivityDetail";
@@ -5,17 +6,18 @@ import Schedules from "@/components/Activity/Schedules/Schedules";
 import API_URL from "@/constants/config";
 import DetailSubImg from "@/components/Activity/DetailSubImg";
 import s from "./page.module.scss";
-import { customFetch } from "@/utils/customFetch";
 
-// userId 값 조회
 const getUsers = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
   try {
-    const response = await customFetch(`${API_URL}/users/me`, {
+    const response = await fetch(`${API_URL}/users/me`, {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       next: { tags: ["users"] },
-      cache: "no-store",
     });
 
     if (!response.ok) {
@@ -24,7 +26,7 @@ const getUsers = async () => {
 
     return response.json();
   } catch (error) {
-    console.error("유저 정보 가져오기 실패:", error);
+    console.error("유저 정보 가져오기 실패", error);
     return null;
   }
 };

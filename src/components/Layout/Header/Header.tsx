@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Image from "next/image";
@@ -11,10 +12,14 @@ import Alarm from "@/components/Alarm/Alarm";
 export const cx = classNames.bind(s);
 
 const getUsers = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
   try {
-    const response = await customFetch(`${API_URL}/users/me`, {
+    const response = await fetch(`${API_URL}/users/me`, {
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
       },
       next: { tags: ["users"] },
     });
@@ -25,25 +30,22 @@ const getUsers = async () => {
 
     return response.json();
   } catch (error) {
-    console.error("유저 정보 가져오기 실패:", error);
+    console.error("유저 정보 가져오기 실패", error);
     return null;
   }
 };
 
-const Header = async () => {
-  let users = null;
-
-  try {
-    users = await getUsers();
-  } catch (error) {
-    console.error("유저 정보 요청 실패", error);
-  }
-
+const getNotifications = async () => {
   const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패");
   }
-  const myNotifications = await response.json();
+  return response.json();
+};
+
+const Header = async () => {
+  const users = await getUsers();
+  const myNotifications = await getNotifications();
 
   return (
     <header className={s.header}>
