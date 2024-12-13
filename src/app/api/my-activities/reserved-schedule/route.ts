@@ -1,13 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import API_URL from "@/constants/config";
 import { customFetch } from "@/utils/customFetch";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const activityId = searchParams.get("activityId");
+  const date = searchParams.get("date");
   try {
-    const { searchParams } = new URL(request.url);
-    const activityId = searchParams.get("activityId");
-    const date = searchParams.get("date");
-
     if (!activityId || !date) {
       return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
     }

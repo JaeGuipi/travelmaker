@@ -14,6 +14,7 @@ export const customFetch = async (input: RequestInfo | URL, init?: RequestInit) 
       ...defaultHeaders,
       ...(init?.headers || {}),
     },
+    cache: "no-cache",
   };
 
   return await fetch(input, customInit);

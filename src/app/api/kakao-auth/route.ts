@@ -1,8 +1,7 @@
 // app/api/kakao-auth/route.ts
-export const runtime = "nodejs";
 
 import API_URL from "@/constants/config";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface BackandRequest {
   token: string;
@@ -10,15 +9,14 @@ interface BackandRequest {
   nickname?: string;
 }
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   const redirectUri = "http://localhost:3000/api/kakao-auth";
+  const url = req.nextUrl;
+  //Setp 1: 카카오 code 추출
+  const code = url.searchParams.get("code");
+  const state = url.searchParams.get("state"); // state 매개변수 추출
 
   try {
-    const url = new URL(req.url);
-    //Setp 1: 카카오 code 추출
-    const code = url.searchParams.get("code");
-    const state = url.searchParams.get("state"); // state 매개변수 추출
-
     if (!code) {
       return NextResponse.json({ success: false, error: "Missing authorization code" }, { status: 400 });
     }

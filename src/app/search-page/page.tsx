@@ -1,7 +1,3 @@
-export const dynamic = "force-dynamic";
-
-// app/search/page.tsx
-
 import React from "react";
 import API_URL from "@/constants/config";
 import SearchBar from "@/components/SearchBar";
