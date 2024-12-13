@@ -29,7 +29,10 @@ const MyReservationItem = ({
         >
           {getStatusText(reservation.status)}
         </p>
-        <p className={s.title}>{reservation.activity.title}</p>
+        {/* <p className={s.title}>{reservation.activity.title}</p> */}
+        <div className={s.title}>
+          오버플로우 히든 없이 말 줄버플로우 히든 없이 임표를 어떻게 적용해야 할 지 너무 어려운데 도대체 어떻게 해
+        </div>
         <div className={s["schedule-container"]}>
           <span className={s.schedule}>{reservation.date}</span>
           <span className={s.schedule}>{`${reservation.startTime} - ${reservation.endTime}`}</span>
