@@ -18,7 +18,7 @@
 
   &.medium {
     @include buttonStyles(16px, 12px 33px);
-    @include tablet {
+    @include mobile {
       @include buttonStyles(14px, 9px 20px);
     }
   }
