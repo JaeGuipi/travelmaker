@@ -67,7 +67,7 @@ export const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantT
   return (
     <button onClick={() => setIsOpen((prev) => !prev)} className={cx("toggle", variant)}>
       {children}
-      {variant === "kebab" && <Image src={"/icons/btn_kebab.svg"} width={15} height={15} alt="캐밥아이콘" />}
+      {variant === "kebab" && <Image src={"/icons/btn_kebab.svg"} fill alt="캐밥아이콘" />}
       {variant === "default" && (isOpen ? <IoIosArrowUp size={15} /> : <IoIosArrowDown size={15} />)}
     </button>
   );

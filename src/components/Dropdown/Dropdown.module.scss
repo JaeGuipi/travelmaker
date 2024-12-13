@@ -14,8 +14,15 @@
   background-color: white;
 
   &.kebab {
+    position: relative;
     width: 24px;
+    height: 24px;
     background: transparent;
+    @include tablet {
+      width: 20px;
+      height: 20px;
+    }
+
     img {
       width: 100%;
     }
