@@ -4,7 +4,6 @@ import React, { useState, createContext, useContext, ReactNode, useRef, useEffec
 import styles from "./Dropdown.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
-import kebab from "@/../public/icons/btn_kebab.svg";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 const cx = classNames.bind(styles);
@@ -68,7 +67,7 @@ export const DropdownToggle: React.FC<{ children?: ReactNode; variant?: VariantT
   return (
     <button onClick={() => setIsOpen((prev) => !prev)} className={cx("toggle", variant)}>
       {children}
-      {variant === "kebab" && <Image src={kebab} alt="캐밥아이콘" />}
+      {variant === "kebab" && <Image src={"/icons/btn_kebab.svg"} width={15} height={15} alt="캐밥아이콘" />}
       {variant === "default" && (isOpen ? <IoIosArrowUp size={15} /> : <IoIosArrowDown size={15} />)}
     </button>
   );
