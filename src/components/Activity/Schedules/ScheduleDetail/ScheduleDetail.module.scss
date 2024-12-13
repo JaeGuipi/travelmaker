@@ -33,6 +33,12 @@
 }
 
 /* 모바일 */
+.calendarContainer {
+  text-align: left;
+  > button {
+    margin-top: 24px;
+  }
+}
 .total {
   @include flex-align-start;
   flex-direction: column;

@@ -8,7 +8,7 @@
   background-color: $orange02;
   position: absolute;
   right: 0;
-  top: 50px;
+  top: 90px;
   z-index: 300;
 
   @include mobile {
@@ -22,9 +22,8 @@
     padding: 2rem;
   }
 
- @include scrollbar
+  @include scrollbar;
 }
-
 
 .conunt-container {
   display: flex;
@@ -53,9 +52,10 @@
   gap: 0.4rem;
   border-radius: 0.5rem;
   z-index: 300;
-  
-  @include mobile{
-  width: 100%;}
+
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .status-container {

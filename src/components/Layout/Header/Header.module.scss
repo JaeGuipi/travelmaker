@@ -6,6 +6,7 @@
 }
 
 .headerContainer {
+  position: relative;
   @include flex-between;
   height: 90px;
   @include mobile {
@@ -43,12 +44,6 @@
       align-items: center;
       gap: 12px;
       position: relative;
-
-      @include mobile {
-        .alarm {
-          display: none;
-        }
-      }
 
       .userInfo {
         display: flex;

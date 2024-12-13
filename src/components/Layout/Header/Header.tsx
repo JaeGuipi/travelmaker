@@ -6,6 +6,7 @@ import s from "./Header.module.scss";
 import classNames from "classnames/bind";
 import User from "@/components/Layout/Header/User";
 import SearchBar from "@/components/SearchBar";
+import Alarm from "@/components/Alarm/Alarm";
 
 export const cx = classNames.bind(s);
 
@@ -37,10 +38,10 @@ const Header = async () => {
   } catch (error) {
     console.error("유저 정보 요청 실패", error);
   }
-  
-  const response = await customFetch(`${API_URL}/my-notifications?size=4`)
+
+  const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
-    console.error("내 알림 리스트 조회 실패")
+    console.error("내 알림 리스트 조회 실패");
   }
   const myNotifications = await response.json();
 
@@ -59,7 +60,10 @@ const Header = async () => {
             <Link href={"/signup"}>회원가입</Link>
           </div>
         ) : (
-          <User users={users} initialNotifications={myNotifications} />
+          <>
+            <Alarm initialNotifications={myNotifications} type="header" />
+            <User users={users} />
+          </>
         )}
       </section>
     </header>
