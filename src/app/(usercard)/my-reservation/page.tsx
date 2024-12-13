@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import API_URL from "@/constants/config";
 import { MyReservation } from "@/types/myReservationsTypes/myReservationsTypes";
 import MyReservationList from "@/app/(usercard)/my-reservation/MyReservationList/MyReservationList";

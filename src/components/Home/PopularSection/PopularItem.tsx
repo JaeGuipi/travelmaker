@@ -1,11 +1,11 @@
-import { MyActivity } from "@/types/types";
+import { Activity } from "@/types/activites/activitesTypes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import s from "./PopularItem.module.scss";
 
 export interface PopularItemProps {
-  activity: MyActivity;
+  activity: Activity;
 }
 
 const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {

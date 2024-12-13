@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import MyActivityList from "./MyActivityList/MyActivityList";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";

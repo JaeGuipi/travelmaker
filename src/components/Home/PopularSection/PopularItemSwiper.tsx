@@ -4,14 +4,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
-import { MyActivity } from "@/types/types";
+import { Activity } from "@/types/activites/activitesTypes";
 import Image from "next/image";
 import SwiperCore from "swiper";
 import s from "./PopularItemSwiper.module.scss";
 import PopularItem from "./PopularItem";
 
 export interface PopularItems {
-  sortedActivities: MyActivity[];
+  sortedActivities: Activity[];
 }
 
 const PopularItemSwiper: React.FC<PopularItems> = ({ sortedActivities }) => {

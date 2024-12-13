@@ -1,5 +1,3 @@
-export const dynamic = "force-dynamic";
-
 import CalendarView from "./CalendarView";
 import { Suspense } from "react";
 import { customFetch } from "@/utils/customFetch";

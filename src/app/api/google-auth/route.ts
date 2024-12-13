@@ -1,7 +1,5 @@
-export const runtime = "nodejs";
-
 import API_URL from "@/constants/config";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface BackandRequest {
   token: string;
@@ -9,13 +7,12 @@ interface BackandRequest {
   nickname?: string;
 }
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
+  const url = req.nextUrl;
+  const code = url.searchParams.get("code");
+  const state = url.searchParams.get("state"); // state 매개변수 추출
+  const redirectUri = `http://localhost:3000/api/google-auth`;
   try {
-    const url = new URL(req.url);
-    const code = url.searchParams.get("code");
-    const state = url.searchParams.get("state"); // state 매개변수 추출
-    const redirectUri = `http://localhost:3000/api/google-auth`;
-
     if (!code || !redirectUri) {
       return NextResponse.json({ error: "필수 필드가 누락되었습니다." }, { status: 400 });
     }
