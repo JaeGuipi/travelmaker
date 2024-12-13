@@ -1,0 +1,35 @@
+.userTabList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  @include mobile {
+    gap: 1rem;
+  }
+
+  a {
+    color: $gray02;
+    font-weight: 400;
+    @include text(lg);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    @include mobile {
+      @include text(md);
+    }
+
+    svg {
+      font-size: 2.5rem;
+      @include mobile {
+        font-size: 2rem;
+      }
+    }
+
+    &.active {
+      color: $yellow01;
+      font-weight: 600;
+      background-color: $orange02;
+      border-radius: 1rem;
+    }
+  }
+}

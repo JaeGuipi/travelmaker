@@ -1,5 +1,11 @@
 import localFont from "next/font/local";
-import "./styles/globals.scss";
+import "@/styles/globals.scss";
+import { Providers as QueryClientProvider } from "./providers";
+import { Toaster } from "react-hot-toast";
+import ClientPathname from "@/app/ClientPathname";
+import Header from "@/components/Layout/Header/Header";
+import Footer from "@/components/Layout/Footer/Footer";
+import BottomBar from "@/components/BottomBar/BottomBar";
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",
@@ -8,15 +14,30 @@ const pretendard = localFont({
   variable: "--font-pretendard",
 });
 
+const ToastProvider = () => {
+  return <Toaster />;
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body className={`${pretendard.variable}`}>
-        {children}
+        <QueryClientProvider>
+          <div id="modal-root"></div>
+          <ToastProvider />
+          <ClientPathname hideRoutes={["/login", "/signup"]}>
+            <Header />
+          </ClientPathname>
+          {children}
+          <ClientPathname hideRoutes={["/login", "/signup"]}>
+            <Footer />
+            <BottomBar />
+          </ClientPathname>
+        </QueryClientProvider>
       </body>
     </html>
   );

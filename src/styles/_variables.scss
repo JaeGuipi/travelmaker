@@ -1,0 +1,126 @@
+@import "mixins";
+
+// Colors
+$background: #fafafa;
+
+$black01: #1b1b1b;
+$black02: #221b11;
+$black03: #333236;
+$gray01: #4b4b4b;
+$gray02: #79747e;
+$gray03: #a1a1a1;
+$gray04: #a4a1aa;
+$gray05: #adaeb8;
+$gray06: #dddddd;
+$gray07: #eeeeee;
+$gray08: #fafafa;
+
+$red01: #ff472e;
+$red02: #ffc2ba;
+$red03: #ffe4e0;
+$orange01: #ff7c1d;
+$orange02: #fff4e8;
+$yellow01: #f89a05;
+$yellow02: #fbaf37;
+$yellow03: #ffc23d;
+$green01: #00ac07;
+$green02: #0b3b2d;
+$green03: #ced8d5;
+$mint01: #21d0c3;
+$blue01: #0085ff;
+$blue02: #2eb4ff;
+$blue03: #e5f3ff;
+
+$font-styles: (
+  4xl: (
+    font-size: 3.6rem,
+    line-height: 4.2rem,
+  ),
+  3xl: (
+    font-size: 3.2rem,
+    line-height: 4.2rem,
+  ),
+  2xl: (
+    font-size: 2.4rem,
+    line-height: 3.2rem,
+  ),
+  xl: (
+    font-size: 2rem,
+    line-height: 3.2rem,
+  ),
+  2lg: (
+    font-size: 1.8rem,
+    line-height: 2.6rem,
+  ),
+  lg: (
+    font-size: 1.6rem,
+    line-height: 2.6rem,
+  ),
+  md: (
+    font-size: 1.4rem,
+    line-height: 2.4rem,
+  ),
+  sm: (
+    font-size: 1.3rem,
+    line-height: 2.2rem,
+  ),
+  xs: (
+    font-size: 1.2rem,
+    line-height: 1.8rem,
+  ),
+);
+
+.container {
+  max-width: 1200px;
+  margin-right: auto;
+  margin-left: auto;
+  transition: all 1s ease;
+  @include tablet {
+    padding: 0 24px;
+    @include mobile {
+      padding: 0 16px;
+    }
+  }
+}
+
+.layoutContainer {
+  min-height: calc(100vh - 91px - 160px);
+  flex-grow: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+  @include mobile {
+    min-height: calc(100vh - 71px - 160px);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+  }
+}
+
+/* 커스텀 스타일은 아래에 추가하여 사용해주세요. */
+/* ----------------------- start: flex custom --------------------- */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin flex-align-start {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+/* ----------------------- end: flex custom ----------------------- */

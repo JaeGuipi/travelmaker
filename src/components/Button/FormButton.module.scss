@@ -1,0 +1,42 @@
+@mixin buttonStyles($font-size, $padding) {
+  font-size: $font-size;
+  padding: $padding;
+}
+
+.formButton {
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.3s;
+  background-color: $yellow01;
+  color: white;
+  cursor: pointer;
+
+  &.small {
+    @include buttonStyles(14px, 9px 20px);
+  }
+
+  &.medium {
+    @include buttonStyles(16px, 12px 33px);
+    @include mobile {
+      @include buttonStyles(14px, 9px 20px);
+    }
+  }
+
+  &.large {
+    @include buttonStyles(16px, 12px 33px);
+    width: 100%;
+  }
+
+  &.emptyButton {
+    border: 1px solid $yellow01;
+    background-color: white;
+    color: $yellow01;
+  }
+
+  &:disabled {
+    background-color: $gray05;
+    color: white;
+    cursor: not-allowed;
+  }
+}

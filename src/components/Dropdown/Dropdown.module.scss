@@ -1,0 +1,86 @@
+/* Dropdown.module.css */
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.toggle {
+  @include flex-between;
+  flex-direction: row;
+  gap: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+
+  &.kebab {
+    width: 40px;
+    background: transparent;
+    img {
+      width: 100%;
+    }
+  }
+
+  &.default {
+    font-size: 16px;
+    font-weight: 500;
+    @include flex-between;
+    flex-direction: row;
+    padding: 12px 2rem;
+    width: 160px;
+    border: 1px solid $yellow01;
+    border-radius: 12px;
+    @include mobile {
+      width: 140px;
+      font-size: 14px;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid #dddddd;
+  width: 160px;
+  position: absolute;
+  top: 65px;
+  overflow: hidden;
+  z-index: 100;
+  color: $gray02;
+  @include mobile {
+    width: 140px;
+  }
+
+  .toggle.kebab + & {
+    position: absolute;
+    left: -113px;
+    top: 43px;
+  }
+}
+
+.item {
+  @include text(lg);
+  @include flex-center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid $gray06;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  @include mobile {
+    @include text(md);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+  z-index: 50;
+
+  &:hover {
+    font-weight: 600;
+    color: $black02;
+    background-color: $orange02;
+  }
+}

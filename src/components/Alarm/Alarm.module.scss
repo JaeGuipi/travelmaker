@@ -1,0 +1,10 @@
+.hdAlarm {
+  margin-right: 12px;
+  @include mobile {
+    display: none;
+  }
+}
+
+.btmAlarm {
+  border: 1px solid red;
+}

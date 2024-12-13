@@ -1,0 +1,115 @@
+/* 타이틀 영역 */
+.title-wrap {
+  .cate {
+    color: $yellow02;
+    @include text(md);
+  }
+
+  & > div {
+    @include flex-between;
+
+    & h2 {
+      color: $black01;
+      font-weight: 700;
+      @include text(3xl);
+    }
+
+    & > div {
+      & > div {
+        top: 40px;
+        right: 0;
+      }
+    }
+  }
+
+  .rating-address {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+
+    > p {
+      @include text(md);
+      > span {
+        position: relative;
+      }
+    }
+
+    .rating {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 5px;
+      @include text(md);
+      .rating-icon {
+        color: $yellow01;
+      }
+    }
+
+    .address {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      color: $yellow02;
+      .mark-icon {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+      }
+    }
+  }
+}
+
+/* 이미지 영역 */
+.img-wrap {
+  overflow: hidden;
+  @include flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  height: 534px;
+  margin-top: 25px;
+  border-radius: 12px;
+  @include tablet {
+    height: 310px;
+  }
+
+  & > li {
+    width: 50%;
+    height: 100%;
+    @include mobile {
+      width: 100%;
+    }
+
+    & img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    & > ul {
+      @include flex-start;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 8px;
+      width: 100%;
+      height: 100%;
+      @include mobile {
+        display: block;
+      }
+
+      & > li {
+        width: 49.3%;
+        height: 50%;
+        @include tablet {
+          width: 49%;
+        }
+
+        & img {
+          height: 100%;
+          max-height: 263px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

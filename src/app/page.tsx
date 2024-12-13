@@ -1,13 +1,15 @@
-import s from "./page.module.scss";
+import { getActivity } from "@/lib/api/activities";
+import ActivityList from "@/components/Home/ActivityListSection/ActivityList";
+import PopularItemList from "@/components/Home/PopularSection/PopularItemList";
+import MainSwiper from "@/components/Home/VisualSection/MainSwiper";
 
-export default function Home() {
+export default async function Home() {
+  const { activities, totalCount } = await getActivity();
   return (
-    <div className={s.page}>
-      HOME 페이지
-      <p className={s.p}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur tenetur odio quis commodi perspiciatis, autem
-        vel, eveniet consequuntur sint ea fuga, officia facilis illo dolorum expedita eaque iusto repellat blanditiis?
-      </p>
-    </div>
+    <>
+      <MainSwiper />
+      <PopularItemList activities={activities} />
+      <ActivityList activities={activities} totalCount={totalCount} />
+    </>
   );
 }
