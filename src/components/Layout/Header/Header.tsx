@@ -7,6 +7,7 @@ import s from "./Header.module.scss";
 import classNames from "classnames/bind";
 import User from "@/components/Layout/Header/User";
 import SearchBar from "@/components/SearchBar";
+import Alarm from "@/components/Alarm/Alarm";
 
 export const cx = classNames.bind(s);
 
@@ -61,7 +62,10 @@ const Header = async () => {
             <Link href={"/signup"}>회원가입</Link>
           </div>
         ) : (
-          <User users={users} initialNotifications={myNotifications} />
+          <>
+            <Alarm initialNotifications={myNotifications} type="header" />
+            <User users={users} />
+          </>
         )}
       </section>
     </header>

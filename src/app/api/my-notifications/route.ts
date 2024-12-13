@@ -7,7 +7,6 @@ export const GET = async (request: NextRequest) => {
   const cursorId = searchParams.get("cursorId");
   const size = searchParams.get("size")
   
-
   try {
     let url = `${API_URL}/my-notifications?size=${size}`
 

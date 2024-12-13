@@ -112,23 +112,25 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
 
             {modals[calendarModal] && (
               <FormInfoModal modalKey={calendarModal} title={calendarModal} showSubmit={false}>
-                <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
-                <HeadCountSelector
-                  count={count}
-                  onIncrease={handleIncrease}
-                  onDecrease={handleDecrease}
-                  onChange={handleChange}
-                  minCount={MIN_COUNT}
-                  maxCount={MAX_COUNT}
-                />
-                <FormButton
-                  type="submit"
-                  size="large"
-                  onClick={() => toggleModal(calendarModal)}
-                  disabled={!selectedScheduleId || isSubmitting}
-                >
-                  예약하기
-                </FormButton>
+                <div className={s.calendarContainer}>
+                  <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+                  <HeadCountSelector
+                    count={count}
+                    onIncrease={handleIncrease}
+                    onDecrease={handleDecrease}
+                    onChange={handleChange}
+                    minCount={MIN_COUNT}
+                    maxCount={MAX_COUNT}
+                  />
+                  <FormButton
+                    type="submit"
+                    size="large"
+                    onClick={() => toggleModal(calendarModal)}
+                    disabled={!selectedScheduleId || isSubmitting}
+                  >
+                    예약하기
+                  </FormButton>
+                </div>
               </FormInfoModal>
             )}
           </>
@@ -142,15 +144,17 @@ const ScheduleDetail = ({ activityId, schedules, price }: ScheduleDetailProps) =
             </button>
             {modals[calendarModal] && (
               <FormInfoModal modalKey={calendarModal} title={calendarModal} showSubmit={false}>
-                <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
-                <FormButton
-                  type="submit"
-                  size="large"
-                  onClick={() => toggleModal(calendarModal)} // 모달 닫기
-                  disabled={!selectedScheduleId || isSubmitting}
-                >
-                  예약하기
-                </FormButton>
+                <div className={s.calendarContainer}>
+                  <Calendar schedules={schedules} onTimeSelect={handleScheduleSelect} />
+                  <FormButton
+                    type="submit"
+                    size="large"
+                    onClick={() => toggleModal(calendarModal)} // 모달 닫기
+                    disabled={!selectedScheduleId || isSubmitting}
+                  >
+                    예약하기
+                  </FormButton>
+                </div>
               </FormInfoModal>
             )}
           </>

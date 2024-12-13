@@ -8,36 +8,25 @@ import { logout } from "@/actions/auth.action";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
-import Notificationlist from "@/components/Layout/Header/Notification/Notification";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { GoChecklist } from "react-icons/go";
 import { AiOutlineSetting } from "react-icons/ai";
 import { TbCalendarCheck } from "react-icons/tb";
 import { MdOutlineLogout } from "react-icons/md";
 
-const User = ({ users, initialNotifications }: { users: GetMe | null; initialNotifications: MyNotifications }) => {
+const User = ({ users }: { users: GetMe | null; initialNotifications?: MyNotifications }) => {
   const router = useRouter();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const notificationRef = useRef<HTMLDivElement>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
-    setIsModalOpen(false);
-  };
-
-  const toggleNotification = () => {
-    setIsDropdownOpen(false);
-    setIsModalOpen(!isModalOpen);
   };
 
   const handleClickOutside = (e: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
       setIsDropdownOpen(false);
     }
-
-    if (notificationRef.current && !notificationRef.current.contains(e.target as Node)) setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -57,16 +46,6 @@ const User = ({ users, initialNotifications }: { users: GetMe | null; initialNot
     <div className={s.userWrap} ref={dropdownRef}>
       {users && (
         <div className={s.loginOn}>
-          <button className={s.alarm} onClick={toggleNotification}>
-            <Image src={"/icons/btn_alarm.svg"} width={15} height={17} alt="알림" />
-          </button>
-          {isModalOpen && (
-            <Notificationlist
-              ref={notificationRef}
-              onClose={() => setIsModalOpen(false)}
-              notifications={initialNotifications}
-            />
-          )}
           <div className={s.userInfo} onClick={toggleDropdown}>
             <div className={s.profileImgWrap}>
               <Image

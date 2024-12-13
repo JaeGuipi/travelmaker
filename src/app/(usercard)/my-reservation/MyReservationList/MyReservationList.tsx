@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { MyReservation } from "@/types/types";
+import { MyReservation } from "@/types/myReservationsTypes/myReservationsTypes";
 import s from "./MyReservationList.module.scss";
 import MyReservationItem from "../MyReservationItem/MyReservationItem";
 import Dropdown, { DropdownToggle, DropdownMenu, DropdownItem } from "@/components/Dropdown/Dropdown";
@@ -77,7 +77,6 @@ const MyReservationList = ({
           prev.map((reservation) => (reservation.id === id ? { ...reservation, status: "canceled" } : reservation)),
         );
       }
-      console.log("예약취소성공");
     } catch (error) {
       console.error(error);
     }
@@ -172,10 +171,13 @@ const MyReservationList = ({
           {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
           {modalState.key === reviewModal && modalState.reservation && (
             <FormInfoModal modalKey={reviewModal} title="후기작성" showSubmit={false}>
-              <ReviewContent reservation={modalState.reservation} onSuccess={() => {
-                handleReviewSuccess(modalState.reservation!.id);
-                handleCloseModal()
-              }}/>
+              <ReviewContent
+                reservation={modalState.reservation}
+                onSuccess={() => {
+                  handleReviewSuccess(modalState.reservation!.id);
+                  handleCloseModal();
+                }}
+              />
             </FormInfoModal>
           )}
           {modalState.key === confirmModal && modalState.reservation && (

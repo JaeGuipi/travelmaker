@@ -2,10 +2,10 @@ import ItemLayout from "@/app/(usercard)/my-reservation/ItemLayout/ItemLayout";
 import Dropdown, { DropdownItem, DropdownMenu, DropdownToggle } from "@/components/Dropdown/Dropdown";
 import s from "./MyActivitiItem.module.scss";
 import { FaStar } from "react-icons/fa";
-import { MyActivity } from "@/types/types";
+import { Activity } from "@/types/activites/activitesTypes";
 import { useRouter } from "next/navigation";
 
-const MyActivityItem = ({ activity, onDelete }: { activity: MyActivity; onDelete: (id: number) => void }) => {
+const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: (id: number) => void }) => {
   const router = useRouter();
   const dropdownItems = [
     { key: 1, label: "수정하기" },

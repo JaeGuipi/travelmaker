@@ -4,10 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import classNames from "classnames/bind";
 import { FaStar } from "react-icons/fa";
-import { MyReservation } from "@/types/types";
+import { MyReservation } from "@/types/myReservationsTypes/myReservationsTypes";
 import { postReview } from "@/actions/myReservation";
-// import { useToast } from "@/hooks/useToast";
-// import toastMessages from "@/lib/toastMessage";
+import { useToast } from "@/hooks/useToast";
 
 const cx = classNames.bind(s);
 
@@ -15,7 +14,7 @@ const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation;
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
 
-  // const { showSuccess, showError } = useToast();
+  const { showError } = useToast();
 
   const starArr = [1, 2, 3, 4, 5];
 
@@ -31,12 +30,12 @@ const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation;
       formData.append("content", review);
 
       await postReview(formData);
-      // showSuccess(toastMessages.success.review);
+      
       onSuccess();
     } catch (error) {
-      // if (error instanceof Error) {
-      //   showError(error.message);
-      // }
+      if (error instanceof Error) {
+        showError(error.message);
+      }
       console.error(error);
     }
   };
