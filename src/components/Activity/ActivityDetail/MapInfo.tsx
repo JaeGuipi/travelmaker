@@ -8,7 +8,7 @@ import s from "./MapInfo.module.scss";
 
 const useKakaoLoader = () => {
   useKakaoLoaderOrigin({
-    appkey: process.env.NEXT_PUBLIC_APPKEY!,
+    appkey: process.env.KAKAO_APPKEY!,
     libraries: ["clusterer", "drawing", "services"],
   });
 };
