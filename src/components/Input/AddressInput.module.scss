@@ -24,6 +24,7 @@
     @include flex-center;
     @include mobile {
       min-height: 30px;
+      margin-bottom: 0.3rem;
     }
 
     &:hover {

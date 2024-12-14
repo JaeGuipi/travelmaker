@@ -9,6 +9,7 @@ interface FormButtonProps {
   size?: "small" | "medium" | "large"; // 버튼 크기
   variant?: "fillButton" | "emptyButton"; // 버튼 스타일
   disabled?: boolean; // 비활성화 여부
+  className?: string;
 }
 
 const FormButton = ({
@@ -18,8 +19,9 @@ const FormButton = ({
   size = "medium",
   variant = "fillButton",
   disabled = false,
+  className,
 }: FormButtonProps) => {
-  const buttonClass = classNames(s.formButton, s[size], s[variant], { [s.disabled]: disabled });
+  const buttonClass = classNames(s.formButton, s[size], s[variant], { [s.disabled]: disabled }, className);
 
   return (
     <button className={buttonClass} type={type} onClick={onClick} disabled={disabled}>
