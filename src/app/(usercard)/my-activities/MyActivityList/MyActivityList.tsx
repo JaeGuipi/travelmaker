@@ -61,17 +61,16 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
     };
   }, [isLoading, currentCursorId, activityList]);
 
-  if (activityList.length === 0) {
-    return <NoList text="아직 등록한 체험이 없어요" />;
-  }
+  
   return (
     <div className={s["content-container"]}>
       <ItemTitleLayout title="내 체험관리">
         <FormButton onClick={() => router.push("/my-activities/register")}>체험 등록하기</FormButton>
       </ItemTitleLayout>
-      {activityList.map((activity) => (
+      {activityList.length === 0 ? (<NoList text="아직 등록한 체험이 없어요" />) : ( activityList.map((activity) => (
         <MyActivityItem key={activity.id} activity={activity} onDelete={handleDeleteItem}></MyActivityItem>
-      ))}
+      )))}
+     
     </div>
   );
 };
