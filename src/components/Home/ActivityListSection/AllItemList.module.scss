@@ -1,4 +1,5 @@
 .item-list {
+  overflow: hidden;
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(4, 1fr);
@@ -18,6 +19,9 @@
     @include tablet {
       max-width: 221px;
     }
+    @include mobile {
+      max-width: 168px;
+    }
 
     .img {
       overflow: hidden;
@@ -27,6 +31,10 @@
       @include tablet {
         width: 221px;
         height: 221px;
+      }
+      @include mobile {
+        max-width: 168px;
+        height: 168px;
       }
 
       img {

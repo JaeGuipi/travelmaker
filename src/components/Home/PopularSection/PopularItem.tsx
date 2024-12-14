@@ -21,7 +21,7 @@ const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {
         </p>
         <h4 className={s.title}>{activity.title}</h4>
         <p className={s.price}>
-          ${activity.price}
+          ₩{activity.price}
           <span> / 인</span>
         </p>
       </div>
