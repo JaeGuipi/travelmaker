@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { Activity } from "@/types/activites/activitesTypes";
 import { useRouter } from "next/navigation";
 
-const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: (id: number) => void }) => {
+const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: () => void }) => {
   const router = useRouter();
   const dropdownItems = [
     { key: 1, label: "수정하기" },
@@ -16,7 +16,7 @@ const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: 
     if (label === "수정하기") {
       router.push(`/my-activities/${activity.id}`);
     } else if (label === "삭제하기") {
-      onDelete(activity.id);
+      onDelete();
     }
   };
   return (

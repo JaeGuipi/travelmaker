@@ -194,7 +194,6 @@ const MyReservationList = ({
               modalKey={confirmModal}
               text="예약을 취소하시겠어요?"
               id={modalState.reservation.id}
-              onClose={handleCloseModal}
               onCancel={handleDeleteItem}
             />
           )}
