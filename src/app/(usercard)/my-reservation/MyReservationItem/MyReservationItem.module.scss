@@ -19,8 +19,12 @@
   color: $red01;
   margin-bottom: 0.8rem;
 
-  @include mobile {
-    @include text(md);
+  @include tablet {
+    height: 26px;
+    @include mobile {
+      @include text(md);
+      height: 24px;
+    }
   }
 
   &.pending {
