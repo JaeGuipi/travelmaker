@@ -18,7 +18,7 @@ const AuthForm = ({ title, link, linkTitle, children }: FormLinkProps) => {
     <div className={cx("form-link-container")}>
       <h1 className={s.logo}>
         <Link href={"/"}>
-          <Image src="/images/logo.png" width={210} height={38} alt="logo" />
+          <Image src="/images/logo-column.svg" fill alt="TRAVEL MAKER" />
         </Link>
       </h1>
       {children}
