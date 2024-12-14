@@ -2,7 +2,7 @@
   flex: 1;
   padding: 2.1rem 2.4rem;
   position: relative;
-  overflow: hidden;
+  width: calc(100% - 380px);
 
   @include tablet {
     padding: 1.2rem 1.8rem;
