@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/navigation";
 import AuthForm from "../Auth/AuthForm/AuthForm";
 import toastMessages from "@/lib/toastMessage";
+import { Suspense } from "react";
 
 type FormValues = {
   email: string;
@@ -27,7 +28,7 @@ const SignUpForm = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<signUpSchema>({
     resolver: zodResolver(signUpSchema),
-    mode: "onChange", 
+    mode: "onChange",
   });
 
   const onSubmit = async (data: FormValues) => {
@@ -88,7 +89,9 @@ const SignUpForm = () => {
           </FormButton>
         </form>
       </AuthForm>
-      <SocialLoginAndSignup type="signup" />
+      <Suspense>
+        <SocialLoginAndSignup type="signup" />
+      </Suspense>
     </section>
   );
 };

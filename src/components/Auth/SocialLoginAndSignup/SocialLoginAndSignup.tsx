@@ -34,7 +34,7 @@ const SocialLoginAndSignup = ({ type = "login" }: Props) => {
     if (error) {
       showError(`${error} 로그인으로 이동해서 진행해주세요.`);
     }
-  }, [searchParams]);
+  }, [searchParams, showError]);
 
   return (
     <div className={cx("social-login-container")}>
