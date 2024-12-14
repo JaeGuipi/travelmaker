@@ -9,7 +9,7 @@
   }
 
   @include mobile {
-    padding: 1.1rem 0.8rem;
+    padding: 1.2rem 1rem;
   }
 }
 
@@ -113,7 +113,17 @@
 
   @include mobile {
     @include text(md);
-    right: 1.1rem;
-    bottom: 0.8rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .customButton {
+    @include tablet {
+      padding: 1rem 2rem !important;
+      @include mobile {
+        font-size: 12px !important;
+        padding: 0.5rem 1.3rem !important;
+      }
+    }
   }
 }
