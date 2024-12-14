@@ -17,28 +17,28 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
   const [activityList, setActivityList] = useState(initialActivityList);
   const [currentCursorId, setCurrentCursorId] = useState(cursorId);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedId, setSeletedId] = useState<number | null>(null)
+  const [selectedId, setSeletedId] = useState<number | null>(null);
   const observerRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   const { notify, showError } = useToast();
-  const {toggleModal} = useModalStore()
-const confirmModal = "delete"
+  const { toggleModal } = useModalStore();
+  const confirmModal = "delete";
 
   const handleDeleteItem = async () => {
-    if (selectedId === null) return
+    if (selectedId === null) return;
     const response = await deleteActivity(selectedId);
     if (response?.status === 204) {
       setActivityList((prev) => prev.filter((activity) => activity.id !== selectedId));
       notify(toastMessages.success.deleteActivity);
-      setSeletedId(null)
+      setSeletedId(null);
     } else showError(response?.message);
   };
 
-  const openDeleteModal = (id : number) => {
-    setSeletedId(id)
-    toggleModal(confirmModal)
-  }
+  const openDeleteModal = (id: number) => {
+    setSeletedId(id);
+    toggleModal(confirmModal);
+  };
 
   useEffect(() => {
     if (activityList.length === 0) return;
@@ -73,7 +73,6 @@ const confirmModal = "delete"
     };
   }, [isLoading, currentCursorId, activityList]);
 
-  
   return (
     <div className={s["content-container"]}>
       <ItemTitleLayout title="내 체험관리">
@@ -90,12 +89,7 @@ const confirmModal = "delete"
           ></MyActivityItem>
         ))
       )}
-      <ConfirmModal
-        modalKey={confirmModal}
-        text="체험을 삭제하시겠어요?"
-        onCancel={handleDeleteItem}
-        id={selectedId}
-      />
+      <ConfirmModal modalKey={confirmModal} text="체험을 삭제하시겠어요?" onCancel={handleDeleteItem} id={selectedId} />
     </div>
   );
 };

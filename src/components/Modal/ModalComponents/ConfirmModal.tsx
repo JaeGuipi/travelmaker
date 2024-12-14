@@ -11,7 +11,7 @@ interface ModalProps {
   modalKey: string;
   text: string;
   onCancel: (id: number) => void;
-  id: number|null;
+  id: number | null;
 }
 
 const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
