@@ -24,8 +24,8 @@ const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: 
       <div className={s["info"]}>
         <div className={s["rating-container"]}>
           <div className={s["rating-box"]}>
-          <FaStar size={19} className={s["star"]} />
-          <span className={s["rating"]}>{`${activity.rating} (${activity.reviewCount})`}</span>
+            <FaStar size={19} className={s["star"]} />
+            <span className={s["rating"]}>{`${activity.rating} (${activity.reviewCount})`}</span>
           </div>
           <p className={s["title"]}>{activity.title}</p>
         </div>

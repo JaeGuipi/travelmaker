@@ -1,7 +1,6 @@
 .content-container {
   flex: 1;
-  overflow: hidden;
-  min-height: 100rem; //케밥이 안보여서 추가
+  width: calc(100% - 380px);
 }
 
 .no-list {

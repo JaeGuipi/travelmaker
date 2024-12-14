@@ -51,7 +51,7 @@ const Header = async () => {
     <header className={s.header}>
       <section className={cx("headerContainer", "container")}>
         <Link href={"/"} className={s.logo}>
-          <Image src={"/images/logo.png"} fill alt="TRAVEL MAKER" />
+          <Image src={"/images/logo.svg"} fill alt="TRAVEL MAKER" />
         </Link>
         <div className={s.search}>
           <SearchBar />
