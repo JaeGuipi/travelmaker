@@ -10,6 +10,7 @@ import LoadingSpinner from "../../../LoadingSpinner/LoadingSpinner";
 import { deleteNotification } from "@/actions/myNotification";
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
+import { IoMailOpenOutline } from "react-icons/io5";
 
 const cx = classNames.bind(s);
 
@@ -61,7 +62,6 @@ const NotificationItem = ({
         </button>
       </div>
       <div className={s["content-container"]}>
-        {/* <span className={s.content}>{notification.content}</span> */}
         <HighlightContent content={notification.content} />
         <span className={s["time-text"]}>{timeText}</span>
       </div>
@@ -127,18 +127,28 @@ const NotificationList = forwardRef<HTMLDivElement, { onClose: () => void; notif
     }, [isLoading, currentCursorId, notificationList, ref]);
 
     return (
-      <div ref={ref} className={cx("notificationList-container")}>
-        <div className={cx("conunt-container")}>
-          <span className={cx("count")}>{`알림 ${notifications.totalCount}개`}</span>
+      <div ref={ref} className={s["notificationList-container"]}>
+        <div className={s["conunt-container"]}>
+          <span className={cx("count")}>
+            {notificationList.length !== 0 ? `알림 ${notifications.totalCount}개` : ""}
+          </span>
           <button type="button" onClick={() => onClose()}>
             <Image src="/icons/btn_cancel_black.svg" width={24} height={24} alt="닫기" />
           </button>
         </div>
-        <ul className={cx("notificationList-wrap")}>
-          {notificationList.map((notification) => (
-            <NotificationItem key={notification.id} notification={notification} onDelete={handleDelete} />
-          ))}
-        </ul>
+        {notificationList.length === 0 ? (
+          <div className={s["no-list-container"]}>
+            <IoMailOpenOutline className={s["no-list"]} />
+            <span className={s["no-text"]}>새로운 알림이 없습니다.</span>
+          </div>
+        ) : (
+          <ul className={s["notificationList-wrap"]}>
+            {notificationList.map((notification) => (
+              <NotificationItem key={notification.id} notification={notification} onDelete={handleDelete} />
+            ))}
+          </ul>
+        )}
+
         {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
       </div>
     );
