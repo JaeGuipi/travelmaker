@@ -18,7 +18,7 @@ const AllItemList = ({ activities = [], onLoadMore }: AllItemListProps) => {
             <Link href={`/activities/${activity.id}`}>
               <div className={s.img}>
                 <Image
-                  src={activity.bannerImageUrl || `/images/profile.png`}
+                  src={activity.bannerImageUrl || "/images/no_image.png"}
                   width={283}
                   height={283}
                   alt="체험 이미지"
@@ -33,7 +33,7 @@ const AllItemList = ({ activities = [], onLoadMore }: AllItemListProps) => {
                 </p>
                 <h4 className={s.title}>{activity.title}</h4>
                 <p className={s.price}>
-                  ₩{activity.price}
+                  ${activity.price}
                   <span> / 인</span>
                 </p>
               </div>

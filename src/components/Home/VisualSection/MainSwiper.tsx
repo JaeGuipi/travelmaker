@@ -11,6 +11,7 @@ import s from "./MainSwiper.module.scss";
 
 export default function MainSwiper() {
   SwiperCore.use([Navigation, Autoplay]);
+
   return (
     <>
       <section className={s.visual}>
@@ -26,13 +27,22 @@ export default function MainSwiper() {
           loop={true}
         >
           <SwiperSlide>
-            <Image src="/images/main_bnr01.jpg" fill alt="main_bnr01" loading="eager" />
+            <picture>
+              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr01.jpg" />
+              <Image src="/images/main_bnr01.jpg" fill alt="main_bnr01" loading="eager" />
+            </picture>
           </SwiperSlide>
           <SwiperSlide>
-            <Image src="/images/main_bnr02.jpg" fill alt="main_bnr02" loading="eager" />
+            <picture>
+              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr02.jpg" />
+              <Image src="/images/main_bnr02.jpg" fill alt="main_bnr02" loading="eager" />
+            </picture>
           </SwiperSlide>
           <SwiperSlide>
-            <Image src="/images/main_bnr03.jpg" fill alt="main_bnr03" loading="eager" />
+            <picture>
+              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr03.jpg" />
+              <Image src="/images/main_bnr03.jpg" fill alt="main_bnr03" loading="eager" />
+            </picture>
           </SwiperSlide>
           <div className={s["swiper-prev"]}>
             <Image src="/icons/arrow_prev.svg" fill alt="next" />
