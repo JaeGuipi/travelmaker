@@ -11,8 +11,7 @@
   }
 
   @include mobile {
-    height: auto;
-    min-height: 140px;
+    height: 130px;
   }
 }
 
@@ -28,7 +27,7 @@
 
   @include mobile {
     width: 12.8rem;
-    height: 140px;
+    height: 130px;
   }
 }
 

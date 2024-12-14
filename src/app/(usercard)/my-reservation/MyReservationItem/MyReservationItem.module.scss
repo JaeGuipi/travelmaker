@@ -24,6 +24,7 @@
     @include mobile {
       @include text(md);
       height: 24px;
+      margin-bottom: 0;
     }
   }
 
