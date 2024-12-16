@@ -2,9 +2,9 @@
 import React from "react";
 import s from "./BottomBar.module.scss";
 import Link from "next/link";
-import { IoSearch, IoPersonSharp } from "react-icons/io5";
+import { IoSearch, IoPersonOutline } from "react-icons/io5";
 import { TbReservedLine } from "react-icons/tb";
-import { FaHome } from "react-icons/fa";
+import { AiOutlineHome } from "react-icons/ai";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Alarm from "../Alarm/Alarm";
@@ -30,11 +30,11 @@ const BottomBar = async () => {
       </Link>
 
       <Link href="/" className={s["bottom-bar-item"]}>
-        <FaHome size={20} />홈
+        <AiOutlineHome size={20} />홈
       </Link>
 
       <Link href="/my-info" className={s["bottom-bar-item"]}>
-        <IoPersonSharp size={20} />
+        <IoPersonOutline size={20} />
         마이페이지
       </Link>
       <Alarm initialNotifications={myNotifications} type="bottom" />
