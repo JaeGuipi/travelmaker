@@ -25,10 +25,10 @@
 
 | 이름   | 역할                | GitHub                                      | 한 줄 소개                  |
 |--------|---------------------|---------------------------------------------|-----------------------------|
-| 이재서 | 팀장, 프론트엔드     | [GitHub 프로필](https://github.com/JaeGuipi) | 서치 페이지, 예약 현황 페이지, middleware 구현, 간편 회원가입 기능 구현|
-| 구민지 | 프론트엔드           | [GitHub 프로필](https://github.com/99mingi) | 메인 페이지, 체험 상세 페이지, 지도 및 달력 SDK를 이용한 기능 구현         |
-| 지혜민 | 프론트엔드           | [GitHub 프로필](https://github.com/hyemeeny) | 로그인 페이지, 내 정보 페이지, 내 체험 등록 및 수정 페이지, 지도 및 달력 SDK를 이용한 기능 구현    |
-| 김진 | 프론트엔드             | [GitHub 프로필](https://github.com/jjeankim) | 회원가입 페이지, 예약 내역 페이지, 내 체험 관리 페이지   |
+| 이재서 | 팀장, 프론트엔드     | [GitHub 프로필](https://github.com/JaeGuipi) | 서치 페이지, 예약 현황 페이지, middleware 구현, 간편 회원가입 기능 구현, 커스텀 달력|
+| 구민지 | 프론트엔드           | [GitHub 프로필](https://github.com/99mingi) | 메인 페이지, 체험 상세 페이지, 지도 SDK를 이용한 기능 구현 , 커스텀 달력|
+| 지혜민 | 프론트엔드           | [GitHub 프로필](https://github.com/hyemeeny) | 로그인 페이지, 내 정보 페이지, 내 체험 등록 및 수정 페이지, 지도 SDK를 이용한 기능 구현    |
+| 김진 | 프론트엔드             | [GitHub 프로필](https://github.com/jjeankim) | 회원가입 페이지, 예약 내역 페이지, 내 체험 관리 페이지 |
 
 <br />
 
