@@ -75,7 +75,7 @@
   }
 
   & > li {
-    width: 50%;
+    flex: 0 0 calc(50% - 8px);
     height: 100%;
     @include mobile {
       width: 100%;
@@ -98,7 +98,7 @@
       }
 
       & > li {
-        width: 49.3%;
+        flex: 0 0 calc(50% - 8px);
         height: 50%;
         @include tablet {
           width: 49%;

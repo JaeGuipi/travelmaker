@@ -62,13 +62,15 @@ const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
         <p className={s.cate}>{activity.category}</p>
         <div>
           <h2>{activity.title}</h2>
-          <Dropdown>
-            <DropdownToggle variant="kebab"></DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem onClick={() => router.push(`/my-activities/${activity.id}`)}>수정하기</DropdownItem>
-              <DropdownItem onClick={() => openDeleteModal(activity.id)}>삭제하기</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+          {userId === activity.userId && (
+            <Dropdown>
+              <DropdownToggle variant="kebab"></DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem onClick={() => router.push(`/my-activities/${activity.id}`)}>수정하기</DropdownItem>
+                <DropdownItem onClick={() => openDeleteModal(activity.id)}>삭제하기</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          )}
         </div>
         <div className={s["rating-address"]}>
           <p className={s.rating}>
