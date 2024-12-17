@@ -22,7 +22,7 @@ const MyReservationItem = ({
           className={cx("status", {
             pending: reservation.status === "pending",
             confirmed: reservation.status === "confirmed",
-            declinde: reservation.status === "declined",
+            declined: reservation.status === "declined",
             canceled: reservation.status === "canceled",
             completed: reservation.status === "completed",
           })}
