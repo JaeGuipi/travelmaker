@@ -31,7 +31,7 @@ const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: 
         </div>
         <div className={s["kebab-container"]}>
           <p className={s["price"]}>
-            {`₩${activity.price}`}
+            {`₩${activity.price.toLocaleString()}`}
             <span className={s["per-head"]}>/인</span>
           </p>
           <div className={s["dropdown-container"]}>

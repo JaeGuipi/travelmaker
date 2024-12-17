@@ -23,3 +23,51 @@ body {
 .ReactModal__Body--open {
   overflow: hidden;
 }
+
+.error-page-content {
+  min-height: calc(100vh - 91px - 160px);
+  padding: 15rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-page-title-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-page-icon {
+  color: $gray06;
+}
+
+.error-page-title {
+  @include text(2xl);
+  font-weight: 700;
+  color: $gray01;
+  margin-top: 30px;
+}
+
+.error-page-title-description {
+  @include text(lg);
+  color: $gray02;
+  margin-bottom: 10px;
+}
+
+.move-to-home {
+  @include text(sm);
+  font-weight: 500;
+  background-color: $yellow02;
+  border-radius: 0.6rem;
+  padding: 1rem;
+  color: #fff;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
