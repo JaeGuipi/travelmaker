@@ -1,34 +1,41 @@
 .addressInputContainer {
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
-  @include tablet {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  margin-top: 1rem;
 
-  .customInput {
-    flex: 1;
-  }
-
-  .searchButton {
-    @include text(md);
+  .titleLabel {
+    @include text(lg);
     font-weight: 500;
-    color: white;
-    padding: 0 1rem;
-    min-height: 40px;
-    background-color: $yellow03;
-    border-radius: 9px;
-    transition: all 0.3s ease-in-out;
-    margin-bottom: 0.5rem;
-    @include flex-center;
-    @include mobile {
-      min-height: 30px;
-      margin-bottom: 0.3rem;
+  }
+
+  .addressInputWrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 8px;
+    @include tablet {
+      gap: 0.5rem;
     }
 
-    &:hover {
-      background-color: $yellow02;
+    .customInput {
+      flex: 1;
+    }
+
+    .searchButton {
+      @include text(md);
+      font-weight: 500;
+      color: white;
+      padding: 0 1rem;
+      min-height: 40px;
+      background-color: $yellow03;
+      border-radius: 9px;
+      transition: all 0.3s ease-in-out;
+      @include flex-center;
+      @include mobile {
+        min-height: 30px;
+      }
+
+      &:hover {
+        background-color: $yellow02;
+      }
     }
   }
 }
