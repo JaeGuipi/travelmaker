@@ -45,16 +45,16 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
     },
   });
 
+  console.log("전체 데이터", activities);
+
   // 데이터 가져오기 및 폼 초기화
   useEffect(() => {
     const fetchActivities = async () => {
-      if (activityId) {
-        if (activities) {
-          setActivity(activities);
-          reset({ ...activities });
-          setBannerPreview(activities.bannerImageUrl || "");
-          setSubImagePreviews(activities.subImages?.map((img: SubImage) => img.imageUrl) || []);
-        }
+      if (activityId && activities) {
+        setActivity(activities);
+        reset({ ...activities });
+        setBannerPreview(activities.bannerImageUrl || "");
+        setSubImagePreviews(activities.subImages?.map((img: SubImage) => img.imageUrl) || []);
       }
     };
     fetchActivities();
