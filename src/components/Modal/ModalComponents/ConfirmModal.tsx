@@ -35,7 +35,7 @@ const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
               onCancel(id!);
             }}
           >
-            취소하기
+            {modalKey === "delete" ? "삭제하기" : "취소하기"}
           </FormButton>
         </div>
       </ModalContainer>

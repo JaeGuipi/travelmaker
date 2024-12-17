@@ -65,7 +65,7 @@
 .img-wrap {
   overflow: hidden;
   @include flex-start;
-  align-items: flex-start;
+  justify-content: space-between;
   gap: 8px;
   height: 534px;
   margin-top: 25px;
@@ -90,6 +90,7 @@
       @include flex-start;
       flex-wrap: wrap;
       align-items: flex-start;
+      justify-content: space-between;
       gap: 8px;
       width: 100%;
       height: 100%;
