@@ -3,21 +3,30 @@
 import { Review } from "@/types/activites/activitesTypes";
 import { timeDiff } from "@/utils/timeDiff";
 import { FaStar } from "react-icons/fa";
+import { useState } from "react";
 import Image from "next/image";
 import s from "./ReviewList.module.scss";
 import Pagination from "@/components/Button/Pagination";
 
 interface ReviewListProps {
-  activityId: number;
   reviews: Review[];
   totalCount: number;
   averageRating: number;
-  page: number;
-  size: number;
 }
 
-const ReviewList = ({ reviews, totalCount, averageRating, page, size }: ReviewListProps) => {
+const ReviewList = ({ reviews, totalCount, averageRating }: ReviewListProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const size = 3;
+
   const totalPage = Math.ceil(totalCount / size);
+
+  // 페이지 변경 핸들러
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  // 현재 페이지에 맞는 리뷰만 표시 (3개씩)
+  const currentReviews = reviews.slice((currentPage - 1) * size, currentPage * size);
 
   const getSatisfactionText = (rating: number): string => {
     switch (true) {
@@ -34,13 +43,6 @@ const ReviewList = ({ reviews, totalCount, averageRating, page, size }: ReviewLi
     }
   };
 
-  // 페이지네이션
-  const handlePageChange = (pageNumber: number) => {
-    const params = new URLSearchParams();
-    params.set("page", pageNumber.toString());
-    params.set("size", size.toString());
-  };
-
   return (
     <section>
       <div className={s.ratingWrap}>
@@ -54,7 +56,7 @@ const ReviewList = ({ reviews, totalCount, averageRating, page, size }: ReviewLi
         </p>
       </div>
       <ul className={s.reviewList}>
-        {reviews.map((review) => (
+        {currentReviews.map((review) => (
           <li key={review.id}>
             <div className={s.profileImg}>
               <Image
@@ -74,7 +76,7 @@ const ReviewList = ({ reviews, totalCount, averageRating, page, size }: ReviewLi
         ))}
       </ul>
       <div className={s.pagination}>
-        <Pagination currentPage={Number(page)} totalPages={totalPage} onPageChange={handlePageChange} />
+        <Pagination currentPage={currentPage} totalPages={totalPage} onPageChange={handlePageChange} />
       </div>
     </section>
   );
