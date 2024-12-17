@@ -43,7 +43,6 @@ async function getActivityReview(activityId: number): Promise<GetReviews> {
     cache: "no-store",
   });
   const data = await response.json();
-  console.log(data);
 
   return {
     ...data,
