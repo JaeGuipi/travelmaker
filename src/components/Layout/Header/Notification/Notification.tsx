@@ -1,5 +1,5 @@
 "use client";
-import { getDotColor, timeDiff } from "@/utils/timeDiff";
+import { timeDiff } from "@/utils/timeDiff";
 import s from "./Notification.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
@@ -46,9 +46,8 @@ const NotificationItem = ({
   onDelete: (id: number) => void;
 }) => {
   const timeText = timeDiff(notification.createdAt);
-  const dotColor = getDotColor(timeText);
+  const dotColor = notification.content.includes("승인") ? "text-notice-blue" : "text-notice-red";
 
-  //알림 삭제 함수
   const handleDelete = () => {
     onDelete(notification.id);
   };

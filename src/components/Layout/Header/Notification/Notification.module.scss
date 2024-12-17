@@ -33,14 +33,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  
+
   @include mobile {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 90%; 
-    height: 90%; 
+    width: 90%;
+    height: 90%;
   }
 }
 
@@ -66,7 +66,7 @@
 .count {
   @include text(xl);
   font-weight: 700;
-  color: $gray02;
+  color: $gray01;
 }
 
 .notificationList-wrap {
@@ -103,7 +103,7 @@
 }
 
 .status.text-notice-blue {
-  background-color: $blue01;
+  background-color: $blue02;
 }
 
 .status.text-notice-red {
@@ -126,13 +126,13 @@
 }
 
 .confirmed {
-  color: $red01;
+  color: $blue02;
   font-weight: 700;
   @include text(md);
 }
 
 .declined {
-  color: $blue01;
+  color: $red01;
   font-weight: 700;
   @include text(md);
 }
