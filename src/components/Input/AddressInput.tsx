@@ -50,7 +50,9 @@ const AddressInput = ({ control, errors }: AddressInputProps) => {
       control={control}
       render={({ field: { onChange, value } }) => (
         <div className={s.addressInputContainer}>
-          <label className={s.titleLabel}>주소</label>
+          <label className={s.titleLabel}>
+            주소 <span className={s.required}>*</span>
+          </label>
           <div className={s.addressInputWrap}>
             <div className={s.customInput}>
               <CustomInput

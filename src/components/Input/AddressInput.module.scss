@@ -4,6 +4,10 @@
   .titleLabel {
     @include text(lg);
     font-weight: 500;
+
+    .required {
+      color: $red01;
+    }
   }
 
   .addressInputWrap {
