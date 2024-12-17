@@ -10,12 +10,14 @@ interface BackandRequest {
 }
 
 export async function GET(req: NextRequest) {
-  const redirectUri = "http://localhost:3000/api/kakao-auth";
   const url = req.nextUrl;
   //Setp 1: 카카오 code 추출
   const code = url.searchParams.get("code");
   const state = url.searchParams.get("state"); // state 매개변수 추출
 
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+
+  const redirectUri = `${BASE_URL}/api/kakao-auth`;
   try {
     if (!code) {
       return NextResponse.json({ success: false, error: "Missing authorization code" }, { status: 400 });
@@ -47,10 +49,7 @@ export async function GET(req: NextRequest) {
       const backendError = await backendResponse.json();
       console.error("백엔드 인증 실패:", backendError.message);
       // 에러 메시지를 포함하여 리디렉션
-      return NextResponse.redirect(
-        `http://localhost:3000/signup?error=${encodeURIComponent(backendError.message)}`,
-        302,
-      );
+      return NextResponse.redirect(`${BASE_URL}/signup?error=${encodeURIComponent(backendError.message)}`, 302);
     }
 
     const backendData = await backendResponse.json();
@@ -58,11 +57,11 @@ export async function GET(req: NextRequest) {
 
     if (!accessToken || !refreshToken) {
       console.error("백엔드에서 토큰이 누락되었습니다.");
-      return NextResponse.redirect("http://localhost:3000/error", 302);
+      return NextResponse.redirect(`${BASE_URL}/error`, 302);
     }
 
     // Step 4: 쿠키 설정 및 리디렉션
-    const response = NextResponse.redirect("http://localhost:3000/", 302);
+    const response = NextResponse.redirect(BASE_URL, 302);
     response.cookies.set("accessToken", accessToken, {
       httpOnly: true,
       sameSite: "lax",
@@ -77,6 +76,6 @@ export async function GET(req: NextRequest) {
     return response;
   } catch (error) {
     console.error("OAuth 처리 중 오류 발생:", error);
-    return NextResponse.redirect("http://localhost:3000/?error=server_error", 302);
+    return NextResponse.redirect(`${BASE_URL}/?error=server_error`, 302);
   }
 }
