@@ -30,7 +30,7 @@ const ReviewList = ({ reviews, totalCount, averageRating, page, size }: ReviewLi
       case rating >= 1:
         return "불만족";
       default:
-        return "매우 불만족";
+        return "등록된 리뷰가 없습니다.";
     }
   };
 
