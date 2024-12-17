@@ -22,18 +22,16 @@ const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
   const [isSdkLoaded, setIsSdkLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    // 카카오 SDK가 로드되었는지 확인
-    if (typeof kakao !== "undefined") {
-      setIsSdkLoaded(true);
-    } else {
-      // SDK가 로드되었을 때만 지도를 사용
-      const interval = setInterval(() => {
-        if (typeof kakao !== "undefined") {
-          setIsSdkLoaded(true);
-          clearInterval(interval);
-        }
-      }, 300);
-    }
+    // 카카오 SDK 로드 여부를 확인하는 함수
+    const checkKakaoLoaded = () => {
+      if (typeof kakao !== "undefined") {
+        setIsSdkLoaded(true);
+      } else {
+        setTimeout(checkKakaoLoaded, 300); // SDK가 로드되었는지 확인
+      }
+    };
+
+    checkKakaoLoaded(); // SDK 로드 확인 시작
   }, []);
 
   useEffect(() => {
@@ -44,7 +42,7 @@ const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
     if (!mapContainer) return;
 
     const mapOptions = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+      center: new kakao.maps.LatLng(33.450701, 126.570667), // 기본 지도 중심
       level: 3, // 지도의 확대 레벨
     };
 
