@@ -9,6 +9,8 @@ export interface PopularItemProps {
 }
 
 const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {
+  const formattedPrice = new Intl.NumberFormat("ko-KR").format(activity.price);
+
   return (
     <Link href={`/activities/${activity.id}`}>
       <Image src={activity.bannerImageUrl} width={384} height={384} priority={true} alt="체험 이미지" />
@@ -21,7 +23,7 @@ const PopularItem: React.FC<PopularItemProps> = ({ activity }) => {
         </p>
         <h4 className={s.title}>{activity.title}</h4>
         <p className={s.price}>
-          ${activity.price}
+          ₩{formattedPrice}
           <span> / 인</span>
         </p>
       </div>

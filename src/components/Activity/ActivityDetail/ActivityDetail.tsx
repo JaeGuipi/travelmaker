@@ -25,10 +25,6 @@ export default async function ActivityDetail({ activity }: ActivityDetailProps) 
               <span>{activity.address}</span>
             </p>
           </div>
-          <div>
-            <h3 className={s["info-title"]}>후기</h3>
-            <div></div>
-          </div>
         </div>
       </div>
     </section>

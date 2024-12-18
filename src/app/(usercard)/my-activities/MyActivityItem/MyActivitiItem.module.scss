@@ -4,6 +4,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: calc(100% - 380px);
+  @include tablet {
+    padding: 1.2rem 1.8rem;
+  }
+
+  @include mobile {
+    padding: 1.2rem 1rem;
+  }
 }
 
 .rating-container {
@@ -12,7 +20,7 @@
 
 .rating-box {
   display: flex;
- align-items: center;
+  align-items: center;
 }
 
 .star {
@@ -30,11 +38,27 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @include tablet {
+    @include text(2lg);
+  }
+
+  @include mobile {
+    @include text(md);
+  }
 }
 
 .price {
   @include text(2xl);
   font-weight: 500;
+
+  @include tablet {
+    @include text(xl);
+  }
+
+  @include mobile {
+    @include text(lg);
+  }
 }
 
 .per-head {

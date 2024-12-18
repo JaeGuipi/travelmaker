@@ -11,14 +11,12 @@ interface ModalProps {
   modalKey: string;
   text: string;
   onCancel: (id: number) => void;
-  id: number;
-  onClose: () => void;
+  id: number | null;
 }
 
 const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
   const { toggleModal } = useModalStore();
-  console.log(id);
-
+  const buttonText = modalKey === "delete" ? "삭제하기" : "취소하기";
   return (
     <>
       <ModalContainer modalKey={modalKey} className={s["confirm-modal"]}>
@@ -34,10 +32,10 @@ const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
             size="small"
             onClick={() => {
               toggleModal(modalKey);
-              onCancel(id);
+              onCancel(id!);
             }}
           >
-            취소하기
+            {buttonText}
           </FormButton>
         </div>
       </ModalContainer>

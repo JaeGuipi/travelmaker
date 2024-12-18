@@ -1,14 +1,13 @@
 .notificationList-container {
   max-height: 50rem;
   overflow-y: auto;
-  position: relative;
   border: 1px solid #ddd;
   border-radius: 1rem;
   padding: 2.4rem 2rem;
   background-color: $orange02;
   position: absolute;
   right: 0;
-  top: 90px;
+  top: 8rem;
   z-index: 300;
 
   @include mobile {
@@ -25,6 +24,39 @@
   @include scrollbar;
 }
 
+.no-list-container {
+  background-color: #fff;
+  border-radius: 1rem;
+  width: 32.8rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include mobile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+  }
+}
+
+.no-list {
+  font-size: 12rem;
+  color: $gray04;
+  opacity: 0.5;
+}
+
+.no-text {
+  @include text(md);
+  font-weight: 700;
+  color: $gray02;
+  opacity: 0.5;
+}
+
 .conunt-container {
   display: flex;
   justify-content: space-between;
@@ -34,6 +66,7 @@
 .count {
   @include text(xl);
   font-weight: 700;
+  color: $gray01;
 }
 
 .notificationList-wrap {
@@ -44,7 +77,7 @@
 }
 
 .notificationItem-container {
-  width: 328px;
+  width: 32.8rem;
   background-color: #fff;
   padding: 1.6rem 1.2rem;
   display: flex;
@@ -64,13 +97,13 @@
 
 .status {
   display: inline-block;
-  width: 5px;
-  height: 5px;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
 }
 
 .status.text-notice-blue {
-  background-color: $blue01;
+  background-color: $blue02;
 }
 
 .status.text-notice-red {
@@ -93,13 +126,13 @@
 }
 
 .confirmed {
-  color: $red01;
+  color: $blue02;
   font-weight: 700;
   @include text(md);
 }
 
 .declined {
-  color: $blue01;
+  color: $red01;
   font-weight: 700;
   @include text(md);
 }

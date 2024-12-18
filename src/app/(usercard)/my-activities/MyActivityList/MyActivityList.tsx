@@ -10,22 +10,34 @@ import { useRouter } from "next/navigation";
 import { deleteActivity } from "@/actions/activity.action";
 import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
+import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
+import useModalStore from "@/store/useModalStore";
 
 const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList: Activity[]; cursorId: number }) => {
   const [activityList, setActivityList] = useState(initialActivityList);
   const [currentCursorId, setCurrentCursorId] = useState(cursorId);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedId, setSeletedId] = useState<number | null>(null);
   const observerRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
   const { notify, showError } = useToast();
+  const { toggleModal } = useModalStore();
+  const confirmModal = "delete";
 
-  const handleDeleteItem = async (id: number) => {
-    const response = await deleteActivity(id);
+  const handleDeleteItem = async () => {
+    if (selectedId === null) return;
+    const response = await deleteActivity(selectedId);
     if (response?.status === 204) {
-      setActivityList((prev) => prev.filter((activity) => activity.id !== id));
+      setActivityList((prev) => prev.filter((activity) => activity.id !== selectedId));
       notify(toastMessages.success.deleteActivity);
+      setSeletedId(null);
     } else showError(response?.message);
+  };
+
+  const openDeleteModal = (id: number) => {
+    setSeletedId(id);
+    toggleModal(confirmModal);
   };
 
   useEffect(() => {
@@ -61,17 +73,23 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
     };
   }, [isLoading, currentCursorId, activityList]);
 
-  if (activityList.length === 0) {
-    return <NoList text="아직 등록한 체험이 없어요" />;
-  }
   return (
     <div className={s["content-container"]}>
       <ItemTitleLayout title="내 체험관리">
         <FormButton onClick={() => router.push("/my-activities/register")}>체험 등록하기</FormButton>
       </ItemTitleLayout>
-      {activityList.map((activity) => (
-        <MyActivityItem key={activity.id} activity={activity} onDelete={handleDeleteItem}></MyActivityItem>
-      ))}
+      {activityList.length === 0 ? (
+        <NoList text="아직 등록한 체험이 없어요" />
+      ) : (
+        activityList.map((activity) => (
+          <MyActivityItem
+            key={activity.id}
+            activity={activity}
+            onDelete={() => openDeleteModal(activity.id)}
+          ></MyActivityItem>
+        ))
+      )}
+      <ConfirmModal modalKey={confirmModal} text="체험을 삭제하시겠어요?" onCancel={handleDeleteItem} id={selectedId} />
     </div>
   );
 };

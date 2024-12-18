@@ -22,7 +22,7 @@ const MyReservationItem = ({
           className={cx("status", {
             pending: reservation.status === "pending",
             confirmed: reservation.status === "confirmed",
-            declinde: reservation.status === "declined",
+            declined: reservation.status === "declined",
             canceled: reservation.status === "canceled",
             completed: reservation.status === "completed",
           })}
@@ -42,6 +42,7 @@ const MyReservationItem = ({
               type="button"
               onClick={() => onOpenModal("review", reservation)}
               disabled={reservation.reviewSubmitted}
+              className={s.customButton}
             >
               후기 작성
             </FormButton>
@@ -49,7 +50,12 @@ const MyReservationItem = ({
         )}
         {reservation.status === "pending" && (
           <div className={s.button}>
-            <FormButton type="button" variant="emptyButton" onClick={() => onOpenModal("confirm", reservation)}>
+            <FormButton
+              type="button"
+              variant="emptyButton"
+              onClick={() => onOpenModal("confirm", reservation)}
+              className={s.customButton}
+            >
               예약 취소
             </FormButton>
           </div>

@@ -17,9 +17,3 @@ export const timeDiff = (date: string) => {
   return `${start.toLocaleDateString()}`;
 };
 
-export const getDotColor = (timeText: string) => {
-  if (timeText.includes("방금 전")) {
-    return "text-notice-blue";
-  }
-  return "text-notice-red";
-};

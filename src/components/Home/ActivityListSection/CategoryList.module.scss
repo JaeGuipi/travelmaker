@@ -3,7 +3,7 @@
   @include flex-start;
   gap: 20px;
   scrollbar-width: none;
-  @include mobile {
+  @include tablet {
     flex-wrap: nowrap;
     overflow-x: scroll;
     padding: 15px 0 5px;
@@ -18,7 +18,7 @@
     height: 120px;
     cursor: pointer;
     @include mobile {
-      flex: 0 0 60px;
+      flex: 0 0 80px;
       height: 100px;
     }
     > span {

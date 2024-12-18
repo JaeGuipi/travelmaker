@@ -14,8 +14,15 @@
   background-color: white;
 
   &.kebab {
-    width: 40px;
+    position: relative;
+    width: 24px;
+    height: 24px;
     background: transparent;
+    @include tablet {
+      width: 20px;
+      height: 20px;
+    }
+
     img {
       width: 100%;
     }
@@ -54,8 +61,8 @@
 
   .toggle.kebab + & {
     position: absolute;
-    left: -113px;
-    top: 43px;
+    right: 0;
+    top: 30px;
   }
 }
 

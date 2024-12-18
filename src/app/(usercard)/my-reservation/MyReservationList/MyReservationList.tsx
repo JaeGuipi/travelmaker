@@ -55,6 +55,7 @@ const MyReservationList = ({
   };
 
   const dropdownItems = [
+    { key: "total", label: "전체 예약" },
     { key: "pending", label: "예약 완료" },
     { key: "canceled", label: "예약 취소" },
     { key: "confirmed", label: "예약 승인" },
@@ -85,6 +86,14 @@ const MyReservationList = ({
   const orderedList = async (status: string) => {
     if (isLoading) return;
     setIsLoading(true);
+    
+    if (status === "total") {
+      setReservationList(initialReservationList)
+      setCurrentCursorId(cursorId)
+      setReservationStatus("")
+      setIsLoading(false)
+      return
+    }
     setReservationStatus(status);
     try {
       const response = await fetch(`/api/my-reservations?size=6&status=${status}`);
@@ -185,7 +194,6 @@ const MyReservationList = ({
               modalKey={confirmModal}
               text="예약을 취소하시겠어요?"
               id={modalState.reservation.id}
-              onClose={handleCloseModal}
               onCancel={handleDeleteItem}
             />
           )}

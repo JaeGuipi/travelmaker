@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NotificationList from "../Layout/Header/Notification/Notification";
 import s from "./Alarm.module.scss";
 import { MyNotifications } from "@/types/notifications/notificationsTypes";
@@ -23,6 +23,17 @@ const Alarm: React.FC<AlarmProps> = ({ initialNotifications, type }) => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const handleClickOutside = (e:MouseEvent) => {
+    if (notificationRef.current && !notificationRef.current.contains(e.target as Node)) setIsModalOpen(false)
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown",handleClickOutside)
+
+    return () => {
+      document.removeEventListener("mousedown",handleClickOutside)
+    }
+  })
   const buttonClassName = type === "header" ? s.hdAlarm : s.btmAlarm;
 
   if (type === "bottom") {

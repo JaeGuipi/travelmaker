@@ -13,13 +13,16 @@
   }
   .item-box {
     img {
-      max-height: 283px;
+      height: 283px;
+      width: 283px;
       border-radius: 20px;
       @include tablet {
-        height: 30vw;
+        height: 221px;
+        width: 221px;
       }
       @include mobile {
-        height: 43vw;
+        height: 168px;
+        width: 168px;
       }
     }
 
@@ -103,4 +106,8 @@
   flex-direction: column;
   gap: 40px;
   padding-bottom: 30px;
+}
+
+.itemImg {
+  object-fit: cover;
 }

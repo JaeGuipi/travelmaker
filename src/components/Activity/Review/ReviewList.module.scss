@@ -1,3 +1,10 @@
+h3.info-title {
+  padding-top: 40px;
+  color: $yellow02;
+  font-weight: 700;
+  @include text(xl);
+}
+
 .ratingWrap {
   gap: 16px;
   padding-top: 24px;

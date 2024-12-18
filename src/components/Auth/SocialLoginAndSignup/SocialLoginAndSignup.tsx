@@ -17,15 +17,15 @@ const cx = classNames.bind(s);
 const SocialLoginAndSignup = ({ type = "login" }: Props) => {
   const searchParams = useSearchParams();
   const { showError } = useToast();
-
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const title = type === "login" ? "SNS 계정으로 로그인하기" : "SNS 계정으로 회원가입하기";
 
   const googleClientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-  const googleRedirectUri = `http://localhost:3000/api/google-auth`;
+  const googleRedirectUri = `${BASE_URL}/api/google-auth`;
   const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=${googleRedirectUri}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email&state=${type}`;
 
   const kakaoclientId = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
-  const kakaoredirectUri = `http://localhost:3000/api/kakao-auth`;
+  const kakaoredirectUri = `${BASE_URL}/api/kakao-auth`;
   const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoclientId}&redirect_uri=${kakaoredirectUri}&response_type=code&state=${type}`;
 
   // 에러 메시지 확인
@@ -34,7 +34,7 @@ const SocialLoginAndSignup = ({ type = "login" }: Props) => {
     if (error) {
       showError(`${error} 로그인으로 이동해서 진행해주세요.`);
     }
-  }, [searchParams]);
+  }, [searchParams, showError]);
 
   return (
     <div className={cx("social-login-container")}>

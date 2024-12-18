@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { Activity } from "@/types/activites/activitesTypes";
 import { useRouter } from "next/navigation";
 
-const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: (id: number) => void }) => {
+const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: () => void }) => {
   const router = useRouter();
   const dropdownItems = [
     { key: 1, label: "수정하기" },
@@ -16,7 +16,7 @@ const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: 
     if (label === "수정하기") {
       router.push(`/my-activities/${activity.id}`);
     } else if (label === "삭제하기") {
-      onDelete(activity.id);
+      onDelete();
     }
   };
   return (
@@ -24,14 +24,14 @@ const MyActivityItem = ({ activity, onDelete }: { activity: Activity; onDelete: 
       <div className={s["info"]}>
         <div className={s["rating-container"]}>
           <div className={s["rating-box"]}>
-          <FaStar size={19} className={s["star"]} />
-          <span className={s["rating"]}>{`${activity.rating} (${activity.reviewCount})`}</span>
+            <FaStar size={19} className={s["star"]} />
+            <span className={s["rating"]}>{`${activity.rating} (${activity.reviewCount})`}</span>
           </div>
           <p className={s["title"]}>{activity.title}</p>
         </div>
         <div className={s["kebab-container"]}>
           <p className={s["price"]}>
-            {`₩${activity.price}`}
+            {`₩${activity.price.toLocaleString()}`}
             <span className={s["per-head"]}>/인</span>
           </p>
           <div className={s["dropdown-container"]}>

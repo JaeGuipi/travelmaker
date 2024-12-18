@@ -9,11 +9,13 @@ type SchedulesProps = {
 };
 
 export default function Schedules({ activityId, schedules, price }: SchedulesProps) {
+  const formattedPrice = new Intl.NumberFormat("ko-KR").format(price);
+
   return (
     <>
       <div className={s.schedules}>
         <p className={s.price}>
-          ₩ {price} <span>/ 인</span>
+          ₩ {formattedPrice} <span>/ 인</span>
         </p>
         <ScheduleDetail activityId={activityId} schedules={schedules} price={price} />
       </div>

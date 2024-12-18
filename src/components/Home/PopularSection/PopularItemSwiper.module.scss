@@ -1,8 +1,8 @@
 .swiper {
   position: static;
-  padding-top: 32px;
+  padding-top: 32px !important;
   @include mobile {
-    padding-top: 16px;
+    padding-top: 16px !important;
   }
   > div {
     display: flex;
