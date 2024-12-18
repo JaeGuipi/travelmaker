@@ -8,11 +8,17 @@ import { AiOutlineHome } from "react-icons/ai";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Alarm from "../Alarm/Alarm";
+import { cookies } from "next/headers";
 
 const BottomBar = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken) return;
+
   const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
-    console.error("내 알림 리스트 조회 실패");
+    console.error("하단바 내 알림 리스트 조회 실패");
   }
 
   const myNotifications = await response.json();

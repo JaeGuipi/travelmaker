@@ -36,6 +36,11 @@ const getUsers = async () => {
 };
 
 const getNotifications = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
+
+  if (!accessToken) return;
+
   const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패");
@@ -45,7 +50,7 @@ const getNotifications = async () => {
 
 const Header = async () => {
   const users = await getUsers();
-  const myNotifications = await getNotifications();
+  const myNotifications = users ? await getNotifications() : { notifications: [] };
 
   return (
     <header className={s.header}>
