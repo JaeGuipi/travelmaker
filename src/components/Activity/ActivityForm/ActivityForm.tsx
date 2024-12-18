@@ -10,11 +10,11 @@ import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 import FormButton from "@/components/Button/FormButton";
 import CustomInput from "@/components/Input/CustomInput";
-import ScheduleInput from "@/components/Input/ScheduleInput";
-import BannerInput from "@/components/Input/BannerInput";
-import CategoryDropdown from "@/components/Dropdown/CategoryDropdown";
+import CategoryDropdown from "@/components/Activity/ActivityForm/ActivityCategory/CategoryDropdown";
+import AddressInput from "@/components/Activity/ActivityForm/ActivityInput/AddressInput";
+import ScheduleInput from "@/components/Activity/ActivityForm/ActivityInput/ScheduleInput";
+import BannerInput from "@/components/Activity/ActivityForm/ActivityInput/BannerInput";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import AddressInput from "@/components/Input/AddressInput";
 
 const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
   const { showSuccess, showError, notify } = useToast();
