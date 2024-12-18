@@ -6,32 +6,33 @@ import { useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import s from "./MapInfo.module.scss";
 
-const useKakaoLoader = () => {
-  useKakaoLoaderOrigin({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_APPKEY!,
-    libraries: ["clusterer", "drawing", "services"],
-  });
-};
-
 interface MapInfoProps {
   address: string;
 }
 
 const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
-  useKakaoLoader(); // 카카오맵 SDK 로드
+  // Kakao SDK 로드
+  useKakaoLoaderOrigin({
+    appkey: process.env.NEXT_PUBLIC_KAKAO_APPKEY!,
+    libraries: ["clusterer", "drawing", "services"],
+  });
+
   const [isSdkLoaded, setIsSdkLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     // 카카오 SDK 로드 여부를 확인하는 함수
     const checkKakaoLoaded = () => {
-      if (typeof kakao !== "undefined") {
+      if (typeof window !== "undefined" && typeof kakao !== "undefined") {
         setIsSdkLoaded(true);
       } else {
         setTimeout(checkKakaoLoaded, 300); // SDK가 로드되었는지 확인
       }
     };
 
-    checkKakaoLoaded(); // SDK 로드 확인 시작
+    // 클라이언트 환경에서만 실행
+    if (typeof window !== "undefined") {
+      checkKakaoLoaded();
+    }
   }, []);
 
   useEffect(() => {
