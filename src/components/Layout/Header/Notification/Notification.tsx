@@ -85,6 +85,21 @@ const NotificationList = forwardRef<HTMLDivElement, { onClose: () => void; notif
       } else showError(response?.message);
     };
 
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch("/api/my-notifications?size=4");
+        const { notifications: newNotifications, cursorId: newCursorId } = await response.json();
+        setNotificationList(newNotifications);
+        setCurrentCursorId(newCursorId || null);
+      } catch (error) {
+        console.error("알림 데이터를 가져오는데 실패했습니다.", error);
+      }
+    };
+
+    useEffect(() => {
+      fetchNotifications();
+    }, [onClose]);
+
     useEffect(() => {
       if (notificationList.length === 0) return;
 
