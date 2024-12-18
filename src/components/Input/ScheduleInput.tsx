@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useFieldArray, Control, UseFormRegister } from "react-hook-form";
+import { useFieldArray, Control } from "react-hook-form";
 import { FiPlus, FiMinus } from "react-icons/fi";
-import { PostActivity } from "@/types/activites/activitesTypes";
+import { PostActivity, Schedule } from "@/types/activites/activitesTypes";
 import s from "./ScheduleInput.module.scss";
 import classNames from "classnames/bind";
 import { useToast } from "@/hooks/useToast";
@@ -12,24 +12,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import "./Calendar.scss";
-import { updateActivity } from "@/actions/activity.action";
-import { useParams } from "next/navigation";
+import { HiOutlineCalendar } from "react-icons/hi2";
+import { IoTimeOutline } from "react-icons/io5";
 
 const cx = classNames.bind(s);
 
-interface ScheduleInputProps {
-  control: Control<PostActivity>;
-  register: UseFormRegister<PostActivity>;
-}
-
-const ScheduleInput = ({ control }: ScheduleInputProps) => {
-  const { showSuccess, showError, notify } = useToast();
-  // const [schedule, setSchedule] = useState<any>({
-  //   date: null,
-  //   startTime: null,
-  //   endTime: null,
-  // });
-  const { activityId } = useParams();
+const ScheduleInput = ({ control }: { control: Control<PostActivity> }) => {
+  const { notify } = useToast();
   const [date, setDate] = useState<Date | null>(null);
   const [startTime, setStartTime] = useState<string>("");
   const [endTime, setEndTime] = useState<string>("");
@@ -38,47 +27,85 @@ const ScheduleInput = ({ control }: ScheduleInputProps) => {
     name: "schedules",
   });
 
-  // const isOverlapping = (newSchedule: any) => {
-  //   return fields.some(
-  //     (field) =>
-  //       field.date === newSchedule.date &&
-  //       ((newSchedule.startTime >= field.startTime && newSchedule.startTime < field.endTime) ||
-  //         (newSchedule.endTime > field.startTime && newSchedule.endTime <= field.endTime) ||
-  //         (newSchedule.startTime <= field.startTime && newSchedule.endTime >= field.endTime)),
-  //   );
-  // };
+  const isOverlapping = (newSchedule: Schedule) => {
+    // 문자열 date + time을 Date 객체로 변환하는 함수
+    const parseToDateTime = (dateStr: string, timeStr: string) => new Date(`${dateStr}T${timeStr}`);
 
-  // const handleAppend = (newSchedule: any) => {
-  //   if (!newSchedule.date || !newSchedule.startTime || !newSchedule.endTime) {
-  //     notify(toastMessages.notify.scheduleField);
-  //     return;
-  //   }
+    // parseToDateTime: 문자열을 Date 객체로 변환
+    const newStart = parseToDateTime(newSchedule.date, newSchedule.startTime);
+    const newEnd = parseToDateTime(newSchedule.date, newSchedule.endTime);
 
-  //   if (newSchedule.startTime >= newSchedule.endTime) {
-  //     notify(toastMessages.notify.scheduleStartTime);
-  //     return;
-  //   }
+    return fields.some((field) => {
+      const existingStart = parseToDateTime(field.date, field.startTime);
+      const existingEnd = parseToDateTime(field.date, field.endTime);
 
-  //   if (isOverlapping(newSchedule)) {
-  //     notify(toastMessages.notify.newSchedule);
-  //     return;
-  //   }
-
-  //   setSchedule({ date: "", startTime: "", endTime: "" });
-  //   append({ id: Date.now(), ...newSchedule });
-  // };
+      // 시간이 겹치는 조건
+      return (
+        (newStart >= existingStart && newStart < existingEnd) || // 새 시작 시간이 기존 범위에 포함
+        (newEnd > existingStart && newEnd <= existingEnd) || // 새 종료 시간이 기존 범위에 포함
+        (newStart <= existingStart && newEnd >= existingEnd) // 기존 시간대가 새 시간대에 포함됨
+      );
+    });
+  };
 
   const handleAppend = () => {
-    if (!date || !startTime || !endTime || startTime >= endTime) {
-      alert("유효하지 않은 시간 범위입니다.");
+    if (!date) {
+      notify(toastMessages.notify.scheduleDate);
       return;
     }
 
-    append({
+    if (!startTime || !endTime) {
+      notify(toastMessages.notify.scheduleTime);
+      return;
+    }
+
+    if (startTime >= endTime) {
+      notify(toastMessages.notify.scheduleStartTime);
+      return;
+    }
+
+    const newSchedule = {
+      id: Date.now(),
       date: format(date, "yyyy-MM-dd"),
       startTime,
       endTime,
+    };
+
+    // 겹치는 시간대 검사
+    if (isOverlapping(newSchedule)) {
+      notify(toastMessages.notify.newSchedule);
+      return;
+    }
+
+    // 겹치지 않을 때만 append
+    // append({
+    //   date: newSchedule.date,
+    //   startTime: newSchedule.startTime,
+    //   endTime: newSchedule.endTime,
+    // });
+
+    // 새로운 스케줄을 fields에 추가하고 정렬
+    const updatedFields = [
+      ...fields,
+      {
+        id: Date.now(),
+        date: newSchedule.date,
+        startTime: newSchedule.startTime,
+        endTime: newSchedule.endTime,
+      },
+    ];
+
+    // 날짜와 시간 기준 정렬
+    updatedFields.sort((a, b) => {
+      if (a.date !== b.date) {
+        return a.date.localeCompare(b.date);
+      }
+      return a.startTime.localeCompare(b.startTime);
     });
+
+    // 필드 업데이트
+    remove(); // 기존 fields 초기화
+    updatedFields.forEach((field) => append(field));
 
     // 입력 필드 리셋
     setDate(null);
@@ -86,59 +113,35 @@ const ScheduleInput = ({ control }: ScheduleInputProps) => {
     setEndTime("");
   };
 
-  // const handleRemove = async (index: number) => {
-  //   const fieldToRemove = fields[index];
-  //   const id = Number(activityId);
-
-  //   const formData = {
-  //     date: fieldToRemove.date,
-  //     startTime: fieldToRemove.startTime,
-  //     endTime: fieldToRemove.endTime,
-  //     scheduleId: fieldToRemove.id,
-  //   };
-
-  //   try {
-  //     // 예약 내역이 없을 때 항목 삭제
-  //     remove(index);
-  //     showSuccess(toastMessages.success.scheduleRemoved);
-
-  //     const response = await updateActivity(id, formData);
-
-  //     if (!response.ok) {
-  //       console.error("HTTP 상태 코드:", response.status); // 상태 코드 출력
-  //       console.error("전체 응답:", response); // 응답 객체 출력
-  //       notify(toastMessages.notify.reservationExists);
-  //       return;
-  //     }
-  //   } catch (error) {
-  //     console.error("삭제 중 에러 발생:", error);
-  //     showError(toastMessages.error.serverError);
-  //   }
-  // };
-
   return (
     <div className={s.scheduleInputContainer}>
-      <label className={s.titleLabel}>예약 가능한 시간대</label>
+      <label className={s.titleLabel}>
+        예약 가능한 시간대 <span className={s.required}>*</span>
+      </label>
       <div className={s.scheduleInputWrap}>
         <div className={s.fieldList}>
           <div className={s.fieldItem}>
             <label className={s.subLabel}>날짜</label>
+
             <Controller
-              name="date"
+              name={"date"}
               control={control}
               render={({ field }) => (
-                <DatePicker
-                  locale={ko}
-                  selected={date}
-                  onChange={(date: Date | null) => {
-                    setDate(date);
-                    field.onChange(date ? format(date, "yyyy-MM-dd") : "");
-                  }}
-                  dateFormat="yyyy-MM-dd"
-                  dateFormatCalendar="yyyy년 MM월"
-                  placeholderText="YYYY-MM-DD"
-                  className={s.scheduleInput}
-                />
+                <label className={s.datePickerWrap}>
+                  <DatePicker
+                    locale={ko}
+                    selected={date}
+                    onChange={(date: Date | null) => {
+                      setDate(date);
+                      field.onChange(date ? format(date, "yyyy-MM-dd") : "");
+                    }}
+                    dateFormat="yyyy-MM-dd"
+                    dateFormatCalendar="yyyy년 MM월"
+                    placeholderText="YYYY-MM-DD"
+                    className={s.scheduleInput}
+                  />
+                  <HiOutlineCalendar size={18} className={cx(date ? "" : "off")} />
+                </label>
               )}
             />
           </div>
@@ -149,20 +152,24 @@ const ScheduleInput = ({ control }: ScheduleInputProps) => {
               name="startTime"
               control={control}
               render={({ field }) => (
-                <DatePicker
-                  selected={startTime ? new Date(`1970-01-01T${startTime}:00`) : null}
-                  onChange={(time: Date | null) => {
-                    setStartTime(time ? format(time, "HH:mm") : "");
-                    field.onChange(time ? format(time, "HH:mm") : "");
-                  }}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={15}
-                  timeCaption="시작 시간"
-                  dateFormat="HH:mm"
-                  placeholderText="00:00"
-                  className={s.scheduleInput}
-                />
+                <label className={s.datePickerWrap}>
+                  <DatePicker
+                    selected={startTime ? new Date(`1970-01-01T${startTime}:00`) : null}
+                    onChange={(time: Date | null) => {
+                      setStartTime(time ? format(time, "HH:mm") : "");
+                      field.onChange(time ? format(time, "HH:mm") : "");
+                    }}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    timeCaption="시작 시간"
+                    timeFormat="HH:mm"
+                    dateFormat="HH:mm"
+                    placeholderText="00:00"
+                    className={s.scheduleInput}
+                  />
+                  <IoTimeOutline size={18} className={cx(startTime ? "" : "off")} />
+                </label>
               )}
             />
           </div>
@@ -175,20 +182,24 @@ const ScheduleInput = ({ control }: ScheduleInputProps) => {
               name="endTime"
               control={control}
               render={({ field }) => (
-                <DatePicker
-                  selected={endTime ? new Date(`1970-01-01T${endTime}:00`) : null}
-                  onChange={(time: Date | null) => {
-                    setEndTime(time ? format(time, "HH:mm") : "");
-                    field.onChange(time ? format(time, "HH:mm") : "");
-                  }}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeIntervals={15}
-                  timeCaption="종료 시간"
-                  dateFormat="HH:mm"
-                  placeholderText="00:00"
-                  className={s.scheduleInput}
-                />
+                <label className={s.datePickerWrap}>
+                  <DatePicker
+                    selected={endTime ? new Date(`1970-01-01T${endTime}:00`) : null}
+                    onChange={(time: Date | null) => {
+                      setEndTime(time ? format(time, "HH:mm") : "");
+                      field.onChange(time ? format(time, "HH:mm") : "");
+                    }}
+                    showTimeSelect
+                    showTimeSelectOnly
+                    timeIntervals={60}
+                    timeCaption="종료 시간"
+                    timeFormat="HH:mm"
+                    dateFormat="HH:mm"
+                    placeholderText="00:00"
+                    className={s.scheduleInput}
+                  />
+                  <IoTimeOutline size={18} className={cx(endTime ? "" : "off")} />
+                </label>
               )}
             />
           </div>

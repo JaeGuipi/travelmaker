@@ -4,6 +4,10 @@
   .titleLabel {
     @include text(lg);
     font-weight: 500;
+
+    .required {
+      color: $red01;
+    }
   }
 
   .scheduleInputWrap {
@@ -16,6 +20,9 @@
     display: flex;
     align-items: flex-end;
     gap: 1rem;
+    @include mobile {
+      gap: 0.5rem;
+    }
 
     .timeSeparator {
       font-size: 1.5rem;
@@ -36,15 +43,31 @@
         flex: 0.5;
       }
 
-      .react-datepicker-wrapper {
-        display: block;
-      }
-
       .subLabel {
         @include text(md);
         color: $gray04;
         padding-left: 0.3rem;
         padding-bottom: 0.3rem;
+      }
+
+      .datePickerWrap {
+        position: relative;
+
+        svg {
+          position: absolute;
+          right: 1.5rem;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          cursor: pointer;
+          @include mobile {
+            display: none;
+          }
+
+          &.off {
+            color: $gray05;
+          }
+        }
       }
 
       .scheduleInput {
