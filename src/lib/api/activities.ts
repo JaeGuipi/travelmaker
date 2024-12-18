@@ -18,6 +18,7 @@ export const getActivity = async (params: { size?: number; category?: string } =
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-cache",
     });
     return await response.json();
   } catch (error) {
