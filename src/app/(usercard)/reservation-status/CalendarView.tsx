@@ -16,7 +16,7 @@ import { EventClickArg } from "@fullcalendar/core";
 type Props = {
   activityId?: string;
   defaultYear: number;
-  defaultMonth: number;
+  defaultMonth: string;
   dashboardData: ResponsReservationMonthData[];
 };
 
@@ -94,7 +94,7 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
           key={activityId || "default"}
           plugins={[dayGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          initialDate={new Date(defaultYear, defaultMonth - 1, 1)}
+          initialDate={new Date(defaultYear, Number(defaultMonth) - 1, 1)}
           events={events}
           datesSet={(arg) => {
             const newYear = arg.view.currentStart.getFullYear();
