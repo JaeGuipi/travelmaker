@@ -29,8 +29,9 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitting },
     reset,
+    watch,
   } = useForm<PostActivity>({
     mode: "onChange",
     defaultValues: {
@@ -44,8 +45,6 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
       subImageUrls: [],
     },
   });
-
-  console.log("전체 데이터", activities);
 
   // 데이터 가져오기 및 폼 초기화
   useEffect(() => {
@@ -174,7 +173,7 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
 
       router.push("/my-activities");
     } catch (error) {
-      console.error(error);
+      console.error("에러 원인", error);
       if (activityId) {
         showError(toastMessages.error.activityUpdate);
       } else {
@@ -183,22 +182,31 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
     }
   };
 
+  const category = watch("category");
+  const address = watch("address");
+  const schedules = watch("schedules");
+
+  const isButtonDisabled = !isValid || !bannerPreview || !category || !address || !schedules.length;
+
   return (
     <section className={s.activityForm}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.activityFormHeader}>
           <h2>{activityId ? "내 체험 수정" : "내 체험 등록"}</h2>
-          <FormButton type="submit" size="medium" disabled={!isValid}>
-            {activityId ? "수정하기" : "등록하기"}
+          <FormButton type="submit" size="medium" disabled={isSubmitting || isButtonDisabled}>
+            {isSubmitting ? <LoadingSpinner /> : activityId ? "수정하기" : "등록하기"}
           </FormButton>
         </div>
         <div className={s.activityFormBody}>
+          <p className={s.requiredText}>
+            <span className={s.required}>*</span> 표시는 필수 입력 사항입니다.
+          </p>
           <CustomInput
             id="title"
             type="text"
-            placeholder="제목"
+            placeholder="제목을 입력해주세요"
             {...register("title", {
-              required: { value: true, message: "제목을 입력해주세요." },
+              required: { value: true, message: "제목을 입력해주세요" },
             })}
             errors={errors.title?.message}
           />
@@ -217,10 +225,10 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
           <CustomInput
             id="description"
             type="text"
-            placeholder="설명"
+            placeholder="설명을 입력해주세요"
             {...register("description", {
-              required: { value: true, message: "설명을 입력해주세요." },
-              minLength: { value: 8, message: "설명을 8자 이상 입력해주세요." },
+              required: { value: true, message: "설명을 입력해주세요" },
+              minLength: { value: 8, message: "설명을 8자 이상 입력해주세요" },
             })}
             isTextArea
             errors={errors.description?.message}
@@ -230,16 +238,17 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
             id="price"
             type="number"
             placeholder="가격"
+            required
             {...register("price", {
               valueAsNumber: true,
-              required: { value: true, message: "가격을 입력해주세요." },
-              min: { value: 1000, message: "가격은 1000원 이상 입력해주세요." },
-              validate: (value) => value >= 1000 || "가격은 1000원 이상 입력해주세요.",
+              required: { value: true, message: "가격을 입력해주세요" },
+              min: { value: 1000, message: "가격은 1000원 이상 입력해주세요" },
+              validate: (value) => value >= 1000 || "가격은 1000원 이상 입력해주세요",
             })}
             errors={errors.price?.message}
           />
           <AddressInput control={control} errors={errors.address?.message} />
-          <ScheduleInput control={control} register={register} />
+          <ScheduleInput control={control} />
           <BannerInput
             title="배너 이미지"
             inputId="bannerImageUrl"
@@ -247,6 +256,7 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
             handleImageChange={handleBannerImageChange}
             handleImageRemove={handleBannerImageRemove}
             isSingle={true}
+            required
           />
           <BannerInput
             title="소개 이미지"
