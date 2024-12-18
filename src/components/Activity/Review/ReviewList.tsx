@@ -45,6 +45,7 @@ const ReviewList = ({ reviews, totalCount, averageRating }: ReviewListProps) => 
 
   return (
     <section>
+      <h3 className={s["info-title"]}>후기</h3>
       <div className={s.ratingWrap}>
         <p className={s.rating}>{parseFloat((averageRating ?? 0).toFixed(1))}</p>
         <p className={s.reviewCount}>
