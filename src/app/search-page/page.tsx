@@ -37,7 +37,7 @@ export default async function Page({ searchParams }: SearchPageProps) {
     headers: {
       "Content-Type": "application/json",
     },
-    cache: "no-store",
+    cache: "no-store", //차후 지울 예정
   });
 
   if (!res.ok) {
