@@ -16,8 +16,7 @@ interface ModalProps {
 
 const ConfirmModal = ({ modalKey, text, onCancel, id }: ModalProps) => {
   const { toggleModal } = useModalStore();
-  const buttonText = modalKey === "delete" ? "삭제하기" : "취소하기"
-
+  const buttonText = modalKey === "delete" ? "삭제하기" : "취소하기";
   return (
     <>
       <ModalContainer modalKey={modalKey} className={s["confirm-modal"]}>

@@ -1,13 +1,16 @@
 "use client";
-
 import { ActivityDetailResponse } from "@/types/activites/activitesTypes";
 import { FaStar } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Dropdown, { DropdownItem, DropdownMenu, DropdownToggle } from "../Dropdown/Dropdown";
+import { useRouter } from "next/navigation";
+import { deleteActivity } from "@/actions/activity.action";
 import s from "./DetailSubImg.module.scss";
 import DetailSubImgSwiper from "./DetailSubImgSwiper";
+import ConfirmModal from "../Modal/ModalComponents/ConfirmModal";
+import useModalStore from "@/store/useModalStore";
 
 interface DetailSubImgProps {
   activity: ActivityDetailResponse;
@@ -18,11 +21,32 @@ interface DetailSubImgProps {
 const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
   const { subImages = [] } = activity;
   const [isClient, setIsClient] = useState(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const isMobileOrBelow = useMediaQuery({ query: "(max-width: 768px)" });
+
+  const router = useRouter();
+
+  const { toggleModal } = useModalStore();
+  const confirmModal = "delete";
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const handleDeleteItem = async () => {
+    if (selectedId === null) return;
+    try {
+      await deleteActivity(selectedId);
+      router.push("/");
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const openDeleteModal = (id: number) => {
+    setSelectedId(id);
+    toggleModal(confirmModal);
+  };
 
   if (!isClient) {
     return null;
@@ -38,12 +62,12 @@ const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
         <p className={s.cate}>{activity.category}</p>
         <div>
           <h2>{activity.title}</h2>
-          {userId === activity.id && (
+          {userId === activity.userId && (
             <Dropdown>
               <DropdownToggle variant="kebab"></DropdownToggle>
               <DropdownMenu>
-                <DropdownItem>수정하기</DropdownItem>
-                <DropdownItem>삭제하기</DropdownItem>
+                <DropdownItem onClick={() => router.push(`/my-activities/${activity.id}`)}>수정하기</DropdownItem>
+                <DropdownItem onClick={() => openDeleteModal(activity.id)}>삭제하기</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           )}
@@ -81,6 +105,7 @@ const DetailSubImg = ({ activity, userId }: DetailSubImgProps) => {
         </ul>
       )}
       {isMobileOrBelow && <DetailSubImgSwiper activity={activity} />}
+      <ConfirmModal modalKey={confirmModal} text="체험을 삭제하시겠어요?" onCancel={handleDeleteItem} id={selectedId} />
     </>
   );
 };
