@@ -23,7 +23,7 @@ const toastMessages = {
     scheduleDate: "날짜를 선택해주세요.",
     scheduleTime: "시작 시간 ~ 종료 시간을 선택해주세요.",
     scheduleStartTime: "시작 시간은 종료 시간보다 이전이어야 합니다.",
-    newSchedule: "겹치는 시간대가 있습니다.\n다른 시간대를 선택해주세요.",
+    newSchedule: "겹치는 시간대가 있습니다. 다른 시간대를 선택해주세요.",
   },
 };
 
