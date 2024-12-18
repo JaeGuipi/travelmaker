@@ -8,7 +8,6 @@
 }
 
 .react-datepicker {
-  // 달력 전체
   border: none;
   overflow: hidden;
   border-radius: 8px;
@@ -26,7 +25,6 @@
   }
 
   .react-datepicker__navigation {
-    // 월변경 하는 화살표
     top: 20px;
     display: block;
     background-size: 16px;
@@ -42,7 +40,6 @@
 
   .react-datepicker__month-container,
   .react-datepicker__time-container {
-    // 달력 전체
     @include text(xs);
     font-weight: 300;
     background: white;
@@ -56,12 +53,10 @@
     font-weight: 500;
 
     .react-datepicker__current-month {
-      // 달력에 표기되는 년도 월
       @include text(sm);
     }
 
     .react-datepicker__day-names {
-      // 요일을 감싸고 있는 div 태그
       @include flex-between;
       margin: 0.4rem;
     }
@@ -74,7 +69,6 @@
   .react-datepicker__current-month,
   .react-datepicker__day-names > div,
   .react-datepicker__day {
-    // 날짜
     padding: 1rem;
   }
 
@@ -90,12 +84,10 @@
 
   .react-datepicker__day--disabled,
   .react-datepicker__day--outside-month {
-    // 선택이 안된 날짜
     color: $gray06;
   }
 
   .react-datepicker__day--today {
-    // 오늘 날짜
     background-color: rgba(255, 220, 40, 0.15);
     font-weight: 300;
   }
@@ -105,7 +97,6 @@
   .react-datepicker__day--in-range,
   .react-datepicker__day:hover:not(.react-datepicker__day--disabled),
   .react-datepicker__day--in-range:not(.react-datepicker__day--in-selecting-range) {
-    //선택된 날짜
     background-color: $orange02;
     color: #000;
     border-radius: 8px;
