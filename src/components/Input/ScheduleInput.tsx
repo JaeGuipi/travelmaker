@@ -2,16 +2,14 @@ import { useState } from "react";
 import { useFieldArray, Control } from "react-hook-form";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { PostActivity, Schedule } from "@/types/activites/activitesTypes";
+import { format } from "date-fns";
 import s from "./ScheduleInput.module.scss";
 import classNames from "classnames/bind";
-import { useToast } from "@/hooks/useToast";
-import toastMessages from "@/lib/toastMessage";
-import { Controller } from "react-hook-form";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { format } from "date-fns";
-import { ko } from "date-fns/locale";
-import "./Calendar.scss";
+import "./ScheduleCalendar.scss";
+import { useToast } from "@/hooks/useToast";
+import toastMessages from "@/lib/toastMessage";
 import { HiOutlineCalendar } from "react-icons/hi2";
 import { IoTimeOutline } from "react-icons/io5";
 
@@ -27,11 +25,9 @@ const ScheduleInput = ({ control }: { control: Control<PostActivity> }) => {
     name: "schedules",
   });
 
+  // 겹치는 시간대 검사
   const isOverlapping = (newSchedule: Schedule) => {
-    // 문자열 date + time을 Date 객체로 변환하는 함수
     const parseToDateTime = (dateStr: string, timeStr: string) => new Date(`${dateStr}T${timeStr}`);
-
-    // parseToDateTime: 문자열을 Date 객체로 변환
     const newStart = parseToDateTime(newSchedule.date, newSchedule.startTime);
     const newEnd = parseToDateTime(newSchedule.date, newSchedule.endTime);
 
@@ -39,11 +35,10 @@ const ScheduleInput = ({ control }: { control: Control<PostActivity> }) => {
       const existingStart = parseToDateTime(field.date, field.startTime);
       const existingEnd = parseToDateTime(field.date, field.endTime);
 
-      // 시간이 겹치는 조건
       return (
-        (newStart >= existingStart && newStart < existingEnd) || // 새 시작 시간이 기존 범위에 포함
-        (newEnd > existingStart && newEnd <= existingEnd) || // 새 종료 시간이 기존 범위에 포함
-        (newStart <= existingStart && newEnd >= existingEnd) // 기존 시간대가 새 시간대에 포함됨
+        (newStart >= existingStart && newStart < existingEnd) ||
+        (newEnd > existingStart && newEnd <= existingEnd) ||
+        (newStart <= existingStart && newEnd >= existingEnd)
       );
     });
   };
@@ -71,46 +66,29 @@ const ScheduleInput = ({ control }: { control: Control<PostActivity> }) => {
       endTime,
     };
 
-    // 겹치는 시간대 검사
     if (isOverlapping(newSchedule)) {
       notify(toastMessages.notify.newSchedule);
       return;
     }
 
-    // 겹치지 않을 때만 append
-    // append({
-    //   date: newSchedule.date,
-    //   startTime: newSchedule.startTime,
-    //   endTime: newSchedule.endTime,
-    // });
-
-    // 새로운 스케줄을 fields에 추가하고 정렬
-    const updatedFields = [
-      ...fields,
-      {
-        id: Date.now(),
-        date: newSchedule.date,
-        startTime: newSchedule.startTime,
-        endTime: newSchedule.endTime,
-      },
-    ];
-
-    // 날짜와 시간 기준 정렬
-    updatedFields.sort((a, b) => {
-      if (a.date !== b.date) {
-        return a.date.localeCompare(b.date);
-      }
-      return a.startTime.localeCompare(b.startTime);
-    });
-
-    // 필드 업데이트
-    remove(); // 기존 fields 초기화
-    updatedFields.forEach((field) => append(field));
-
-    // 입력 필드 리셋
+    append(newSchedule);
     setDate(null);
     setStartTime("");
     setEndTime("");
+  };
+
+  const sortedFields = [...fields].sort((a, b) => {
+    if (a.date !== b.date) {
+      return a.date.localeCompare(b.date);
+    }
+    return a.startTime.localeCompare(b.startTime);
+  });
+
+  const handleRemoveById = (id: number) => {
+    const index = fields.findIndex((field) => field.id === id);
+    if (index !== -1) {
+      remove(index);
+    }
   };
 
   return (
@@ -122,86 +100,56 @@ const ScheduleInput = ({ control }: { control: Control<PostActivity> }) => {
         <div className={s.fieldList}>
           <div className={s.fieldItem}>
             <label className={s.subLabel}>날짜</label>
-
-            <Controller
-              name={"date"}
-              control={control}
-              render={({ field }) => (
-                <label className={s.datePickerWrap}>
-                  <DatePicker
-                    locale={ko}
-                    selected={date}
-                    onChange={(date: Date | null) => {
-                      setDate(date);
-                      field.onChange(date ? format(date, "yyyy-MM-dd") : "");
-                    }}
-                    dateFormat="yyyy-MM-dd"
-                    dateFormatCalendar="yyyy년 MM월"
-                    placeholderText="YYYY-MM-DD"
-                    className={s.scheduleInput}
-                  />
-                  <HiOutlineCalendar size={18} className={cx(date ? "" : "off")} />
-                </label>
-              )}
-            />
+            <label className={s.datePickerWrap}>
+              <DatePicker
+                selected={date}
+                onChange={(date: Date | null) => setDate(date)}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="YYYY-MM-DD"
+                className={s.scheduleInput}
+              />
+              <HiOutlineCalendar size={18} className={cx(date ? "" : "off")} />
+            </label>
           </div>
 
-          <div className={cx("fieldItem", "titme")}>
+          <div className={cx("fieldItem", "time")}>
             <label className={s.subLabel}>시작 시간</label>
-            <Controller
-              name="startTime"
-              control={control}
-              render={({ field }) => (
-                <label className={s.datePickerWrap}>
-                  <DatePicker
-                    selected={startTime ? new Date(`1970-01-01T${startTime}:00`) : null}
-                    onChange={(time: Date | null) => {
-                      setStartTime(time ? format(time, "HH:mm") : "");
-                      field.onChange(time ? format(time, "HH:mm") : "");
-                    }}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={60}
-                    timeCaption="시작 시간"
-                    timeFormat="HH:mm"
-                    dateFormat="HH:mm"
-                    placeholderText="00:00"
-                    className={s.scheduleInput}
-                  />
-                  <IoTimeOutline size={18} className={cx(startTime ? "" : "off")} />
-                </label>
-              )}
-            />
+            <label className={s.datePickerWrap}>
+              <DatePicker
+                selected={startTime ? new Date(`1970-01-01T${startTime}:00`) : null}
+                onChange={(time: Date | null) => setStartTime(time ? format(time, "HH:mm") : "")}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={60}
+                timeCaption="Start Time"
+                timeFormat="HH:mm"
+                dateFormat="HH:mm"
+                placeholderText="00:00"
+                className={s.scheduleInput}
+              />
+              <IoTimeOutline size={18} className={cx(startTime ? "" : "off")} />
+            </label>
           </div>
 
           <span className={s.timeSeparator}>~</span>
 
-          <div className={cx("fieldItem", "titme")}>
+          <div className={cx("fieldItem", "time")}>
             <label className={s.subLabel}>종료 시간</label>
-            <Controller
-              name="endTime"
-              control={control}
-              render={({ field }) => (
-                <label className={s.datePickerWrap}>
-                  <DatePicker
-                    selected={endTime ? new Date(`1970-01-01T${endTime}:00`) : null}
-                    onChange={(time: Date | null) => {
-                      setEndTime(time ? format(time, "HH:mm") : "");
-                      field.onChange(time ? format(time, "HH:mm") : "");
-                    }}
-                    showTimeSelect
-                    showTimeSelectOnly
-                    timeIntervals={60}
-                    timeCaption="종료 시간"
-                    timeFormat="HH:mm"
-                    dateFormat="HH:mm"
-                    placeholderText="00:00"
-                    className={s.scheduleInput}
-                  />
-                  <IoTimeOutline size={18} className={cx(endTime ? "" : "off")} />
-                </label>
-              )}
-            />
+            <label className={s.datePickerWrap}>
+              <DatePicker
+                selected={endTime ? new Date(`1970-01-01T${endTime}:00`) : null}
+                onChange={(time: Date | null) => setEndTime(time ? format(time, "HH:mm") : "")}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={60}
+                timeCaption="End Time"
+                timeFormat="HH:mm"
+                dateFormat="HH:mm"
+                placeholderText="00:00"
+                className={s.scheduleInput}
+              />
+              <IoTimeOutline size={18} className={cx(endTime ? "" : "off")} />
+            </label>
           </div>
 
           <button type="button" onClick={handleAppend} className={s.addButton}>
@@ -209,20 +157,20 @@ const ScheduleInput = ({ control }: { control: Control<PostActivity> }) => {
           </button>
         </div>
 
-        {fields.map((field, index) => (
+        {sortedFields.map((field) => (
           <ul key={field.id} className={cx("fieldList", "active")}>
             <li className={s.fieldItem}>
               <span className={s.scheduleInput}>{field.date}</span>
             </li>
-            <li className={cx("fieldItem", "titme")}>
+            <li className={cx("fieldItem", "time")}>
               <span className={s.scheduleInput}>{field.startTime}</span>
             </li>
             <span className={s.timeSeparator}>~</span>
-            <li className={cx("fieldItem", "titme")}>
+            <li className={cx("fieldItem", "time")}>
               <span className={s.scheduleInput}>{field.endTime}</span>
             </li>
 
-            <button type="button" onClick={() => remove(index)} className={s.removeButton}>
+            <button type="button" onClick={() => handleRemoveById(field.id)} className={s.removeButton}>
               <FiMinus />
             </button>
           </ul>
