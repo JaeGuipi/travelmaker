@@ -92,7 +92,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             </span>
           )}
           {iconType === "search" && (
-            <button type="button" className={cx("input-img")}>
+            <button type="submit" className={cx("input-img")}>
               <Image src={"/icons/btn_search.svg"} width={20} height={20} alt="Search Icon" />
             </button>
           )}

@@ -55,7 +55,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
     router.push(`/search-page?${params.toString()}`);
   };
   return (
-    <div>
+    <section>
       {data?.activities.length > 0 ? (
         <div className={s["search-wrap"]}>
           <div className={s["list-setup"]}>
@@ -76,9 +76,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
               <li key={activity.id} className={s["item-box"]}>
                 <Link href={`/activities/${activity.id}`}>
                   <Image
-                    src={activity.bannerImageUrl || `/images/profile.png`}
+                    src={activity.bannerImageUrl}
                     width={283}
                     height={283}
+                    className={s.itemImg}
                     alt="체험 이미지"
                   />
                   <div className={s.info}>
@@ -90,7 +91,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
                     </p>
                     <h4 className={s.title}>{activity.title}</h4>
                     <p className={s.price}>
-                      ${activity.price}
+                      ₩{activity.price}
                       <span> / 인</span>
                     </p>
                   </div>
@@ -103,7 +104,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
       ) : (
         <p>검색 결과가 없습니다.</p>
       )}
-    </div>
+    </section>
   );
 };
 
