@@ -172,9 +172,10 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
       }
 
       router.push("/my-activities");
-    } catch (error) {
-      console.error("에러 원인", error);
-      if (activityId) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        showError(error.message);
+      } else if (activityId) {
         showError(toastMessages.error.activityUpdate);
       } else {
         showError(toastMessages.error.activity);
@@ -206,7 +207,7 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
             type="text"
             placeholder="제목을 입력해주세요"
             {...register("title", {
-              required: { value: true, message: "제목을 입력해주세요" },
+              required: { value: true, message: "제목을 입력해주세요." },
             })}
             errors={errors.title?.message}
           />
@@ -227,8 +228,8 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
             type="text"
             placeholder="설명을 입력해주세요"
             {...register("description", {
-              required: { value: true, message: "설명을 입력해주세요" },
-              minLength: { value: 8, message: "설명을 8자 이상 입력해주세요" },
+              required: { value: true, message: "설명을 입력해주세요." },
+              minLength: { value: 8, message: "설명을 8자 이상 입력해주세요." },
             })}
             isTextArea
             errors={errors.description?.message}
@@ -239,11 +240,11 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
             type="number"
             placeholder="가격"
             required
+            min="1000"
             {...register("price", {
               valueAsNumber: true,
-              required: { value: true, message: "가격을 입력해주세요" },
-              min: { value: 1000, message: "가격은 1000원 이상 입력해주세요" },
-              validate: (value) => value >= 1000 || "가격은 1000원 이상 입력해주세요",
+              required: { value: true, message: "가격을 입력해주세요." },
+              validate: (value) => value >= 1000 || "가격은 1000원 이상 입력해주세요.",
             })}
             errors={errors.price?.message}
           />
