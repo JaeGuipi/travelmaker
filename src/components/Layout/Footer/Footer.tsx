@@ -33,7 +33,7 @@ const Footer = () => {
     <footer className={s.footer}>
       <div className="container">
         <div className={s["ft-inner"]}>
-          <span>©codeit - 2023</span>
+          <span>©codeit - 2025</span>
           <ul className={s["ft-info"]}>
             <li className="mr-8">Privacy Policy</li>
             <li>FAQ</li>
