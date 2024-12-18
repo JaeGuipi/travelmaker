@@ -3,15 +3,15 @@ import { Suspense } from "react";
 import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import ReservationTitle from "./ReservationTItle";
+import s from "./page.module.scss";
+import ItemTitleLayout from "../my-reservation/ItemTitleLayout/ItemTitleLayout";
+import NoList from "../my-reservation/MyReservationList/NoList";
 
-const ReservationsPage = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const Page = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
   const activityId = searchParams.activity as string | undefined;
   const year = searchParams.year ? parseInt(searchParams.year as string, 10) : new Date().getFullYear();
-  const month = searchParams.month ? parseInt(searchParams.month as string, 10) : new Date().getMonth() + 1;
+  const rawMonth = searchParams.month ? parseInt(searchParams.month as string, 10) : new Date().getMonth() + 1;
+  const month = rawMonth < 10 ? `0${rawMonth}` : `${rawMonth}`;
 
   const activities = await customFetch(`${API_URL}/my-activities`).then((res) => res.json());
 
@@ -28,20 +28,29 @@ const ReservationsPage = async ({
   } catch (error) {
     console.error("🚨 에러 발생:", error);
   }
+  console.log(month);
 
+  if (activities.activities.length === 0) {
+    return (
+      <div className={s.wrapper}>
+        <ItemTitleLayout title="예약 현황" />
+        <NoList text="아직 등록한 체험이 없어요" />
+      </div>
+    );
+  }
   return (
-    <div style={{ width: "100%" }}>
-      <h1>체험 예약 관리</h1>
+    <div className={s.wrapper}>
+      <ItemTitleLayout title="예약 현황" />
       <ReservationTitle data={activities} />
       <Suspense fallback={<div>로딩 중...</div>}>
         {activityId ? (
           <CalendarView activityId={activityId} defaultYear={year} defaultMonth={month} dashboardData={reservations} />
         ) : (
-          <div>체험을 먼저 선택해주세요.</div>
+          <div className={s.selectTitle}>체험을 먼저 선택해주세요.</div>
         )}
       </Suspense>
     </div>
   );
 };
 
-export default ReservationsPage;
+export default Page;
