@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { verifyToken, refreshAccessToken } from "./lib/auth";
 
 // 해당하는 경로에 미들웨어 작동
-const protectedRoutes = ["/reservation-status"];
+const protectedRoutes = ["/reservation-status","/my-reservation", "/my-activities"];
 
 const loginRedirectUrl = (request: Request) => {
   return new URL("/login", request.url);

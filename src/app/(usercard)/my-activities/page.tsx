@@ -1,7 +1,8 @@
 import MyActivityList from "./MyActivityList/MyActivityList";
-import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import { Activity } from "@/types/activites/activitesTypes";
+import { customFetch } from "@/utils/customFetch";
+
 
 const MyActivities = async () => {
   const response = await customFetch(`${API_URL}/my-activities?size=6`);

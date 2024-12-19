@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +7,7 @@ import classNames from "classnames/bind";
 import User from "@/components/Layout/Header/User";
 import SearchBar from "@/components/SearchBar";
 import Alarm from "@/components/Alarm/Alarm";
+import { customFetch } from "@/utils/customFetch";
 
 export const cx = classNames.bind(s);
 
@@ -36,6 +36,7 @@ const getUsers = async () => {
 };
 
 const getNotifications = async () => {
+
   const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패");
@@ -45,7 +46,7 @@ const getNotifications = async () => {
 
 const Header = async () => {
   const users = await getUsers();
-  const myNotifications = await getNotifications();
+  const myNotifications = users ? await getNotifications() : { notifications: [] };
 
   return (
     <header className={s.header}>
