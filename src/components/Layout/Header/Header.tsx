@@ -1,5 +1,4 @@
 import { cookies } from "next/headers";
-import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +40,11 @@ const getNotifications = async () => {
 
   if (!accessToken) return;
 
-  const response = await customFetch(`${API_URL}/my-notifications?size=4`);
+  const response = await fetch(`${API_URL}/my-notifications?size=4`,{
+    headers: {
+      Authorization: `Bearer${accessToken}`
+    }
+  });
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패");
   }
