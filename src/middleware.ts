@@ -2,7 +2,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { handleTokenRefresh, setAccessTokenCookie } from "./lib/auth-handlers";
 
-// 보호 경로 지정
 const protectedRoutes = ["/reservation-status", "/my-info", "/my-reservation", "/my-activities"];
 
 export const loginRedirectUrl = (request: Request) => {

@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from "react";
+import { ChangeEventHandler, useMemo } from "react";
 import Image from "next/image";
 import s from "./BannerInput.module.scss";
 import { FiPlus } from "react-icons/fi";
@@ -12,6 +12,7 @@ interface BannerInputProps {
   handleImageRemove: (index: number) => void;
   maxImages?: number;
   isSingle?: boolean;
+  required?: boolean;
 }
 
 const BannerInput = ({
@@ -22,18 +23,20 @@ const BannerInput = ({
   handleImageRemove,
   maxImages = 4,
   isSingle = false,
+  required = false,
 }: BannerInputProps) => {
-  const previews = isSingle
-    ? imagePreviews
-      ? [imagePreviews]
-      : []
-    : Array.isArray(imagePreviews)
-    ? imagePreviews
-    : [];
+  const previews = useMemo(() => {
+    if (isSingle) {
+      return imagePreviews ? [imagePreviews] : [];
+    }
+    return Array.isArray(imagePreviews) ? imagePreviews : [];
+  }, [isSingle, imagePreviews]);
 
   return (
     <div className={s.bannerInputContainer}>
-      <h4 className={s.titleLabel}>{title}</h4>
+      <h4 className={s.titleLabel}>
+        {title} {required ? <span className={s.required}>*</span> : ""}
+      </h4>
       <div className={s.bannerImgWrap}>
         <div className={s.bannerImgbox}>
           <label className={s.imagePreview} htmlFor={inputId}>

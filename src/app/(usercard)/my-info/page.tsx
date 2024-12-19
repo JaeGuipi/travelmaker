@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import API_URL from "@/constants/config";
-import MyPageForm from "@/components/Auth/MyPageForm";
+import MyPageForm from "@/components/Auth/MyPageForm/MyPageForm";
 
 const getUsers = async () => {
   const cookieStore = cookies();

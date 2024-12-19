@@ -4,6 +4,10 @@
     font-weight: 500;
     margin-top: 1rem;
     margin-bottom: 8px;
+
+    .required {
+      color: $red01;
+    }
   }
 
   .errorText {
