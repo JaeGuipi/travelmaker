@@ -1,20 +1,11 @@
 import MyActivityList from "./MyActivityList/MyActivityList";
-import { cookies } from "next/headers";
 import API_URL from "@/constants/config";
 import { Activity } from "@/types/activites/activitesTypes";
-import { redirect } from "next/navigation";
+import { customFetch } from "@/utils/customFetch";
+
 
 const MyActivities = async () => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
-
-  if (!accessToken) redirect("/login");
-  
-  const response = await fetch(`${API_URL}/my-activities?size=6`, {
-    headers: {
-      Authorization: `Barer ${accessToken}`,
-    },
-  });
+  const response = await customFetch(`${API_URL}/my-activities?size=6`);
   if (!response.ok) {
     console.error("내 체험 데이터를 불러오는 데 실패했습니다.");
   }
