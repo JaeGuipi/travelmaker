@@ -1,12 +1,12 @@
 "use client";
 
 import { UseFormRegisterReturn } from "react-hook-form";
-import styles from "./CustomInput.module.scss";
+import s from "./CustomInput.module.scss";
 import classNames from "classnames/bind";
 import Image from "next/image";
 import { useState, forwardRef, ChangeEventHandler } from "react";
 
-const cx = classNames.bind(styles);
+const cx = classNames.bind(s);
 
 interface CustomInputProps {
   id?: string;
@@ -52,7 +52,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
       <div>
         {label && (
           <label className={cx("label")} htmlFor={id}>
-            {label} {required ? <span className={styles.required}>*</span> : ""}
+            {label} {required ? <span className={s.required}>*</span> : ""}
           </label>
         )}
         <div className={cx("input-container")}>
