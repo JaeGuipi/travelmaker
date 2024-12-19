@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
 import useModalStore from "@/store/useModalStore";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList: Activity[]; cursorId: number }) => {
   const [activityList, setActivityList] = useState(initialActivityList);
@@ -89,6 +90,7 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
           ></MyActivityItem>
         ))
       )}
+      {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
       <ConfirmModal modalKey={confirmModal} text="체험을 삭제하시겠어요?" onCancel={handleDeleteItem} id={selectedId} />
     </div>
   );

@@ -4,6 +4,7 @@ import MyReservationList from "@/app/(usercard)/my-reservation/MyReservationList
 import { customFetch } from "@/utils/customFetch";
 
 const MyReservationPage = async () => {
+
   const response = await customFetch(`${API_URL}/my-reservations?size=6`);
 
   if (!response.ok) {

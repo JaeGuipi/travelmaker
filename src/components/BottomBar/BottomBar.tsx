@@ -5,14 +5,17 @@ import Link from "next/link";
 import { IoSearch, IoPersonOutline } from "react-icons/io5";
 import { TbReservedLine } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
-import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Alarm from "../Alarm/Alarm";
+import { customFetch } from "@/utils/customFetch";
 
 const BottomBar = async () => {
-  const response = await customFetch(`${API_URL}/my-notifications?size=4`);
+
+  const response = await customFetch(`${API_URL}/my-notifications?size=4`
+  );
+
   if (!response.ok) {
-    console.error("내 알림 리스트 조회 실패");
+    console.error("하단바 내 알림 리스트 조회 실패");
   }
 
   const myNotifications = await response.json();
@@ -37,7 +40,7 @@ const BottomBar = async () => {
         <IoPersonOutline size={20} />
         마이페이지
       </Link>
-      <Alarm initialNotifications={myNotifications} type="bottom" />
+     {response.ok && <Alarm initialNotifications={myNotifications} type="bottom" />}
     </div>
   );
 };
