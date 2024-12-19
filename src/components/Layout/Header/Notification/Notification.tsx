@@ -70,7 +70,7 @@ const NotificationItem = ({
 
 const NotificationList = forwardRef<HTMLDivElement, { onClose: () => void; notifications: MyNotifications }>(
   ({ onClose, notifications }, ref) => {
-    const [notificationList, setNotificationList] = useState(notifications.notifications);
+    const [notificationList, setNotificationList] = useState(notifications.notifications || []);
     const [currentCursorId, setCurrentCursorId] = useState(notifications.cursorId);
     const [isLoading, setIsLoading] = useState(false);
     const observerRef = useRef<HTMLDivElement>(null);
@@ -144,7 +144,7 @@ const NotificationList = forwardRef<HTMLDivElement, { onClose: () => void; notif
       <div ref={ref} className={s["notificationList-container"]}>
         <div className={s["conunt-container"]}>
           <span className={cx("count")}>
-            {notificationList.length !== 0 ? `알림 ${notifications.totalCount}개` : ""}
+            {notificationList?.length !== 0 ? `알림 ${notifications.totalCount}개` : ""}
           </span>
           <button type="button" onClick={() => onClose()}>
             <Image src="/icons/btn_cancel_black.svg" width={24} height={24} alt="닫기" />

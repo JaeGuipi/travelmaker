@@ -7,6 +7,7 @@ import classNames from "classnames/bind";
 import User from "@/components/Layout/Header/User";
 import SearchBar from "@/components/SearchBar";
 import Alarm from "@/components/Alarm/Alarm";
+import { customFetch } from "@/utils/customFetch";
 
 export const cx = classNames.bind(s);
 
@@ -35,16 +36,8 @@ const getUsers = async () => {
 };
 
 const getNotifications = async () => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
 
-  if (!accessToken) return;
-
-  const response = await fetch(`${API_URL}/my-notifications?size=4`,{
-    headers: {
-      Authorization: `Bearer${accessToken}`
-    }
-  });
+  const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패");
   }
