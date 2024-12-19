@@ -55,7 +55,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             {label} {required ? <span className={s.required}>*</span> : ""}
           </label>
         )}
-        <div className={cx("input-container")}>
+        <div className={s["input-container"]}>
           {isTextArea ? (
             <textarea
               className={cx("textarea", {
@@ -87,22 +87,22 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
             />
           )}
           {errors && (
-            <span className={cx("error-text")} role="alert">
+            <span className={s["error-text"]} role="alert">
               {errors}
             </span>
           )}
           {iconType === "search" && (
-            <button type="submit" className={cx("input-img")}>
+            <button type="submit" className={s["input-img"]}>
               <Image src={"/icons/btn_search.svg"} width={20} height={20} alt="Search Icon" />
             </button>
           )}
           {iconType === "date" && (
-            <button type="button" className={cx("input-img")}>
+            <button type="button" className={s["input-img"]}>
               <Image src={"/icons/btn_calendar.svg"} width={20} height={20} alt="Search Icon" />
             </button>
           )}
           {type === "password" && (
-            <button type="button" onClick={handleClickVisible} className={cx("input-img")}>
+            <button type="button" onClick={handleClickVisible} className={s["input-img"]}>
               <Image
                 src={isVisible ? "/icons/btn_visibility_on.svg" : "/icons/btn_visibility_off.svg"}
                 width={24}
