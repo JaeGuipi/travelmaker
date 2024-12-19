@@ -1,51 +1,42 @@
 // middleware.ts
 import { NextRequest, NextResponse } from "next/server";
-import { verifyToken, refreshAccessToken } from "./lib/auth";
+import { handleTokenRefresh, setAccessTokenCookie } from "./lib/auth-handlers";
 
-// 해당하는 경로에 미들웨어 작동
-const protectedRoutes = ["/reservation-status"];
+// 보호 경로 지정
+const protectedRoutes = ["/reservation-status", "/my-info", "/my-reservation", "/my-activities"];
 
-const loginRedirectUrl = (request: Request) => {
+export const loginRedirectUrl = (request: Request) => {
   return new URL("/login", request.url);
 };
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 보호된 경로가 아니라면 검사 없이 통과
-  if (!isProtectedRoute(pathname)) {
-    return NextResponse.next();
+  // 1. 모든 요청에 대해 토큰 상태 확인 및 재발급 시도
+  const { isValidAccessToken, newAccessToken, hasRefreshToken } = await handleTokenRefresh(request);
+
+  // 토큰 재발급이 발생한 경우 쿠키 설정
+  const response = NextResponse.next();
+  if (newAccessToken) {
+    setAccessTokenCookie(response, newAccessToken);
   }
 
-  const accessToken = request.cookies.get("accessToken")?.value;
-  const refreshToken = request.cookies.get("refreshToken")?.value;
-
-  // 액세스 토큰 검증
-  if (accessToken && verifyToken(accessToken)) {
-    // 액세스 토큰 유효한 경우 바로 진행
-    return NextResponse.next();
-  }
-
-  // 리프레시 토큰으로 액세스 토큰 재발급 시도
-  if (refreshToken && verifyToken(refreshToken)) {
-    const newAccessToken = await refreshAccessToken(refreshToken);
-    if (newAccessToken) {
-      // 새로운 액세스 토큰 세팅 후 진행
-      const response = NextResponse.next();
-      response.cookies.set("accessToken", newAccessToken, {
-        httpOnly: true,
-        secure: true,
-        path: "/",
-        maxAge: 60 * 60, // 1시간
-      });
-      return response;
+  // 2. 특정 경로 보호 로직: 보호된 경로에서 액세스, 리프레시 토큰 모두 없으면 로그인 페이지로 이동
+  if (isProtectedRoute(pathname)) {
+    // 보호된 경로인데 유효한 액세스 토큰 없음 AND 리프레시 토큰도 없으면 redirect
+    if (!isValidAccessToken && !hasRefreshToken) {
+      return NextResponse.redirect(loginRedirectUrl(request));
+    }
+    // 여기서 isValidAccessToken = false 이면서 refreshToken이 있을 경우엔 이미 handleTokenRefresh에서 재발급 시도했으므로,
+    // 재발급 실패라면 결국 유효한 액세스 토큰이 없으므로 리다이렉트
+    if (!isValidAccessToken) {
+      return NextResponse.redirect(loginRedirectUrl(request));
     }
   }
 
-  // 여기까지 왔다면 액세스 토큰, 리프레시 토큰 모두 유효하지 않으므로 로그인 페이지로 리다이렉트
-  return NextResponse.redirect(loginRedirectUrl(request));
+  return response;
 }
 
-const isProtectedRoute = (pathname: string): boolean => {
+function isProtectedRoute(pathname: string): boolean {
   return protectedRoutes.some((route) => pathname.startsWith(route));
-};
+}
