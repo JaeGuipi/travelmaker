@@ -7,19 +7,12 @@ import { TbReservedLine } from "react-icons/tb";
 import { AiOutlineHome } from "react-icons/ai";
 import API_URL from "@/constants/config";
 import Alarm from "../Alarm/Alarm";
-import { cookies } from "next/headers";
+import { customFetch } from "@/utils/customFetch";
 
 const BottomBar = async () => {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value;
 
-  if (!accessToken) return;
-
-  const response = await fetch(`${API_URL}/my-notifications?size=4`,{
-    headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
-  });
+  const response = await customFetch(`${API_URL}/my-notifications?size=4`
+  );
 
   if (!response.ok) {
     console.error("하단바 내 알림 리스트 조회 실패");
@@ -47,7 +40,7 @@ const BottomBar = async () => {
         <IoPersonOutline size={20} />
         마이페이지
       </Link>
-      <Alarm initialNotifications={myNotifications} type="bottom" />
+     {response.ok && <Alarm initialNotifications={myNotifications} type="bottom" />}
     </div>
   );
 };
