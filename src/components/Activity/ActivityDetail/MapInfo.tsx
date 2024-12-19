@@ -10,7 +10,7 @@ import s from "./MapInfo.module.scss";
 const useKakaoLoader = () => {
   useKakaoLoaderOrigin({
     appkey: process.env.NEXT_PUBLIC_KAKAO_APPKEY!, // 환경 변수에서 앱 키 가져오기
-    libraries: ["clusterer", "drawing", "services"], // 필요한 라이브러리 명시
+    libraries: ["services", "clusterer", "drawing"], // 필요한 라이브러리 명시
   });
 };
 
@@ -36,7 +36,7 @@ const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
   }, []);
 
   useEffect(() => {
-    if (!isSdkLoaded || !address) return; // SDK 미로드 또는 주소 없음 시 종료
+    if (!isSdkLoaded || !address) return; // SDK가 로드되지 않았으면 중단
 
     // Kakao Maps API 로드 확인
     if (typeof kakao === "undefined" || !kakao.maps) {
@@ -53,6 +53,12 @@ const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
     };
 
     const map = new kakao.maps.Map(mapContainer, mapOptions); // 지도 생성
+
+    // Kakao Maps SDK의 Geocoder가 로드되었는지 확인
+    if (!kakao.maps.services || !kakao.maps.services.Geocoder) {
+      console.error("Kakao Maps SDK의 Geocoder가 로드되지 않았습니다.");
+      return;
+    }
 
     const geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
 
@@ -78,14 +84,7 @@ const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
     let debounceTimeout: NodeJS.Timeout;
     kakao.maps.event.addListener(map, "idle", () => {
       clearTimeout(debounceTimeout);
-      debounceTimeout = setTimeout(() => {
-        // 요청 제한 처리
-        const bounds = map.getBounds(); // 현재 지도 범위 가져오기
-        console.log("현재 지도 범위:", bounds);
-
-        // 이곳에서 API 요청 등을 처리할 수 있습니다.
-        console.log("데이터 요청 제한");
-      }, 500); // 500ms 대기
+      debounceTimeout = setTimeout(() => {}, 500);
     });
   }, [address, isSdkLoaded]); // address나 SDK 로드 상태 변경 시 실행
 
