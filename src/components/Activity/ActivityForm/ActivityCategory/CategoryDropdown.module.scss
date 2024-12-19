@@ -14,6 +14,7 @@
     cursor: pointer;
     @include mobile {
       padding: 1rem 1.5rem;
+      font-size: 1.3rem;
     }
 
     &.focused {
@@ -26,6 +27,9 @@
 
     .placeholder {
       font-size: 1.4rem;
+      @include mobile {
+        font-size: 1.3rem;
+      }
 
       &.gray {
         color: $gray05;

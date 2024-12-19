@@ -19,6 +19,18 @@
     flex-direction: column;
     gap: 1rem;
 
+    .requiredText {
+      text-align: right;
+      @include text(md);
+      @include mobile {
+        @include text(sm);
+      }
+
+      .required {
+        color: $red01;
+      }
+    }
+
     input[type="date"] {
       background: white url("../../../../public/icons/btn_calendar.svg") no-repeat right 20px center;
       background-size: 16px;
