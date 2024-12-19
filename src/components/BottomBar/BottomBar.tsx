@@ -17,7 +17,7 @@ const BottomBar = async () => {
 
   const response = await fetch(`${API_URL}/my-notifications?size=4`,{
     headers: {
-      Authorization: `Barer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`
     }
   });
 
