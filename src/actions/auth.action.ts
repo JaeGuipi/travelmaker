@@ -7,12 +7,12 @@ import { SignUp } from "@/types/users/usersTypes";
 import API_URL from "@/constants/config";
 
 // 쿠키 저장 함수
-const setCookie = (name: string, value: string) => {
+const setCookie = (name: string, value: string, maxAge: number = 60 * 60 * 24 * 7) => {
   const cookieStore = cookies();
   cookieStore.set({
     name,
     value,
-    maxAge: 60 * 60 * 24 * 7, // 일주일 동안 유지
+    maxAge,
     path: "/",
     httpOnly: true,
     sameSite: "strict",
@@ -37,8 +37,11 @@ export const login = async (loginData: PostAuth) => {
 
     const data = await response.json();
 
-    setCookie("accessToken", data.accessToken);
-    setCookie("refreshToken", data.refreshToken);
+    const accessTokenMaxAge: number = 60 * 60;
+    const refreshTokenMaxAge: number = 60 * 60 * 24 * 14;
+
+    setCookie("accessToken", data.accessToken, accessTokenMaxAge);
+    setCookie("refreshToken", data.refreshToken, refreshTokenMaxAge);
   } catch (error) {
     console.log("로그인 중 오류 발생: ", error);
     throw new Error("로그인 실패");
