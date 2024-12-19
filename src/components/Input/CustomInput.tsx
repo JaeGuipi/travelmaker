@@ -19,6 +19,7 @@ interface CustomInputProps {
   borderColor?: "default" | "yellow";
   iconType?: "search" | "password" | "date";
   register?: UseFormRegisterReturn;
+  required?: boolean;
   readOnly?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
 }
@@ -35,6 +36,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
       isTextArea,
       iconType,
       borderColor = "default",
+      required = false,
       readOnly = false,
       ...rest
     },
@@ -49,8 +51,8 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
     return (
       <div>
         {label && (
-          <label className={s.label} htmlFor={id}>
-            {label}
+          <label className={cx("label")} htmlFor={id}>
+            {label} {required ? <span className={s.required}>*</span> : ""}
           </label>
         )}
         <div className={s["input-container"]}>

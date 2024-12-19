@@ -83,7 +83,7 @@ const MyPageForm = ({ users }: { users: GetMe }) => {
       <div className={s.mypageFormContainer}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={s.mypageHeader}>
-            <h2>내 정보</h2>
+            <h2>내 프로필</h2>
             <FormButton type="submit" disabled={!isValid}>
               저장하기
             </FormButton>

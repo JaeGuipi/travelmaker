@@ -76,7 +76,7 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
 
   return (
     <div className={s["content-container"]}>
-      <ItemTitleLayout title="내 체험관리">
+      <ItemTitleLayout title="내 체험 관리">
         <FormButton onClick={() => router.push("/my-activities/register")}>체험 등록하기</FormButton>
       </ItemTitleLayout>
       {activityList.length === 0 ? (

@@ -17,12 +17,27 @@ body {
   @include mobile {
     min-width: 375px;
   }
-  @include scrollbar;
 }
 
 .ReactModal__Body--open {
   overflow: hidden;
 }
+
+/* ----------------------- start scrollbar ----------------------- */
+::-webkit-scrollbar {
+  width: 0.6rem;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $yellow03;
+  border-radius: 0.4rem;
+}
+/* ----------------------- end scrollbar ----------------------- */
 
 .error-page-content {
   min-height: calc(100vh - 91px - 160px);
