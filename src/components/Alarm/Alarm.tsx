@@ -33,7 +33,7 @@ const Alarm: React.FC<AlarmProps> = ({ initialNotifications, type }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  });
+  },[]);
   const buttonClassName = type === "header" ? s.hdAlarm : s.btmAlarm;
 
   if (type === "bottom") {
