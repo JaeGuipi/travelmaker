@@ -19,9 +19,13 @@
     width: 350px;
     height: 54px;
     object-fit: cover;
-    @include mobile {
-      width: 202px;
-      height: 32px;
+    @include tablet {
+      width: 300px;
+      height: 46px;
+      @include mobile {
+        width: 202px;
+        height: 32px;
+      }
     }
   }
 
@@ -29,8 +33,11 @@
     flex: 1;
     padding: 0 5rem;
     cursor: pointer;
-    @include mobile {
-      display: none;
+    @include tablet {
+      padding: 0 3rem;
+      @include mobile {
+        display: none;
+      }
     }
   }
 
