@@ -84,15 +84,13 @@ $font-styles: (
 }
 
 .layoutContainer {
-  min-height: calc(100vh - 91px - 160px);
-  flex-grow: 1;
+  min-height: calc(100vh - 91px - 160px - 120px);
   display: flex;
   align-items: flex-start;
   gap: 3rem;
   padding-top: 6rem;
-  padding-bottom: 8rem;
   @include mobile {
-    min-height: calc(100vh - 71px - 160px);
+    min-height: calc(100vh - 71px - 210px - 80px);
     padding-top: 2rem;
     padding-bottom: 3rem;
   }
