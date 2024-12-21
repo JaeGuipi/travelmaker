@@ -68,10 +68,6 @@ body {
   @include mobile {
     @include text(xl);
     margin-top: 1rem;
-
-    svg {
-      width: 60%;
-    }
   }
 }
 
@@ -81,6 +77,7 @@ body {
   margin-bottom: 1rem;
   @include mobile {
     @include text(md);
+    margin-top: -1rem;
   }
 }
 
