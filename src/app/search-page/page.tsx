@@ -1,6 +1,6 @@
 import React from "react";
 import API_URL from "@/constants/config";
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/Layout/Header/SearchBar";
 import SearchResults from "./SearchResults";
 import { GetActivities } from "@/types/activites/activitesTypes";
 import classNames from "classnames/bind";

@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import API_URL from "@/constants/config";
-import UserTabList from "@/components/UserTab/UserTabList";
-import FileInput from "@/components/Input/FileInput";
+import UserTabList from "@/components/Layout/UserTab/UserTabList";
+import FileInput from "@/components/Auth/MyPageForm/components/FileInput";
 import s from "./UserTab.module.scss";
 
 const getUsers = async () => {

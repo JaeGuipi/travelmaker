@@ -5,7 +5,7 @@ import Link from "next/link";
 import s from "./Header.module.scss";
 import classNames from "classnames/bind";
 import User from "@/components/Layout/Header/User";
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/Layout/Header/SearchBar";
 import Alarm from "@/components/Alarm/Alarm";
 import { customFetch } from "@/utils/customFetch";
 
@@ -36,7 +36,6 @@ const getUsers = async () => {
 };
 
 const getNotifications = async () => {
-
   const response = await customFetch(`${API_URL}/my-notifications?size=4`);
   if (!response.ok) {
     console.error("내 알림 리스트 조회 실패");

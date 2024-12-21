@@ -1,22 +1,18 @@
 "use client";
 
+import s from "./MyPageForm.module.scss";
 import { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import s from "./MyPageForm.module.scss";
-
-import { useToast } from "@/hooks/useToast";
-import toastMessages from "@/lib/toastMessage";
-
-import { GetMe } from "@/types/users/usersTypes";
 import { MyPageFormValues, MyPageSchema } from "@/schema/zodSchema";
 import { updateUsers, uploadProfileImage } from "@/actions/auth.action";
-
-import FileInput from "@/components/Input/FileInput";
+import { GetMe } from "@/types/users/usersTypes";
+import { useToast } from "@/hooks/useToast";
+import toastMessages from "@/lib/toastMessage";
+import FileInput from "@/components/Auth/MyPageForm/components/FileInput";
 import CustomInput from "@/components/Input/CustomInput";
 import FormButton from "@/components/Button/FormButton";
-import UserTabList from "@/components/UserTab/UserTabList";
+import UserTabList from "@/components/Layout/UserTab/UserTabList";
 
 const MyPageForm = ({ users }: { users: GetMe }) => {
   const { showSuccess, showError } = useToast();
