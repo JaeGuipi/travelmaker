@@ -3,12 +3,11 @@
   margin: auto;
   width: 20px;
   height: 20px;
+  display: block;
   border-radius: 100%;
   border-width: 2px;
   border-style: solid;
   border-color: $gray06 $gray06 transparent;
-  border-image: initial;
-  display: inline-block;
   animation: 0.75s linear 0s infinite spin;
 }
 
