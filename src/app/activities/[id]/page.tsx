@@ -1,12 +1,12 @@
 import { cookies } from "next/headers";
 import { ActivityDetailResponse, GetReviews } from "@/types/activites/activitesTypes";
+import { notFound } from "next/navigation";
 import ReviewList from "@/components/Activity/Review/ReviewList";
 import ActivityDetail from "@/components/Activity/ActivityDetail/ActivityDetail";
 import Schedules from "@/components/Activity/Schedules/Schedules";
 import API_URL from "@/constants/config";
 import DetailSubImg from "@/components/Activity/DetailSubImg";
 import s from "./page.module.scss";
-import { notFound } from "next/navigation";
 
 const getUsers = async () => {
   const cookieStore = cookies();
@@ -56,14 +56,18 @@ async function getActivityReview(activityId: number): Promise<GetReviews> {
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const users = await getUsers();
-  const userId = users?.id || null;
-  const activity = await getActivityDetail(params.id);
+  const [users, activity, reviewData] = await Promise.all([
+    getUsers(),
+    getActivityDetail(params.id),
+    getActivityReview(params.id),
+  ]);
+
   if (!activity) {
     notFound();
   }
 
-  const { reviews, totalCount, averageRating } = await getActivityReview(params.id);
+  const userId = users?.id || null;
+  const { reviews, totalCount, averageRating } = reviewData;
 
   return (
     <div className="container">
