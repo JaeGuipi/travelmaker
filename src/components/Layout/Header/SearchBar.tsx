@@ -1,13 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import CustomInput from "../../Input/CustomInput";
 
 const SearchBar = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const currentParams = useSearchParams();
+
+  const keywordFromQuery = currentParams.get("keyword");
+
+  const [searchQuery, setSearchQuery] = useState<string>(keywordFromQuery ?? "");
+
+  useEffect(() => {
+    // keyword가 없으면 검색창 비우기
+    if (!keywordFromQuery) {
+      setSearchQuery("");
+    } else {
+      setSearchQuery(keywordFromQuery);
+    }
+  }, [keywordFromQuery]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
