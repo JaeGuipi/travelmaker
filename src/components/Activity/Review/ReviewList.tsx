@@ -3,7 +3,7 @@
 import { Review } from "@/types/activites/activitesTypes";
 import { timeDiff } from "@/utils/timeDiff";
 import { FaStar } from "react-icons/fa";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import s from "./ReviewList.module.scss";
 import Pagination from "@/components/Button/Pagination";
@@ -17,30 +17,22 @@ interface ReviewListProps {
 const ReviewList = ({ reviews, totalCount, averageRating }: ReviewListProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const size = 3;
-
   const totalPage = Math.ceil(totalCount / size);
 
-  // 페이지 변경 핸들러
+  const currentReviews = useMemo(() => {
+    return reviews.slice((currentPage - 1) * size, currentPage * size);
+  }, [reviews, currentPage, size]);
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  // 현재 페이지에 맞는 리뷰만 표시 (3개씩)
-  const currentReviews = reviews.slice((currentPage - 1) * size, currentPage * size);
-
   const getSatisfactionText = (rating: number): string => {
-    switch (true) {
-      case rating >= 4:
-        return "매우 만족";
-      case rating >= 3:
-        return "대체로 만족";
-      case rating >= 2:
-        return "보통";
-      case rating >= 1:
-        return "불만족";
-      default:
-        return "등록된 리뷰가 없습니다.";
-    }
+    if (rating >= 4) return "매우 만족";
+    if (rating >= 3) return "대체로 만족";
+    if (rating >= 2) return "보통";
+    if (rating >= 1) return "불만족";
+    return "등록된 리뷰가 없습니다.";
   };
 
   return (
