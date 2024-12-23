@@ -6,10 +6,11 @@ import { useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import s from "./MapInfo.module.scss";
 
+// Kakao Maps SDK를 로드하는 커스텀 훅
 const useKakaoLoader = () => {
   useKakaoLoaderOrigin({
-    appkey: process.env.NEXT_PUBLIC_KAKAO_APPKEY!,
-    libraries: ["clusterer", "drawing", "services"],
+    appkey: process.env.NEXT_PUBLIC_KAKAO_APPKEY!, // 환경 변수에서 앱 키 가져오기
+    libraries: ["services", "clusterer", "drawing"], // 필요한 라이브러리 명시
   });
 };
 
@@ -18,66 +19,74 @@ interface MapInfoProps {
 }
 
 const MapInfo: React.FC<MapInfoProps> = ({ address }) => {
-  useKakaoLoader(); // 카카오맵 SDK 로드
+  useKakaoLoader(); // Kakao Maps SDK 로드
   const [isSdkLoaded, setIsSdkLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    // 카카오 SDK 로드 여부를 확인하는 함수
+    // Kakao SDK 로드 상태 확인
     const checkKakaoLoaded = () => {
       if (typeof kakao !== "undefined") {
         setIsSdkLoaded(true);
       } else {
-        setTimeout(checkKakaoLoaded, 300); // SDK가 로드되었는지 확인
+        setTimeout(checkKakaoLoaded, 300); // 비동기로 로드 상태 반복 확인
       }
     };
 
-    checkKakaoLoaded(); // SDK 로드 확인 시작
+    checkKakaoLoaded(); // 확인 시작
   }, []);
 
   useEffect(() => {
-    if (!isSdkLoaded || !address) return; // SDK가 로드되지 않으면 종료
+    if (!isSdkLoaded || !address) return; // SDK가 로드되지 않았으면 중단
 
-    // 지도를 표시할 div
-    const mapContainer = document.getElementById("map");
+    // Kakao Maps API 로드 확인
+    if (typeof kakao === "undefined" || !kakao.maps) {
+      console.error("Kakao Maps SDK가 로드되지 않았습니다.");
+      return;
+    }
+
+    const mapContainer = document.getElementById("map"); // 지도 컨테이너 선택
     if (!mapContainer) return;
 
     const mapOptions = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667), // 기본 지도 중심
-      level: 3, // 지도의 확대 레벨
+      center: new kakao.maps.LatLng(33.450701, 126.570667), // 초기 중심 좌표
+      level: 3, // 초기 확대 수준
     };
 
-    // 지도를 생성
-    const map = new kakao.maps.Map(mapContainer, mapOptions);
+    const map = new kakao.maps.Map(mapContainer, mapOptions); // 지도 생성
 
-    // 주소-좌표 변환 객체를 생성
-    const geocoder = new kakao.maps.services.Geocoder();
+    // Kakao Maps SDK의 Geocoder가 로드되었는지 확인
+    if (!kakao.maps.services || !kakao.maps.services.Geocoder) {
+      console.error("Kakao Maps SDK의 Geocoder가 로드되지 않았습니다.");
+      return;
+    }
 
-    // 주소로 좌표를 검색
+    const geocoder = new kakao.maps.services.Geocoder(); // 주소-좌표 변환 객체 생성
+
     geocoder.addressSearch(address, (result, status) => {
-      // 정상적으로 검색이 완료됐으면
       if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(
-          parseFloat(result[0].y), // y (latitude)를 숫자로 변환
-          parseFloat(result[0].x), // x (longitude)를 숫자로 변환
-        );
+        const coords = new kakao.maps.LatLng(parseFloat(result[0].y), parseFloat(result[0].x));
 
-        // 결과값으로 받은 위치를 마커로 표시
         const marker = new kakao.maps.Marker({
-          map: map,
-          position: coords,
+          map: map, // 마커를 추가할 지도
+          position: coords, // 마커 위치
         });
 
-        // 인포윈도우로 장소에 대한 설명을 표시
         const infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="width:150px;text-align:center;padding:6px 0;">${address}</div>`,
+          content: `<div style="width:150px;text-align:center;padding:6px 0;">${address}</div>`, // 정보창 내용
         });
-        infowindow.open(map, marker);
+        infowindow.open(map, marker); // 마커 위에 정보창 표시
 
-        // 지도의 중심을 결과값으로 받은 위치로 이동
-        map.setCenter(coords);
+        map.setCenter(coords); // 지도의 중심 이동
       }
     });
-  }, [address, isSdkLoaded]);
+
+    // 지도 이벤트에 디바운스 처리 추가
+    let debounceTimeout: NodeJS.Timeout;
+    kakao.maps.event.addListener(map, "idle", () => {
+      clearTimeout(debounceTimeout);
+      debounceTimeout = setTimeout(() => {}, 500);
+    });
+  }, [address, isSdkLoaded]); // address나 SDK 로드 상태 변경 시 실행
 
   if (!isSdkLoaded) {
     return <LoadingSpinner />; // SDK 로딩 중이면 로딩 표시

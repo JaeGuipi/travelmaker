@@ -13,6 +13,7 @@
       .description {
         padding-top: 16px;
         @include text(lg);
+        word-break: break-all;
       }
 
       .mapInfo {
