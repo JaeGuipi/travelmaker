@@ -88,6 +88,8 @@ export const deleteActivity = async (activityId: number) => {
     if (error instanceof Error) {
       return { status: 500, message: error.message };
     }
+  } finally {
+    revalidateTag("activity");
   }
 };
 

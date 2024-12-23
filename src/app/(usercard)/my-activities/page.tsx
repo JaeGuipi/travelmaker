@@ -4,7 +4,7 @@ import { Activity } from "@/types/activites/activitesTypes";
 import { customFetch } from "@/utils/customFetch";
 
 const MyActivities = async () => {
-  const response = await customFetch(`${API_URL}/my-activities?size=6`);
+  const response = await customFetch(`${API_URL}/my-activities?size=6`, { next: { tags: ["activity"] } });
   if (!response.ok) {
     console.error("내 체험 데이터를 불러오는 데 실패했습니다.");
   }
