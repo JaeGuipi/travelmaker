@@ -11,10 +11,21 @@
   align-items: center;
   gap: 3.69rem;
   flex: 1;
+
+  @include mobile {
+    margin-top: 8rem;
+
+    img {
+      width: 100px;
+    }
+  }
 }
 
 .no-list-notice {
-@include text(2xl);
-font-weight: 500;
-color: $gray02;
+  @include text(2xl);
+  font-weight: 500;
+  color: $gray02;
+  @include mobile {
+    @include text(lg);
+  }
 }
