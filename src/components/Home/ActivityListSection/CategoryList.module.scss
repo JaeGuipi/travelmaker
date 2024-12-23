@@ -20,6 +20,10 @@
     flex: 0 0 120px;
     height: 120px;
     cursor: pointer;
+    &:hover {
+      transition: 0.3s;
+      color: $yellow03;
+    }
     @include mobile {
       flex: 0 0 60px;
       height: 100px;
@@ -37,6 +41,7 @@
   }
   li.selected {
     > span {
+      color: $yellow01;
       font-weight: bold;
     }
   }
