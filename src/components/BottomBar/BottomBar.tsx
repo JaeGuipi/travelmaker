@@ -1,4 +1,3 @@
-// BottomBar.jsx
 import React from "react";
 import s from "./BottomBar.module.scss";
 import Link from "next/link";
