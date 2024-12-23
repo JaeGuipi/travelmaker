@@ -12,7 +12,8 @@
     display: flex;
     justify-content: space-between;
     & > a,
-    > button {
+    & > button {
+      @include text(xs);
       display: flex;
       flex-direction: column;
       align-items: center;
