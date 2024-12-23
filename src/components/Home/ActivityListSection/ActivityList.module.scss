@@ -1,6 +1,7 @@
 .allitem-section {
   position: relative;
-  margin-top: 100px;
+  max-width: 1200px;
+  margin: 100px auto 0 auto;
   @include mobile {
     margin-top: 50px;
   }
@@ -10,7 +11,11 @@
   color: $black01;
   font-weight: bold;
   @include text(4xl);
+  @include tablet {
+    padding: 0 24px;
+  }
   @include mobile {
+    padding: 0 16px;
     @include text(2lg);
   }
 }

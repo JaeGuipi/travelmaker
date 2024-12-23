@@ -76,10 +76,12 @@ const ActivityList: React.FC<GetActivities> = ({ activities }) => {
   };
 
   return (
-    <section className={cx("allitem-section", "container")}>
+    <section className={s["allitem-section"]}>
       <h3 className={s.title}>🛼 마음에 드는 장소를 선택해보세요</h3>
       <CategoryList categories={categories} selectedCategory={selectedCategory} onCategoryClick={handleCategoryClick} />
-      {loading ? <LoadingSpinner /> : <AllItemList activities={filteredActivities} onLoadMore={handleLoadMore} />}
+      <div className="container">
+        {loading ? <LoadingSpinner /> : <AllItemList activities={filteredActivities} onLoadMore={handleLoadMore} />}
+      </div>
     </section>
   );
 };
