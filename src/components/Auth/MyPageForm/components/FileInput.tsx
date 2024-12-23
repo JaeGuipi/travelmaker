@@ -17,7 +17,7 @@ const FileInput = ({ users, preview, handleImageChange, readOnly }: FileInputPro
     <div className={s.profileContainer}>
       <div className={s.profileImgWrap}>
         <div className={s.profileImgBox}>
-          {users && <Image src={profileImage} width={160} height={160} alt={users.nickname || "프로필 이미지"} />}
+          {users && <Image src={profileImage} fill alt={users.nickname || "프로필 이미지"} />}
         </div>
 
         {!readOnly && (

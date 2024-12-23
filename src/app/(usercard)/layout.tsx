@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import ClientPathname from "@/app/ClientPathname";
-import UserTab from "@/components/UserTab/UserTab";
+import UserTab from "@/components/Layout/UserTab/UserTab";
 import classNames from "classnames";
 
 export default function RootLayout({

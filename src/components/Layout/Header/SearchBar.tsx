@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import CustomInput from "./Input/CustomInput";
+import CustomInput from "../../Input/CustomInput";
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
