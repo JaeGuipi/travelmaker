@@ -1,7 +1,7 @@
 import MyActivityList from "./MyActivityList/MyActivityList";
-import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import { Activity } from "@/types/activites/activitesTypes";
+import { customFetch } from "@/utils/customFetch";
 
 const MyActivities = async () => {
   const response = await customFetch(`${API_URL}/my-activities?size=6`);
@@ -13,11 +13,7 @@ const MyActivities = async () => {
   const cursorId = myActivity.cursorId;
   const myActivityList: Activity[] = myActivity.activities;
 
-  return (
-    <>
-      <MyActivityList initialActivityList={myActivityList} cursorId={cursorId}></MyActivityList>
-    </>
-  );
+  return <MyActivityList initialActivityList={myActivityList} cursorId={cursorId}></MyActivityList>;
 };
 
 export default MyActivities;

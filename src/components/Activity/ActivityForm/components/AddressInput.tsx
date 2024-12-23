@@ -50,19 +50,24 @@ const AddressInput = ({ control, errors }: AddressInputProps) => {
       control={control}
       render={({ field: { onChange, value } }) => (
         <div className={s.addressInputContainer}>
-          <div className={s.customInput}>
-            <CustomInput
-              id="address"
-              type="text"
-              value={value || ""}
-              onChange={(e) => onChange((e.target as HTMLInputElement).value)}
-              readOnly
-              placeholder="주소를 검색하세요"
-            />
+          <label className={s.titleLabel}>
+            주소 <span className={s.required}>*</span>
+          </label>
+          <div className={s.addressInputWrap}>
+            <div className={s.customInput}>
+              <CustomInput
+                id="address"
+                type="text"
+                value={value || ""}
+                onChange={(e) => onChange((e.target as HTMLInputElement).value)}
+                readOnly
+                placeholder="주소를 검색하세요"
+              />
+            </div>
+            <button type="button" onClick={() => handleClick(onChange)} className={s.searchButton}>
+              주소 검색
+            </button>
           </div>
-          <button type="button" onClick={() => handleClick(onChange)} className={s.searchButton}>
-            주소 검색
-          </button>
           {errors && <span className={s.errorText}>{errors}</span>}
         </div>
       )}

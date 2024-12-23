@@ -1,4 +1,24 @@
 .loader {
   @include flex-center;
   margin: auto;
+  width: 20px;
+  height: 20px;
+  display: block;
+  border-radius: 100%;
+  border-width: 2px;
+  border-style: solid;
+  border-color: $gray06 $gray06 transparent;
+  animation: 0.75s linear 0s infinite spin;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
 }

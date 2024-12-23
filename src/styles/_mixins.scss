@@ -25,23 +25,3 @@ $breakpoint-pc: 1280px;
   font-size: map-get(map-get($font-styles, $size), font-size);
   line-height: map-get(map-get($font-styles, $size), line-height);
 }
-
-@mixin scrollbar {
-  &::-webkit-scrollbar {
-    width: 0.6rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $yellow03;
-    border-radius: 0.4rem;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: $yellow02;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $orange02;
-    border-radius: 0.4rem;
-  }
-}

@@ -1,6 +1,10 @@
 .label {
   @include text(lg);
   font-weight: 500;
+
+  .required {
+    color: $red01;
+  }
 }
 
 .label + .input-container {
@@ -19,8 +23,12 @@
   border-radius: 12px;
   padding: 1.6rem 2rem;
   transition: all 0.3s ease-in-out;
+  font-family: var(--font-pretendard), Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   @include mobile {
     padding: 1rem 1.5rem;
+    font-size: 1.3rem;
   }
 
   &.border-yellow {
@@ -30,6 +38,9 @@
   &::placeholder {
     @include text(md);
     color: $gray05;
+    @include mobile {
+      @include text(sm);
+    }
   }
 
   &:focus {
@@ -40,9 +51,6 @@
 
 .textarea {
   height: 160px;
-  font-family: var(--font-pretendard), Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   resize: none;
 
   &::-webkit-scrollbar {

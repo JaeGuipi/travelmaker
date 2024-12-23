@@ -1,0 +1,154 @@
+.scheduleInputContainer {
+  margin-top: 1rem;
+
+  .titleLabel {
+    @include text(lg);
+    font-weight: 500;
+
+    .required {
+      color: $red01;
+    }
+  }
+
+  .scheduleInputWrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fieldList {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    @include mobile {
+      gap: 0.5rem;
+    }
+
+    .timeSeparator {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: $gray04;
+      margin-bottom: 1.5rem;
+      @include tablet {
+        display: none;
+      }
+    }
+
+    .fieldItem {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      &.time {
+        flex: 0.5;
+      }
+
+      .subLabel {
+        @include text(md);
+        color: $gray04;
+        padding-left: 0.3rem;
+        padding-bottom: 0.3rem;
+      }
+
+      .datePickerWrap {
+        position: relative;
+
+        svg {
+          position: absolute;
+          right: 1.5rem;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+          cursor: pointer;
+          @include mobile {
+            display: none;
+          }
+
+          &.off {
+            color: $gray05;
+          }
+        }
+      }
+
+      .scheduleInput {
+        display: block;
+        font-size: 1.4rem;
+        width: 100%;
+        border: 1px solid $gray06;
+        border-radius: 12px;
+        padding: 1.6rem 2rem;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        @include mobile {
+          padding: 1rem 1.5rem;
+        }
+
+        &.border-yellow {
+          border-color: $yellow01;
+        }
+
+        &::placeholder {
+          @include text(md);
+          color: $gray05;
+        }
+
+        &:focus {
+          border-color: $yellow01;
+          outline: none;
+        }
+      }
+    }
+
+    &.active {
+      .scheduleInput {
+        color: $gray04;
+        background-color: $gray07;
+        border: none;
+      }
+    }
+
+    &:not(:first-child) {
+      border-top: 1px solid $gray06;
+      margin-top: 1rem;
+      padding-top: 1rem;
+
+      .scheduleInput {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .addButton,
+  .removeButton {
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 9px;
+    transition: all 0.3s ease-in-out;
+    @include flex-center;
+    @include mobile {
+      min-width: 40px;
+      min-height: 40px;
+    }
+
+    svg {
+      font-size: 3rem;
+      color: white;
+    }
+  }
+
+  .addButton {
+    background-color: $yellow03;
+
+    &:hover {
+      background-color: $yellow02;
+    }
+  }
+
+  .removeButton {
+    background-color: $gray06;
+
+    &:hover {
+      background-color: $gray05;
+    }
+  }
+}

@@ -5,6 +5,28 @@ import ClientPathname from "@/app/ClientPathname";
 import Header from "@/components/Layout/Header/Header";
 import Footer from "@/components/Layout/Footer/Footer";
 import BottomBar from "@/components/BottomBar/BottomBar";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "travel maker",
+  description: "트레블 메이커에서 즐기는 다양한 체험",
+  openGraph: {
+    title: "travel maker",
+    description: "트레블 메이커에서 즐기는 다양한 체험",
+    images: [
+      {
+        url: "https://travelmaker-ten.vercel.app/opengraph_image.png",
+        width: 800,
+        height: 400,
+        alt: "Travel Maker Open Graph Image",
+      },
+    ],
+    url: "https://travelmaker-ten.vercel.app",
+    siteName: "travel maker",
+    locale: "ko_KR",
+    type: "website",
+  },
+};
 
 const pretendard = localFont({
   src: "./fonts/PretendardVariable.woff2",

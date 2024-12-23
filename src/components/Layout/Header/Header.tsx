@@ -1,13 +1,13 @@
 import { cookies } from "next/headers";
-import { customFetch } from "@/utils/customFetch";
 import API_URL from "@/constants/config";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./Header.module.scss";
 import classNames from "classnames/bind";
 import User from "@/components/Layout/Header/User";
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/components/Layout/Header/SearchBar";
 import Alarm from "@/components/Alarm/Alarm";
+import { customFetch } from "@/utils/customFetch";
 
 export const cx = classNames.bind(s);
 
@@ -45,7 +45,7 @@ const getNotifications = async () => {
 
 const Header = async () => {
   const users = await getUsers();
-  const myNotifications = await getNotifications();
+  const myNotifications = users ? await getNotifications() : { notifications: [] };
 
   return (
     <header className={s.header}>

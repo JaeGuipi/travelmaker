@@ -52,7 +52,8 @@ export const updateActivity = async (activityId: number, activityData: PostActiv
 
     if (!response.ok) {
       const errorResponse = await response.json();
-      throw new Error(errorResponse?.message || "체험 수정 실패");
+      const errorMessage = errorResponse?.message || "체험 수정 실패";
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();

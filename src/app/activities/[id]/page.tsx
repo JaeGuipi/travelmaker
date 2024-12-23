@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { ActivityDetailResponse, GetReviews } from "@/types/activites/activitesTypes";
+import { notFound } from "next/navigation";
 import ReviewList from "@/components/Activity/Review/ReviewList";
 import ActivityDetail from "@/components/Activity/ActivityDetail/ActivityDetail";
 import Schedules from "@/components/Activity/Schedules/Schedules";
@@ -32,8 +33,11 @@ const getUsers = async () => {
 };
 
 // 체험 상세 정보 조회
-async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse> {
+async function getActivityDetail(activityId: number): Promise<ActivityDetailResponse | null> {
   const response = await fetch(`${API_URL}/activities/${activityId}`, { next: { tags: ["activity"] } });
+  if (!response.ok) {
+    return null; // 활동 정보가 없을 경우 null 반환
+  }
   return response.json();
 }
 
@@ -52,11 +56,18 @@ async function getActivityReview(activityId: number): Promise<GetReviews> {
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
-  const users = await getUsers();
-  const userId = users?.id || null;
-  const activity = await getActivityDetail(params.id);
+  const [users, activity, reviewData] = await Promise.all([
+    getUsers(),
+    getActivityDetail(params.id),
+    getActivityReview(params.id),
+  ]);
 
-  const { reviews, totalCount, averageRating } = await getActivityReview(params.id);
+  if (!activity) {
+    notFound();
+  }
+
+  const userId = users?.id || null;
+  const { reviews, totalCount, averageRating } = reviewData;
 
   return (
     <div className="container">

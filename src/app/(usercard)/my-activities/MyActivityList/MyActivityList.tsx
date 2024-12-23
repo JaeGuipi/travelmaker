@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 import ConfirmModal from "@/components/Modal/ModalComponents/ConfirmModal";
 import useModalStore from "@/store/useModalStore";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList: Activity[]; cursorId: number }) => {
   const [activityList, setActivityList] = useState(initialActivityList);
@@ -75,7 +76,7 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
 
   return (
     <div className={s["content-container"]}>
-      <ItemTitleLayout title="내 체험관리">
+      <ItemTitleLayout title="내 체험 관리">
         <FormButton onClick={() => router.push("/my-activities/register")}>체험 등록하기</FormButton>
       </ItemTitleLayout>
       {activityList.length === 0 ? (
@@ -89,6 +90,7 @@ const MyActivityList = ({ initialActivityList, cursorId }: { initialActivityList
           ></MyActivityItem>
         ))
       )}
+      {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
       <ConfirmModal modalKey={confirmModal} text="체험을 삭제하시겠어요?" onCancel={handleDeleteItem} id={selectedId} />
     </div>
   );

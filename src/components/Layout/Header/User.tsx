@@ -8,11 +8,13 @@ import { logout } from "@/actions/auth.action";
 import Image from "next/image";
 import Link from "next/link";
 import s from "@/components/Layout/Header/Header.module.scss";
-import { RiUserSettingsLine } from "react-icons/ri";
-import { GoChecklist } from "react-icons/go";
-import { AiOutlineSetting } from "react-icons/ai";
-import { TbCalendarCheck } from "react-icons/tb";
-import { MdOutlineLogout } from "react-icons/md";
+import {
+  HiOutlineUser,
+  HiOutlineClipboardDocumentCheck,
+  HiOutlineCog6Tooth,
+  HiOutlineCalendarDays,
+  HiOutlineUserMinus,
+} from "react-icons/hi2";
 
 const User = ({ users }: { users: GetMe | null; initialNotifications?: MyNotifications }) => {
   const router = useRouter();
@@ -60,22 +62,22 @@ const User = ({ users }: { users: GetMe | null; initialNotifications?: MyNotific
             {isDropdownOpen && (
               <div className={s.toggleDropdown}>
                 <Link href={"/my-info"}>
-                  <RiUserSettingsLine />내 프로필
+                  <HiOutlineUser />내 프로필
                 </Link>
                 <Link href={"/my-reservation"}>
-                  <GoChecklist />
+                  <HiOutlineClipboardDocumentCheck />
                   예약 내역
                 </Link>
                 <Link href={"/my-activities"}>
-                  <AiOutlineSetting />내 체험 관리
+                  <HiOutlineCog6Tooth />내 체험 관리
                 </Link>
                 <Link href={"/reservation-status"}>
-                  <TbCalendarCheck />
+                  <HiOutlineCalendarDays />
                   예약 현황
                 </Link>
                 <div className={s.logout}>
                   <button onClick={handleLogout}>
-                    <MdOutlineLogout />
+                    <HiOutlineUserMinus />
                     로그아웃
                   </button>
                 </div>
