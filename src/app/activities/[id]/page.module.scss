@@ -18,7 +18,8 @@
         flex: 0 0 453px;
       }
       @include mobile {
-        flex: 1;
+        flex: auto;
+        width: 100%;
       }
     }
   }
