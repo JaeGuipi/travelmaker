@@ -4,7 +4,7 @@ import SearchBar from "@/components/Layout/Header/SearchBar";
 import SearchResults from "./SearchResults";
 import { GetActivities } from "@/types/activites/activitesTypes";
 import classNames from "classnames/bind";
-import styles from "./page.module.scss";
+import s from "./page.module.scss";
 import { Metadata } from "next";
 import Image from "next/image";
 import enterWord from "@/../../public/images/enter_word.png";
