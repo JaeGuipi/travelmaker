@@ -1,40 +1,41 @@
 import s from "./SwiperText.module.scss";
 
 interface SwiperText {
-  title: string;
+  title1: string;
+  title2: string;
   subTitle: string;
-  tag: string;
 }
 
 export default function SwiperText({ slideIndex }: { slideIndex: number }) {
   const texts: { [key: number]: SwiperText } = {
     0: {
-      title: "트레블 메이커에서 즐기는",
-      subTitle: "다양한 체험",
-      tag: "",
+      title1: "트레블 메이커에서 즐기는",
+      title2: "다양한 체험",
+      subTitle: "",
     },
     1: {
-      title: "당신의 여행 속",
-      subTitle: "숨겨진 보물을 찾아보세요",
-      tag: "",
+      title1: "당신의 여행 속",
+      title2: `숨겨진 보물을
+      찾아보세요`,
+      subTitle: "",
     },
     2: {
-      title: "어디 갈지 고민 될 땐",
-      subTitle: "트레블 메이커와 함께",
-      tag: "",
+      title1: "어디 갈지 고민 될 땐",
+      title2: "트레블 메이커와 함께",
+      subTitle: "",
     },
   };
 
-  const { title, subTitle, tag } = texts[slideIndex] || texts[0];
+  const { title1, title2, subTitle } = texts[slideIndex] || texts[0];
 
   return (
     <div className={s["visual-text"]}>
       <h2>
-        {title}
+        {title1}
         <br />
-        {subTitle}
+        {title2}
       </h2>
-      <p>{tag}</p>
+      <p>{subTitle}</p>
     </div>
   );
 }
