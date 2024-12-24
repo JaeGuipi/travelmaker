@@ -80,8 +80,11 @@
 
       .title {
         overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        white-space: normal;
         text-overflow: ellipsis;
-        white-space: nowrap;
+        -webkit-line-clamp: 2;
         padding-top: 10px;
         font-weight: 600;
         @include text(2xl);
