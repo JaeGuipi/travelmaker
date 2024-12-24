@@ -8,6 +8,7 @@ import BottomBar from "@/components/BottomBar/BottomBar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
+  title: "트래블 메이커",
   openGraph: {
     title: "travel maker",
     description: "트레블 메이커에서 즐기는 다양한 체험",

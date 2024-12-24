@@ -12,11 +12,6 @@ import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import FormButton from "@/components/Button/FormButton";
 import CustomInput from "@/components/Input/CustomInput";
 import SocialLoginAndSignup from "@/components/Auth/SocialLoginAndSignup/SocialLoginAndSignup";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "트래블 메이커 : 로그인",
-};
 
 const LoginPage = () => {
   const { showSuccess, showError } = useToast();
