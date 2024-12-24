@@ -6,6 +6,11 @@ import ReservationTitle from "./ReservationTItle";
 import s from "./page.module.scss";
 import ItemTitleLayout from "../my-reservation/ItemTitleLayout/ItemTitleLayout";
 import NoList from "../my-reservation/MyReservationList/NoList";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 예약 현황",
+};
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
   const activityId = searchParams.activity as string | undefined;

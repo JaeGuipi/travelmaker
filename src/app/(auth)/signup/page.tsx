@@ -11,6 +11,11 @@ import { useRouter } from "next/navigation";
 import AuthForm from "@/components/Auth/AuthForm/AuthForm";
 import toastMessages from "@/lib/toastMessage";
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 회원가입",
+};
 
 type FormValues = {
   email: string;

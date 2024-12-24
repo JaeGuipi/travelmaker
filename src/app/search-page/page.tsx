@@ -5,6 +5,11 @@ import SearchResults from "./SearchResults";
 import { GetActivities } from "@/types/activites/activitesTypes";
 import classNames from "classnames/bind";
 import styles from "./page.module.scss";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 검색",
+};
 
 const cx = classNames.bind(styles);
 interface SearchParams {

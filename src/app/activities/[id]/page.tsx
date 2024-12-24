@@ -6,6 +6,11 @@ import Schedules from "@/components/Activity/Schedules/Schedules";
 import API_URL from "@/constants/config";
 import DetailSubImg from "@/components/Activity/DetailSubImg";
 import s from "./page.module.scss";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 체험 상세",
+};
 
 const getUsers = async () => {
   const cookieStore = cookies();
