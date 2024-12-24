@@ -2,11 +2,6 @@ import API_URL from "@/constants/config";
 import { MyReservation } from "@/types/myReservationsTypes/myReservationsTypes";
 import MyReservationList from "@/app/(usercard)/my-reservation/MyReservationList/MyReservationList";
 import { customFetch } from "@/utils/customFetch";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "트래블 메이커 : 내 예약 관리",
-};
 
 const MyReservationPage = async () => {
 

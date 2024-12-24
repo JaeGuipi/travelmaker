@@ -4,7 +4,7 @@ import MyPageForm from "@/components/Auth/MyPageForm/MyPageForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "트래블 메이커 : 내 정보",
+  title: "트래블 메이커 : 내 프로필",
 };
 
 const getUsers = async () => {
