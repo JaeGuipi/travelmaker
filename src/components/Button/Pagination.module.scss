@@ -28,6 +28,15 @@
       @include text(md);
     }
 
+    svg {
+      width: 24px;
+      height: 24px;
+      @include mobile {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
     &:hover {
       background-color: $orange02;
     }

@@ -6,7 +6,10 @@
   @include tablet {
     flex-wrap: nowrap;
     overflow-x: scroll;
-    padding: 15px 0 5px;
+    padding: 15px 0 5px 24px;
+  }
+  @include mobile {
+    padding: 15px 0 5px 16px;
   }
 
   li {
@@ -17,16 +20,28 @@
     flex: 0 0 120px;
     height: 120px;
     cursor: pointer;
+    &:hover {
+      transition: 0.3s;
+      color: $yellow03;
+    }
     @include mobile {
-      flex: 0 0 80px;
+      flex: 0 0 60px;
       height: 100px;
     }
+
+    > img {
+      @include mobile {
+        width: 45px;
+      }
+    }
+
     > span {
       @include text(md);
     }
   }
   li.selected {
     > span {
+      color: $yellow01;
       font-weight: bold;
     }
   }

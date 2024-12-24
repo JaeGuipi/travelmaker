@@ -8,21 +8,21 @@ import BottomBar from "@/components/BottomBar/BottomBar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "travel maker",
+  title: "TRAVEL MAKER",
   description: "트레블 메이커에서 즐기는 다양한 체험",
   openGraph: {
-    title: "travel maker",
+    title: "TRAVEL MAKER",
     description: "트레블 메이커에서 즐기는 다양한 체험",
     images: [
       {
-        url: "https://travelmaker-ten.vercel.app/opengraph_image.png",
+        url: "https://travelmaker-ten.vercel.app/opengraph-image.png",
         width: 800,
         height: 400,
         alt: "Travel Maker Open Graph Image",
       },
     ],
     url: "https://travelmaker-ten.vercel.app",
-    siteName: "travel maker",
+    siteName: "TRAVEL MAKER",
     locale: "ko_KR",
     type: "website",
   },

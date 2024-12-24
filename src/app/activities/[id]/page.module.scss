@@ -11,5 +11,8 @@
     gap: 24px;
     padding-top: 85px;
     @include flex-align-start;
+    .infoWrap {
+      flex: auto;
+    }
   }
 }

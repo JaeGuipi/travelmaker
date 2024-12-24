@@ -23,6 +23,15 @@
       max-width: 168px;
     }
 
+    &:hover {
+      .img {
+        img {
+          transition: all ease-in 0.3s;
+          transform: scale3d(1.2, 1.2, 1.2);
+        }
+      }
+    }
+
     .img {
       overflow: hidden;
       width: 283px;

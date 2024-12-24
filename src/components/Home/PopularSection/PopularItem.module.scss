@@ -4,6 +4,7 @@
   bottom: 0;
   width: 100%;
   padding: 30px 20px;
+  z-index: 5;
   @include mobile {
     padding: 20px;
   }
