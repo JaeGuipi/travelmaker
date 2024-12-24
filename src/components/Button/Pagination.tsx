@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import s from "./Pagination.module.scss";
-import { FaCaretLeft, FaCaretRight } from "react-icons/fa6";
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 interface PaginationProps {
   currentPage: number; // 현재 페이지 상태
@@ -19,7 +19,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
   return (
     <div className={s.pagination}>
       <button className={s.pageButton} onClick={() => handlePageClick(currentPage - 1)} disabled={currentPage === 1}>
-        <FaCaretLeft />
+        <MdOutlineKeyboardArrowLeft />
       </button>
 
       {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -37,7 +37,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
         onClick={() => handlePageClick(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <FaCaretRight />
+        <MdOutlineKeyboardArrowRight />
       </button>
     </div>
   );

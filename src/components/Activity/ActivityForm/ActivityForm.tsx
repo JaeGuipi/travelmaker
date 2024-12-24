@@ -10,10 +10,10 @@ import { useToast } from "@/hooks/useToast";
 import toastMessages from "@/lib/toastMessage";
 import FormButton from "@/components/Button/FormButton";
 import CustomInput from "@/components/Input/CustomInput";
-import CategoryDropdown from "@/components/Activity/ActivityForm/ActivityCategory/CategoryDropdown";
-import AddressInput from "@/components/Activity/ActivityForm/ActivityInput/AddressInput";
-import ScheduleInput from "@/components/Activity/ActivityForm/ActivityInput/ScheduleInput";
-import BannerInput from "@/components/Activity/ActivityForm/ActivityInput/BannerInput";
+import CategoryDropdown from "@/components/Activity/ActivityForm/components/CategoryDropdown";
+import AddressInput from "@/components/Activity/ActivityForm/components/AddressInput";
+import ScheduleInput from "@/components/Activity/ActivityForm/components/ScheduleInput";
+import BannerInput from "@/components/Activity/ActivityForm/components/BannerInput";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
