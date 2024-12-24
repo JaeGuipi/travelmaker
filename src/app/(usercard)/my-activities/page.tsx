@@ -2,6 +2,11 @@ import MyActivityList from "./MyActivityList/MyActivityList";
 import API_URL from "@/constants/config";
 import { Activity } from "@/types/activites/activitesTypes";
 import { customFetch } from "@/utils/customFetch";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 내 체험 관리",
+};
 
 const MyActivities = async () => {
   const response = await customFetch(`${API_URL}/my-activities?size=6`, { next: { tags: ["activity"] } });

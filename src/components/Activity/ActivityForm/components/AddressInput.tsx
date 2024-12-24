@@ -61,7 +61,7 @@ const AddressInput = ({ control, errors }: AddressInputProps) => {
                 value={value || ""}
                 onChange={(e) => onChange((e.target as HTMLInputElement).value)}
                 readOnly
-                placeholder="주소를 검색하세요"
+                placeholder="주소를 검색해주세요"
               />
             </div>
             <button type="button" onClick={() => handleClick(onChange)} className={s.searchButton}>

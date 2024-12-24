@@ -4,9 +4,16 @@ import SearchBar from "@/components/Layout/Header/SearchBar";
 import SearchResults from "./SearchResults";
 import { GetActivities } from "@/types/activites/activitesTypes";
 import classNames from "classnames/bind";
-import styles from "./page.module.scss";
+import s from "./page.module.scss";
+import { Metadata } from "next";
+import Image from "next/image";
+import enterWord from "@/../../public/images/enter_word.png";
 
-const cx = classNames.bind(styles);
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 검색",
+};
+
+const cx = classNames.bind(s);
 interface SearchParams {
   keyword?: string;
   sort?: string;
@@ -52,7 +59,14 @@ export default async function Page({ searchParams }: SearchPageProps) {
       <div className={cx("searchbar")}>
         <SearchBar />
       </div>
-      {!keyword ? <div>검색어를 입력해주세요.</div> : <SearchResults data={data} searchParams={searchParams} />}
+      {!keyword ? (
+        <div className={s.enterword}>
+          <Image src={enterWord} alt="검색어를 입력해주세요." />
+          <p>검색어를 입력해주세요.</p>
+        </div>
+      ) : (
+        <SearchResults data={data} searchParams={searchParams} />
+      )}
     </main>
   );
 }
