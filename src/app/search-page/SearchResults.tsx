@@ -8,6 +8,7 @@ import { GetActivities } from "@/types/activites/activitesTypes";
 import Link from "next/link";
 import s from "./SearchResults.module.scss";
 import Pagination from "@/components/Button/Pagination";
+import NoItem from "@/../../public/images/no_item.png";
 
 interface SearchResultsProps {
   data: GetActivities;
@@ -55,7 +56,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
     router.push(`/search-page?${params.toString()}`);
   };
   return (
-    <section>
+    <section className={s.searchsection}>
       {data?.activities.length > 0 ? (
         <div className={s["search-wrap"]}>
           <div className={s["list-setup"]}>
@@ -72,37 +73,44 @@ const SearchResults: React.FC<SearchResultsProps> = ({ data, searchParams }) => 
             </Dropdown>
           </div>
           <ul className={s["item-list"]}>
-            {data.activities.map((activity) => (
-              <li key={activity.id} className={s["item-box"]}>
-                <Link href={`/activities/${activity.id}`}>
-                  <Image
-                    src={activity.bannerImageUrl}
-                    width={283}
-                    height={283}
-                    className={s.itemImg}
-                    alt="체험 이미지"
-                  />
-                  <div className={s.info}>
-                    <p className={s.rating}>
-                      <span className={s["rating-icon"]}>
-                        <Image src="/icons/rating_star.svg" fill alt="평점 아이콘" />
-                      </span>
-                      {activity.rating}&nbsp;({activity.reviewCount})
-                    </p>
-                    <h4 className={s.title}>{activity.title}</h4>
-                    <p className={s.price}>
-                      ₩{activity.price}
-                      <span> / 인</span>
-                    </p>
-                  </div>
-                </Link>
-              </li>
-            ))}
+            {data.activities.map((activity) => {
+              const formattedPrice = new Intl.NumberFormat("ko-KR").format(activity.price);
+              return (
+                <li key={activity.id} className={s["item-box"]}>
+                  <Link href={`/activities/${activity.id}`}>
+                    <div className={s.img}>
+                      <Image
+                        src={activity.bannerImageUrl || "/images/no_image.png"}
+                        width={283}
+                        height={283}
+                        alt="체험 이미지"
+                      />
+                    </div>
+                    <div className={s.info}>
+                      <p className={s.rating}>
+                        <span className={s["rating-icon"]}>
+                          <Image src="/icons/rating_star.svg" fill alt="평점 아이콘" />
+                        </span>
+                        {activity.rating}&nbsp;({activity.reviewCount})
+                      </p>
+                      <h4 className={s.title}>{activity.title}</h4>
+                      <p className={s.price}>
+                        ₩{formattedPrice}
+                        <span> / 인</span>
+                      </p>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <Pagination currentPage={Number(page)} totalPages={totalPage} onPageChange={handlePageChange} />
         </div>
       ) : (
-        <p>검색 결과가 없습니다.</p>
+        <div className={s.noItem}>
+          <Image src={NoItem} alt="검색 결과 없음" />
+          <p>앗! {keyword}에 대한 검색결과는 존재하지 않아요!</p>
+        </div>
       )}
     </section>
   );
