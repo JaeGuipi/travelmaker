@@ -30,7 +30,7 @@
 <br />
 
 ## 📚 라이브러리
-<img src="https://img.shields.io/badge/react hook form-EC5990?style=flat-square&logo=reacthookform&logoColor=white"/> <img src="https://img.shields.io/badge/zod-3E67B1?style=flat-square&logo=zod&logoColor=white"/> <img src="https://img.shields.io/badge/zustand-FA7D19?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/swiper-3882D2?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react modal-714B67?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react hot toast-76D04B?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react icons-F01F7A?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react kakao maps sdk-F2BB13?style=flat-square&logoColor=white"/><img src="https://img.shields.io/badge/Full Calendar-F44A6A?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react datepicker-67A4AC?style=flat-square&logoColor=white"/>
+<img src="https://img.shields.io/badge/react hook form-EC5990?style=flat-square&logo=reacthookform&logoColor=white"/> <img src="https://img.shields.io/badge/zod-3E67B1?style=flat-square&logo=zod&logoColor=white"/> <img src="https://img.shields.io/badge/zustand-FA7D19?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/swiper-3882D2?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react modal-714B67?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react hot toast-76D04B?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react icons-F01F7A?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react kakao maps sdk-F2BB13?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/Full Calendar-F44A6A?style=flat-square&logoColor=white"/> <img src="https://img.shields.io/badge/react datepicker-67A4AC?style=flat-square&logoColor=white"/>
 
 <br />
 
@@ -44,16 +44,19 @@
 |:---:|:---:|:---:|:---:|
 |![](https://github.com/JaeGuipi.png?size=120)|![](https://github.com/99minji.png?size=120)|![](https://github.com/hyemeeny.png?size=120)|![](https://github.com/jjeankim.png?size=120)|
 |👑[이재서](https://github.com/JaeGuipi)|[구민지](https://github.com/99minji)|[지혜민](https://github.com/hyemeeny)|[김진](https://github.com/jjeankim)|
-|검색 페이지 <br/>예약 현황 페이지 <br/>middleware 구현 <br />간편 회원가입 기능 구현 <br/>fullcalendar 커스텀|메인 페이지<br /> 체험 상세 페이지<br /> 지도 SDK를 이용한 기능 구현 <br />fullcalendar 커스텀|로그인 페이지<br /> 내 정보 페이지<br /> 내 체험 등록 및 수정 페이지 <br /> 지도 SDK를 이용한 기능 구현<br />datepicker 커스텀|회원가입 페이지<br /> 예약 내역 페이지<br /> 내 체험 관리 페이지<br /> 알림 구현|
+|검색 페이지 <br/>예약 현황 페이지 <br/>middleware 구현 <br />간편 회원가입 구현 <br/>fullcalendar 커스텀|메인 페이지<br /> 체험 상세 페이지<br /> 지도 SDK 기능 구현 <br />fullcalendar 커스텀|로그인 페이지<br /> 내 정보 페이지<br /> 내 체험 등록 및 수정 페이지 <br /> 지도 SDK 기능 구현<br />datepicker 커스텀|회원가입 페이지<br /> 예약 내역 페이지<br /> 내 체험 관리 페이지<br /> 알림 구현|
 
 <br />
 
 ## 📺 화면 구성
 
 #### 회원가입 페이지
-- 회원 가입 또는 간편 회원 가입으로 계정을 생성합니다.
+- 아이디, 비밀번호 회원 가입 계정을 생성합니다.
 
 #### 로그인 페이지
+- 로그인 또는 간편 로그인으로 로그인을 합니다.
+
+#### 간편 회원가입 및 로그인
 - 로그인 또는 간편 로그인으로 로그인을 합니다.
 
 <br/> 
