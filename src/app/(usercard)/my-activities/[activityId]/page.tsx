@@ -1,5 +1,10 @@
 import ActivityForm from "@/components/Activity/ActivityForm/ActivityForm";
 import API_URL from "@/constants/config";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 내 체험 수정하기",
+};
 
 const getActivityById = async (activityId: number) => {
   try {
