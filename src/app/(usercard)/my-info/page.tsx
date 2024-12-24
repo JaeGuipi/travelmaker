@@ -1,6 +1,11 @@
 import { cookies } from "next/headers";
 import API_URL from "@/constants/config";
 import MyPageForm from "@/components/Auth/MyPageForm/MyPageForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "트래블 메이커 : 내 프로필",
+};
 
 const getUsers = async () => {
   const cookieStore = cookies();
