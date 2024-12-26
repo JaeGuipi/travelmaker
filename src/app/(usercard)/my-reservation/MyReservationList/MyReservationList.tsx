@@ -166,7 +166,7 @@ const MyReservationList = ({
         </div>
       </ItemTitleLayout>
       {reservationList.length === 0 ? (
-        <NoList text="아직 등록한 체험이 없어요" />
+        <NoList text="아직 신청한 예약이 없어요" />
       ) : (
         <>
           {reservationList.map((reservation) => (
