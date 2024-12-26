@@ -7,63 +7,65 @@ import { PostActivity } from "@/types/activites/activitesTypes";
 
 // 체험 등록
 export const postActivity = async (activityData: PostActivity) => {
-  try {
-    const cookieStore = cookies();
-    const accessToken = cookieStore.get("accessToken")?.value;
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-    const response = await fetch(`${API_URL}/activities`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(activityData),
-    });
-
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      throw new Error(errorResponse?.message || "체험 등록 실패");
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("체험 등록 중 오류 발생: ", error);
-    throw error;
-  } finally {
-    revalidateTag("activity");
+  if (!accessToken) {
+    throw new Error("인증 정보가 유효하지 않습니다.");
   }
+
+  const response = await fetch(`${API_URL}/activities`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(activityData),
+  });
+
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    return {
+      success: false,
+      message: errorResponse?.message || "체험 등록에 실패하였습니다.",
+    };
+  }
+
+  revalidateTag("activity");
+  return { success: true, message: "체험이 성공적으로 등록되었습니다." };
 };
 
 // 체험 수정
-export const updateActivity = async (activityId: number, activityData: PostActivity) => {
-  try {
-    const cookieStore = cookies();
-    const accessToken = cookieStore.get("accessToken")?.value;
+export const updateActivity = async (
+  activityId: number,
+  activityData: PostActivity,
+): Promise<{ success: boolean; message: string }> => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("accessToken")?.value;
 
-    const response = await fetch(`${API_URL}/my-activities/${activityId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(activityData),
-    });
-
-    if (!response.ok) {
-      const errorResponse = await response.json();
-      const errorMessage = errorResponse?.message || "체험 수정 실패";
-      throw new Error(errorMessage);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("체험 수정 중 오류 발생: ", error);
-    throw error;
-  } finally {
-    revalidateTag("activity");
+  if (!accessToken) {
+    return { success: false, message: "인증 정보가 유효하지 않습니다." };
   }
+
+  const response = await fetch(`${API_URL}/my-activities/${activityId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(activityData),
+  });
+
+  if (!response.ok) {
+    const errorResponse = await response.json();
+    return {
+      success: false,
+      message: errorResponse?.message || "체험 수정에 실패하였습니다.",
+    };
+  }
+
+  revalidateTag("activity");
+  return { success: true, message: "체험이 성공적으로 수정되었습니다." };
 };
 
 // 체험 삭제
