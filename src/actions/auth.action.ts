@@ -130,7 +130,6 @@ export const uploadProfileImage = async (formData: FormData) => {
   }
 
   const data = await response.json();
-  console.log("Upload successful:", data);
 
   revalidateTag("users");
 

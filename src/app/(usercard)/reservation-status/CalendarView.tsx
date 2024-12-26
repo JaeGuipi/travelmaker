@@ -26,8 +26,6 @@ const CalendarView = ({ activityId, defaultYear, defaultMonth, dashboardData }: 
   const { toggleModal } = useModalStore();
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // 선택한 날짜
 
-  console.log("🔥 CalendarView:", dashboardData);
-
   // 🔥 완료, 승인, 예약 각각의 이벤트 생성
   const events = dashboardData.flatMap((d) => {
     const eventList = [];

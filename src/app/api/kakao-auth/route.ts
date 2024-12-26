@@ -1,6 +1,7 @@
 // app/api/kakao-auth/route.ts
 
 import API_URL from "@/constants/config";
+import { generateRandomNickname } from "@/utils/randomNickname";
 import { NextRequest, NextResponse } from "next/server";
 
 interface BackandRequest {
@@ -34,7 +35,7 @@ export async function GET(req: NextRequest) {
       backendEndpoint = `${API_URL}/oauth/sign-up/kakao`;
       requestBody = {
         ...requestBody,
-        nickname: "Kakko 사용자", // 닉네임은 필수가 아니므로 기본값 설정
+        nickname: generateRandomNickname(),
       };
     }
 
