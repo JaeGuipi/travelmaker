@@ -26,7 +26,7 @@ const PopularItemSwiper: React.FC<PopularItems> = ({ sortedActivities }) => {
         prevEl: `.${s["swiper-prev"]}`,
       }}
       breakpoints={{
-        375: {
+        365: {
           slidesPerView: 1.8,
           spaceBetween: 16,
         },

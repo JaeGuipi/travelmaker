@@ -15,7 +15,7 @@ export const GET = async (request: NextRequest) => {
       return NextResponse.json({ error: "데이터 요청 실패" }, { status: response.status });
     }
     const data = await response.json();
-    return NextResponse.json(data)
+    return NextResponse.json(data);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

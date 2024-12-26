@@ -1,4 +1,5 @@
 import API_URL from "@/constants/config";
+import { generateRandomNickname } from "@/utils/randomNickname";
 import { NextRequest, NextResponse } from "next/server";
 
 interface BackandRequest {
@@ -48,7 +49,7 @@ export async function GET(req: NextRequest) {
 
     if (state === "signup") {
       backendEndpoint = `${API_URL}/oauth/sign-up/google`;
-      requestBody = { ...requestBody, nickname: "Google 사용자" };
+      requestBody = { ...requestBody, nickname: generateRandomNickname() };
     }
 
     const backendResponse = await fetch(backendEndpoint, {

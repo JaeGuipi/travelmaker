@@ -9,14 +9,15 @@ export const GET = async (request: NextRequest) => {
   const status = searchParams.get("status") || "";
 
   try {
-    let url = `${API_URL}/my-reservations?size=${size}`
+    let url = `${API_URL}/my-reservations?size=${size}`;
 
-    if (cursorId) url += `&cursorId=${cursorId}`
+    if (cursorId) url += `&cursorId=${cursorId}`;
 
-    if (status && status !== "") url += `&status=${status}`
+    if (status && status !== "") url += `&status=${status}`;
 
-    const response = await customFetch(url);
-  
+    const response = request.headers.get("Authorization")
+      ? await fetch(url, { headers: { Authorization: request.headers.get("Authorization") || "" } })
+      : await customFetch(url);
     if (!response.ok) {
       return NextResponse.json({ error: "데이터 요청 실패" }, { status: response.status });
     }

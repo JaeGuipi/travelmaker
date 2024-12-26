@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./SocialLoginAndSignup.module.scss";
@@ -15,6 +15,7 @@ type Props = {
 const cx = classNames.bind(s);
 
 const SocialLoginAndSignup = ({ type = "login" }: Props) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const { showError } = useToast();
   const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
@@ -33,6 +34,7 @@ const SocialLoginAndSignup = ({ type = "login" }: Props) => {
     const error = searchParams.get("error");
     if (error) {
       showError(`${error} 로그인으로 이동해서 진행해주세요.`);
+      router.replace(`/${type}`);
     }
   }, [searchParams, showError]);
 
