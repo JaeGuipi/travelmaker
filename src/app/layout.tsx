@@ -16,8 +16,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://travelmaker-ten.vercel.app/opengraph-image.png",
-        width: 800,
-        height: 400,
         alt: "Travel Maker Open Graph Image",
       },
     ],

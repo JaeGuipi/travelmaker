@@ -79,7 +79,7 @@
 
 |메인 페이지|체험 상세 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/dc573406-7455-4cdc-9e4b-ca20354dbf1b" width="450"/>|<img src="https://github.com/user-attachments/assets/2d3acb43-e3d3-4b18-b720-6ed805a78847" width="450"/>|
 
 <br/>
 
@@ -93,7 +93,7 @@
 
 |검색 페이지|내 프로필 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/6fabae78-2544-44b0-a81e-b71ca6ac7c69" width="450"/>|<img src="https://github.com/user-attachments/assets/7361c6cc-7d2f-4469-8cbe-a59b62ce02b0" width="450"/>|
 
 <br/>
 
@@ -105,9 +105,9 @@
 
 <br/>
 
-|체험 관리 페이지|체험 등록 및 수정 페이지|
-|:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|체험 관리 페이지(등록&수정)|
+|:---:|
+|<img src="https://github.com/user-attachments/assets/1c5d4f51-5b4f-4e43-9f7d-66e13082a13f" width="450"/>|
 
 <br/>
 
@@ -122,4 +122,4 @@
 
 |예약 내역 페이지|예약 현황 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/aa923124-e01d-4b41-bfd4-62852556e467" width="450"/>|<img src="https://github.com/user-attachments/assets/47308b3f-d182-4bda-9b59-5c2c2b689a26" width="450"/>|
