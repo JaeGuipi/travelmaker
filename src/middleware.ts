@@ -16,6 +16,10 @@ export async function middleware(request: NextRequest) {
 
   // 토큰 재발급이 발생한 경우 쿠키 설정
   const response = NextResponse.next();
+  console.log(response);
+  if (newAccessToken) {
+    response.headers.set("Authorization", `Bearer ${newAccessToken}`);
+  }
   if (newAccessToken) {
     setAccessTokenCookie(response, newAccessToken);
   }
@@ -32,7 +36,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginRedirectUrl(request));
     }
   }
-
   return response;
 }
 
