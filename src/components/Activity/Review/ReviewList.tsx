@@ -68,9 +68,11 @@ const ReviewList = ({ reviews, totalCount, averageRating }: ReviewListProps) => 
           </li>
         ))}
       </ul>
-      <div className={s.pagination}>
-        <Pagination currentPage={currentPage} totalPages={totalPage} onPageChange={handlePageChange} />
-      </div>
+      {currentReviews.length > 0 && (
+        <div className={s.pagination}>
+          <Pagination currentPage={currentPage} totalPages={totalPage} onPageChange={handlePageChange} />
+        </div>
+      )}
     </section>
   );
 };
