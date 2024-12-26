@@ -5,7 +5,7 @@ import { customFetch } from "@/utils/customFetch";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "트래블 메이커 : 내 예약 관리",
+  title: "트래블 메이커 : 예약 내역",
 };
 
 const MyReservationPage = async () => {
