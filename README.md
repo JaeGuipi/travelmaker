@@ -60,9 +60,9 @@
 
 <br/> 
 
-|회원가입 페이지|로그인 페이지|간편 회원가입 및 로그인|
-|:---:|:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|<img src="" width="450"/>|
+|회원가입 및 로그인 페이지|간편 회원가입 및 로그인|
+|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/373e0c00-23f7-4dd5-bbe3-af3786a2c1d8" width="450"/>|<img src="https://github.com/user-attachments/assets/26314394-68ca-4c32-a05c-8b36810e8c21" width="450"/>|
 
 <br/>
 
@@ -98,16 +98,16 @@
 <br/>
 
 #### 체험 관리 페이지
-- 판매자가 등록한 체험을 리스트로 관리하고 확인할 수 있습니다.
+- 판매자가 등록한 체험을 리스트로 관리하고 확인, 삭제할 수 있습니다.
 
 #### 체험 등록 및 수정 페이지
 - 판매자가 체험을 등록, 수정하고 예약 날짜, 시간 및 체험 장소를 직접 설정할 수 있습니다.
 
 <br/>
 
-|체험 관리 페이지(등록&수정)|
-|:---:|
-|<img src="https://github.com/user-attachments/assets/1c5d4f51-5b4f-4e43-9f7d-66e13082a13f" width="450"/>|
+|체험 관리 페이지|체험 등록 및 수정 페이지|
+|:---:|:---:|
+|<img src="https://github.com/user-attachments/assets/e1f34500-f44a-47c6-9c17-aba15603ab55" width="450"/>|<img src="https://github.com/user-attachments/assets/a5b65465-2b48-4856-9016-9551c9b09ade" width="450"/>|
 
 <br/>
 
