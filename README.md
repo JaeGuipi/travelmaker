@@ -90,7 +90,7 @@
 
 |검색 페이지|내 프로필 페이지|
 |:---:|:---:|
-|<img src="https://github.com/user-attachments/assets/6fabae78-2544-44b0-a81e-b71ca6ac7c69" width="450"/>|<img src="https://github.com/user-attachments/assets/d048f83e-dbee-4647-9eab-d7740dec6e7c" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/6fabae78-2544-44b0-a81e-b71ca6ac7c69" width="450"/>|<img src="https://github.com/user-attachments/assets/7361c6cc-7d2f-4469-8cbe-a59b62ce02b0" width="450"/>|
 
 <br/>
 
@@ -119,4 +119,4 @@
 
 |예약 내역 페이지|예약 현황 페이지|
 |:---:|:---:|
-|<img src="https://github.com/user-attachments/assets/b6ea65b4-6903-4705-8d85-0105d6203d1d" width="450"/>|<img src="https://github.com/user-attachments/assets/6e8615d3-3171-4fdd-ae5e-7861cd116d41" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/aa923124-e01d-4b41-bfd4-62852556e467" width="450"/>|<img src="https://github.com/user-attachments/assets/47308b3f-d182-4bda-9b59-5c2c2b689a26" width="450"/>|
