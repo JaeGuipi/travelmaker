@@ -76,7 +76,7 @@
 
 |메인 페이지|체험 상세 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/dc573406-7455-4cdc-9e4b-ca20354dbf1b" width="450"/>|<img src="https://github.com/user-attachments/assets/2d3acb43-e3d3-4b18-b720-6ed805a78847" width="450"/>|
 
 <br/>
 
@@ -90,7 +90,7 @@
 
 |검색 페이지|내 프로필 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="https://github.com/user-attachments/assets/d048f83e-dbee-4647-9eab-d7740dec6e7c" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/6fabae78-2544-44b0-a81e-b71ca6ac7c69" width="450"/>|<img src="https://github.com/user-attachments/assets/d048f83e-dbee-4647-9eab-d7740dec6e7c" width="450"/>|
 
 <br/>
 
@@ -102,9 +102,9 @@
 
 <br/>
 
-|체험 관리 페이지|체험 등록 및 수정 페이지|
-|:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|체험 관리 페이지(등록&수정)|
+|:---:|
+|<img src="https://github.com/user-attachments/assets/1c5d4f51-5b4f-4e43-9f7d-66e13082a13f" width="450"/>|
 
 <br/>
 
