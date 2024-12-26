@@ -90,7 +90,7 @@
 
 |검색 페이지|내 프로필 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|<img src="" width="450"/>|<img src="https://github.com/user-attachments/assets/d048f83e-dbee-4647-9eab-d7740dec6e7c" width="450"/>|
 
 <br/>
 
@@ -119,4 +119,4 @@
 
 |예약 내역 페이지|예약 현황 페이지|
 |:---:|:---:|
-|<img src="" width="450"/>|<img src="" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/b6ea65b4-6903-4705-8d85-0105d6203d1d" width="450"/>|<img src="https://github.com/user-attachments/assets/6e8615d3-3171-4fdd-ae5e-7861cd116d41" width="450"/>|
