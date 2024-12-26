@@ -102,9 +102,9 @@
 
 <br/>
 
-|체험 관리 페이지(등록&수정)|
+|체험 관리 페이지|
 |:---:|
-|<img src="https://github.com/user-attachments/assets/1c5d4f51-5b4f-4e43-9f7d-66e13082a13f" width="450"/>|
+|<img src="https://github.com/user-attachments/assets/e1f34500-f44a-47c6-9c17-aba15603ab55" width="450"/>|
 
 <br/>
 
