@@ -164,7 +164,11 @@ const ActivityForm = ({ activities }: { activities?: PostActivity }) => {
 
       if (activityId) {
         const id = Number(activityId);
-        await updateActivity(id, updatedData);
+        const result = await updateActivity(id, updatedData);
+        if (!result.success) {
+          showError(result.message);
+          return;
+        }
         showSuccess(toastMessages.success.activityUpdate);
       } else {
         await postActivity(updatedData);
