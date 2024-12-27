@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     description: "트레블 메이커에서 즐기는 다양한 체험",
     images: [
       {
-        url: "https://travelmaker-ten.vercel.app/images/opengraph-image.jpg",
+        url: "https://travelmaker-ten.vercel.app/opengraph-image.jpg",
         alt: "Travel Maker Open Graph Image",
       },
     ],
