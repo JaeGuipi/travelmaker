@@ -1,6 +1,7 @@
 "use server";
 
 import API_URL from "@/constants/config";
+import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 // 내 예약 리뷰 작성
@@ -28,5 +29,5 @@ export const postReview = async (formData: FormData) => {
       }
       throw new Error("리뷰 등록 실패")
     }
-    
+    revalidateTag("reservation")
 };
