@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 
 const MyReservationPage = async () => {
 
-  const response = await customFetch(`${API_URL}/my-reservations?size=6`,{
-    next: { tags: ["reservation"]}
-  });
+  const response = await customFetch(`${API_URL}/my-reservations?size=6`);
 
   if (!response.ok) {
     console.error("예약 데이터를 불러오는 데 실패했습니다.");
