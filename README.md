@@ -130,7 +130,7 @@
 
 |예약 내역 페이지|
 |:---:|
-|<img src="https://github.com/user-attachments/assets/47308b3f-d182-4bda-9b59-5c2c2b689a26" width="600"/>|
+|<img src="https://github.com/user-attachments/assets/aa923124-e01d-4b41-bfd4-62852556e467" width="600"/>|
 
 <br />
 
