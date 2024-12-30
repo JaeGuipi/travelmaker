@@ -5,16 +5,12 @@ import { useState } from "react";
 import classNames from "classnames/bind";
 import { FaStar } from "react-icons/fa";
 import { MyReservation } from "@/types/myReservationsTypes/myReservationsTypes";
-import { postReview } from "@/actions/myReservation";
-import { useToast } from "@/hooks/useToast";
 
 const cx = classNames.bind(s);
 
-const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation; onSuccess: () => void }) => {
+const ReviewContent = ({ reservation, onSubmit }: { reservation: MyReservation; onSubmit: (data: FormData) => void }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState("");
-
-  const { showError } = useToast();
 
   const starArr = [1, 2, 3, 4, 5];
 
@@ -22,22 +18,15 @@ const ReviewContent = ({ reservation, onSuccess }: { reservation: MyReservation;
     setRating(star);
   };
 
-  const handleSubmit = async () => {
-    try {
+  const handleSubmit =  (e: React.FormEvent) => {
+    e.preventDefault()
       const formData = new FormData();
       formData.append("reservationId", reservation.id.toString());
       formData.append("rating", rating.toString());
       formData.append("content", review);
-
-      await postReview(formData);
       
-      onSuccess();
-    } catch (error) {
-      if (error instanceof Error) {
-        showError(error.message);
-      }
-      console.error(error);
-    }
+      onSubmit(formData)
+    
   };
 
   return (

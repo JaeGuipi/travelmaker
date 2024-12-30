@@ -11,6 +11,7 @@ import FormInfoModal from "@/components/Modal/ModalComponents/FormInfoModal";
 import ItemTitleLayout from "@/app/(usercard)/my-reservation/ItemTitleLayout/ItemTitleLayout";
 import NoList from "./NoList";
 import ReviewContent from "./ReviewContent";
+import { postReview } from "@/actions/myReservation";
 
 interface ModalState {
   key: string | null;
@@ -48,10 +49,21 @@ const MyReservationList = ({
     setModalState({ key: null, reservation: null });
   };
 
-  const handleReviewSuccess = (id: number) => {
-    setReservationList((prev) =>
-      prev.map((reservation) => (reservation.id === id ? { ...reservation, reviewSubmitted: true } : reservation)),
-    );
+  const handleSubmitReview = async (formData: FormData) => {
+    try {
+      await postReview(formData);
+      const reservationId = formData.get("reservationId")?.toString();
+      if (reservationId) {
+        setReservationList((prev) =>
+          prev.map((reservation) =>
+            reservation.id.toString() === reservationId ? { ...reservation, reviewSubmitted: true } : reservation,
+          ),
+        );
+      }
+      handleCloseModal();
+    } catch (error) {
+      console.error("리뷰 작성 실패", error);
+    }
   };
 
   const dropdownItems = [
@@ -63,7 +75,6 @@ const MyReservationList = ({
     { key: "completed", label: "체험 완료" },
   ];
 
-  //서버액션으로 바꿔보기...
   const handleDeleteItem = async (id: number) => {
     try {
       const response = await fetch(`/api/my-reservations/${id}`, {
@@ -86,13 +97,13 @@ const MyReservationList = ({
   const orderedList = async (status: string) => {
     if (isLoading) return;
     setIsLoading(true);
-    
+
     if (status === "total") {
-      setReservationList(initialReservationList)
-      setCurrentCursorId(cursorId)
-      setReservationStatus("")
-      setIsLoading(false)
-      return
+      setReservationList(initialReservationList);
+      setCurrentCursorId(cursorId);
+      setReservationStatus("");
+      setIsLoading(false);
+      return;
     }
     setReservationStatus(status);
     try {
@@ -180,13 +191,7 @@ const MyReservationList = ({
           {currentCursorId !== null && <div ref={observerRef}>{isLoading && <LoadingSpinner />}</div>}
           {modalState.key === reviewModal && modalState.reservation && (
             <FormInfoModal modalKey={reviewModal} title="후기작성" showSubmit={false}>
-              <ReviewContent
-                reservation={modalState.reservation}
-                onSuccess={() => {
-                  handleReviewSuccess(modalState.reservation!.id);
-                  handleCloseModal();
-                }}
-              />
+              <ReviewContent reservation={modalState.reservation} onSubmit={handleSubmitReview} />
             </FormInfoModal>
           )}
           {modalState.key === confirmModal && modalState.reservation && (
