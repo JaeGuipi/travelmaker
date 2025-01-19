@@ -25,6 +25,15 @@ const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
   }
 
   const handleDateClick = (info: DateClickArg) => {
+    // 오늘 날짜와 선택된 날짜 비교
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const clickedDate = new Date(info.dateStr);
+
+    if (clickedDate < today) {
+      return; // 과거 날짜 선택 무시
+    }
+
     setSelectedDate(info.dateStr);
   };
 
@@ -51,13 +60,24 @@ const Calendar: React.FC<CalendarProps> = ({ schedules, onTimeSelect }) => {
             dateClick={handleDateClick}
             fixedWeekCount={false}
             events={schedules.map((schedule) => ({
-              id: String(schedule.id), // id를 string으로 변환
+              id: String(schedule.id),
             }))}
             dayCellClassNames={(arg) => {
-              const cellDate = new Date(arg.date).toDateString();
-              const isSelected = selectedDate && cellDate === new Date(selectedDate).toDateString();
-              const hasEvent = schedules.some((schedule) => new Date(schedule.date).toDateString() === cellDate);
-              return `${isSelected ? s.active : ""} ${hasEvent ? s.hasEvent : ""}`;
+              const cellDate = new Date(arg.date);
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              const isSelected = selectedDate && new Date(selectedDate).toDateString() === cellDate.toDateString();
+              const hasEvent = schedules.some(
+                (schedule) => new Date(schedule.date).toDateString() === cellDate.toDateString(),
+              );
+              const isPast = cellDate < today;
+
+              const classes = [];
+              if (isSelected) classes.push(s.active);
+              if (hasEvent) classes.push(s.hasEvent);
+              if (isPast) classes.push(s.past);
+
+              return classes;
             }}
           />
         </div>

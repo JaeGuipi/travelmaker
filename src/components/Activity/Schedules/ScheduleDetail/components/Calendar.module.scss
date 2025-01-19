@@ -44,3 +44,9 @@
   border-radius: 8px;
   background: $orange02;
 }
+.past {
+  opacity: 0.5;
+  pointer-events: none;
+  color: #999;
+  cursor: not-allowed;
+}
