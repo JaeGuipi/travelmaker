@@ -29,7 +29,7 @@ export default function MainSwiper() {
             <SwiperText slideIndex={0} />
             <picture>
               <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr01.jpg" />
-              <Image src="/images/main_bnr01.jpg" fill alt="main_bnr01" loading="eager" />
+              <Image src="/images/main_bnr01.jpg" fill alt="main_bnr01" priority />
             </picture>
           </SwiperSlide>
           <SwiperSlide>
