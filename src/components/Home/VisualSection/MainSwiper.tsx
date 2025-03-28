@@ -18,12 +18,12 @@ export default function MainSwiper() {
         <Swiper
           className={s.swiper}
           slidesPerView={1}
+          initialSlide={0}
           navigation={{
             nextEl: `.${s["swiper-next"]}`,
             prevEl: `.${s["swiper-prev"]}`,
           }}
           autoplay={{ delay: 2500 }}
-          loop={true}
         >
           <SwiperSlide>
             <SwiperText slideIndex={0} />
@@ -34,7 +34,7 @@ export default function MainSwiper() {
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 fill
                 alt="main_bnr01"
-                priority
+                priority={true}
               />
             </picture>
           </SwiperSlide>
@@ -47,8 +47,8 @@ export default function MainSwiper() {
                 src="/images/main_bnr02.jpg"
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 fill
+                loading="lazy"
                 alt="main_bnr02"
-                loading="eager"
               />
             </picture>
           </SwiperSlide>
@@ -58,10 +58,10 @@ export default function MainSwiper() {
               <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr03.jpg" />
               <Image
                 src="/images/main_bnr03.jpg"
+                loading="lazy"
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 fill
                 alt="main_bnr03"
-                loading="eager"
               />
             </picture>
           </SwiperSlide>
