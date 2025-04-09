@@ -18,42 +18,57 @@ export default function MainSwiper() {
         <Swiper
           className={s.swiper}
           slidesPerView={1}
+          initialSlide={0}
           navigation={{
             nextEl: `.${s["swiper-next"]}`,
             prevEl: `.${s["swiper-prev"]}`,
           }}
           autoplay={{ delay: 2500 }}
-          loop={true}
         >
           <SwiperSlide>
             <SwiperText slideIndex={0} />
-            <picture>
-              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr01.jpg" />
-              <Image src="/images/main_bnr01.jpg" fill alt="main_bnr01" loading="eager" />
-            </picture>
+            <div className={s.imageWrapper}>
+              <Image
+                src="/images/main_bnr01.jpg"
+                alt="main_bnr01"
+                fill
+                quality={75}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
+              />
+            </div>
           </SwiperSlide>
           <SwiperSlide>
             <SwiperText slideIndex={1} />
-
-            <picture>
-              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr02.jpg" />
-              <Image src="/images/main_bnr02.jpg" fill alt="main_bnr02" loading="eager" />
-            </picture>
+            <div className={s.imageWrapper}>
+              <Image
+                src="/images/main_bnr02.jpg"
+                alt="main_bnr02"
+                fill
+                quality={75}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+              />
+            </div>
           </SwiperSlide>
           <SwiperSlide>
             <SwiperText slideIndex={2} />
-            <picture>
-              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr03.jpg" />
-              <Image src="/images/main_bnr03.jpg" fill alt="main_bnr03" loading="eager" />
-            </picture>
+            <div className={s.imageWrapper}>
+              <Image
+                src="/images/main_bnr03.jpg"
+                alt="main_bnr03"
+                fill
+                quality={75}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+              />
+            </div>
           </SwiperSlide>
-          <div className={s["swiper-prev"]}>
-            <Image src="/icons/arrow_prev.svg" fill alt="next" />
-          </div>
-          <div className={s["swiper-next"]}>
-            <Image src="/icons/arrow_next.svg" fill alt="prev" />
-          </div>
         </Swiper>
+        <div className={s["swiper-prev"]}>
+          <Image src="/icons/arrow_prev.svg" alt="prev" fill quality={100} />
+        </div>
+        <div className={s["swiper-next"]}>
+          <Image src="/icons/arrow_next.svg" alt="next" fill quality={100} />
+        </div>
       </section>
     </>
   );
