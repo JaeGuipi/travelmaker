@@ -27,51 +27,48 @@ export default function MainSwiper() {
         >
           <SwiperSlide>
             <SwiperText slideIndex={0} />
-            <picture>
-              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr01.jpg" />
+            <div className={s.imageWrapper}>
               <Image
                 src="/images/main_bnr01.jpg"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                fill
                 alt="main_bnr01"
-                priority={true}
+                fill
+                quality={75}
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
               />
-            </picture>
+            </div>
           </SwiperSlide>
           <SwiperSlide>
             <SwiperText slideIndex={1} />
-
-            <picture>
-              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr02.jpg" />
+            <div className={s.imageWrapper}>
               <Image
                 src="/images/main_bnr02.jpg"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                fill
-                loading="lazy"
                 alt="main_bnr02"
+                fill
+                quality={75}
+                sizes="(max-width: 1200px) 100vw, 1200px"
               />
-            </picture>
+            </div>
           </SwiperSlide>
           <SwiperSlide>
             <SwiperText slideIndex={2} />
-            <picture>
-              <source media="(max-width: 1200px)" srcSet="/images/tb_main_bnr03.jpg" />
+            <div className={s.imageWrapper}>
               <Image
                 src="/images/main_bnr03.jpg"
-                loading="lazy"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                fill
                 alt="main_bnr03"
+                fill
+                quality={75}
+                sizes="(max-width: 1200px) 100vw, 1200px"
               />
-            </picture>
+            </div>
           </SwiperSlide>
-          <div className={s["swiper-prev"]}>
-            <Image src="/icons/arrow_prev.svg" fill alt="next" />
-          </div>
-          <div className={s["swiper-next"]}>
-            <Image src="/icons/arrow_next.svg" fill alt="prev" />
-          </div>
         </Swiper>
+        <div className={s["swiper-prev"]}>
+          <Image src="/icons/arrow_prev.svg" alt="prev" fill quality={100} />
+        </div>
+        <div className={s["swiper-next"]}>
+          <Image src="/icons/arrow_next.svg" alt="next" fill quality={100} />
+        </div>
       </section>
     </>
   );
